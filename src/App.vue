@@ -4,9 +4,9 @@
   -->
 
 <script setup lang="ts">
-const start = async () => {
-  console.log("launch tiki flow.");
-};
+import { ref } from "vue";
+import Tiki from "@/components/tiki/tiki.vue";
+const present = ref(false);
 </script>
 
 <template>
@@ -25,7 +25,8 @@ const start = async () => {
       <h1>Oh, Hi!</h1>
       <h3>Just click &ldquo;start&rdquo; to well...</h3>
     </div>
-    <button class="start" @click="start">start</button>
+    <button class="start" @click="present = !present">start</button>
+    <tiki v-model:present="present" />
   </main>
 </template>
 
