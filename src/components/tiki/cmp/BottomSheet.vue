@@ -16,13 +16,20 @@ const slideOut = ref(false);
 
 <template>
   <div class="overlay" @click.stop.prevent="slideOut = true">
-    <Transition appear name="slide" @leave="$emit('dismiss')">
+    <Transition
+      appear
+      name="slide"
+      @leave="$emit('dismiss')"
+      @close="slideOut = true"
+    >
       <div
         v-if="!slideOut"
         class="bottom-sheet"
         :style="{ 'background-color': color, height: height }"
         @click.stop.prevent
-      />
+      >
+        <slot />
+      </div>
     </Transition>
   </div>
 </template>

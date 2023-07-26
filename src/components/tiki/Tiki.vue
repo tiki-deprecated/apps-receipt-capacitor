@@ -5,6 +5,7 @@
 
 <script setup lang="ts">
 import BottomSheet from "@/components/tiki/cmp/BottomSheet.vue";
+import BTest from "@/components/tiki/BTest.vue";
 
 defineProps({
   present: {
@@ -21,7 +22,9 @@ defineEmits(["update:present"]);
       height="50%"
       v-if="present"
       @dismiss="$emit('update:present', false)"
-    />
+    >
+      <b-test />
+    </bottom-sheet>
   </Transition>
 </template>
 
