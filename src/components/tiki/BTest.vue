@@ -8,7 +8,7 @@ defineEmits(["close"]);
 </script>
 
 <template>
-  <button @click="this.$parent.$emit('close')">hello</button>
+  <button @click="this.$parent.$emit('close')">close</button>
 </template>
 
 <style scoped></style>
