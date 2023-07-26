@@ -4,11 +4,11 @@
   -->
 
 <script setup lang="ts">
-defineEmits(["close"]);
+import BottomSheet from "@/components/tiki/element/BottomSheet.vue";
 </script>
 
 <template>
-  <button @click="this.$parent.$emit('close')">close</button>
+  <bottom-sheet height="50%" @dismiss="$emit('close')">hello</bottom-sheet>
 </template>
 
 <style scoped></style>

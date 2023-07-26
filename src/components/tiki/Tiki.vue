@@ -4,8 +4,7 @@
   -->
 
 <script setup lang="ts">
-import BottomSheet from "@/components/tiki/cmp/BottomSheet.vue";
-import BTest from "@/components/tiki/BTest.vue";
+import Offer from "@/components/tiki/screen/Offer.vue";
 
 defineProps({
   present: {
@@ -18,13 +17,7 @@ defineEmits(["update:present"]);
 
 <template>
   <Transition appear name="fade">
-    <bottom-sheet
-      height="50%"
-      v-if="present"
-      @dismiss="$emit('update:present', false)"
-    >
-      <b-test />
-    </bottom-sheet>
+    <offer v-if="present" @close="$emit('update:present', false)"> </offer>
   </Transition>
 </template>
 
