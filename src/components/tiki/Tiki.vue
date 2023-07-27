@@ -31,8 +31,8 @@ defineEmits(["update:present"]);
     <!--      ]"-->
     <!--    >-->
     <!--    </offer>-->
-    <!--    <terms v-if="present" @close="$emit('update:present', false)" />-->
-    <learn-more v-if="present" @close="$emit('update:present', false)" />
+    <terms v-if="present" @close="$emit('update:present', false)" />
+    <!--    <learn-more v-if="present" @close="$emit('update:present', false)" />-->
   </Transition>
 </template>
 

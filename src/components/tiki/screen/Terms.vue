@@ -40,12 +40,21 @@ import TextButton from "@/components/tiki/element/TextButton.vue";
 }
 
 .terms {
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: clip;
   flex: 1 1 auto;
   border-bottom: 1px solid var(--tiki-accent-color);
 }
 
-.terms :deep {
+.terms :deep(h1),
+.terms :deep(h2),
+.terms :deep(h3),
+.terms :deep(h4),
+.terms :deep(h5),
+.terms :deep(h6),
+.terms :deep(p),
+.terms :deep(a),
+.terms :deep(table) {
   font-family: var(--tiki-font-family);
   line-height: var(--tiki-line-height);
   font-size: var(--tiki-font-size);
@@ -76,12 +85,7 @@ import TextButton from "@/components/tiki/element/TextButton.vue";
   font-weight: bold;
 }
 
-.terms :deep(h5) {
-  font-size: var(--tiki-font-size-xs);
-  line-height: var(--tiki-line-height-xs);
-  font-weight: bold;
-}
-
+.terms :deep(h5),
 .terms :deep(h6) {
   font-size: var(--tiki-font-size-xs);
   line-height: var(--tiki-line-height-xs);
