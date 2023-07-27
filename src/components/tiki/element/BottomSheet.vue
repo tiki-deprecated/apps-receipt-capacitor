@@ -22,12 +22,7 @@ const slideOut = ref(false);
       @leave="$emit('dismiss')"
       @close="slideOut = true"
     >
-      <div
-        v-if="!slideOut"
-        class="bottom-sheet"
-        :style="{ 'background-color': color, height: height }"
-        @click.stop.prevent
-      >
+      <div v-if="!slideOut" class="bottom-sheet" @click.stop.prevent>
         <slot />
       </div>
     </Transition>
@@ -59,9 +54,11 @@ const slideOut = ref(false);
   left: 50%;
   transform: translate(-50%, 0%);
   width: 100vw;
-  height: 85vh;
+  height: fit-content;
   z-index: 999;
   border-radius: 40px 40px 0 0;
+  box-sizing: border-box;
+  max-height: 95vh;
 }
 
 .slide-enter-active {

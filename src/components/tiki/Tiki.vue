@@ -4,8 +4,9 @@
   -->
 
 <script setup lang="ts">
-import BottomSheet from "@/components/tiki/cmp/BottomSheet.vue";
-import BTest from "@/components/tiki/BTest.vue";
+import Offer from "@/components/tiki/screen/Offer.vue";
+import Terms from "@/components/tiki/screen/Terms.vue";
+import LearnMore from "@/components/tiki/screen/LearnMore.vue";
 
 defineProps({
   present: {
@@ -18,13 +19,20 @@ defineEmits(["update:present"]);
 
 <template>
   <Transition appear name="fade">
-    <bottom-sheet
-      height="50%"
-      v-if="present"
-      @dismiss="$emit('update:present', false)"
-    >
-      <b-test />
-    </bottom-sheet>
+    <!--    <offer-->
+    <!--      v-if="present"-->
+    <!--      @close="$emit('update:present', false)"-->
+    <!--      reward="./src/assets/offer-card.png"-->
+    <!--      description="Share your receipts to earn rewards like gift cards or cash!"-->
+    <!--      :bullets="[-->
+    <!--        { text: 'De-identified (for your privacy)', isUsed: true },-->
+    <!--        { text: 'Develop market insights', isUsed: false },-->
+    <!--        { text: 'Deliver a more personalized experience ', isUsed: true },-->
+    <!--      ]"-->
+    <!--    >-->
+    <!--    </offer>-->
+    <terms v-if="present" @close="$emit('update:present', false)" />
+    <!--    <learn-more v-if="present" @close="$emit('update:present', false)" />-->
   </Transition>
 </template>
 
