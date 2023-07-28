@@ -4,25 +4,29 @@
   -->
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
-defineProps({
+const props = defineProps({
   color: String,
   height: String,
+  show: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
 });
 defineEmits(["dismiss"]);
-const slideOut = ref(false);
+const isShow = ref(props.show);
+watch(
+  () => props.show,
+  (show) => (isShow.value = show)
+);
 </script>
 
 <template>
-  <div class="overlay" @click.stop.prevent="slideOut = true">
-    <Transition
-      appear
-      name="slide"
-      @leave="$emit('dismiss')"
-      @close="slideOut = true"
-    >
-      <div v-if="!slideOut" class="bottom-sheet" @click.stop.prevent>
+  <div class="overlay" @click.stop.prevent="isShow = false">
+    <Transition appear name="slide" @leave="$emit('dismiss')">
+      <div v-if="isShow" class="bottom-sheet" @click.stop.prevent>
         <slot />
       </div>
     </Transition>
