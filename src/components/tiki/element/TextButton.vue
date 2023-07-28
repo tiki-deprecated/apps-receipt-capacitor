@@ -14,12 +14,13 @@ defineProps({
     required: false,
     default: true,
   },
+  icon: Object,
 });
 </script>
 
 <template>
   <button class="textButton" :class="focus ? 'focus' : 'nofocus'">
-    {{ text }}
+    <component :is="icon" v-if="icon != null" class="icon" />{{ text }}
   </button>
 </template>
 
@@ -35,6 +36,9 @@ defineProps({
   line-height: var(--tiki-line-height-xl);
   font-family: var(--tiki-font-family);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 5%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .textButton.focus {
@@ -47,5 +51,11 @@ defineProps({
   border-color: var(--tiki-primary-background-color);
   background-color: var(--tiki-primary-background-color);
   color: var(--tiki-primary-text-color);
+}
+
+.icon {
+  height: 1.2em;
+  width: auto;
+  margin-right: 0.5em;
 }
 </style>

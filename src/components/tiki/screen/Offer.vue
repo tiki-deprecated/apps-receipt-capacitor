@@ -6,10 +6,12 @@
 <script setup lang="ts">
 import BottomSheet from "@/components/tiki/element/BottomSheet.vue";
 import ScreenTitle from "@/components/tiki/element/ScreenTitle.vue";
-import QuestionButton from "@/components/tiki/element/QuestionButton.vue";
+import QuestionIcon from "@/components/tiki/icon/QuestionIcon.vue";
 import TextButton from "@/components/tiki/element/TextButton.vue";
-import DataUse, { Bullet } from "@/components/tiki/element/DataUse.vue";
+import DataUse from "@/components/tiki/element/DataUse.vue";
+import type { Bullet } from "@/components/tiki/element/DataUse.vue";
 import OfferCard from "@/components/tiki/element/OfferCard.vue";
+import CircleButton from "@/components/tiki/element/CircleButton.vue";
 
 defineProps({
   reward: String,
@@ -29,7 +31,7 @@ defineProps({
           title="Data Rewards"
           subtitle="Share data. Earn rewards."
         />
-        <question-button />
+        <circle-button :icon="QuestionIcon" />
       </div>
       <offer-card :src="reward" :description="description" />
       <data-use :bullets="bullets" class="data-use" />

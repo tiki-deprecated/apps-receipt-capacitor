@@ -7,6 +7,7 @@
 import Offer from "@/components/tiki/screen/Offer.vue";
 import Terms from "@/components/tiki/screen/Terms.vue";
 import LearnMore from "@/components/tiki/screen/LearnMore.vue";
+import Reward from "@/components/tiki/screen/Reward.vue";
 
 defineProps({
   present: {
@@ -31,8 +32,9 @@ defineEmits(["update:present"]);
     <!--      ]"-->
     <!--    >-->
     <!--    </offer>-->
-    <terms v-if="present" @close="$emit('update:present', false)" />
+    <!--    <terms v-if="present" @close="$emit('update:present', false)" />-->
     <!--    <learn-more v-if="present" @close="$emit('update:present', false)" />-->
+    <reward v-if="present" @close="$emit('update:present', false)" />
   </Transition>
 </template>
 
