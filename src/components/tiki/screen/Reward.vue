@@ -18,8 +18,6 @@ import TextButton from "@/components/tiki/element/TextButton.vue";
 import ScanIcon from "@/components/tiki/icon/ScanIcon.vue";
 import HistorySummary from "@/components/tiki/element/HistorySummary.vue";
 import ReceiptIcon from "@/components/tiki/icon/ReceiptIcon.vue";
-import OfferCard from "@/components/tiki/element/OfferCard.vue";
-import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import OfferCarousel from "@/components/tiki/element/OfferCarousel.vue";
 
 const show = ref(true);
