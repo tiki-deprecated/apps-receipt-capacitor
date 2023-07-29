@@ -111,7 +111,7 @@ events
 }
 
 .icon {
-  height: 2.5em;
+  height: 2.4em;
   margin-right: 1.143em;
   color: var(--tiki-secondary-text-color);
 }

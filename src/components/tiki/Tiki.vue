@@ -9,6 +9,7 @@ import Terms from "@/components/tiki/screen/Terms.vue";
 import LearnMore from "@/components/tiki/screen/LearnMore.vue";
 import Reward from "@/components/tiki/screen/Reward.vue";
 import History from "@/components/tiki/screen/History.vue";
+import Account from "@/components/tiki/screen/Account.vue";
 
 defineProps({
   present: {
@@ -36,7 +37,8 @@ defineEmits(["update:present"]);
     <!--    <terms v-if="present" @close="$emit('update:present', false)" />-->
     <!--    <learn-more v-if="present" @close="$emit('update:present', false)" />-->
     <!--    <reward v-if="present" @close="$emit('update:present', false)" />-->
-    <history v-if="present" @close="$emit('update:present', false)" />
+    <!--    <history v-if="present" @close="$emit('update:present', false)" />-->
+    <account v-if="present" @close="$emit('update:present', false)" />
   </Transition>
 </template>
 
