@@ -4,9 +4,9 @@
   -->
 
 <script setup lang="ts">
-import AccountIcon from "@/components/icons/solid/AccountIcon.vue";
-import RedeemIcon from "@/components/icons/outline/RedeemIcon.vue";
-import ScanIcon from "@/components/icons/outline/ScanIcon.vue";
+import AccountIcon from "@/components/icons/AccountIcon.vue";
+import RedeemIcon from "@/components/icons/RedeemIcon.vue";
+import ScanIcon from "@/components/icons/ScanIcon.vue";
 import SquareButton from "@/components/buttons/SquareButton.vue";
 import TextButton from "@/components/buttons/TextButton.vue";
 

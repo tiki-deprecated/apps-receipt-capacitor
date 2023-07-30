@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { Offer } from "./Offer";
 import type { PropType } from "vue";
-import QuestionIcon from "@/components/icons/outline/QuestionIcon.vue";
+import QuestionIcon from "@/components/icons/QuestionIcon.vue";
 import TextButton from "@/components/buttons/TextButton.vue";
 import CircleButton from "@/components/buttons/CircleButton.vue";
 import OfferDataUse from "@/modules/offer/OfferDataUse.vue";

@@ -28,7 +28,7 @@ defineEmits(["click"]);
 }
 
 .icon {
-  height: 0.875em;
+  height: 1em;
   width: auto;
   color: var(--tiki-secondary-text-color);
   position: absolute;

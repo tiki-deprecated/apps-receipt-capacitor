@@ -4,7 +4,8 @@
   -->
 
 <script setup lang="ts">
-import ArrowIcon from "@/components/icons/outline/ArrowIcon.vue";
+import ArrowIcon from "@/components/icons/ArrowIcon.vue";
+
 defineProps({
   amount: Number,
   date: Date,

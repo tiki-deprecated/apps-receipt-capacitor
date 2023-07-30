@@ -49,7 +49,7 @@ defineProps({
 }
 
 .icon {
-  height: 2.4em;
+  height: 1.75em;
   margin-right: 1.143em;
   color: var(--tiki-secondary-text-color);
 }

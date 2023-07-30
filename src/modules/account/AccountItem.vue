@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import UnlinkIcon from "@/components/icons/outline/UnlinkIcon.vue";
+import UnlinkIcon from "@/components/icons/UnlinkIcon.vue";
 import type { PropType } from "vue";
 import type { Account } from "@/modules/account/Account";
 import { icon } from "@/modules/account/AccountType";

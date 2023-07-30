@@ -4,16 +4,16 @@
   -->
 
 <script setup lang="ts">
-import CloseIcon from "@/components/icons/outline/CloseIcon.vue";
+import CrossMarkIconOutline from "@/components/icons/CrossMarkIconOutline.vue";
 import ConfettiExplosion from "vue-confetti-explosion";
 import CircleButton from "@/components/buttons/CircleButton.vue";
-import ReceiptIcon from "@/components/icons/solid/ReceiptIcon.vue";
 import type { Reward } from "@/modules/reward/Reward";
 import RewardCarousel from "@/modules/reward/RewardCarousel.vue";
 import RewardHistory from "@/modules/reward/RewardHistory.vue";
 import RewardCounter from "@/modules/reward/RewardCounter.vue";
 import RewardAction from "@/modules/reward/RewardAction.vue";
 import HeaderTitle from "@/components/HeaderTitle.vue";
+import { HistoryEventType, icon } from "@/modules/history/HistoryEventType";
 
 defineEmits(["close", "history", "account"]);
 defineProps({
@@ -26,7 +26,7 @@ defineProps({
 
 <template>
   <header-title title="Data Rewards" subtitle="Share data. Earn rewards.">
-    <circle-button @click="$emit('close')" :icon="CloseIcon" />
+    <circle-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
   </header-title>
   <ConfettiExplosion class="confetti" />
   <reward-counter :amount="2750" class="reward-counter" />
@@ -34,7 +34,7 @@ defineProps({
     class="reward-history"
     :amount="25"
     :date="new Date()"
-    :icon="ReceiptIcon"
+    :icon="icon(HistoryEventType.SCAN)"
     @click="$emit('history')"
   />
   <reward-carousel :rewards="rewards" />
