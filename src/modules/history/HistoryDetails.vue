@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import ReceiptIcon from "@/components/icon/ReceiptIcon.vue";
+import ReceiptIcon from "@/components/icons/solid/ReceiptIcon.vue";
 
 export interface HistoryEvent {
   name: String;

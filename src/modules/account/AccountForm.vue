@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import AccountIconSolid from "@/components/icon/AccountIconSolid.vue";
+import AccountIcon from "@/components/icons/solid/AccountIcon.vue";
 
 const accounts: Array<String> = ["gmail", "amazon"];
 </script>
@@ -14,7 +14,7 @@ const accounts: Array<String> = ["gmail", "amazon"];
     <label for="accounts">Choose Account</label>
     <select id="accounts">
       <option v-for="account in accounts" :value="account">
-        <account-icon-solid /> {{ account }}
+        <account-icon /> {{ account }}
       </option>
     </select>
     <label id="username">Username</label>

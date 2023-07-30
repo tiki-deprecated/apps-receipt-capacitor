@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide } from "vue3-carousel";
-import AccountIconSolid from "@/components/icon/AccountIconSolid.vue";
-import UnlinkIcon from "@/components/icon/UnlinkIcon.vue";
+import AccountIcon from "@/components/icons/solid/AccountIcon.vue";
+import UnlinkIcon from "@/components/icons/outline/UnlinkIcon.vue";
 
 // defineProps({
 //   accounts: Array<{
@@ -18,19 +18,19 @@ import UnlinkIcon from "@/components/icon/UnlinkIcon.vue";
 
 const accounts = [
   {
-    type: AccountIconSolid,
+    type: AccountIcon,
     username: "mike@mytiki.com",
   },
   {
-    type: AccountIconSolid,
+    type: AccountIcon,
     username: "mike@mytiki.com",
   },
   {
-    type: AccountIconSolid,
+    type: AccountIcon,
     username: "mike@mytiki.com",
   },
   {
-    type: AccountIconSolid,
+    type: AccountIcon,
     username: "mike@mytiki.com",
   },
 ];

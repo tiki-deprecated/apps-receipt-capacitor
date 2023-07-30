@@ -4,18 +4,16 @@
   -->
 
 <script setup lang="ts">
-import Terms from "../../../example/src/assets/terms.md";
-import BackButton from "@/components/element/BackButton.vue";
-import BottomSheet from "@/components/element/BottomSheet.vue";
-import TextButton from "@/components/element/TextButton.vue";
+import LearnMore from "../../../example/src/assets/learn-more.md";
+import BackButton from "@/components/buttons/BackButton.vue";
+import BottomSheet from "@/components/BottomSheet.vue";
 </script>
 
 <template>
   <bottom-sheet @dismiss="$emit('close')">
     <div class="body">
       <back-button text="Back" class="back" />
-      <terms class="terms" />
-      <text-button text="I agree" class="agree" />
+      <learn-more class="learn-more" />
     </div>
   </bottom-sheet>
 </template>
@@ -34,12 +32,7 @@ import TextButton from "@/components/element/TextButton.vue";
   margin-bottom: 0.625em;
 }
 
-.agree {
-  flex: 0 0 auto;
-  margin: 2em 0;
-}
-
-.terms {
+.learn-more {
   overflow-y: scroll;
   overflow-x: clip;
   flex: 1 1 auto;

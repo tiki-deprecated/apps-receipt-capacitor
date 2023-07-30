@@ -5,20 +5,20 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import BottomSheet from "@/components/element/BottomSheet.vue";
-import ScreenTitle from "@/components/element/ScreenTitle.vue";
-import CloseIcon from "@/components/icon/CloseIcon.vue";
-import Counter from "@/components/element/Counter.vue";
+import BottomSheet from "@/components/BottomSheet.vue";
+import ScreenTitle from "@/components/ScreenTitle.vue";
+import CloseIcon from "@/components/icons/outline/CloseIcon.vue";
+import Counter from "@/modules/reward/Counter.vue";
 import ConfettiExplosion from "vue-confetti-explosion";
-import CircleButton from "@/components/element/CircleButton.vue";
-import SquareButton from "@/components/element/SquareButton.vue";
-import AccountIcon from "@/components/icon/AccountIcon.vue";
-import RedeemIcon from "@/components/icon/RedeemIcon.vue";
-import TextButton from "@/components/element/TextButton.vue";
-import ScanIcon from "@/components/icon/ScanIcon.vue";
-import HistorySummary from "@/components/element/HistorySummary.vue";
-import ReceiptIcon from "@/components/icon/ReceiptIcon.vue";
-import OfferCarousel from "@/components/element/OfferCarousel.vue";
+import CircleButton from "@/components/buttons/CircleButton.vue";
+import SquareButton from "@/components/buttons/SquareButton.vue";
+import AccountIcon from "@/components/icons/AccountIcon.vue";
+import RedeemIcon from "@/components/icons/outline/RedeemIcon.vue";
+import TextButton from "@/components/buttons/TextButton.vue";
+import ScanIcon from "@/components/icons/outline/ScanIcon.vue";
+import HistorySummary from "@/modules/history/HistorySummary.vue";
+import ReceiptIcon from "@/components/icons/solid/ReceiptIcon.vue";
+import OfferCarousel from "@/modules/offer/OfferCarousel.vue";
 
 const show = ref(true);
 </script>

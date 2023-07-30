@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import ArrowIcon from "@/components/icon/ArrowIcon.vue";
+import ArrowIcon from "@/components/icons/outline/ArrowIcon.vue";
 
 defineProps({
   text: String,

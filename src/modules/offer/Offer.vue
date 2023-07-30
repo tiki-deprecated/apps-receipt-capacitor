@@ -4,14 +4,14 @@
   -->
 
 <script setup lang="ts">
-import BottomSheet from "@/components/element/BottomSheet.vue";
-import ScreenTitle from "@/components/element/ScreenTitle.vue";
-import QuestionIcon from "@/components/icon/QuestionIcon.vue";
-import TextButton from "@/components/element/TextButton.vue";
-import DataUse from "@/components/element/DataUse.vue";
-import type { Bullet } from "@/components/element/DataUse.vue";
-import OfferCard from "@/components/element/OfferCard.vue";
-import CircleButton from "@/components/element/CircleButton.vue";
+import BottomSheet from "@/components/BottomSheet.vue";
+import ScreenTitle from "@/components/ScreenTitle.vue";
+import QuestionIcon from "@/components/icons/outline/QuestionIcon.vue";
+import TextButton from "@/components/buttons/TextButton.vue";
+import DataUse from "@/modules/offer/DataUse.vue";
+import type { Bullet } from "@/modules/offer/DataUse.vue";
+import OfferCard from "@/modules/offer/OfferCard.vue";
+import CircleButton from "@/components/buttons/CircleButton.vue";
 
 defineProps({
   reward: String,

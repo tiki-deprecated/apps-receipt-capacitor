@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import Account from "@/components/screen/Account.vue";
+import Account from "@/modules/account/Account.vue";
 
 defineProps({
   present: {
