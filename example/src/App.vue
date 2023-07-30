@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { Tiki } from "@mytiki/tiki-receipt-capacitor";
+import { TikiReceipt } from "@mytiki/tiki-receipt-capacitor";
 
 const present = ref(false);
 </script>
@@ -27,7 +27,7 @@ const present = ref(false);
       <h3>Just click &ldquo;start&rdquo; to well...</h3>
     </div>
     <button class="start" @click="present = !present">start</button>
-    <Tiki v-model:present="present" />
+    <tiki-receipt v-model:present="present" />
   </main>
 </template>
 

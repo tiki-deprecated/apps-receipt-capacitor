@@ -5,12 +5,12 @@
 
 import type { App } from "vue";
 import "./assets/main.css";
-import Tiki from "@/components/Tiki.vue";
+import TikiReceipt from "@/components/TikiReceipt.vue";
 
 export default {
   install: (app: App) => {
-    app.component("Tiki", Tiki);
+    app.component("TikiReceipt", TikiReceipt);
   },
 };
 
-export { Tiki };
+export { TikiReceipt };
