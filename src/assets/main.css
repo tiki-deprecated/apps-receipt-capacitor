@@ -30,19 +30,3 @@
     /* place dark theme var overrides here */
   }
 }
-
-#app {
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
-}
-
-body {
-  min-height: 100vh;
-  color: var(--tiki-primary-text-color);
-  background: var(--tiki-primary-background-color);
-  font-size: var(--tiki-font-size);
-  line-height: var(--tiki-line-height);
-  transition: color 0.5s, background-color 0.5s;
-  font-family: var(--tiki-font-family);
-}

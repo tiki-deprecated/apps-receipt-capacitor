@@ -1,6 +1,16 @@
-import './assets/main.css'
+/*
+ * Copyright (c) TIKI Inc.
+ * MIT license. See LICENSE file in root directory.
+ */
 
-import { createApp } from 'vue'
-import App from './App.vue'
+import type { App } from "vue";
+import "./assets/main.css";
+import TikiReceipt from "@/components/TikiReceipt.vue";
 
-createApp(App).mount('#app')
+export default {
+  install: (app: App) => {
+    app.component("TikiReceipt", TikiReceipt);
+  },
+};
+
+export { TikiReceipt };

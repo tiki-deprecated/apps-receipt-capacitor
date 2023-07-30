@@ -1,46 +1,56 @@
 {
   "name": "@mytiki/tiki-receipt-capacitor",
   "version": "0.0.1",
-  "description": "receipt rewards",
-  "main": "index.js",
-  "keywords": [
-    "tiki"
+  "description": "pineapple",
+  "type": "module",
+  "files": [
+    "dist/*"
   ],
-  "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check build-only; npx cap sync",
-    "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+  "main": "./dist/tiki-receipt-capacitor.umd.js",
+  "module": "./dist/tiki-receipt-capacitor.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/tiki-receipt-capacitor.es.js",
+      "require": "./dist/tiki-receipt-capacitor.umd.js"
+    },
+    "./dist/tiki-receipt-capacitor.css": {
+      "import": "./dist/tiki-receipt-capacitor.css",
+      "require": "./dist/tiki-receipt-capacitor.css"
+    }
   },
+  "types": "./dist/main.d.ts",
+  "scripts": {
+    "build": "vue-tsc --noEmit && vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
   "dependencies": {
-    "@capacitor/android": "^5.1.1",
-    "@capacitor/core": "^5.1.1",
-    "@capacitor/ios": "^5.1.1",
     "vue": "^3.3.4",
     "vue-confetti-explosion": "^1.0.2",
     "vue3-carousel": "^0.3.1"
   },
   "devDependencies": {
-    "@capacitor/cli": "latest",
-    "@rushstack/eslint-patch": "^1.2.0",
-    "@tsconfig/node18": "^2.0.1",
-    "@types/node": "^18.16.17",
+    "@babel/types": "^7.22.5",
+    "@rushstack/eslint-patch": "^1.3.2",
+    "@tsconfig/node18": "^18.2.0",
+    "@types/node": "^20.4.5",
     "@vitejs/plugin-vue": "^4.2.3",
-    "@vue/eslint-config-prettier": "^7.1.0",
+    "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^11.0.3",
     "@vue/tsconfig": "^0.4.0",
-    "eslint": "^8.39.0",
-    "eslint-plugin-vue": "^9.11.0",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.8.8",
-    "typescript": "~5.0.4",
-    "vite": "^4.3.9",
-    "vite-plugin-vue-markdown": "^0.23.7",
-    "vue-tsc": "^1.6.5"
+    "eslint": "^8.46.0",
+    "eslint-plugin-vue": "^9.16.0",
+    "path": "^0.12.7",
+    "rollup-plugin-typescript2": "^0.35.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.7",
+    "vite-plugin-dts": "^3.3.1",
+    "vue-tsc": "^1.8.8"
   },
-  "author": "Tiki inc.",
-  "license": "MIT"
+  "peerDependencies": {
+    "@capacitor/android": "^5.2.2",
+    "@capacitor/core": "^5.2.2",
+    "@capacitor/ios": "^5.2.2"
+  }
 }
