@@ -15,7 +15,7 @@ defineEmits(["click"]);
 </script>
 
 <template>
-  <div class="history-summary">
+  <div class="reward-summary">
     <div class="amount">
       <component :is="icon" class="icon" />
       {{ amount }} pts on
@@ -34,7 +34,7 @@ defineEmits(["click"]);
 </template>
 
 <style scoped>
-.history-summary {
+.reward-summary {
   font-family: var(--tiki-font-family);
   line-height: var(--tiki-line-height);
   font-size: var(--tiki-font-size);

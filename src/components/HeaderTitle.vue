@@ -5,19 +5,32 @@
 
 <script setup lang="ts">
 defineProps({
-  title: String,
+  title: {
+    type: String,
+    required: true,
+  },
   subtitle: String,
 });
 </script>
 
 <template>
-  <div class="screen-title">
-    <p class="title">{{ title }}</p>
-    <p class="subtitle">{{ subtitle }}</p>
+  <div class="heading">
+    <div class="screen-title">
+      <p class="title">{{ title }}</p>
+      <p class="subtitle">{{ subtitle }}</p>
+    </div>
+    <slot />
   </div>
 </template>
 
 <style scoped>
+.heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 0 0.5em 2em 0.5em;
+}
+
 .title {
   font-family: var(--tiki-font-family);
   color: var(--tiki-primary-text-color);

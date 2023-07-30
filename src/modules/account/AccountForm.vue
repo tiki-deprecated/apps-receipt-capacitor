@@ -5,15 +5,14 @@
 
 <script setup lang="ts">
 import AccountIcon from "@/components/icons/solid/AccountIcon.vue";
-
-const accounts: Array<String> = ["gmail", "amazon"];
+import { AccountType } from "@/modules/account/AccountType";
 </script>
 
 <template>
   <form>
     <label for="accounts">Choose Account</label>
     <select id="accounts">
-      <option v-for="account in accounts" :value="account">
+      <option v-for="account in Object.values(AccountType)" :value="account">
         <account-icon /> {{ account }}
       </option>
     </select>

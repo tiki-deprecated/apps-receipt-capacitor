@@ -31,6 +31,7 @@ defineEmits(["click"]);
   font-family: var(--tiki-font-family);
   background-color: transparent;
   border: none;
+  padding: 0;
 }
 
 .icon {

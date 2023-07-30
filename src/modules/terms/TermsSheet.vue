@@ -4,9 +4,10 @@
   -->
 
 <script setup lang="ts">
-import BackButton from "@/components/buttons/BackButton.vue";
+import TextButton from "@/components/buttons/TextButton.vue";
+import HeaderBack from "@/components/HeaderBack.vue";
 
-defineEmits(["back"]);
+defineEmits(["back", "accept"]);
 defineProps({
   src: {
     type: Object,
@@ -17,8 +18,9 @@ defineProps({
 
 <template>
   <div class="full-screen">
-    <back-button text="Back" class="back" @click="$emit('back')" />
-    <component :is="src" class="learn-more" />
+    <header-back text="Back" @click="$emit('back')" />
+    <component :is="src" class="terms" />
+    <text-button text="I agree" class="agree" @click="$emit('accept')" />
   </div>
 </template>
 
@@ -29,12 +31,12 @@ defineProps({
   height: 95vh;
 }
 
-.back {
+.agree {
   flex: 0 0 auto;
-  margin-bottom: 0.625em;
+  margin: 2em 0;
 }
 
-.learn-more {
+.terms {
   overflow-y: scroll;
   overflow-x: clip;
   flex: 1 1 auto;

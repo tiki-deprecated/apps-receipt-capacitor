@@ -5,14 +5,20 @@
 
 <script setup lang="ts">
 defineProps({
-  src: String,
-  description: String,
+  image: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
 });
 </script>
 
 <template>
   <div class="card">
-    <img :src="src" alt="" class="img" />
+    <img :src="image" alt="" class="img" />
     <p class="description">{{ description }}</p>
   </div>
 </template>

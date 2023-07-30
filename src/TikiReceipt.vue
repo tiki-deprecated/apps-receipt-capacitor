@@ -5,15 +5,16 @@
 
 <script setup lang="ts">
 import { State } from "./state";
-import Account from "@/modules/account/Account.vue";
 import { PropType, ref, watch } from "vue";
 import type { Offer } from "@/modules/offer/Offer";
 import OfferSheet from "@/modules/offer/OfferSheet.vue";
-import Terms from "@/modules/terms/Terms.vue";
-import Learn from "@/modules/learn/Learn.vue";
-import Reward from "@/modules/reward/Reward.vue";
-import History from "@/modules/history/History.vue";
+import TermsSheet from "@/modules/terms/TermsSheet.vue";
+import LearnSheet from "@/modules/learn/LearnSheet.vue";
+import RewardSheet from "@/modules/reward/RewardSheet.vue";
+import HistorySheet from "@/modules/history/HistorySheet.vue";
 import BottomSheet from "@/components/BottomSheet.vue";
+import AccountSheet from "@/modules/account/AccountSheet.vue";
+import type { Reward } from "@/modules/reward/Reward";
 
 defineEmits(["update:present"]);
 const props = defineProps({
@@ -31,6 +32,10 @@ const props = defineProps({
   },
   learnMore: {
     type: Object,
+    required: true,
+  },
+  rewards: {
+    type: Array<Reward>,
     required: true,
   },
 });
@@ -60,29 +65,30 @@ watch(
           @close="state = State.Hidden"
           :offer="offer"
         />
-        <terms
+        <terms-sheet
           v-if="state === State.Terms"
           :src="terms"
           @back="state = State.Offer"
           @accept="state = State.Reward"
         />
-        <learn
+        <learn-sheet
           v-if="state === State.Learn"
           :src="learnMore"
           @back="state = State.Offer"
         />
-        <reward
+        <reward-sheet
           v-if="state === State.Reward"
           @close="state = State.Hidden"
           @history="state = State.History"
           @account="state = State.Account"
+          :rewards="rewards"
         />
-        <history
+        <history-sheet
           v-if="state === State.History"
           @close="state = State.Hidden"
           @back="state = State.Reward"
         />
-        <account
+        <account-sheet
           v-if="state === State.Account"
           @close="state = State.Hidden"
           @back="state = State.Reward"

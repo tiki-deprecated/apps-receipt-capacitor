@@ -13,13 +13,13 @@ defineProps({
 </script>
 
 <template>
-  <p class="counter">
+  <p class="reward-counter">
     {{ amount.toLocaleString("en", { useGrouping: true }) }} pts
   </p>
 </template>
 
 <style scoped>
-.counter {
+.reward-counter {
   font-family: var(--tiki-font-family);
   font-size: calc(var(--tiki-font-size) * 3.625);
   font-weight: bold;

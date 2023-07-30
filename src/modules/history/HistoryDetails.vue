@@ -4,32 +4,27 @@
   -->
 
 <script setup lang="ts">
-import ReceiptIcon from "@/components/icons/solid/ReceiptIcon.vue";
-
-export interface HistoryEvent {
-  name: String;
-  amount: Number;
-  icon: Object;
-  date: Date;
-}
+import type { HistoryEvent } from "@/modules/history/HistoryEvent";
+import { HistoryEventType } from "@/modules/history/HistoryEventType";
+import HistoryItem from "@/modules/history/HistoryItem.vue";
 
 const events: Array<HistoryEvent> = [
   {
     name: "Amazon receipt detected",
     amount: 25,
-    icon: ReceiptIcon,
+    type: HistoryEventType.LINK,
     date: new Date(),
   },
   {
     name: "Amazon receipt detected",
     amount: 25,
-    icon: ReceiptIcon,
+    type: HistoryEventType.REDEEM,
     date: new Date(new Date().setMonth(3)),
   },
   {
     name: "Amazon receipt detected",
     amount: 25,
-    icon: ReceiptIcon,
+    type: HistoryEventType.SCAN,
     date: new Date(new Date().setDate(7)),
   },
 ];
@@ -61,29 +56,7 @@ events
       )"
       class="event"
     >
-      <div class="description">
-        <component :is="event.icon" class="icon" />
-        <div>
-          <p class="name">{{ event.name }}</p>
-          <p class="date">
-            {{
-              event.date.toLocaleDateString("en-US", {
-                hour12: true,
-                minute: "numeric",
-                hour: "numeric",
-                day: "numeric",
-                month: "numeric",
-                year: "2-digit",
-              })
-            }}
-          </p>
-        </div>
-      </div>
-      <div class="amount">
-        <span v-if="event.amount > 0">+</span>
-        <span v-if="event.amount < 0">-</span>
-        {{ event.amount }} pts
-      </div>
+      <history-item :event="event" />
     </div>
   </div>
 </template>
@@ -103,39 +76,5 @@ events
   align-items: start;
   justify-content: space-between;
   margin: 1.5em auto;
-}
-
-.description {
-  display: flex;
-  align-items: center;
-}
-
-.icon {
-  height: 2.4em;
-  margin-right: 1.143em;
-  color: var(--tiki-secondary-text-color);
-}
-
-.name {
-  font-size: var(--tiki-font-size);
-  line-height: 1em;
-  color: var(--tiki-primary-text-color);
-  font-weight: bold;
-  margin: 0;
-}
-
-.date {
-  font-size: var(--tiki-font-size-xs);
-  line-height: var(--tiki-line-height-sm);
-  color: var(--tiki-secondary-text-color);
-  font-weight: 500;
-  margin: 0;
-}
-
-.amount {
-  font-size: var(--tiki-font-size-xl);
-  line-height: 1em;
-  color: var(--tiki-primary-text-color);
-  font-weight: bold;
 }
 </style>

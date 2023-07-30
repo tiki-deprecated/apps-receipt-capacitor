@@ -31,7 +31,7 @@ const present = ref(false);
     <button class="start" @click="present = !present">start</button>
     <tiki-receipt
       :offer="{
-        reward: './src/assets/offer-card.png',
+        image: './src/assets/offer-card.png',
         description:
           'Share your receipts to earn rewards like gift cards or cash!',
         bullets: [
@@ -42,6 +42,23 @@ const present = ref(false);
       }"
       :terms="Terms"
       :learnMore="LearnMore"
+      :rewards="[
+        {
+          image: './src/assets/offer-card.png',
+          description:
+            'Share your receipts to earn rewards like gift cards or cash!',
+        },
+        {
+          image: './src/assets/offer-card.png',
+          description:
+            'Share your receipts to earn rewards like gift cards or cash!',
+        },
+        {
+          image: './src/assets/offer-card.png',
+          description:
+            'Share your receipts to earn rewards like gift cards or cash!',
+        },
+      ]"
       v-model:present="present"
     />
   </main>
