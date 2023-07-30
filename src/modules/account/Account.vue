@@ -4,40 +4,29 @@
   -->
 
 <script setup lang="ts">
-import BottomSheet from "@/components/BottomSheet.vue";
 import CloseIcon from "@/components/icons/outline/CloseIcon.vue";
 import CircleButton from "@/components/buttons/CircleButton.vue";
-import { ref } from "vue";
 import BackButton from "@/components/buttons/BackButton.vue";
 import AccountForm from "@/modules/account/AccountForm.vue";
 import TextButton from "@/components/buttons/TextButton.vue";
 import AccountIcon from "@/components/icons/outline/AccountIcon.vue";
 import AccountCarousel from "@/modules/account/AccountCarousel.vue";
 
-const show = ref(true);
+defineEmits(["close", "back"]);
 </script>
 
 <template>
-  <bottom-sheet @dismiss="$emit('close')" :show="show">
-    <div class="body">
-      <div class="heading">
-        <back-button text="Rewards" />
-        <circle-button @click="show = false" :icon="CloseIcon" />
-      </div>
-      <account-form />
-      <p class="linked-accounts">Linked Accounts</p>
-      <account-carousel class="account-carousel" />
-      <text-button text="Link Account" :icon="AccountIcon" />
-    </div>
-  </bottom-sheet>
+  <div class="heading">
+    <back-button text="Rewards" @click="$emit('back')" />
+    <circle-button @click="$emit('close')" :icon="CloseIcon" />
+  </div>
+  <account-form />
+  <p class="linked-accounts">Linked Accounts</p>
+  <account-carousel class="account-carousel" />
+  <text-button text="Link Account" :icon="AccountIcon" />
 </template>
 
 <style scoped>
-.body {
-  padding: 1.5em 1em 2.5em 1em;
-  box-sizing: border-box;
-}
-
 .heading {
   display: flex;
   align-items: flex-start;

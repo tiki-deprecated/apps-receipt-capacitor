@@ -11,27 +11,18 @@ import { ref } from "vue";
 import BackButton from "@/components/buttons/BackButton.vue";
 import HistoryDetails from "@/modules/history/HistoryDetails.vue";
 
-const show = ref(true);
+defineEmits(["close", "back"]);
 </script>
 
 <template>
-  <bottom-sheet @dismiss="$emit('close')" :show="show">
-    <div class="body">
-      <div class="heading">
-        <back-button text="Rewards" />
-        <circle-button @click="show = false" :icon="CloseIcon" />
-      </div>
-      <history-details />
-    </div>
-  </bottom-sheet>
+  <div class="heading">
+    <back-button text="Rewards" @click="$emit('back')" />
+    <circle-button @click="$emit('close')" :icon="CloseIcon" />
+  </div>
+  <history-details />
 </template>
 
 <style scoped>
-.body {
-  padding: 1.5em 1em 2.5em 1em;
-  box-sizing: border-box;
-}
-
 .heading {
   display: flex;
   align-items: flex-start;

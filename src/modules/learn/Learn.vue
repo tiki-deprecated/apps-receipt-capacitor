@@ -4,27 +4,29 @@
   -->
 
 <script setup lang="ts">
-import LearnMore from "../../../example/src/assets/learn-more.md";
 import BackButton from "@/components/buttons/BackButton.vue";
-import BottomSheet from "@/components/BottomSheet.vue";
+
+defineEmits(["back"]);
+defineProps({
+  src: {
+    type: Object,
+    required: true,
+  },
+});
 </script>
 
 <template>
-  <bottom-sheet @dismiss="$emit('close')">
-    <div class="body">
-      <back-button text="Back" class="back" />
-      <learn-more class="learn-more" />
-    </div>
-  </bottom-sheet>
+  <div class="full-screen">
+    <back-button text="Back" class="back" @click="$emit('back')" />
+    <component :is="src" class="learn-more" />
+  </div>
 </template>
 
 <style scoped>
-.body {
-  padding: 1.5em 1em 2.5em 1em;
+.full-screen {
   display: flex;
   flex-flow: column;
-  height: 100vh;
-  box-sizing: border-box;
+  height: 95vh;
 }
 
 .back {

@@ -4,10 +4,7 @@
   -->
 
 <script setup lang="ts">
-export interface Bullet {
-  text: String;
-  isUsed: Boolean;
-}
+import type { Bullet } from "@/modules/offer/Bullet";
 
 defineProps({
   bullets: Array<Bullet>,

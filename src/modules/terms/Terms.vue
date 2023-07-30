@@ -4,29 +4,32 @@
   -->
 
 <script setup lang="ts">
-import Terms from "../../../example/src/assets/terms.md";
 import BackButton from "@/components/buttons/BackButton.vue";
 import BottomSheet from "@/components/BottomSheet.vue";
 import TextButton from "@/components/buttons/TextButton.vue";
+
+defineEmits(["back", "accept"]);
+defineProps({
+  src: {
+    type: Object,
+    required: true,
+  },
+});
 </script>
 
 <template>
-  <bottom-sheet @dismiss="$emit('close')">
-    <div class="body">
-      <back-button text="Back" class="back" />
-      <terms class="terms" />
-      <text-button text="I agree" class="agree" />
-    </div>
-  </bottom-sheet>
+  <div class="full-screen">
+    <back-button text="Back" class="back" @click="$emit('back')" />
+    <component :is="src" class="terms" />
+    <text-button text="I agree" class="agree" @click="$emit('accept')" />
+  </div>
 </template>
 
 <style scoped>
-.body {
-  padding: 1.5em 1em 2.5em 1em;
+.full-screen {
   display: flex;
   flex-flow: column;
-  height: 100vh;
-  box-sizing: border-box;
+  height: 95vh;
 }
 
 .back {

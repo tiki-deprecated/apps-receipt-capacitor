@@ -19,7 +19,7 @@ defineEmits(["dismiss"]);
 const isShow = ref(props.show);
 watch(
   () => props.show,
-  (show) => (isShow.value = show)
+  (show) => (isShow.value = show),
 );
 </script>
 
