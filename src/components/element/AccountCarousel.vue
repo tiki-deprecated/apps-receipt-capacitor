@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide } from "vue3-carousel";
-import AccountIconSolid from "@/icon/AccountIconSolid.vue";
-import UnlinkIcon from "@/icon/UnlinkIcon.vue";
+import AccountIconSolid from "@/components/icon/AccountIconSolid.vue";
+import UnlinkIcon from "@/components/icon/UnlinkIcon.vue";
 
 // defineProps({
 //   accounts: Array<{

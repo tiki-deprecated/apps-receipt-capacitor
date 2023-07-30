@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { MyButton } from "@mytiki/tiki-receipt-capacitor";
+import { Tiki } from "@mytiki/tiki-receipt-capacitor";
 
 const present = ref(false);
 </script>
@@ -27,8 +27,7 @@ const present = ref(false);
       <h3>Just click &ldquo;start&rdquo; to well...</h3>
     </div>
     <button class="start" @click="present = !present">start</button>
-    <!--    <tiki v-model:present="present" />-->
-    <my-button />
+    <Tiki v-model:present="present" />
   </main>
 </template>
 
@@ -47,10 +46,10 @@ header {
   margin: 2em auto;
   display: block;
   padding: 0.5em 2em;
-  border: var(--tiki-accent-color) solid 1px;
+  border: #00b272 solid 1px;
   border-radius: 0.5em;
-  background: var(--tiki-accent-color);
-  color: var(--tiki-primary-background-color);
+  background: #00b272;
+  color: #ffffff;
   font-size: var(--tiki-font-size);
   font-weight: 500;
 }
@@ -61,14 +60,14 @@ header {
 
 .greetings h1 {
   font-weight: 500;
-  font-size: var(--tiki-font-size-xl);
-  line-height: var(--tiki-line-height-xl);
-  color: var(--tiki-accent-color);
+  font-size: 1.25em;
+  line-height: 1.75em;
+  color: #00b272;
 }
 
 .greetings h3 {
-  font-size: var(--tiki-font-size-lg);
-  line-height: var(--tiki-line-height-lg);
+  font-size: 1.25em;
+  line-height: 1.75em;
   font-weight: normal;
 }
 

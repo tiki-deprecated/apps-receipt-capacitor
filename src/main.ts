@@ -4,12 +4,13 @@
  */
 
 import type { App } from "vue";
-import MyButton from "@/components/MyButton.vue";
+import "./assets/main.css";
+import Tiki from "@/components/Tiki.vue";
 
 export default {
   install: (app: App) => {
-    app.component("MyButton", MyButton);
+    app.component("Tiki", Tiki);
   },
 };
 
-export { MyButton };
+export { Tiki };

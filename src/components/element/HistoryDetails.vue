@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import ReceiptIcon from "@/icon/ReceiptIcon.vue";
+import ReceiptIcon from "@/components/icon/ReceiptIcon.vue";
 
 export interface HistoryEvent {
   name: String;
@@ -57,7 +57,7 @@ events
       v-for="event in events.filter(
         (e) =>
           e.date.getMonth() === new Date(month).getMonth() &&
-          e.date.getFullYear() === new Date(month).getFullYear()
+          e.date.getFullYear() === new Date(month).getFullYear(),
       )"
       class="event"
     >

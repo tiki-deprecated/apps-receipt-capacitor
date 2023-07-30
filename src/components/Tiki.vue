@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-// import Account from "./screen/Account.vue";
+import Account from "@/components/screen/Account.vue";
 
 defineProps({
   present: {
@@ -17,7 +17,6 @@ defineEmits(["update:present"]);
 
 <template>
   <Transition appear name="fade">
-    <div>hello</div>
     <!--    <offer-->
     <!--      v-if="present"-->
     <!--      @close="$emit('update:present', false)"-->
@@ -34,7 +33,7 @@ defineEmits(["update:present"]);
     <!--    <learn-more v-if="present" @close="$emit('update:present', false)" />-->
     <!--    <reward v-if="present" @close="$emit('update:present', false)" />-->
     <!--    <history v-if="present" @close="$emit('update:present', false)" />-->
-    <!--    <account v-if="present" @close="$emit('update:present', false)" />-->
+    <account v-if="present" @close="$emit('update:present', false)" />
   </Transition>
 </template>
 

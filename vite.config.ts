@@ -32,14 +32,14 @@ export default defineConfig({
   build: {
     cssCodeSplit: true,
     lib: {
-      entry: "src/components/main.ts",
+      entry: "src/main.ts",
       name: "tiki-receipt-capacitor",
       formats: ["es", "cjs", "umd"],
       fileName: (format) => `tiki-receipt-capacitor.${format}.js`,
     },
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, "src/components/main.ts"),
+        main: path.resolve(__dirname, "src/main.ts"),
       },
       external: ["vue"],
       output: {

@@ -4,15 +4,15 @@
   -->
 
 <script setup lang="ts">
-import BottomSheet from "@/element/BottomSheet.vue";
-import CloseIcon from "@/icon/CloseIcon.vue";
-import CircleButton from "@/element/CircleButton.vue";
+import BottomSheet from "@/components/element/BottomSheet.vue";
+import CloseIcon from "@/components/icon/CloseIcon.vue";
+import CircleButton from "@/components/element/CircleButton.vue";
 import { ref } from "vue";
-import BackButton from "@/element/BackButton.vue";
-import AccountForm from "@/element/AccountForm.vue";
-import TextButton from "@/element/TextButton.vue";
-import AccountIconOutline from "@/icon/AccountIconOutline.vue";
-import AccountCarousel from "@/element/AccountCarousel.vue";
+import BackButton from "@/components/element/BackButton.vue";
+import AccountForm from "@/components/element/AccountForm.vue";
+import TextButton from "@/components/element/TextButton.vue";
+import AccountIconOutline from "@/components/icon/AccountIconOutline.vue";
+import AccountCarousel from "@/components/element/AccountCarousel.vue";
 
 const show = ref(true);
 </script>

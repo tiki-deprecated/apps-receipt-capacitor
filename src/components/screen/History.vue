@@ -4,12 +4,12 @@
   -->
 
 <script setup lang="ts">
-import BottomSheet from "@/element/BottomSheet.vue";
-import CloseIcon from "@/icon/CloseIcon.vue";
-import CircleButton from "@/element/CircleButton.vue";
+import BottomSheet from "@/components/element/BottomSheet.vue";
+import CloseIcon from "@/components/icon/CloseIcon.vue";
+import CircleButton from "@/components/element/CircleButton.vue";
 import { ref } from "vue";
-import BackButton from "@/element/BackButton.vue";
-import HistoryDetails from "@/element/HistoryDetails.vue";
+import BackButton from "@/components/element/BackButton.vue";
+import HistoryDetails from "@/components/element/HistoryDetails.vue";
 
 const show = ref(true);
 </script>
