@@ -5,6 +5,8 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import LearnMore from "./assets/learn-more.md";
+import Terms from "./assets/terms.md";
 import { TikiReceipt } from "@mytiki/tiki-receipt-capacitor";
 
 const present = ref(false);
@@ -27,7 +29,38 @@ const present = ref(false);
       <h3>Just click &ldquo;start&rdquo; to well...</h3>
     </div>
     <button class="start" @click="present = !present">start</button>
-    <tiki-receipt v-model:present="present" />
+    <tiki-receipt
+      :offer="{
+        image: './src/assets/offer-card.png',
+        description:
+          'Share your receipts to earn rewards like gift cards or cash!',
+        bullets: [
+          { text: 'De-identified (for your privacy)', isUsed: true },
+          { text: 'Develop market insights', isUsed: false },
+          { text: 'Deliver a more personalized experience ', isUsed: true },
+        ],
+      }"
+      :terms="Terms"
+      :learnMore="LearnMore"
+      :rewards="[
+        {
+          image: './src/assets/offer-card.png',
+          description:
+            'Share your receipts to earn rewards like gift cards or cash!',
+        },
+        {
+          image: './src/assets/offer-card.png',
+          description:
+            'Share your receipts to earn rewards like gift cards or cash!',
+        },
+        {
+          image: './src/assets/offer-card.png',
+          description:
+            'Share your receipts to earn rewards like gift cards or cash!',
+        },
+      ]"
+      v-model:present="present"
+    />
   </main>
 </template>
 

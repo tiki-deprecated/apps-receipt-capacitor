@@ -5,7 +5,7 @@
 
 import type { App } from "vue";
 import "./assets/main.css";
-import TikiReceipt from "@/components/TikiReceipt.vue";
+import TikiReceipt from "./TikiReceipt.vue";
 
 export default {
   install: (app: App) => {
