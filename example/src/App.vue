@@ -4,10 +4,21 @@
   -->
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { inject, ref } from "vue";
 import LearnMore from "./assets/learn-more.md";
 import Terms from "./assets/terms.md";
 import { TikiReceipt } from "@mytiki/tiki-receipt-capacitor";
+import { TikiSdk } from "../../../tiki-sdk-capacitor";
+
+const tiki: TikiSdk | undefined = inject("TikiSdk");
+tiki
+  ?.initialize(
+    "59a1cfe4-67c3-42d2-b21c-3414fc4859cf",
+    "be19730a-00d5-45f5-b18e-2e19eb25f311",
+  )
+  .then((rsp) => {
+    console.log(`id: ${rsp.id} | address: ${rsp.address}`);
+  });
 
 const present = ref(false);
 </script>

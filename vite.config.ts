@@ -34,7 +34,7 @@ export default defineConfig({
     lib: {
       entry: "src/main.ts",
       name: "tiki-receipt-capacitor",
-      formats: ["es", "cjs", "umd"],
+      formats: ["es", "cjs"],
       fileName: (format) => `tiki-receipt-capacitor.${format}.js`,
     },
     rollupOptions: {
