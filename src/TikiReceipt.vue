@@ -4,8 +4,8 @@
   -->
 
 <script setup lang="ts">
-import { State } from "./state";
-import { PropType, ref, watch } from "vue";
+import { initialState, State } from "@/state";
+import { inject, PropType, ref, watch } from "vue";
 import type { Offer } from "@/modules/offer/Offer";
 import OfferSheet from "@/modules/offer/OfferSheet.vue";
 import TermsSheet from "@/modules/terms/TermsSheet.vue";
@@ -15,8 +15,11 @@ import HistorySheet from "@/modules/history/HistorySheet.vue";
 import BottomSheet from "@/components/BottomSheet.vue";
 import AccountSheet from "@/modules/account/AccountSheet.vue";
 import type { Reward } from "@/modules/reward/Reward";
+import { TikiSdk } from "../../tiki-sdk-capacitor/src";
 
-defineEmits(["update:present"]);
+const tiki: TikiSdk | undefined = inject("TikiSdk");
+
+const emit = defineEmits(["update:present"]);
 const props = defineProps({
   present: {
     type: Boolean,
@@ -38,14 +41,24 @@ const props = defineProps({
     type: Array<Reward>,
     required: true,
   },
+  ptr: {
+    type: String,
+    required: true,
+  },
 });
 
 const state = ref(State.Hidden);
 watch(
   () => props.present,
-  (present) => {
-    if (present) state.value = State.Offer;
-    else state.value = State.Hidden;
+  async (present) => {
+    if (present) {
+      try {
+        state.value = await initialState(tiki!, props.ptr!);
+      } catch (e) {
+        console.error(e);
+        emit("update:present", false);
+      }
+    } else state.value = State.Hidden;
   },
 );
 </script>

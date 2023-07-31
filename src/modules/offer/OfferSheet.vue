@@ -6,26 +6,19 @@
 <script setup lang="ts">
 import { Offer } from "./Offer";
 import type { PropType } from "vue";
-import { inject } from "vue";
 import QuestionIcon from "@/components/icons/QuestionIcon.vue";
 import TextButton from "@/components/buttons/TextButton.vue";
 import CircleButton from "@/components/buttons/CircleButton.vue";
 import OfferDataUse from "@/modules/offer/OfferDataUse.vue";
 import Card from "@/components/Card.vue";
 import HeaderTitle from "@/components/HeaderTitle.vue";
-import { TikiSdk } from "@mytiki/tiki-sdk-capacitor";
 
 defineEmits(["close", "learn", "accept"]);
-defineProps({
+const props = defineProps({
   offer: {
     type: Object as PropType<Offer>,
     required: true,
   },
-});
-
-const tiki: TikiSdk | undefined = inject("TikiSdk");
-tiki?.address().then((addr) => {
-  console.log(`ADDRESS IS: ${addr}`);
 });
 </script>
 

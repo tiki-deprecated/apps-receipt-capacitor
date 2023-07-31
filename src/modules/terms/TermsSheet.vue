@@ -6,21 +6,34 @@
 <script setup lang="ts">
 import TextButton from "@/components/buttons/TextButton.vue";
 import HeaderBack from "@/components/HeaderBack.vue";
+import { TikiSdk } from "@mytiki/tiki-sdk-capacitor";
+import { inject } from "vue";
+import * as Service from "@/modules/terms/TermsService";
 
-defineEmits(["back", "accept"]);
+const tiki: TikiSdk | undefined = inject("TikiSdk");
+const emit = defineEmits(["back", "accept"]);
 defineProps({
   src: {
     type: Object,
     required: true,
   },
+  ptr: {
+    type: String,
+    required: true,
+  },
 });
+
+const accept = () => {
+  Service.accept(tiki!, {}, {});
+  emit("accept");
+};
 </script>
 
 <template>
   <div class="full-screen">
     <header-back text="Back" @click="$emit('back')" />
     <component :is="src" class="terms" />
-    <text-button text="I agree" class="agree" @click="$emit('accept')" />
+    <text-button text="I agree" class="agree" @click="accept" />
   </div>
 </template>
 
