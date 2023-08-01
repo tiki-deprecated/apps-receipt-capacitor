@@ -4,21 +4,34 @@
   -->
 
 <script setup lang="ts">
-import HeaderBack from "@/components/HeaderBack.vue";
+import VueMarkdown from "vue-markdown-render";
+import TextButton from "@/components/buttons/text-button.vue";
+import HeaderBack from "@/components/header-back.vue";
+import { TikiSdk } from "@mytiki/tiki-sdk-capacitor";
+import { inject, PropType } from "vue";
+import * as Service from "@/modules/terms/terms-service";
+import type { Program } from "@/modules/program/program";
 
-defineEmits(["back"]);
+const tiki: TikiSdk | undefined = inject("TikiSdk");
+const emit = defineEmits(["back", "accept"]);
 defineProps({
-  src: {
-    type: Object,
+  program: {
+    type: Object as PropType<Program>,
     required: true,
   },
 });
+
+const accept = () => {
+  Service.accept(tiki!, {}, {});
+  emit("accept");
+};
 </script>
 
 <template>
   <div class="full-screen">
     <header-back text="Back" @click="$emit('back')" />
-    <component :is="src" class="learn-more" />
+    <vue-markdown :source="program.terms" class="terms" />
+    <text-button text="I agree" class="agree" @click="accept" />
   </div>
 </template>
 
@@ -29,7 +42,12 @@ defineProps({
   height: 95vh;
 }
 
-.learn-more {
+.agree {
+  flex: 0 0 auto;
+  margin: 2em 0;
+}
+
+.terms {
   overflow-y: scroll;
   overflow-x: clip;
   flex: 1 1 auto;

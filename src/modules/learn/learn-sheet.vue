@@ -4,36 +4,24 @@
   -->
 
 <script setup lang="ts">
-import TextButton from "@/components/buttons/TextButton.vue";
-import HeaderBack from "@/components/HeaderBack.vue";
-import { TikiSdk } from "@mytiki/tiki-sdk-capacitor";
-import { inject } from "vue";
-import * as Service from "@/modules/terms/TermsService";
+import VueMarkdown from "vue-markdown-render";
+import HeaderBack from "@/components/header-back.vue";
+import type { PropType } from "vue";
+import type { Program } from "@/modules/program/program";
 
-const tiki: TikiSdk | undefined = inject("TikiSdk");
-const emit = defineEmits(["back", "accept"]);
+defineEmits(["back"]);
 defineProps({
-  src: {
-    type: Object,
-    required: true,
-  },
-  ptr: {
-    type: String,
+  program: {
+    type: Object as PropType<Program>,
     required: true,
   },
 });
-
-const accept = () => {
-  Service.accept(tiki!, {}, {});
-  emit("accept");
-};
 </script>
 
 <template>
   <div class="full-screen">
     <header-back text="Back" @click="$emit('back')" />
-    <component :is="src" class="terms" />
-    <text-button text="I agree" class="agree" @click="accept" />
+    <vue-markdown :source="program.learn" class="learn-more" />
   </div>
 </template>
 
@@ -44,12 +32,7 @@ const accept = () => {
   height: 95vh;
 }
 
-.agree {
-  flex: 0 0 auto;
-  margin: 2em 0;
-}
-
-.terms {
+.learn-more {
   overflow-y: scroll;
   overflow-x: clip;
   flex: 1 1 auto;

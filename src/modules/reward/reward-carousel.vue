@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide } from "vue3-carousel";
-import Card from "@/components/Card.vue";
-import type { Reward } from "@/modules/reward/Reward";
+import Card from "@/components/card.vue";
+import type { Reward } from "@/modules/reward/reward";
 
 defineProps({
   rewards: Array<Reward>,

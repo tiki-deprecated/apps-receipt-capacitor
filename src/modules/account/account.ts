@@ -3,7 +3,7 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import type { AccountType } from "@/modules/account/AccountType";
+import type { AccountType } from "@/modules/account/account-type";
 
 export interface Account {
   username: string;

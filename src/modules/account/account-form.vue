@@ -4,8 +4,8 @@
   -->
 
 <script setup lang="ts">
-import AccountIcon from "@/components/icons/AccountIcon.vue";
-import { AccountType } from "@/modules/account/AccountType";
+import AccountIcon from "@/components/icons/account-icon.vue";
+import { AccountType } from "@/modules/account/account-type";
 </script>
 
 <template>

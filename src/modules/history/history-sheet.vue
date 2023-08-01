@@ -4,10 +4,10 @@
   -->
 
 <script setup lang="ts">
-import HistoryDetails from "@/modules/history/HistoryDetails.vue";
-import HeaderBack from "@/components/HeaderBack.vue";
-import CrossMarkIconOutline from "@/components/icons/CrossMarkIconOutline.vue";
-import CircleButton from "@/components/buttons/CircleButton.vue";
+import HistoryDetails from "@/modules/history/history-details.vue";
+import HeaderBack from "@/components/header-back.vue";
+import CrossMarkIconOutline from "@/components/icons/cross-mark-icon-outline.vue";
+import CircleButton from "@/components/buttons/circle-button.vue";
 
 defineEmits(["close", "back"]);
 </script>

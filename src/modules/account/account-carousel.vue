@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide } from "vue3-carousel";
-import type { Account } from "@/modules/account/Account";
-import AccountItem from "@/modules/account/AccountItem.vue";
+import type { Account } from "@/modules/account/account";
+import AccountItem from "@/modules/account/account-item.vue";
 
 defineProps({
   accounts: {

@@ -3,7 +3,7 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-export interface Bullet {
+export interface ProgramBullet {
   text: String;
   isUsed: Boolean;
 }

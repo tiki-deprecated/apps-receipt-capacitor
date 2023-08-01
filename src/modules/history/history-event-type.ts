@@ -3,9 +3,9 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import ReceiptIcon from "@/components/icons/ReceiptIcon.vue";
-import AccountIcon from "@/components/icons/AccountIcon.vue";
-import RedeemIcon from "@/components/icons/RedeemIcon.vue";
+import ReceiptIcon from "@/components/icons/receipt-icon.vue";
+import AccountIcon from "@/components/icons/account-icon.vue";
+import RedeemIcon from "@/components/icons/redeem-icon.vue";
 
 export enum HistoryEventType {
   LINK = "link",

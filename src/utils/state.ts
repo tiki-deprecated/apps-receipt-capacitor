@@ -7,7 +7,7 @@ import { TikiSdk } from "@mytiki/tiki-sdk-capacitor";
 
 export enum State {
   Hidden,
-  Offer,
+  Program,
   Terms,
   Learn,
   Reward,
@@ -15,15 +15,13 @@ export enum State {
   Account,
 }
 
-export const initialState = async (
-  tiki: TikiSdk,
-  ptr: string,
-): Promise<State> => {
+export const initialState = async (tiki: TikiSdk): Promise<State> => {
   const isInitialized: Boolean = await tiki?.isInitialized();
   if (isInitialized) {
-    const title = await tiki?.getTitle(ptr);
-    if (title !== undefined) return State.Reward;
-    else return State.Offer;
+    const id = await tiki?.id();
+    const title = await tiki?.getTitle(id);
+    if (title?.id != undefined) return State.Reward;
+    else return State.Program;
   } else {
     throw Error("TIKI SDK is not yet initialized");
   }

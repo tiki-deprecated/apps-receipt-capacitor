@@ -4,12 +4,12 @@
   -->
 
 <script setup lang="ts">
-import type { Bullet } from "@/modules/offer/Bullet";
-import CrossMarkIcon from "@/components/icons/CrossMarkIcon.vue";
-import CheckIcon from "@/components/icons/CheckIcon.vue";
+import type { ProgramBullet } from "@/modules/program/program-bullet";
+import CrossMarkIcon from "@/components/icons/cross-mark-icon.vue";
+import CheckIcon from "@/components/icons/check-icon.vue";
 
 defineProps({
-  bullets: Array<Bullet>,
+  bullets: Array<ProgramBullet>,
 });
 </script>
 

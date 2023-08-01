@@ -4,10 +4,10 @@
   -->
 
 <script setup lang="ts">
-import UnlinkIcon from "@/components/icons/UnlinkIcon.vue";
+import UnlinkIcon from "@/components/icons/unlink-icon.vue";
 import type { PropType } from "vue";
-import type { Account } from "@/modules/account/Account";
-import { icon } from "@/modules/account/AccountType";
+import type { Account } from "@/modules/account/account";
+import { icon } from "@/modules/account/account-type";
 
 defineProps({
   account: {

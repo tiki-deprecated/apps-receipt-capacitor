@@ -4,19 +4,19 @@
   -->
 
 <script setup lang="ts">
-import { Offer } from "./Offer";
+import QuestionIcon from "@/components/icons/question-icon.vue";
+import TextButton from "@/components/buttons/text-button.vue";
+import CircleButton from "@/components/buttons/circle-button.vue";
+import ProgramDataUse from "@/modules/program/program-data-use.vue";
+import Card from "@/components/card.vue";
+import HeaderTitle from "@/components/header-title.vue";
 import type { PropType } from "vue";
-import QuestionIcon from "@/components/icons/QuestionIcon.vue";
-import TextButton from "@/components/buttons/TextButton.vue";
-import CircleButton from "@/components/buttons/CircleButton.vue";
-import OfferDataUse from "@/modules/offer/OfferDataUse.vue";
-import Card from "@/components/Card.vue";
-import HeaderTitle from "@/components/HeaderTitle.vue";
+import type { Program } from "@/modules/program/program";
 
 defineEmits(["close", "learn", "accept"]);
 const props = defineProps({
-  offer: {
-    type: Object as PropType<Offer>,
+  program: {
+    type: Object as PropType<Program>,
     required: true,
   },
 });
@@ -26,8 +26,8 @@ const props = defineProps({
   <header-title title="Data Rewards" subtitle="Share data. Earn rewards.">
     <circle-button :icon="QuestionIcon" @click="$emit('learn')" />
   </header-title>
-  <card :image="offer.image" :description="offer.description" />
-  <offer-data-use :bullets="offer.bullets" class="data-use" />
+  <card :image="program.image" :description="program.description" />
+  <program-data-use :bullets="program.bullets" class="data-use" />
   <div class="footer">
     <text-button
       text="Back off"

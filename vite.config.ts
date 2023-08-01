@@ -8,10 +8,13 @@ import * as path from "path";
 import typescript2 from "rollup-plugin-typescript2";
 import dts from "vite-plugin-dts";
 import vue from "@vitejs/plugin-vue";
+import Markdown from "vite-plugin-vue-markdown";
 
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      include: [/\.vue$/, /\.md$/],
+    }),
     dts({
       insertTypesEntry: true,
     }),
@@ -28,6 +31,7 @@ export default defineConfig({
       },
       exclude: ["vite.config.ts"],
     }),
+    Markdown(),
   ],
   build: {
     cssCodeSplit: true,

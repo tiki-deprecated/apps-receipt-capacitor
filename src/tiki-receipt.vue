@@ -4,20 +4,21 @@
   -->
 
 <script setup lang="ts">
-import { initialState, State } from "@/state";
+import { TikiSdk } from "@mytiki/tiki-sdk-capacitor";
+import { initialState, State } from "@/utils/state";
+import type { Config } from "@/utils/config/config";
+import { apply } from "@/utils/config/theme";
 import { inject, PropType, ref, watch } from "vue";
-import type { Offer } from "@/modules/offer/Offer";
-import OfferSheet from "@/modules/offer/OfferSheet.vue";
-import TermsSheet from "@/modules/terms/TermsSheet.vue";
-import LearnSheet from "@/modules/learn/LearnSheet.vue";
-import RewardSheet from "@/modules/reward/RewardSheet.vue";
-import HistorySheet from "@/modules/history/HistorySheet.vue";
-import BottomSheet from "@/components/BottomSheet.vue";
-import AccountSheet from "@/modules/account/AccountSheet.vue";
-import type { Reward } from "@/modules/reward/Reward";
-import { TikiSdk } from "../../tiki-sdk-capacitor/src";
+import BottomSheet from "@/components/bottom-sheet.vue";
+import ProgramSheet from "@/modules/program/program-sheet.vue";
+import TermsSheet from "@/modules/terms/terms-sheet.vue";
+import LearnSheet from "@/modules/learn/learn-sheet.vue";
+import RewardSheet from "@/modules/reward/reward-sheet.vue";
+import HistorySheet from "@/modules/history/history-sheet.vue";
+import AccountSheet from "@/modules/account/account-sheet.vue";
 
 const tiki: TikiSdk | undefined = inject("TikiSdk");
+const defaultConfig: Config | undefined = inject("TikiReceiptConfig");
 
 const emit = defineEmits(["update:present"]);
 const props = defineProps({
@@ -25,35 +26,20 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  offer: {
-    type: Object as PropType<Offer>,
-    required: true,
-  },
-  terms: {
-    type: Object,
-    required: true,
-  },
-  learnMore: {
-    type: Object,
-    required: true,
-  },
-  rewards: {
-    type: Array<Reward>,
-    required: true,
-  },
-  ptr: {
-    type: String,
-    required: true,
+  config: {
+    type: Object as PropType<Config>,
+    required: false,
   },
 });
-
+const config: Config = props.config ?? defaultConfig!;
+apply(document, config.theme);
 const state = ref(State.Hidden);
 watch(
   () => props.present,
   async (present) => {
     if (present) {
       try {
-        state.value = await initialState(tiki!, props.ptr!);
+        state.value = await initialState(tiki!);
       } catch (e) {
         console.error(e);
         emit("update:present", false);
@@ -71,30 +57,29 @@ watch(
       :show="state !== State.Hidden"
     >
       <div class="body">
-        <offer-sheet
-          v-if="state === State.Offer"
+        <program-sheet
+          v-if="state === State.Program"
           @learn="state = State.Learn"
           @accept="state = State.Terms"
           @close="state = State.Hidden"
-          :offer="offer"
+          :program="config.program"
         />
         <terms-sheet
           v-if="state === State.Terms"
-          :src="terms"
-          @back="state = State.Offer"
+          :program="config.program"
+          @back="state = State.Program"
           @accept="state = State.Reward"
         />
         <learn-sheet
           v-if="state === State.Learn"
-          :src="learnMore"
-          @back="state = State.Offer"
+          :program="config.program"
+          @back="state = State.Program"
         />
         <reward-sheet
           v-if="state === State.Reward"
           @close="state = State.Hidden"
           @history="state = State.History"
           @account="state = State.Account"
-          :rewards="rewards"
         />
         <history-sheet
           v-if="state === State.History"

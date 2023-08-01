@@ -3,7 +3,7 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import type { HistoryEventType } from "@/modules/history/HistoryEventType";
+import type { HistoryEventType } from "@/modules/history/history-event-type";
 
 export interface HistoryEvent {
   name: String;

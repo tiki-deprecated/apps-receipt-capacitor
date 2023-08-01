@@ -4,9 +4,9 @@
   -->
 
 <script setup lang="ts">
-import type { HistoryEvent } from "@/modules/history/HistoryEvent";
-import { HistoryEventType } from "@/modules/history/HistoryEventType";
-import HistoryItem from "@/modules/history/HistoryItem.vue";
+import type { HistoryEvent } from "@/modules/history/history-event";
+import { HistoryEventType } from "@/modules/history/history-event-type";
+import HistoryItem from "@/modules/history/history-item.vue";
 
 const events: Array<HistoryEvent> = [
   {

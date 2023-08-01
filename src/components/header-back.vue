@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import BackButton from "@/components/buttons/BackButton.vue";
+import BackButton from "@/components/buttons/back-button.vue";
 
 defineEmits(["back"]);
 defineProps({

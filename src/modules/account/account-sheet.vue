@@ -4,15 +4,15 @@
   -->
 
 <script setup lang="ts">
-import AccountForm from "@/modules/account/AccountForm.vue";
-import TextButton from "@/components/buttons/TextButton.vue";
-import AccountIconOutline from "@/components/icons/AccountIconOutline.vue";
-import AccountCarousel from "@/modules/account/AccountCarousel.vue";
-import { Account } from "@/modules/account/Account";
-import { AccountType } from "@/modules/account/AccountType";
-import HeaderBack from "@/components/HeaderBack.vue";
-import CircleButton from "@/components/buttons/CircleButton.vue";
-import CrossMarkIconOutline from "@/components/icons/CrossMarkIconOutline.vue";
+import AccountForm from "@/modules/account/account-form.vue";
+import TextButton from "@/components/buttons/text-button.vue";
+import AccountIconOutline from "@/components/icons/account-icon-outline.vue";
+import AccountCarousel from "@/modules/account/account-carousel.vue";
+import { Account } from "@/modules/account/account";
+import { AccountType } from "@/modules/account/account-type";
+import HeaderBack from "@/components/header-back.vue";
+import CircleButton from "@/components/buttons/circle-button.vue";
+import CrossMarkIconOutline from "@/components/icons/cross-mark-icon-outline.vue";
 
 defineEmits(["close", "back"]);
 

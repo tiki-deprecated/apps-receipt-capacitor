@@ -5,8 +5,8 @@
 
 <script setup lang="ts">
 import type { PropType } from "vue";
-import type { HistoryEvent } from "@/modules/history/HistoryEvent";
-import { icon } from "@/modules/history/HistoryEventType";
+import type { HistoryEvent } from "@/modules/history/history-event";
+import { icon } from "@/modules/history/history-event-type";
 
 defineProps({
   event: {

@@ -3,7 +3,7 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import AccountIcon from "@/components/icons/AccountIcon.vue";
+import AccountIcon from "@/components/icons/account-icon.vue";
 
 export enum AccountType {
   GMAIL = "gmail",

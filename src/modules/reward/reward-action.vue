@@ -4,11 +4,11 @@
   -->
 
 <script setup lang="ts">
-import AccountIcon from "@/components/icons/AccountIcon.vue";
-import RedeemIcon from "@/components/icons/RedeemIcon.vue";
-import ScanIcon from "@/components/icons/ScanIcon.vue";
-import SquareButton from "@/components/buttons/SquareButton.vue";
-import TextButton from "@/components/buttons/TextButton.vue";
+import AccountIcon from "@/components/icons/account-icon.vue";
+import RedeemIcon from "@/components/icons/redeem-icon.vue";
+import ScanIcon from "@/components/icons/scan-icon.vue";
+import SquareButton from "@/components/buttons/square-button.vue";
+import TextButton from "@/components/buttons/text-button.vue";
 
 defineEmits(["account"]);
 </script>
