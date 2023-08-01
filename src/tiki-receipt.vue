@@ -39,7 +39,8 @@ watch(
   async (present) => {
     if (present) {
       try {
-        state.value = await initialState(tiki!);
+        state.value = State.Account;
+        // state.value = await initialState(tiki!);
       } catch (e) {
         console.error(e);
         emit("update:present", false);

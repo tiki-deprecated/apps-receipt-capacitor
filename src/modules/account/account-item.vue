@@ -20,7 +20,7 @@ defineProps({
 <template>
   <div>
     <div class="account-button" role="button">
-      <component :is="icon(account.type)" class="icon" />
+      <img :src="icon(account.type)" class="icon" />
       <div class="unlink"><unlink-icon class="unlink-icon" /> Unlink</div>
     </div>
     <p class="username">{{ account.username }}</p>
@@ -38,7 +38,9 @@ defineProps({
 
 .icon {
   height: 2.75em;
+  width: auto;
   margin: 1em 0 0.571em 0;
+  border-radius: 0.625em;
 }
 
 .unlink {

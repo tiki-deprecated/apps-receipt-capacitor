@@ -22,15 +22,15 @@ const accounts: Array<Account> = [
     username: "mike@mytiki.com",
   },
   {
-    type: AccountType.GMAIL,
+    type: AccountType.WALMART,
     username: "mike@mytiki.com",
   },
   {
-    type: AccountType.GMAIL,
+    type: AccountType.AMAZON,
     username: "mike@mytiki.com",
   },
   {
-    type: AccountType.GMAIL,
+    type: AccountType.SAMS_CLUB,
     username: "mike@mytiki.com",
   },
 ];
