@@ -34,7 +34,7 @@ Any changes in compensation require a new agreement. This will have the effect o
 
 _Below is a sample offer for illustrative purposes only._
 
-### A. Offer
+### A. Program
 
 We, Acme Inc., agree to compensate you, the User, for granting us a license to use your Shared Information in exchange for a **five per cent discount on purchases at [www.acme.com](https://www.acme.com) for the duration of the agreement**.
 

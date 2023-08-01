@@ -8,16 +8,6 @@
   ],
   "main": "./dist/tiki-receipt-capacitor.umd.js",
   "module": "./dist/tiki-receipt-capacitor.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/tiki-receipt-capacitor.es.js",
-      "require": "./dist/tiki-receipt-capacitor.umd.js"
-    },
-    "./dist/tiki-receipt-capacitor.css": {
-      "import": "./dist/tiki-receipt-capacitor.css",
-      "require": "./dist/tiki-receipt-capacitor.css"
-    }
-  },
   "types": "./dist/main.d.ts",
   "scripts": {
     "build": "vue-tsc --noEmit && vite build"
@@ -26,14 +16,17 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@mytiki/tiki-sdk-capacitor": "file:../tiki-sdk-capacitor",
     "vue": "^3.3.4",
     "vue-confetti-explosion": "^1.0.2",
+    "vue-markdown-render": "^2.0.1",
     "vue3-carousel": "^0.3.1"
   },
   "devDependencies": {
     "@babel/types": "^7.22.5",
     "@rushstack/eslint-patch": "^1.3.2",
     "@tsconfig/node18": "^18.2.0",
+    "@types/markdown-it": "^12.2.3",
     "@types/node": "^20.4.5",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^8.0.0",
@@ -46,11 +39,13 @@
     "typescript": "^5.1.6",
     "vite": "^4.4.7",
     "vite-plugin-dts": "^3.3.1",
+    "vite-plugin-vue-markdown": "^0.23.7",
     "vue-tsc": "^1.8.8"
   },
   "peerDependencies": {
     "@capacitor/android": "^5.2.2",
     "@capacitor/core": "^5.2.2",
-    "@capacitor/ios": "^5.2.2"
+    "@capacitor/ios": "^5.2.2",
+    "@mytiki/tiki-sdk-capacitor": "file:../tiki-sdk-capacitor"
   }
 }
