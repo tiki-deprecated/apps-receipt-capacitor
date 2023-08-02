@@ -5,15 +5,19 @@
 
 <script setup lang="ts">
 import { inject, ref } from "vue";
-import { TikiReceipt } from "@mytiki/tiki-receipt-capacitor";
-import { TikiSdk } from "@mytiki/tiki-sdk-capacitor";
+import { Tiki, TikiReceipt, TikiSdk } from "@mytiki/tiki-receipt-capacitor";
+import { ReceiptCapture } from "@mytiki/tiki-capture-receipt-capacitor";
 
-const tiki: TikiSdk | undefined = inject("TikiSdk");
+const tiki: Tiki | undefined = inject("Tiki");
+
+//const tiki: TikiSdk | undefined = inject("TikiPlugin");
+const capture: ReceiptCapture | undefined = inject("TikiReceiptCapture");
 const id: String = "0d9dce33-42ff-4bcf-8d77-15bd32f4d769";
-tiki?.initialize(id, "be19730a-00d5-45f5-b18e-2e19eb25f311").then((rsp) => {
-  console.log(`id: ${rsp.id} | address: ${rsp.address}`);
-});
 
+tiki?.initialize(id, "be19730a-00d5-45f5-b18e-2e19eb25f311");
+capture?.initialize(
+
+);
 const present = ref(false);
 </script>
 

@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
+
     repositories {
         google()
         mavenCentral()
@@ -21,6 +21,17 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://maven.pkg.github.com/tiki-bar/tiki-capture-receipt-capacitor")
+            credentials {
+                username = providers
+                        .gradleProperty("gpr.user")
+                        .getOrElse(System.getenv("GITHUB_USER"))
+                password = providers
+                        .gradleProperty("gpr.key")
+                        .getOrElse(System.getenv("GITHUB_KEY"))
+            }
+        }
     }
 }
 

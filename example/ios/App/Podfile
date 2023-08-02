@@ -12,6 +12,7 @@ def capacitor_pods
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
   pod 'MytikiTikiSdkCapacitor', :path => '../../../../tiki-sdk-capacitor'
+  pod 'MytikiTikiCaptureReceiptCapacitor', :path => '../../../../tiki-capture-receipt-capacitor'
 end
 
 target 'App' do

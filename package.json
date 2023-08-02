@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "@mytiki/tiki-sdk-capacitor": "file:../tiki-sdk-capacitor",
+    "@mytiki/tiki-capture-receipt-capacitor": "file:../tiki-capture-receipt-capacitor",
     "vue": "^3.3.4",
     "vue-confetti-explosion": "^1.0.2",
     "vue-markdown-render": "^2.0.1",
@@ -46,6 +47,5 @@
     "@capacitor/android": "^5.2.2",
     "@capacitor/core": "^5.2.2",
     "@capacitor/ios": "^5.2.2",
-    "@mytiki/tiki-sdk-capacitor": "file:../tiki-sdk-capacitor"
   }
 }

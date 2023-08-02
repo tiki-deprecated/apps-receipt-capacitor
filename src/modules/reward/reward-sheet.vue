@@ -14,6 +14,10 @@ import RewardCounter from "@/modules/reward/reward-counter.vue";
 import RewardAction from "@/modules/reward/reward-action.vue";
 import HeaderTitle from "@/components/header-title.vue";
 import { HistoryEventType, icon } from "@/modules/history/history-event-type";
+import { RewardService } from "@/modules/reward/reward-service";
+import { inject, provide } from "vue";
+import { ReceiptCapture } from "@mytiki/tiki-capture-receipt-capacitor";
+import { TikiSdk } from "@mytiki/tiki-sdk-capacitor";
 
 defineEmits(["close", "history", "account"]);
 defineProps({
@@ -22,6 +26,12 @@ defineProps({
     required: true,
   },
 });
+
+const service: RewardService = new RewardService(
+  inject("TikiReceiptCapture") as ReceiptCapture,
+  inject("TikiSdk") as TikiSdk,
+);
+provide("TikiRewardService", service);
 </script>
 
 <template>

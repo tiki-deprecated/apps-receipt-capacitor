@@ -7,14 +7,14 @@
 import VueMarkdown from "vue-markdown-render";
 import TextButton from "@/components/buttons/text-button.vue";
 import HeaderBack from "@/components/header-back.vue";
-import { TikiSdk } from "@mytiki/tiki-sdk-capacitor";
+import type { TikiSdk } from "@mytiki/tiki-sdk-capacitor";
 import { inject, PropType } from "vue";
-import * as Service from "@/modules/terms/terms-service";
 import type { Program } from "@/modules/program/program";
+import { TermsService } from "@/modules/terms/terms-service";
 
-const tiki: TikiSdk | undefined = inject("TikiSdk");
+const service: TermsService = new TermsService(inject("TikiSdk") as TikiSdk);
 const emit = defineEmits(["back", "accept"]);
-defineProps({
+const props = defineProps({
   program: {
     type: Object as PropType<Program>,
     required: true,
@@ -22,7 +22,7 @@ defineProps({
 });
 
 const accept = () => {
-  Service.accept(tiki!, {}, {});
+  service.accept(props.program);
   emit("accept");
 };
 </script>
