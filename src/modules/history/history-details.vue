@@ -5,39 +5,28 @@
 
 <script setup lang="ts">
 import type { HistoryEvent } from "@/modules/history/history-event";
-import { HistoryEventType } from "@/modules/history/history-event-type";
 import HistoryItem from "@/modules/history/history-item.vue";
+import { TikiService } from "@/tiki-service";
+import { inject, ref } from "vue";
+import { HistoryService } from "@/modules/history/history-service";
 
-const events: Array<HistoryEvent> = [
-  {
-    name: "Amazon receipt detected",
-    amount: 25,
-    type: HistoryEventType.LINK,
-    date: new Date(),
-  },
-  {
-    name: "Amazon receipt detected",
-    amount: 25,
-    type: HistoryEventType.REDEEM,
-    date: new Date(new Date().setMonth(3)),
-  },
-  {
-    name: "Amazon receipt detected",
-    amount: 25,
-    type: HistoryEventType.SCAN,
-    date: new Date(new Date().setDate(7)),
-  },
-];
+const service: HistoryService = new HistoryService(
+  inject("Tiki") as TikiService,
+);
 
-const months: Set<Number> = new Set();
-events
-  .sort(function (a, b) {
-    return b.date - a.date;
-  })
-  .forEach((event) => {
-    const trunc = new Date(event.date.getFullYear(), event.date.getMonth());
-    months.add(trunc.getTime());
-  });
+const events = ref<HistoryEvent[]>([]);
+const months = ref<Set<Number>>(new Set());
+service.getAll().then((history) => {
+  history
+    .sort(function (a, b) {
+      return b.date - a.date;
+    })
+    .forEach((event) => {
+      const trunc = new Date(event.date.getFullYear(), event.date.getMonth());
+      months.value.add(trunc.getTime());
+    });
+  events.value = history;
+});
 </script>
 
 <template>
