@@ -7,26 +7,19 @@
 import type { HistoryEvent } from "@/modules/history/history-event";
 import HistoryItem from "@/modules/history/history-item.vue";
 import { TikiService } from "@/tiki-service";
-import { inject, ref } from "vue";
-import { HistoryService } from "@/modules/history/history-service";
+import { inject } from "vue";
 
-const service: HistoryService = new HistoryService(
-  inject("Tiki") as TikiService,
-);
-
-const events = ref<HistoryEvent[]>([]);
-const months = ref<Set<Number>>(new Set());
-service.getAll().then((history) => {
-  history
-    .sort(function (a, b) {
-      return b.date - a.date;
-    })
-    .forEach((event) => {
-      const trunc = new Date(event.date.getFullYear(), event.date.getMonth());
-      months.value.add(trunc.getTime());
-    });
-  events.value = history;
-});
+const tiki: TikiService | undefined = inject("Tiki");
+const months: Set<Number> = new Set<Number>();
+const events: HistoryEvent[] = tiki?.history ?? [];
+events
+  .sort(function (a, b) {
+    return b.date - a.date;
+  })
+  .forEach((event) => {
+    const trunc = new Date(event.date.getFullYear(), event.date.getMonth());
+    months.add(trunc.getTime());
+  });
 </script>
 
 <template>

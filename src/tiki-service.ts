@@ -4,8 +4,6 @@
  */
 
 import type { Config } from "@/utils/config/config";
-import * as TikiSdkLicensing from "@mytiki/tiki-sdk-capacitor";
-import * as TikiReceiptCapture from "@mytiki/tiki-capture-receipt-capacitor";
 import type {
   LicenseRecord,
   PayableRecord,
@@ -13,8 +11,16 @@ import type {
   TikiSdk,
   TitleRecord,
 } from "@mytiki/tiki-sdk-capacitor";
+import * as TikiSdkLicensing from "@mytiki/tiki-sdk-capacitor";
 import type { ReceiptCapture } from "@mytiki/tiki-capture-receipt-capacitor";
-import { RECEIPT_SCANNED_DESCRIPTION } from "@/modules/history/history-event-type";
+import * as TikiReceiptCapture from "@mytiki/tiki-capture-receipt-capacitor";
+import {
+  fromDescription,
+  HistoryEventType,
+  POINTS_REDEEMED_DESCRIPTION,
+  RECEIPT_SCANNED_DESCRIPTION,
+} from "@/modules/history/history-event-type";
+import type { HistoryEvent } from "@/modules/history/history-event";
 
 export class TikiService {
   readonly config: Config;
@@ -26,6 +32,7 @@ export class TikiService {
   private _license?: LicenseRecord;
   private _isInitialized: boolean = false;
   private _total: number = 0;
+  private _history: HistoryEvent[] = [];
   private readonly _type = "pt";
 
   onTotalChanged?: (total: number) => void;
@@ -42,6 +49,10 @@ export class TikiService {
     return this._total;
   }
 
+  get history(): HistoryEvent[] {
+    return this._history;
+  }
+
   id(): string {
     if (this._id != undefined) return this._id;
     else throw Error("Tiki is not initialized. First call .initialize()");
@@ -55,7 +66,7 @@ export class TikiService {
       this.config.key.intelKey,
     );
     this._isInitialized = true;
-    this.retrieveTotal();
+    this.retrieveHistory();
   }
 
   async scan(): Promise<void> {
@@ -108,7 +119,32 @@ export class TikiService {
     if (this.onTotalChanged != undefined) this.onTotalChanged(this._total);
   }
 
-  private async retrieveTotal(): Promise<void> {
+  private add(payable: PayableRecord): void {
+    if (payable.type === this._type) {
+      this._total += Number(payable.amount);
+      if (payable.description != undefined) {
+        this._history.push({
+          name: payable.description,
+          amount: Number(payable.amount),
+          type: fromDescription(payable.description),
+          date: new Date(),
+        });
+      }
+      if (this.onTotalChanged != undefined) this.onTotalChanged(this._total);
+    }
+  }
+  private subtract(receipt: ReceiptRecord): void {
+    this._total -= Number(receipt.amount);
+    this._history.push({
+      name: POINTS_REDEEMED_DESCRIPTION,
+      amount: Number(receipt.amount),
+      type: HistoryEventType.REDEEM,
+      date: new Date(),
+    });
+    if (this.onTotalChanged != undefined) this.onTotalChanged(this._total);
+  }
+
+  private async retrieveHistory(): Promise<void> {
     const license: LicenseRecord | undefined = await this.license();
     if (license != undefined) {
       const payables: PayableRecord[] = await this.licensing.getPayables(
@@ -116,13 +152,11 @@ export class TikiService {
       );
       for (const payable of payables) {
         if (payable.type === this._type) {
-          this._total += Number(payable.amount);
+          this.add(payable);
           const receipts: ReceiptRecord[] = await this.licensing.getReceipts(
             payable.id,
           );
-          receipts.forEach((receipt) => {
-            this._total -= Number(receipt.amount);
-          });
+          receipts.forEach((receipt) => this.subtract(receipt));
         }
       }
     }
