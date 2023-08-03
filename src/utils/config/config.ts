@@ -6,10 +6,11 @@
 import type { Program } from "@/modules/program/program";
 import type { Theme } from "@/utils/config/theme";
 import type { Key } from "@/utils/config/key";
+import type { Reward } from "@/modules/reward/reward";
 
 export interface Config {
   key: Key;
   program: Program;
-  // rewards: Reward[]
+  rewards: Reward[];
   theme?: Theme;
 }

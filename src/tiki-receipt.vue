@@ -5,9 +5,8 @@
 
 <script setup lang="ts">
 import { initialState, State } from "@/utils/state";
-import type { Config } from "@/utils/config/config";
 import { apply } from "@/utils/config/theme";
-import { inject, PropType, ref, watch } from "vue";
+import { inject, ref, watch } from "vue";
 import BottomSheet from "@/components/bottom-sheet.vue";
 import ProgramSheet from "@/modules/program/program-sheet.vue";
 import TermsSheet from "@/modules/terms/terms-sheet.vue";
@@ -72,6 +71,7 @@ watch(
         />
         <reward-sheet
           v-if="state === State.Reward"
+          :rewards="tiki!.config.rewards"
           @close="state = State.Hidden"
           @history="state = State.History"
           @account="state = State.Account"

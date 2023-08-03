@@ -39,7 +39,7 @@ tiki!.onTotalChanged = async (val: number): Promise<void> => {
   font-size: calc(var(--tiki-font-size) * 3.625);
   font-weight: bold;
   color: var(--tiki-accent-color);
-  line-height: calc(var(--tiki-line-height) * 3.625);
+  line-height: 1.5em;
   text-align: center;
   margin: 0;
   padding: 0;

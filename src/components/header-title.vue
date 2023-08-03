@@ -36,7 +36,6 @@ defineProps({
   color: var(--tiki-primary-text-color);
   font-weight: bold;
   font-size: calc(var(--tiki-font-size) * 1.75);
-  line-height: calc(var(--tiki-font-size) * 2);
   text-transform: uppercase;
   margin: 0;
 }
