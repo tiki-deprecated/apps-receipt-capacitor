@@ -3,7 +3,8 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import { TikiSdk } from "@mytiki/tiki-sdk-capacitor";
+import { TikiService } from "@/tiki-service";
+import type { TitleRecord } from "@mytiki/tiki-sdk-capacitor";
 
 export enum State {
   Hidden,
@@ -15,12 +16,12 @@ export enum State {
   Account,
 }
 
-export const initialState = async (tiki: TikiSdk): Promise<State> => {
-  const isInitialized: Boolean = await tiki?.isInitialized();
+export const initialState = async (tiki?: TikiService): Promise<State> => {
+  const isInitialized: Boolean = tiki?.isInitialized ?? false;
   if (isInitialized) {
-    const id = await tiki?.id();
-    const title = await tiki?.getTitle(id);
-    if (title?.id != undefined) return State.Reward;
+    const id: string = tiki!.id();
+    const title: TitleRecord | undefined = await tiki!.licensing.getTitle(id);
+    if (title != undefined) return State.Reward;
     else return State.Program;
   } else {
     throw Error("TIKI SDK is not yet initialized");

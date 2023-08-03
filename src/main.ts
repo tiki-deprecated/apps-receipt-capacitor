@@ -9,8 +9,7 @@ import TikiReceipt from "@/tiki-receipt.vue";
 import type { Config } from "@/utils/config/config";
 import type { Program } from "@/modules/program/program";
 import type { Theme } from "@/utils/config/theme";
-import * as TikiSdkLicensing from "@mytiki/tiki-sdk-capacitor";
-import * as TikiReceiptCapture from "@mytiki/tiki-capture-receipt-capacitor";
+import type { Key } from "@/utils/config/key";
 import {
   Usecase,
   Tag,
@@ -41,25 +40,12 @@ import type {
   ReceiptCapture,
 } from "@mytiki/tiki-capture-receipt-capacitor";
 import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
-
-interface Tiki {
-  config: Config;
-  licensing: TikiSdk;
-  capture: ReceiptCapture;
-  initialize?: () => Promise<void>;
-}
+import { TikiService } from "@/tiki-service";
 
 export default {
   install: (app: App, config: Config) => {
     app.component("TikiReceipt", TikiReceipt);
-    app.provide("Tiki", {
-      config: config,
-      licensing: TikiSdkLicensing.instance,
-      capture: TikiReceiptCapture.instance,
-      initialize: async (): Promise<void> => {
-        console.log("INIT ME");
-      },
-    } as Tiki);
+    app.provide("Tiki", new TikiService(config));
   },
 };
 
@@ -72,7 +58,7 @@ export {
   AccountProvider,
 };
 export type {
-  Tiki,
+  TikiService,
   Config,
   Theme,
   Program,
@@ -95,4 +81,5 @@ export type {
   Receipt,
   Retailer,
   ReceiptCapture,
+  Key,
 };

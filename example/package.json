@@ -17,6 +17,8 @@
     "@capacitor/core": "^5.2.2",
     "@capacitor/ios": "^5.2.2",
     "@mytiki/tiki-receipt-capacitor": "file:..",
+    "@mytiki/tiki-sdk-capacitor": "file../../tiki-sdk-capacitor",
+    "@mytiki/tiki-capture-receipt-capacitor": "file../../tiki-capture-receipt-capacitor",
     "vue": "^3.3.4"
   },
   "devDependencies": {

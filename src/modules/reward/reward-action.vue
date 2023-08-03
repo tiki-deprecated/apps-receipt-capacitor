@@ -10,9 +10,9 @@ import ScanIcon from "@/components/icons/scan-icon.vue";
 import SquareButton from "@/components/buttons/square-button.vue";
 import TextButton from "@/components/buttons/text-button.vue";
 import { inject } from "vue";
-import type { RewardService } from "@/modules/reward/reward-service";
+import { TikiService } from "@/tiki-service";
 
-const service: RewardService | undefined = inject("TikiRewardService");
+const tiki: TikiService | undefined = inject("Tiki");
 defineEmits(["account"]);
 </script>
 
@@ -26,7 +26,7 @@ defineEmits(["account"]);
     />
     <square-button :icon="RedeemIcon" text="Redeem Points" />
   </div>
-  <text-button text="Scan Receipt" :icon="ScanIcon" @click="service?.scan()" />
+  <text-button text="Scan Receipt" :icon="ScanIcon" @click="tiki?.scan()" />
 </template>
 
 <style scoped>

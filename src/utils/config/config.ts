@@ -5,8 +5,10 @@
 
 import type { Program } from "@/modules/program/program";
 import type { Theme } from "@/utils/config/theme";
+import type { Key } from "@/utils/config/key";
 
 export interface Config {
+  key: Key;
   program: Program;
   // rewards: Reward[]
   theme?: Theme;

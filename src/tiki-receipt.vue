@@ -4,7 +4,6 @@
   -->
 
 <script setup lang="ts">
-import { TikiSdk } from "@mytiki/tiki-sdk-capacitor";
 import { initialState, State } from "@/utils/state";
 import type { Config } from "@/utils/config/config";
 import { apply } from "@/utils/config/theme";
@@ -16,9 +15,7 @@ import LearnSheet from "@/modules/learn/learn-sheet.vue";
 import RewardSheet from "@/modules/reward/reward-sheet.vue";
 import HistorySheet from "@/modules/history/history-sheet.vue";
 import AccountSheet from "@/modules/account/account-sheet.vue";
-
-const tiki: TikiSdk | undefined = inject("TikiSdk");
-const defaultConfig: Config | undefined = inject("TikiReceiptConfig");
+import type { TikiService } from "@/tiki-service";
 
 const emit = defineEmits(["update:present"]);
 const props = defineProps({
@@ -26,21 +23,18 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  config: {
-    type: Object as PropType<Config>,
-    required: false,
-  },
 });
-const config: Config = props.config ?? defaultConfig!;
-apply(document, config.theme);
+
+const tiki: TikiService | undefined = inject("Tiki");
+apply(document, tiki?.config.theme);
+
 const state = ref(State.Hidden);
 watch(
   () => props.present,
   async (present) => {
     if (present) {
       try {
-        state.value = State.Account;
-        // state.value = await initialState(tiki!);
+        state.value = await initialState(tiki!);
       } catch (e) {
         console.error(e);
         emit("update:present", false);
@@ -63,17 +57,17 @@ watch(
           @learn="state = State.Learn"
           @accept="state = State.Terms"
           @close="state = State.Hidden"
-          :program="config.program"
+          :program="tiki!.config.program"
         />
         <terms-sheet
           v-if="state === State.Terms"
-          :program="config.program"
+          :program="tiki!.config.program"
           @back="state = State.Program"
           @accept="state = State.Reward"
         />
         <learn-sheet
           v-if="state === State.Learn"
-          :program="config.program"
+          :program="tiki!.config.program"
           @back="state = State.Program"
         />
         <reward-sheet

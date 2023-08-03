@@ -21,11 +21,13 @@ import {
 import Tiki from "@mytiki/tiki-receipt-capacitor";
 
 createApp(App)
-  .use(Tiki,  {
+  .use(Tiki, {
+    key: {
+    },
     program: {
       image: ProgramCard,
       description:
-          "Share your receipts to earn rewards like gift cards or cash!",
+        "Share your receipts to earn rewards like gift cards or cash!",
       terms: Terms,
       learn: LearnMore,
       bullets: [

@@ -3,27 +3,24 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import type {
-  LicenseRecord,
-  TitleRecord,
-  TikiSdk,
-} from "@mytiki/tiki-sdk-capacitor";
+import type { LicenseRecord, TitleRecord } from "@mytiki/tiki-sdk-capacitor";
 import type { Program } from "@/modules/program/program";
+import type { TikiService } from "@/tiki-service";
 
 export class TermsService {
-  tiki: TikiSdk;
+  tiki: TikiService;
 
-  constructor(tiki: TikiSdk) {
+  constructor(tiki: TikiService) {
     this.tiki = tiki;
   }
 
-  accept = async (program: Program): Promise<LicenseRecord> => {
-    const id: string = await this.tiki.id();
-    const titleRecord: TitleRecord = await this.tiki.createTitle(
+  accept = async (program: Program): Promise<void> => {
+    const id: string = this.tiki.id();
+    const titleRecord: TitleRecord = await this.tiki.licensing.createTitle(
       id,
       program.tags ?? [],
     );
-    return await this.tiki.createLicense(
+    await this.tiki.licensing.createLicense(
       titleRecord.id,
       [
         {
