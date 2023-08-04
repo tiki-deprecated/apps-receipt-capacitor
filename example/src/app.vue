@@ -7,9 +7,11 @@
 import { inject, ref } from "vue";
 import { TikiReceipt } from "@mytiki/tiki-receipt-capacitor";
 import type { TikiService } from "@mytiki/tiki-receipt-capacitor";
+import { v4 as uuidv4 } from "uuid";
 
 const tiki: TikiService | undefined = inject("Tiki");
-tiki?.initialize("0d9dce33-42ff-4bcf-8d77-15bd32f4d769");
+const id: string = uuidv4();
+tiki?.initialize(id);
 const present = ref(false);
 </script>
 

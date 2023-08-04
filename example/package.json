@@ -16,9 +16,10 @@
     "@capacitor/android": "^5.2.2",
     "@capacitor/core": "^5.2.2",
     "@capacitor/ios": "^5.2.2",
+    "@mytiki/tiki-capture-receipt-capacitor": "file../../tiki-capture-receipt-capacitor",
     "@mytiki/tiki-receipt-capacitor": "file:..",
     "@mytiki/tiki-sdk-capacitor": "file../../tiki-sdk-capacitor",
-    "@mytiki/tiki-capture-receipt-capacitor": "file../../tiki-capture-receipt-capacitor",
+    "uuid": "^9.0.0",
     "vue": "^3.3.4"
   },
   "devDependencies": {

@@ -46,5 +46,12 @@ createApp(App)
     theme: {
       accentColor: "#783F10",
     },
+    rewards: [
+      {
+        image: ProgramCard,
+        description:
+          "Share your receipts to earn rewards like gift cards or cash!",
+      },
+    ],
   })
   .mount("#app");

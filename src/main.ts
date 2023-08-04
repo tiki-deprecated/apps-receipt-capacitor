@@ -6,10 +6,18 @@
 import type { App } from "vue";
 import "@/assets/main.css";
 import TikiReceipt from "@/tiki-receipt.vue";
-import type { Config } from "@/utils/config/config";
-import type { Program } from "@/modules/program/program";
-import type { Theme } from "@/utils/config/theme";
-import type { Key } from "@/utils/config/key";
+import type { Config } from "@/service/config";
+import type { Program } from "@/service/program";
+import type { Theme } from "@/service/theme";
+import type { Reward } from "@/service/reward";
+import type { LicenseService } from "@/service/license-service";
+import type { RewardService } from "@/service/reward-service";
+import type { HistoryService } from "@/service/history-service";
+import type { AccountService } from "@/service/account-service";
+import type { HistoryEvent } from "@/service/history-event";
+import { HistoryEventType } from "@/service/history-event-type";
+import type { Account } from "@/service/account";
+
 import {
   Usecase,
   Tag,
@@ -40,7 +48,7 @@ import type {
   ReceiptCapture,
 } from "@mytiki/tiki-capture-receipt-capacitor";
 import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
-import { TikiService } from "@/tiki-service";
+import { TikiService } from "@/service/tiki-service";
 
 export default {
   install: (app: App, config: Config) => {
@@ -56,6 +64,7 @@ export {
   CommonUsecases,
   CommonTags,
   AccountProvider,
+  HistoryEventType,
 };
 export type {
   TikiService,
@@ -81,5 +90,11 @@ export type {
   Receipt,
   Retailer,
   ReceiptCapture,
-  Key,
+  Reward,
+  AccountService,
+  HistoryService,
+  LicenseService,
+  RewardService,
+  HistoryEvent,
+  Account,
 };
