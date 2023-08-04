@@ -12,7 +12,7 @@
   --tiki-primary-background-color: rgb(255 255 255);
   --tiki-secondary-background-color: rgb(246 246 246);
   --tiki-accent-color: rgb(0 178 114);
-  --tiki-font-size-base: 16px;
+  --tiki-font-size-base: 12px;
   --tiki-font-size-xs: calc(var(--tiki-font-size-base) * 0.75);
   --tiki-line-height-xs: calc(var(--tiki-font-size-base) * 1);
   --tiki-font-size-sm: calc(var(--tiki-font-size-base) * 0.875);
@@ -28,5 +28,35 @@
 @media (prefers-color-scheme: dark) {
   :root {
     /* place dark theme var overrides here */
+  }
+}
+
+@media (min-height: 640px){
+  :root {
+    --tiki-font-size-base: 12px;
+  }
+}
+
+@media (min-height: 667px){
+  :root {
+    --tiki-font-size-base: 13px;
+  }
+}
+
+@media (min-height: 740px){
+  :root {
+    --tiki-font-size-base: 14px;
+  }
+}
+
+@media (min-height: 780px){
+  :root {
+    --tiki-font-size-base: 15px;
+  }
+}
+
+@media (min-height: 812px){
+  :root {
+    --tiki-font-size-base: 16px;
   }
 }

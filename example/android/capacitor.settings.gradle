@@ -2,5 +2,8 @@
 include ':capacitor-android'
 project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/android/capacitor')
 
+include ':mytiki-tiki-capture-receipt-capacitor'
+project(':mytiki-tiki-capture-receipt-capacitor').projectDir = new File('../../../tiki-capture-receipt-capacitor/android')
+
 include ':mytiki-tiki-sdk-capacitor'
 project(':mytiki-tiki-sdk-capacitor').projectDir = new File('../../../tiki-sdk-capacitor/android')

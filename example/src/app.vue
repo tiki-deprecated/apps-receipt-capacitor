@@ -6,14 +6,12 @@
 <script setup lang="ts">
 import { inject, ref } from "vue";
 import { TikiReceipt } from "@mytiki/tiki-receipt-capacitor";
-import { TikiSdk } from "@mytiki/tiki-sdk-capacitor";
+import type { TikiService } from "@mytiki/tiki-receipt-capacitor";
+import { v4 as uuidv4 } from "uuid";
 
-const tiki: TikiSdk | undefined = inject("TikiSdk");
-const id: String = "0d9dce33-42ff-4bcf-8d77-15bd32f4d769";
-tiki?.initialize(id, "be19730a-00d5-45f5-b18e-2e19eb25f311").then((rsp) => {
-  console.log(`id: ${rsp.id} | address: ${rsp.address}`);
-});
-
+const tiki: TikiService | undefined = inject("Tiki");
+const id: string = uuidv4();
+tiki?.initialize(id);
 const present = ref(false);
 </script>
 

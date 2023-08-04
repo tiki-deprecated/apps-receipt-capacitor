@@ -9,6 +9,7 @@ android {
 
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
+    implementation project(':mytiki-tiki-capture-receipt-capacitor')
     implementation project(':mytiki-tiki-sdk-capacitor')
 
 }

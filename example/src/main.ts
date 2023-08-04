@@ -7,20 +7,28 @@ import "./assets/main.css";
 
 import { createApp } from "vue";
 import App from "@/app.vue";
-import {
-  CommonTags,
-  CommonUsecases,
-  Tag,
-  tiki,
-  Usecase,
-} from "@mytiki/tiki-sdk-capacitor";
+
 import ProgramCard from "@/assets/program-card.png";
 import LearnMore from "@/assets/learn-more.md?raw";
 import Terms from "@/assets/terms.md?raw";
 
+import {
+  Usecase,
+  CommonUsecases,
+  Tag,
+  CommonTags,
+} from "@mytiki/tiki-receipt-capacitor";
+import Tiki from "@mytiki/tiki-receipt-capacitor";
+
 createApp(App)
-  .provide("TikiSdk", tiki)
-  .provide("TikiReceiptConfig", {
+  .use(Tiki, {
+    key: {
+      publishingId: "be19730a-00d5-45f5-b18e-2e19eb25f311",
+      scanKey:
+        "sRwAAAAoY29tLm15dGlraS5zZGsuY2FwdHVyZS5yZWNlaXB0LmNhcGFjaXRvcgY6SQlVDCCrMOCc/j3oG8q4R37b51+hnxE+gy+INAyCYTh8o8wWbXhW0ljpl1WVyCHnJmip2gdcZKWJRSh4U5cSQLUTQg8ZpEngcde9h/8etQFq7M69BYu64NY7NL82VAFuVn+ie2ViSlnw+rPBAMqb5aq/v58fV3JOmWj+b6Y//9xHiAhd",
+      intelKey:
+        "wSNX3mu+YGc/2I1DDd0NmrYHS6zS1BQt2geMUH7DDowER43JGeJRUErOHVwU2tz6xHDXia8BuvXQI3j37I0uYw==",
+    },
     program: {
       image: ProgramCard,
       description:
@@ -38,5 +46,12 @@ createApp(App)
     theme: {
       accentColor: "#783F10",
     },
+    rewards: [
+      {
+        image: ProgramCard,
+        description:
+          "Share your receipts to earn rewards like gift cards or cash!",
+      },
+    ],
   })
   .mount("#app");

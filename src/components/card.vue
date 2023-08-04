@@ -45,5 +45,6 @@ defineProps({
   line-height: var(--tiki-line-height);
   color: var(--tiki-secondary-text-color);
   font-weight: bold;
+  text-align: left;
 }
 </style>
