@@ -29,6 +29,7 @@ const present = ref(false);
   <main>
     <div class="greetings">
       <h1>Oh, Hi!</h1>
+      <p><b>ID: </b>{{ id }}</p>
       <h3>Just click &ldquo;start&rdquo; to well...</h3>
     </div>
     <button class="start" @click="present = !present">start</button>
@@ -77,7 +78,8 @@ header {
 }
 
 .greetings h1,
-.greetings h3 {
+.greetings h3,
+.greetings p {
   text-align: center;
 }
 </style>
