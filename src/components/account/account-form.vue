@@ -15,6 +15,10 @@ const props = defineProps({
     type: Object as PropType<Account>,
     required: true,
   },
+  error: {
+    type: String,
+    required: false,
+  },
 });
 const tiki: TikiService | undefined = inject("Tiki");
 const username = ref<HTMLInputElement>();
@@ -36,6 +40,12 @@ watch(
     password.value!.value = newValue?.password ?? "";
     account.value!.value = newValue?.type ?? AccountType.GMAIL;
   },
+);
+
+const errorMessage = ref(props.error);
+watch(
+  () => props.error,
+  (newValue) => (errorMessage.value = newValue),
 );
 </script>
 
@@ -65,6 +75,9 @@ watch(
       required
       @change="update"
     />
+    <div class="error">
+      <p class="error-message" v-if="error">{{ error }}</p>
+    </div>
   </form>
 </template>
 
@@ -119,6 +132,20 @@ input {
   border-radius: 0.5em;
   box-sizing: border-box;
   margin-bottom: 1.2em;
+}
+
+.error {
+  font-family: var(--tiki-font-family);
+  font-size: var(--tiki-font-size);
+  margin: 0 0 2em 0;
+  color: #c73000;
+  text-align: center;
+  font-weight: 500;
+}
+
+.error-message {
+  margin: 0;
+  line-height: 0;
 }
 
 input:focus,

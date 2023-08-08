@@ -12,7 +12,7 @@ import CircleButton from "@/components/buttons/circle-button.vue";
 import AccountCarousel from "@/components/account/account-carousel.vue";
 import TextButton from "@/components/buttons/text-button.vue";
 import type { Account } from "@/service/account";
-import { inject, ref } from "vue";
+import { inject, ref, watch } from "vue";
 import { TikiService } from "@/service/tiki-service";
 import { AccountType } from "@/service/account-type";
 
@@ -22,19 +22,30 @@ const accounts = ref<Account[]>(tiki!.account.accounts);
 tiki!.account.onChange = (acc) => {
   accounts.value = acc;
 };
-
+const error = ref<string>();
 const form = ref<Account>({
   username: "",
   password: "",
   type: AccountType.GMAIL,
 });
 const submit = async () => {
-  await tiki?.account.login(form.value);
-  form.value = {
-    username: "",
-    password: "",
-    type: AccountType.GMAIL,
-  };
+  if (
+    form.value.username != undefined &&
+    form.value.password != undefined &&
+    form.value.username?.length > 0 &&
+    form.value.password?.length > 0
+  ) {
+    try {
+      await tiki?.account.login(form.value);
+      form.value = {
+        username: "",
+        password: "",
+        type: AccountType.GMAIL,
+      };
+    } catch (err) {
+      error.value = err;
+    }
+  }
 };
 </script>
 
@@ -42,7 +53,7 @@ const submit = async () => {
   <header-back text="Rewards" @back="$emit('back')">
     <circle-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
   </header-back>
-  <account-form v-model:account="form" />
+  <account-form v-model:account="form" :error="error" />
   <p v-if="accounts.length > 0" class="linked-accounts">Linked Accounts</p>
   <account-carousel
     v-if="accounts.length > 0"
@@ -50,7 +61,12 @@ const submit = async () => {
     class="account-carousel"
     @click="$emit('unlink', $event)"
   />
-  <text-button text="Link Account" :icon="AccountIconOutline" @click="submit" />
+  <text-button
+    text="Link Account"
+    :icon="AccountIconOutline"
+    @click="submit"
+    :disable="!canSubmit"
+  />
 </template>
 
 <style scoped>

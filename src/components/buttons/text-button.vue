@@ -4,7 +4,8 @@
   -->
 
 <script setup lang="ts">
-defineProps({
+const emit = defineEmits(["click"]);
+const props = defineProps({
   text: {
     type: String,
     required: true,
@@ -19,7 +20,11 @@ defineProps({
 </script>
 
 <template>
-  <button class="textButton" :class="focus ? 'focus' : 'nofocus'">
+  <button
+    class="textButton"
+    :class="focus ? 'focus' : 'nofocus'"
+    @click.stop.prevent="$emit('click')"
+  >
     <component :is="icon" v-if="icon != null" class="icon" />{{ text }}
   </button>
 </template>
@@ -39,6 +44,7 @@ defineProps({
   display: flex;
   align-items: center;
   justify-content: center;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .textButton.focus {
