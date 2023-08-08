@@ -17,14 +17,26 @@ import { TikiService } from "@/service/tiki-service";
 
 const tiki: TikiService | undefined = inject("Tiki");
 const emits = defineEmits(["back", "close"]);
+const error = ref<string>();
 const form = ref<Account>({
   username: "",
   password: "",
   type: AccountType.GMAIL,
 });
 const submit = async () => {
-  await tiki?.account.logout(form.value);
-  emits("back");
+  if (
+    form.value.username != undefined &&
+    form.value.password != undefined &&
+    form.value.username?.length > 0 &&
+    form.value.password?.length > 0
+  ) {
+    try {
+      await tiki?.account.logout(form.value);
+      emits("back");
+    } catch (err) {
+      error.value = err;
+    }
+  }
 };
 </script>
 
