@@ -4,7 +4,10 @@
   -->
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
+import { useSwipe } from "@vueuse/core";
+import type { UseSwipeDirection } from "@vueuse/core";
+import { BottomSheetService } from "@/service/bottom-sheet";
 
 const props = defineProps({
   color: String,
@@ -19,12 +22,60 @@ defineEmits(["dismiss"]);
 const isShow = ref(props.show);
 watch(
   () => props.show,
-  (show) => (isShow.value = show),
+  (show) => (isShow.value = show)
 );
+
+//const bottomSheetService = BottomSheetService;
+/* let { direction, lengthY } = bottomSheetService.CloseUI(
+  container.value,
+  target.value
+); */
+const target = ref<HTMLElement | null>(null);
+const container = ref<HTMLElement | null>(null);
+const containerWidth = computed(() => container.value?.offsetWidth);
+const left = ref("0");
+const opacity = ref(1);
+
+const { direction, isSwiping, lengthX, lengthY } = useSwipe(target, {
+  passive: false,
+  onSwipe(e: TouchEvent) {
+    if (containerWidth.value) {
+      if (lengthX.value < 0) {
+        const length = Math.abs(lengthX.value);
+        left.value = `${length}px`;
+        opacity.value = 1.1 - length / containerWidth.value;
+      } else {
+        left.value = "0";
+        opacity.value = 1;
+      }
+    }
+  },
+  onSwipeEnd(e: TouchEvent, direction: UseSwipeDirection) {
+    if (
+      lengthX.value < 0 &&
+      containerWidth.value &&
+      Math.abs(lengthX.value) / containerWidth.value >= 0.5
+    ) {
+      left.value = "100%";
+      opacity.value = 0;
+    } else {
+      left.value = "0";
+      opacity.value = 1;
+    }
+  },
+});
+
+watch([direction, lengthY], async () => {
+  console.log("teste", direction.value);
+  console.log("teste", lengthY.value);
+  if (direction.value == "down" && lengthY.value < -80) {
+    isShow.value = false;
+  }
+});
 </script>
 
-<template>
-  <div class="overlay" @click.stop.prevent="isShow = false">
+<template ref="container">
+  <div class="overlay" @click.stop.prevent="isShow = false" ref="target">
     <Transition appear name="slide" @leave="$emit('dismiss')">
       <div v-if="isShow" class="bottom-sheet" @click.stop.prevent>
         <slot />
