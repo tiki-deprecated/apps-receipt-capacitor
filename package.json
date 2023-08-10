@@ -10,14 +10,15 @@
   "module": "./dist/tiki-receipt-capacitor.es.js",
   "types": "./dist/main.d.ts",
   "scripts": {
-    "build": "vue-tsc --noEmit && vite build"
+    "build": "vue-tsc --noEmit && vite build",
+    "android": "npm run build && cd example && npm run build-only && npx cap run android"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@mytiki/tiki-sdk-capacitor": "^0.2.0",
     "@mytiki/tiki-capture-receipt-capacitor": "^0.2.0",
+    "@mytiki/tiki-sdk-capacitor": "^0.2.0",
     "vue": "^3.3.4",
     "vue-confetti-explosion": "^1.0.2",
     "vue-markdown-render": "^2.0.1",
@@ -33,6 +34,7 @@
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^11.0.3",
     "@vue/tsconfig": "^0.4.0",
+    "@vueuse/core": "^10.3.0",
     "eslint": "^8.46.0",
     "eslint-plugin-vue": "^9.16.0",
     "path": "^0.12.7",
