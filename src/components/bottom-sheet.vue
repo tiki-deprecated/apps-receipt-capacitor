@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { useSwipe } from "@vueuse/core";
+
 const props = defineProps({
   color: String,
   height: String,
@@ -15,28 +15,31 @@ const props = defineProps({
     default: true,
   },
 });
-defineEmits(["dismiss"]);
+const emit = defineEmits(["dismiss"]);
 const isShow = ref(props.show);
 watch(
   () => props.show,
   (show) => (isShow.value = show)
 );
 
-const target = ref<HTMLElement | null>(null);
-
-const { direction, lengthY } = useSwipe(target, {
-  passive: false,
-});
-
-watch([direction, lengthY], async () => {
-  if (direction.value == "down" && lengthY.value < -80) isShow.value = false;
-});
+const closeUI = () => {
+  return function (direction: string) {
+    if (direction === "bottom") {
+      emit("dismiss");
+    }
+  };
+};
 </script>
 
-<template ref="target">
-  <div class="overlay" @click.stop.prevent="isShow = false">
+<template>
+  <div class="overlay" @click.stop.prevent="isShow = false" ref="target">
     <Transition appear name="slide" @leave="$emit('dismiss')">
-      <div v-if="isShow" class="bottom-sheet" @click.stop.prevent>
+      <div
+        v-if="isShow"
+        class="bottom-sheet"
+        @click.stop.prevent
+        v-touch:swipe="closeUI()"
+      >
         <slot />
       </div>
     </Transition>
