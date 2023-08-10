@@ -23,10 +23,8 @@ export class RewardService {
   }
 
   async scan(): Promise<void> {
-    console.log("START SCAN?");
     const license = await this.tiki.license.get();
     if (license != undefined) {
-      console.log("START SCAN: YUP");
       const receipt = await this.tiki.capture.scan();
       if (
         !receipt.duplicate &&

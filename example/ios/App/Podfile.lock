@@ -2,16 +2,16 @@ PODS:
   - Capacitor (5.2.2):
     - CapacitorCordova
   - CapacitorCordova (5.2.2)
-  - MytikiTikiCaptureReceiptCapacitor (0.0.1):
+  - MytikiTikiCaptureReceiptCapacitor (0.2.0):
     - Capacitor
-  - MytikiTikiSdkCapacitor (0.0.1):
+  - MytikiTikiSdkCapacitor (0.2.0):
     - Capacitor
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
-  - MytikiTikiCaptureReceiptCapacitor (from `../../../../tiki-capture-receipt-capacitor`)
-  - MytikiTikiSdkCapacitor (from `../../../../tiki-sdk-capacitor`)
+  - "MytikiTikiCaptureReceiptCapacitor (from `../../node_modules/@mytiki/tiki-capture-receipt-capacitor`)"
+  - "MytikiTikiSdkCapacitor (from `../../node_modules/@mytiki/tiki-sdk-capacitor`)"
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -19,16 +19,16 @@ EXTERNAL SOURCES:
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
   MytikiTikiCaptureReceiptCapacitor:
-    :path: "../../../../tiki-capture-receipt-capacitor"
+    :path: "../../node_modules/@mytiki/tiki-capture-receipt-capacitor"
   MytikiTikiSdkCapacitor:
-    :path: "../../../../tiki-sdk-capacitor"
+    :path: "../../node_modules/@mytiki/tiki-sdk-capacitor"
 
 SPEC CHECKSUMS:
   Capacitor: 070b18988e0f566728ae9a5eb3a7a974595f1626
   CapacitorCordova: 3773395d5331add072300ff6041ca2cf7b93cb0b
-  MytikiTikiCaptureReceiptCapacitor: 9cf4ae678e69b2e55631860d1ade0cfb8cb375be
-  MytikiTikiSdkCapacitor: d7bfe12d22e862600650df6f0f7821d54a90785a
+  MytikiTikiCaptureReceiptCapacitor: 7c942a9e13964f165046f5dc5244383203d1e060
+  MytikiTikiSdkCapacitor: 337e2494af6b6c34a1483100da4d4b5cf283d53d
 
-PODFILE CHECKSUM: 460acdf8607fe61e87efefde3279e6dad2f4a382
+PODFILE CHECKSUM: 2f9a0f322694e9fc6ea5b4ef01d7ecdb29338094
 
 COCOAPODS: 1.12.1

@@ -19,12 +19,10 @@ export class LicenseService {
 
   async create(program: Program): Promise<void> {
     const id: string = this.tiki.id;
-    console.log("CREATING LICENSE");
     const titleRecord: TitleRecord = await this.tiki.sdk.createTitle(
       id,
       program.tags ?? [],
     );
-    console.log(`TITLE CREATED: ${titleRecord.id}`);
     const rsp = await this.tiki.sdk.createLicense(
       titleRecord.id,
       [
@@ -37,7 +35,6 @@ export class LicenseService {
       undefined,
       program.description,
     );
-    console.log(`LICENSE CREATED: ${rsp.id}`);
   }
 
   async get(): Promise<LicenseRecord | undefined> {
