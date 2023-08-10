@@ -4,6 +4,8 @@
  */
 
 import { Tag, Usecase } from "@mytiki/tiki-sdk-capacitor";
+import type { Account, Receipt } from "@mytiki/tiki-capture-receipt-capacitor";
+import type { ReceiptEvent } from "@/service/receipt/receipt-event";
 
 export interface Config {
   key: {
@@ -42,9 +44,11 @@ export interface Theme {
 export interface Reward {
   image: String;
   description: String;
-  // issuer: (
-  //   action: HistoryEventType,
-  //   receipts?: Receipt[],
-  //   account?: Account,
-  // ) => number;
+  issuer: (
+    event: ReceiptEvent,
+    details: {
+      receipts?: Receipt[];
+      account?: Account;
+    },
+  ) => number | undefined;
 }

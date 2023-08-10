@@ -4,11 +4,13 @@
  */
 
 import type { PayableRecord, ReceiptRecord } from "@mytiki/tiki-sdk-capacitor";
+import { ReceiptEvent } from "@/service/receipt/receipt-event";
 
 export class HistoryEvent {
   static readonly SCAN_NAME_POSTFIX = "receipt scanned";
   static readonly REDEEM_NAME_POSTFIX = "points redeemed";
   static readonly LINK_NAME_POSTFIX = "account linked";
+  static readonly UNLINK_NAME_POSTFIX = "account unlinked";
 
   readonly name;
   readonly amount;
@@ -79,5 +81,29 @@ export class HistoryEvent {
       new Date(),
       ReceiptEvent.REDEEM,
     );
+  }
+
+  static new(
+    amount: number,
+    date: Date,
+    type: ReceiptEvent,
+    text?: string,
+  ): HistoryEvent {
+    let name;
+    switch (type) {
+      case ReceiptEvent.REDEEM:
+        name = [text, HistoryEvent.REDEEM_NAME_POSTFIX].join("");
+        break;
+      case ReceiptEvent.LINK:
+        name = [text, HistoryEvent.LINK_NAME_POSTFIX].join("");
+        break;
+      case ReceiptEvent.SCAN:
+        name = [text, HistoryEvent.SCAN_NAME_POSTFIX].join("");
+        break;
+      case ReceiptEvent.UNLINK:
+        name = [text, HistoryEvent.UNLINK_NAME_POSTFIX].join("");
+        break;
+    }
+    return new HistoryEvent(name, amount, date, type);
   }
 }

@@ -7,16 +7,21 @@ import { TikiService } from "@/service/tiki-service";
 import { HistoryEvent } from "@/service/history/history-event";
 import type { PayableRecord, ReceiptRecord } from "@mytiki/tiki-sdk-capacitor";
 import { SdkService } from "@/service/sdk-service";
+import { ReceiptEvent } from "@/service/receipt/receipt-event";
 
 export class HistoryService {
   private readonly tiki: TikiService;
   private _history: HistoryEvent[] = [];
   private _total: number = 0;
-
-  onChange?: (event: HistoryEvent) => void;
+  private _onEventListeners: Map<string, (event: HistoryEvent) => void> =
+    new Map();
 
   constructor(tiki: TikiService) {
     this.tiki = tiki;
+  }
+
+  onEvent(id: string, listener: (event: HistoryEvent) => void): void {
+    this._onEventListeners.set(id, listener);
   }
 
   get all(): HistoryEvent[] {
@@ -29,15 +34,6 @@ export class HistoryService {
 
   get total(): number {
     return this._total;
-  }
-
-  add(event: HistoryEvent): void {
-    this._history.push(event);
-    this._total =
-      event.type === ReceiptEvent.REDEEM
-        ? this._total - event.amount
-        : this._total + event.amount;
-    if (this.onChange != undefined) this.onChange(event);
   }
 
   async load(): Promise<void> {
@@ -55,5 +51,14 @@ export class HistoryService {
         }
       }
     }
+  }
+
+  add(event: HistoryEvent): void {
+    this._history.push(event);
+    this._total =
+      event.type === ReceiptEvent.REDEEM
+        ? this._total - event.amount
+        : this._total + event.amount;
+    this._onEventListeners.forEach((listener) => listener(event));
   }
 }

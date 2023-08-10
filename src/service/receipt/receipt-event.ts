@@ -3,7 +3,7 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-enum ReceiptEvent {
+export enum ReceiptEvent {
   SCAN,
   LINK,
   UNLINK,

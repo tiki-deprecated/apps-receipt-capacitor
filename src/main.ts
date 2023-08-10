@@ -6,18 +6,14 @@
 import type { App } from "vue";
 import "@/assets/main.css";
 import TikiReceipt from "@/tiki-receipt.vue";
-import type { Config } from "@/service/config";
-import type { Program } from "@/service/program";
-import type { Theme } from "@/service/theme";
-import type { Reward } from "@/service/reward";
-import type { LicenseService } from "@/service/license-service";
-import type { RewardService } from "@/service/reward-service";
-import type { HistoryService } from "@/service/history-service";
-import type { AccountService } from "@/service/account-service";
-import type { HistoryEvent } from "@/service/history-event";
-import { HistoryEventType } from "@/service/history-event-type";
-import type { Account } from "@/service/account";
-
+import type { Config, Program, Theme, Reward } from "@/service/config";
+import type { ReceiptService } from "@/service/receipt/receipt-service";
+import type { HistoryService } from "@/service/history/history-service";
+import type { SdkService } from "@/service/sdk-service";
+import type { HistoryEvent } from "@/service/history/history-event";
+import { ReceiptEvent } from "@/service/receipt/receipt-event";
+import type { ReceiptAccount } from "@/service/receipt/receipt-account";
+import { ReceiptAccountType } from "@/service/receipt/receipt-account";
 import {
   Usecase,
   Tag,
@@ -64,7 +60,8 @@ export {
   CommonUsecases,
   CommonTags,
   AccountProvider,
-  HistoryEventType,
+  ReceiptEvent,
+  ReceiptAccountType,
 };
 export type {
   TikiService,
@@ -91,10 +88,9 @@ export type {
   Retailer,
   ReceiptCapture,
   Reward,
-  AccountService,
   HistoryService,
-  LicenseService,
-  RewardService,
   HistoryEvent,
-  Account,
+  SdkService,
+  ReceiptService,
+  ReceiptAccount,
 };

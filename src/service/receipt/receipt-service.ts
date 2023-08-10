@@ -5,9 +5,11 @@
 
 import type { ReceiptCapture } from "@mytiki/tiki-capture-receipt-capacitor";
 import * as TikiReceiptCapture from "@mytiki/tiki-capture-receipt-capacitor";
+import * as Capture from "@mytiki/tiki-capture-receipt-capacitor";
 import { TikiService } from "@/service/tiki-service";
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
-import * as Capture from "@mytiki/tiki-capture-receipt-capacitor";
+import { ReceiptEvent } from "@/service/receipt/receipt-event";
+import { HistoryEvent } from "@/service/history/history-event";
 
 export class ReceiptService {
   static readonly OCR_THRESHOLD = 0.8;
@@ -15,15 +17,29 @@ export class ReceiptService {
 
   private readonly tiki: TikiService;
   private _accounts: ReceiptAccount[] = [];
-
-  onAccount?: (account: ReceiptAccount) => void;
-  onReceipt?: (
-    receipt: TikiReceiptCapture.Receipt,
-    account?: ReceiptAccount,
-  ) => void;
+  private _onAccountListeners: Map<string, (account: ReceiptAccount) => void> =
+    new Map();
+  private _onReceiptListeners: Map<
+    string,
+    (receipt: TikiReceiptCapture.Receipt, account?: ReceiptAccount) => void
+  > = new Map();
 
   constructor(tiki: TikiService) {
     this.tiki = tiki;
+  }
+
+  onAccount(id: string, listener: (account: ReceiptAccount) => void): void {
+    this._onAccountListeners.set(id, listener);
+  }
+
+  onReceipt(
+    id: string,
+    listener: (
+      receipt: TikiReceiptCapture.Receipt,
+      account?: ReceiptAccount,
+    ) => void,
+  ) {
+    this._onReceiptListeners.set(id, listener);
   }
 
   get accounts(): ReceiptAccount[] {
@@ -32,9 +48,9 @@ export class ReceiptService {
 
   async scan(): Promise<void> {
     const license = await this.tiki.sdk.getLicense();
-    if (license != undefined && this.onReceipt != undefined) {
+    if (license != undefined) {
       const receipt = await this.plugin.scan();
-      this.addReceipt(receipt);
+      await this.addReceipt(receipt);
     } else
       throw Error(
         `No license found for ${this.tiki.sdk.id}. User must first consent to the program.`,
@@ -48,6 +64,9 @@ export class ReceiptService {
       account.provider!,
     );
     this.addAccount(account);
+    await this.process(ReceiptEvent.LINK, {
+      account: account,
+    });
   }
 
   async logout(account: ReceiptAccount): Promise<void> {
@@ -57,6 +76,9 @@ export class ReceiptService {
       account.provider!,
     );
     this.removeAccount(account);
+    await this.process(ReceiptEvent.UNLINK, {
+      account: account,
+    });
   }
 
   scrape = async (): Promise<void> =>
@@ -72,7 +94,7 @@ export class ReceiptService {
 
   private addAccount(account: ReceiptAccount): void {
     this._accounts.push(account);
-    if (this.onAccount != undefined) this.onAccount(account);
+    this._onAccountListeners.forEach((listener) => listener(account));
     this.scrape();
   }
 
@@ -80,27 +102,61 @@ export class ReceiptService {
     this._accounts = this._accounts.filter(
       (acc) => acc.username != account.username && acc.type != account.type,
     );
-    if (this.onAccount != undefined) this.onAccount(account);
+    this._onAccountListeners.forEach((listener) => listener(account));
   }
 
-  private addReceipt(
+  private async addReceipt(
     receipt: TikiReceiptCapture.Receipt,
     account?: TikiReceiptCapture.Account,
-  ): void {
+  ): Promise<void> {
     if (
       !receipt.duplicate &&
       !receipt.fraudulent &&
-      receipt.ocrConfidence >= ReceiptService.OCR_THRESHOLD &&
-      this.onReceipt != undefined
+      receipt.ocrConfidence >= ReceiptService.OCR_THRESHOLD
     ) {
-      this.onReceipt(
-        receipt,
-        account != undefined ? ReceiptAccount.fromCapture(account) : undefined,
+      await this.process(ReceiptEvent.SCAN, {
+        receipt: receipt,
+        account: account,
+      });
+      this._onReceiptListeners.forEach((listener) =>
+        listener(
+          receipt,
+          account != undefined
+            ? ReceiptAccount.fromCapture(account)
+            : undefined,
+        ),
       );
     } else {
       console.warn(
         `Receipt ignored — duplicate: ${receipt.duplicate} | fraudulent: ${receipt.fraudulent} | confidence: ${receipt.ocrConfidence}`,
       );
+    }
+  }
+
+  private async process(
+    event: ReceiptEvent,
+    details: {
+      receipt?: TikiReceiptCapture.Receipt;
+      account?: TikiReceiptCapture.Account;
+    },
+  ): Promise<void> {
+    const rewards = this.tiki.config.rewards;
+    for (const reward of rewards) {
+      const amount = reward.issuer(event, details);
+      if (amount != undefined) {
+        const historyEvent = HistoryEvent.new(
+          amount,
+          new Date(),
+          event,
+          details.account?.provider?.valueOf(),
+        );
+        await this.tiki.sdk.createPayable(
+          amount,
+          historyEvent.name,
+          details.receipt?.blinkReceiptId,
+        );
+        this.tiki.history.add(historyEvent);
+      }
     }
   }
 }
