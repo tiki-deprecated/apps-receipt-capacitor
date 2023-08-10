@@ -5,7 +5,6 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import * as touch from "vue3-touch-events";
 
 const props = defineProps({
   color: String,
@@ -16,7 +15,7 @@ const props = defineProps({
     default: true,
   },
 });
-defineEmits(["dismiss"]);
+const emit = defineEmits(["dismiss"]);
 const isShow = ref(props.show);
 watch(
   () => props.show,
@@ -24,19 +23,23 @@ watch(
 );
 
 const closeUI = () => {
-  console.log("teste");
+  return function (direction: string) {
+    if (direction === "bottom") {
+      emit("dismiss");
+    }
+  };
 };
 </script>
 
 <template>
-  <div
-    class="overlay"
-    @click.stop.prevent="isShow = false"
-    ref="target"
-    v-touch:drag.once="closeUI"
-  >
+  <div class="overlay" @click.stop.prevent="isShow = false" ref="target">
     <Transition appear name="slide" @leave="$emit('dismiss')">
-      <div v-if="isShow" class="bottom-sheet" @click.stop.prevent>
+      <div
+        v-if="isShow"
+        class="bottom-sheet"
+        @click.stop.prevent
+        v-touch:swipe="closeUI()"
+      >
         <slot />
       </div>
     </Transition>
