@@ -4,10 +4,7 @@
  */
 
 import { TikiService } from "@/service/tiki-service";
-import {
-  HistoryEvent,
-  HistoryEventType,
-} from "@/service/history/history-event";
+import { HistoryEvent } from "@/service/history/history-event";
 import type { PayableRecord, ReceiptRecord } from "@mytiki/tiki-sdk-capacitor";
 import { SdkService } from "@/service/sdk-service";
 
@@ -37,7 +34,7 @@ export class HistoryService {
   add(event: HistoryEvent): void {
     this._history.push(event);
     this._total =
-      event.type === HistoryEventType.REDEEM
+      event.type === ReceiptEvent.REDEEM
         ? this._total - event.amount
         : this._total + event.amount;
     if (this.onChange != undefined) this.onChange(event);
@@ -47,10 +44,15 @@ export class HistoryService {
     const payables: PayableRecord[] = await this.tiki.sdk.getPayables();
     for (const payable of payables) {
       if (payable.type === SdkService.PAYABLE_TYPE) {
-        this.add(HistoryEvent.payable(payable));
-        const receipts: ReceiptRecord[] =
-          await this.tiki.sdk.plugin.getReceipts(payable.id);
-        receipts.forEach((receipt) => this.add(HistoryEvent.receipt(receipt)));
+        const event = HistoryEvent.payable(payable);
+        if (event != undefined) {
+          this.add(event);
+          const receipts: ReceiptRecord[] =
+            await this.tiki.sdk.plugin.getReceipts(payable.id);
+          receipts.forEach((receipt) =>
+            this.add(HistoryEvent.receipt(receipt)),
+          );
+        }
       }
     }
   }

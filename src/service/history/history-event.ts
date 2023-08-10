@@ -5,13 +5,6 @@
 
 import type { PayableRecord, ReceiptRecord } from "@mytiki/tiki-sdk-capacitor";
 
-export enum HistoryEventType {
-  LINK,
-  SCAN,
-  REDEEM,
-  UNKNOWN,
-}
-
 export class HistoryEvent {
   static readonly SCAN_NAME_POSTFIX = "receipt scanned";
   static readonly REDEEM_NAME_POSTFIX = "points redeemed";
@@ -26,7 +19,7 @@ export class HistoryEvent {
     name: string,
     amount: number,
     date: Date,
-    type: HistoryEventType,
+    type: ReceiptEvent,
   ) {
     this.name = name.charAt(0).toUpperCase() + name.slice(1);
     this.amount = amount;
@@ -39,7 +32,7 @@ export class HistoryEvent {
       [text, HistoryEvent.SCAN_NAME_POSTFIX].join(""),
       amount,
       date,
-      HistoryEventType.SCAN,
+      ReceiptEvent.SCAN,
     );
   }
 
@@ -48,7 +41,7 @@ export class HistoryEvent {
       [text, HistoryEvent.REDEEM_NAME_POSTFIX].join(""),
       amount,
       date,
-      HistoryEventType.REDEEM,
+      ReceiptEvent.REDEEM,
     );
   }
 
@@ -57,22 +50,22 @@ export class HistoryEvent {
       [text, HistoryEvent.LINK_NAME_POSTFIX].join(""),
       amount,
       date,
-      HistoryEventType.LINK,
+      ReceiptEvent.LINK,
     );
   }
 
-  static payable(payable: PayableRecord): HistoryEvent {
-    let type: HistoryEventType;
-    if (payable.description === undefined) type = HistoryEventType.UNKNOWN;
+  static payable(payable: PayableRecord): HistoryEvent | undefined {
+    let type: ReceiptEvent;
+    if (payable.description === undefined) return undefined;
     else if (payable.description.endsWith(HistoryEvent.LINK_NAME_POSTFIX))
-      type = HistoryEventType.LINK;
+      type = ReceiptEvent.LINK;
     else if (payable.description.endsWith(HistoryEvent.SCAN_NAME_POSTFIX))
-      type = HistoryEventType.SCAN;
+      type = ReceiptEvent.SCAN;
     else if (payable.description.endsWith(HistoryEvent.REDEEM_NAME_POSTFIX))
-      type = HistoryEventType.REDEEM;
-    else type = HistoryEventType.UNKNOWN;
+      type = ReceiptEvent.REDEEM;
+    else return undefined;
     return new HistoryEvent(
-      payable.description ?? "Unknown event",
+      payable.description,
       Number(payable.amount),
       new Date(),
       type,
@@ -84,7 +77,7 @@ export class HistoryEvent {
       receipt.description ?? HistoryEvent.REDEEM_NAME_POSTFIX,
       Number(receipt.amount),
       new Date(),
-      HistoryEventType.REDEEM,
+      ReceiptEvent.REDEEM,
     );
   }
 }

@@ -9,6 +9,7 @@ import type { TikiService } from "@/service/tiki-service";
 import type { Program } from "@/service/config";
 import type { TitleRecord } from "@mytiki/tiki-sdk-capacitor";
 import type { LicenseRecord } from "@mytiki/tiki-sdk-capacitor";
+import type { Account, Receipt } from "@mytiki/tiki-capture-receipt-capacitor";
 
 export class SdkService {
   private readonly tiki: TikiService;
@@ -71,4 +72,12 @@ export class SdkService {
     const license: LicenseRecord | undefined = await this.getLicense();
     return license != undefined ? this.plugin.getPayables(license.id) : [];
   }
+
+  async createPayable(
+    event: ReceiptEvent,
+    details: {
+      receipt?: Receipt;
+      account?: Account;
+    },
+  ): Promise<PayableRecord> {}
 }
