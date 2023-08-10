@@ -6,7 +6,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { useSwipe } from "@vueuse/core";
-
 const props = defineProps({
   color: String,
   height: String,
@@ -34,8 +33,8 @@ watch([direction, lengthY], async () => {
 });
 </script>
 
-<template>
-  <div class="overlay" @click.stop.prevent="isShow = false" ref="target">
+<template ref="target">
+  <div class="overlay" @click.stop.prevent="isShow = false">
     <Transition appear name="slide" @leave="$emit('dismiss')">
       <div v-if="isShow" class="bottom-sheet" @click.stop.prevent>
         <slot />
