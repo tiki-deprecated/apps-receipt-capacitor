@@ -14,7 +14,7 @@ import RewardSheet from "@/components/reward/reward-sheet.vue";
 import HistorySheet from "@/components/history/history-sheet.vue";
 import AccountSheet from "@/components/account/account-sheet.vue";
 import type { TikiService } from "@/service/tiki-service";
-import type { Theme } from "@/s2/config";
+import type { Theme } from "@/service/config";
 
 const emit = defineEmits(["update:present"]);
 const props = defineProps({

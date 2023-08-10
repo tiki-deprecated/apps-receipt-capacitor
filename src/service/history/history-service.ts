@@ -3,10 +3,13 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import { TikiService } from "@/s2/tiki-service";
-import { HistoryEvent, HistoryEventType } from "@/s2/history/history-event";
+import { TikiService } from "@/service/tiki-service";
+import {
+  HistoryEvent,
+  HistoryEventType,
+} from "@/service/history/history-event";
 import type { PayableRecord, ReceiptRecord } from "@mytiki/tiki-sdk-capacitor";
-import { SdkService } from "@/s2/sdk-service";
+import { SdkService } from "@/service/sdk-service";
 
 export class HistoryService {
   private readonly tiki: TikiService;

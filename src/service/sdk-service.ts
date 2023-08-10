@@ -5,8 +5,8 @@
 
 import type { PayableRecord, TikiSdk } from "@mytiki/tiki-sdk-capacitor";
 import * as TikiSdkLicensing from "@mytiki/tiki-sdk-capacitor";
-import type { TikiService } from "@/s2/tiki-service";
-import type { Program } from "@/s2/config";
+import type { TikiService } from "@/service/tiki-service";
+import type { Program } from "@/service/config";
 import type { TitleRecord } from "@mytiki/tiki-sdk-capacitor";
 import type { LicenseRecord } from "@mytiki/tiki-sdk-capacitor";
 
@@ -25,6 +25,11 @@ export class SdkService {
   get id(): string {
     if (this._id != undefined) return this._id;
     else throw Error("Tiki is not initialized. First call .initialize()");
+  }
+
+  async initialize(id: string): Promise<void> {
+    await this.plugin.initialize(id, this.tiki.config.key.publishingId);
+    this._id = id;
   }
 
   async createLicense(): Promise<void> {
