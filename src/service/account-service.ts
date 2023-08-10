@@ -34,6 +34,7 @@ export class AccountService {
         this.add({
           username: account.username,
           type: type,
+          verified: account.verified,
         });
       }
     }
@@ -54,7 +55,7 @@ export class AccountService {
                   LicenseService.PAYABLE_TYPE,
                   undefined,
                   RECEIPT_SCANNED_DESCRIPTION,
-                  receipt.blinkReceiptId,
+                  receipt.blinkReceiptId
                 );
                 if (this.onScan != undefined)
                   this.onScan(
@@ -62,12 +63,12 @@ export class AccountService {
                       username: account.username,
                       type: type,
                     },
-                    payable,
+                    payable
                   );
               }
             }
           }
-        },
+        }
       );
     }
   }
@@ -76,7 +77,7 @@ export class AccountService {
     await this.tiki.capture.loginWithEmail(
       account.username,
       account.password!,
-      toEmailProvider(account.type)!,
+      toEmailProvider(account.type)!
     );
     this.add(account);
     this.scan();
@@ -86,7 +87,7 @@ export class AccountService {
     await this.tiki.capture.removeEmail(
       account.username,
       account.password!,
-      toEmailProvider(account.type)!,
+      toEmailProvider(account.type)!
     );
     this.remove(account);
   }
@@ -98,7 +99,7 @@ export class AccountService {
 
   private remove(account: Account): void {
     this._accounts = this._accounts.filter(
-      (acc) => acc.username != account.username && acc.type != account.type,
+      (acc) => acc.username != account.username && acc.type != account.type
     );
     if (this.onChange != undefined) this.onChange(this._accounts);
   }

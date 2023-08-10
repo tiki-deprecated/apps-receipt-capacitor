@@ -2,11 +2,21 @@
   - Copyright (c) TIKI Inc.
   - MIT license. See LICENSE file in root directory.
   -->
+<script setup lang="ts">
+defineEmits(["click"]);
+defineProps({
+  unsyncAccount: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+});
+</script>
 
 <template>
   <svg
     viewBox="0 0 100 100"
-    fill="currentColor"
+    :fill="unsyncAccount ? '%23C73000' : 'currentColor'"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path

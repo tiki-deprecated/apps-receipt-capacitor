@@ -9,4 +9,5 @@ export interface Account {
   username: string;
   type: AccountType;
   password?: string;
+  verified?: boolean;
 }

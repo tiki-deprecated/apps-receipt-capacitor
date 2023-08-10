@@ -22,7 +22,10 @@ defineProps({
   <div>
     <div class="account-button" role="button" @click="$emit('click', account)">
       <img :alt="account.type" :src="icon(account.type)" class="icon" />
-      <div class="unlink"><unlink-icon class="unlink-icon" /> Unlink</div>
+      <div class="unlink">
+        <unlink-icon class="unlink-icon" :unsyncAccount="account.verified" />
+        {{ account.verified ? "Unlink" : "Error" }}
+      </div>
     </div>
     <p class="username">{{ account.username }}</p>
   </div>
