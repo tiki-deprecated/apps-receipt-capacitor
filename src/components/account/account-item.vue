@@ -22,8 +22,8 @@ defineProps({
   <div>
     <div class="account-button" role="button" @click="$emit('click', account)">
       <img :alt="account.type" :src="icon(account.type)" class="icon" />
-      <div class="unlink">
-        <unlink-icon class="unlink-icon" :unsyncAccount="account.verified" />
+      <div class="unlink" :class="account.verified ? '' : 'unsync-text'">
+        <unlink-icon class="unlink-icon" :syncAccount="account.verified" />
         {{ account.verified ? "Unlink" : "Error" }}
       </div>
     </div>
@@ -62,7 +62,9 @@ defineProps({
   margin-right: 0.571em;
   height: 1.714em;
 }
-
+.unsync-text {
+  color: #c73000;
+}
 .username {
   white-space: nowrap;
   overflow: hidden;

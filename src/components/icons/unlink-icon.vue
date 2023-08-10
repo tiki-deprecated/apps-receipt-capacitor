@@ -5,7 +5,7 @@
 <script setup lang="ts">
 defineEmits(["click"]);
 defineProps({
-  unsyncAccount: {
+  syncAccount: {
     type: Boolean,
     required: false,
     default: false,
@@ -16,7 +16,7 @@ defineProps({
 <template>
   <svg
     viewBox="0 0 100 100"
-    :fill="unsyncAccount ? '%23C73000' : 'currentColor'"
+    :fill="!syncAccount ? '#C73000' : 'currentColor'"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
