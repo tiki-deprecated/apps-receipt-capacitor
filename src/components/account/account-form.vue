@@ -129,6 +129,10 @@ span {
    width: 10px;
 }
 
+#accounts .vs__dropdown-toggle{
+  border: none
+}
+
 select {
   padding: 10px 30px 10px 10px;
   -moz-appearance: none;
