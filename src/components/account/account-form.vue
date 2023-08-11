@@ -5,9 +5,13 @@
 
 <script setup lang="ts">
 import { AccountType, types } from "@/service/account-type";
-import { inject, PropType, ref, watch } from "vue";
+import { inject, ref, watch } from "vue";
+import type {PropType} from 'vue'
 import { TikiService } from "@/service/tiki-service";
 import type { Account } from "@/service/account";
+import AccountDropdown from './account-dropdown.vue'
+import { icon } from "@/service/account-type";
+import GmailIcon from "@/assets/images/gmail.png";
 
 const emit = defineEmits(["update:account"]);
 const props = defineProps({
@@ -57,6 +61,13 @@ watch(
         {{ account }}
       </option>
     </select>
+    <v-select :options="Object.values(AccountType)" id="accounts" >
+      <template #option="option">
+        <span><img :src="GmailIcon" style=" width: 30px;">{{ option.label }}</span>
+      </template>
+    </v-select>
+
+  <!--  <account-dropdown/> -->
     <label id="username">Username</label>
     <input
       type="text"
@@ -91,6 +102,11 @@ label {
   display: block;
 }
 
+span {
+  display: flex; 
+  align-items: center;
+}
+
 #accounts {
   text-transform: capitalize;
   width: 100%;
@@ -100,9 +116,17 @@ label {
   color: var(--tiki-primary-text-color);
   padding: 0.6em 0.8em;
   background-color: var(--tiki-primary-background-color);
-  border: none;
+  border: solid black 1px;
   border-radius: 0.5em;
   margin-bottom: 1.2em;
+}
+
+#accounts __v-select .vs__dropdown-menu {
+   border: none;
+   background-color: #f04512; 
+}
+#accounts __v-select :is(img) {
+   width: 10px;
 }
 
 select {
