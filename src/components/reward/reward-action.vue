@@ -4,9 +4,9 @@
   -->
 
 <script setup lang="ts">
-import AccountIcon from "@/assets/icons/account.svg";
-import RedeemIcon from "@/assets/icons/redeem.svg";
-import ScanIcon from "@/assets/icons/scan.svg";
+import AccountIcon from "@/assets/icons/account.svg?component";
+import RedeemIcon from "@/assets/icons/redeem.svg?component";
+import ScanIcon from "@/assets/icons/scan.svg?component";
 import SquareButton from "@/components/buttons/square-button.vue";
 import TextButton from "@/components/buttons/text-button.vue";
 import { inject } from "vue";

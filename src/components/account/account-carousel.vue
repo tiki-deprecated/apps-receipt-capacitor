@@ -20,7 +20,7 @@ defineProps({
 
 <template>
   <carousel :items-to-show="3.5" snapAlign="start">
-    <slide v-for="account in accounts" :key="accounts">
+    <slide v-for="(account, index) in accounts" :key="index">
       <account-item :account="account" @click="$emit('click', $event)" />
     </slide>
   </carousel>

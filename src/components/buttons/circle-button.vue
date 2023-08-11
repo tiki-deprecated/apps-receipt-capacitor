@@ -5,7 +5,10 @@
 
 <script setup lang="ts">
 defineProps({
-  icon: Object,
+  icon: {
+    type: Object,
+    required: true,
+  },
 });
 defineEmits(["click"]);
 </script>

@@ -5,7 +5,8 @@
 
 <script setup lang="ts">
 import { inject, ref } from "vue";
-import { TikiReceipt, TikiService } from "@mytiki/tiki-receipt-capacitor";
+import { TikiReceipt } from "@mytiki/tiki-receipt-capacitor";
+import type { TikiService } from "@mytiki/tiki-receipt-capacitor";
 import { v4 as uuidv4 } from "uuid";
 
 const tiki: TikiService | undefined = inject("Tiki");

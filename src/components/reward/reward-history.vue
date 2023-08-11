@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import ArrowIcon from "@/assets/icons/arrow.svg";
+import ArrowIcon from "@/assets/icons/arrow.svg?component";
 import { TikiService } from "@/service/tiki-service";
 import { inject, ref } from "vue";
 import type { HistoryEvent } from "@/service/history/history-event";

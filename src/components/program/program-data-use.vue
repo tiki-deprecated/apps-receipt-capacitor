@@ -4,12 +4,14 @@
   -->
 
 <script setup lang="ts">
-import type { ProgramBullet } from "@/service/program-bullet";
-import CrossMarkIcon from "@/assets/icons/cross-mark.svg";
-import CheckIcon from "@/assets/icons/check.svg";
+import CrossMarkIcon from "@/assets/icons/cross-mark.svg?component";
+import CheckIcon from "@/assets/icons/check.svg?component";
 
 defineProps({
-  bullets: Array<ProgramBullet>,
+  bullets: Array<{
+    text: string;
+    isUsed: boolean;
+  }>,
 });
 </script>
 

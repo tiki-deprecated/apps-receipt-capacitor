@@ -6,10 +6,7 @@
 import type { App } from "vue";
 import "@/assets/main.css";
 import TikiReceipt from "@/tiki-receipt.vue";
-import type { Reward } from "@/service/reward";
-import type { Theme } from "@/service/theme";
-import type { Program } from "@/service/program";
-import type { Config } from "@/service/config";
+import type { Program, Theme, Reward, Config } from "@/service/config";
 import type { ReceiptService } from "@/service/receipt/receipt-service";
 import type { HistoryService } from "@/service/history/history-service";
 import type { SdkService } from "@/service/sdk-service";

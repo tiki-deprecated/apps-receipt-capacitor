@@ -4,8 +4,8 @@
   -->
 
 <script setup lang="ts">
-import AccountIconOutline from "@/assets/icons/account-outline.svg";
-import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg";
+import AccountIconOutline from "@/assets/icons/account-outline.svg?component";
+import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg?component";
 import AccountForm from "@/components/account/account-form.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import CircleButton from "@/components/buttons/circle-button.vue";
@@ -36,8 +36,8 @@ const submit = async () => {
     try {
       await tiki?.receipt.login(form.value);
       form.value = new ReceiptAccount("", ReceiptAccountType.GMAIL, "");
-    } catch (err) {
-      error.value = err;
+    } catch (err: any) {
+      error.value = err.toString();
     }
   }
 };

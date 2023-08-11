@@ -51,7 +51,7 @@ export class ReceiptAccount {
     return ReceiptAccount.fromProvider(account.username, account.provider);
   }
 
-  get icon(): Object {
+  get icon(): string {
     return icon(this.type);
   }
 

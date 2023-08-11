@@ -75,7 +75,7 @@ export const all: Map<string, ReceiptAccountType> = new Map(
   ),
 );
 
-export const icon = (type: ReceiptAccountType): Object => {
+export const icon = (type: ReceiptAccountType): string => {
   switch (type) {
     // case ReceiptAccountType.ACME:
     //   return AcmeIcon;

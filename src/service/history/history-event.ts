@@ -3,9 +3,9 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import AccountIcon from "@/assets/icons/account.svg";
-import ReceiptIcon from "@/assets/icons/receipt.svg";
-import RedeemIcon from "@/assets/icons/redeem.svg";
+import AccountIcon from "@/assets/icons/account.svg?component";
+import ReceiptIcon from "@/assets/icons/receipt.svg?component";
+import RedeemIcon from "@/assets/icons/redeem.svg?component";
 
 import type { PayableRecord, ReceiptRecord } from "@mytiki/tiki-sdk-capacitor";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
@@ -16,10 +16,10 @@ export class HistoryEvent {
   static readonly LINK_NAME_POSTFIX = "account linked";
   static readonly UNLINK_NAME_POSTFIX = "account unlinked";
 
-  readonly name;
-  readonly amount;
-  readonly type;
-  readonly date;
+  readonly name: string;
+  readonly amount: number;
+  readonly type: ReceiptEvent;
+  readonly date: Date;
 
   private constructor(
     name: string,

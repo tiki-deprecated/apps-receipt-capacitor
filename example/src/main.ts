@@ -55,11 +55,12 @@ createApp(App)
         issuer: (
           event: ReceiptEvent,
           details: { receipt?: Receipt; account?: ReceiptAccount },
-        ) => {
+        ): number | undefined => {
           if (event == ReceiptEvent.SCAN) return 50;
         },
       },
     ],
-    redeem: (total: number) => (total > 0 ? total : undefined),
+    redeem: (total: number): number | undefined =>
+      total > 0 ? total : undefined,
   })
   .mount("#app");

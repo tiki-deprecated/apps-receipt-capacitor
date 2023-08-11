@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg";
+import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg?component";
 import CircleButton from "@/components/buttons/circle-button.vue";
 import type { Reward } from "@/service/config";
 import RewardCarousel from "@/components/reward/reward-carousel.vue";

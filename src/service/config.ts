@@ -17,6 +17,7 @@ export interface Config {
   program: Program;
   rewards: Reward[];
   theme?: Theme;
+  redeem?: (total: number) => number | undefined;
 }
 
 export interface Program {
@@ -25,8 +26,8 @@ export interface Program {
   terms: string;
   learn: string;
   bullets: {
-    text: String;
-    isUsed: Boolean;
+    text: string;
+    isUsed: boolean;
   }[];
   usecases: Usecase[];
   destinations?: string[];
@@ -43,8 +44,8 @@ export interface Theme {
 }
 
 export interface Reward {
-  image: String;
-  description: String;
+  image: string;
+  description: string;
   issuer: (
     event: ReceiptEvent,
     details: {

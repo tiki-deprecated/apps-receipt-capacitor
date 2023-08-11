@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import ArrowIcon from "@/assets/icons/arrow.svg";
+import ArrowIcon from "@/assets/icons/arrow.svg?component";
 
 defineProps({
   text: String,
