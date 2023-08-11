@@ -17,6 +17,7 @@ import type { AccountService } from "@/service/account-service";
 import type { HistoryEvent } from "@/service/history-event";
 import { HistoryEventType } from "@/service/history-event-type";
 import type { Account } from "@/service/account";
+import Vue3TouchEvents from "vue3-touch-events";
 
 import {
   Usecase,
@@ -54,6 +55,7 @@ export default {
   install: (app: App, config: Config) => {
     app.component("TikiReceipt", TikiReceipt);
     app.provide("Tiki", new TikiService(config));
+    app.use(Vue3TouchEvents);
   },
 };
 
