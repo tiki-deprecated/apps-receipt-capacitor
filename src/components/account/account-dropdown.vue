@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import GmailIcon from "@/assets/images/gmail.png";
-import { ReceiptAccountType } from "@/main";
 const props = defineProps({
   accounts: {
     type: Array,
     required: true,
-  },
-  error: {
-    type: String,
-    required: false,
   },
  selectedAccount: {
   type: HTMLSelectElement,
