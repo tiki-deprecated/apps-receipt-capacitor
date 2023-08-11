@@ -7,7 +7,7 @@
 import VueMarkdown from "vue-markdown-render";
 import HeaderBack from "@/components/header/header-back.vue";
 import type { PropType } from "vue";
-import type { Program } from "@/service/program";
+import type { Program } from "@/service/config";
 
 defineEmits(["back"]);
 defineProps({

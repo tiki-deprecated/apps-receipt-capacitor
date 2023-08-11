@@ -29,7 +29,7 @@ defineEmits(["account"]);
   <text-button
     text="Scan Receipt"
     :icon="ScanIcon"
-    @click="tiki?.reward.scan()"
+    @click="tiki?.receipt.scan()"
   />
 </template>
 

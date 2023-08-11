@@ -12,13 +12,14 @@ import ProgramCard from "@/assets/program-card.png";
 import LearnMore from "@/assets/learn-more.md?raw";
 import Terms from "@/assets/terms.md?raw";
 
-import {
-  Usecase,
+import Tiki, {
+  CommonTags,
   CommonUsecases,
   Tag,
-  CommonTags,
+  Usecase,
+  ReceiptEvent,
 } from "@mytiki/tiki-receipt-capacitor";
-import Tiki from "@mytiki/tiki-receipt-capacitor";
+import type { Receipt, ReceiptAccount } from "@mytiki/tiki-receipt-capacitor";
 
 createApp(App)
   .use(Tiki, {
@@ -51,6 +52,12 @@ createApp(App)
         image: ProgramCard,
         description:
           "Share your receipts to earn rewards like gift cards or cash!",
+        issuer: (
+          event: ReceiptEvent,
+          details: { receipt?: Receipt; account?: ReceiptAccount },
+        ) => {
+          if (event == ReceiptEvent.SCAN) return 50;
+        },
       },
     ],
   })

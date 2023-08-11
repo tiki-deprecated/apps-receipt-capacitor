@@ -7,7 +7,7 @@
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide } from "vue3-carousel";
 import Card from "@/components/card.vue";
-import type { Reward } from "@/service/reward";
+import type { Reward } from "@/service/config";
 
 defineProps({
   rewards: Array<Reward>,

@@ -3,6 +3,10 @@
  * MIT license. See LICENSE file in root directory.
  */
 
+import AccountIcon from "@/components/icons/account-icon.vue";
+import ReceiptIcon from "@/components/icons/receipt-icon.vue";
+import RedeemIcon from "@/components/icons/redeem-icon.vue";
+
 import type { PayableRecord, ReceiptRecord } from "@mytiki/tiki-sdk-capacitor";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
 
@@ -105,5 +109,17 @@ export class HistoryEvent {
         break;
     }
     return new HistoryEvent(name, amount, date, type);
+  }
+
+  get icon(): Object {
+    switch (this.type) {
+      case ReceiptEvent.SCAN:
+        return ReceiptIcon;
+      case ReceiptEvent.REDEEM:
+        return RedeemIcon;
+      case ReceiptEvent.UNLINK:
+      case ReceiptEvent.LINK:
+        return AccountIcon;
+    }
   }
 }

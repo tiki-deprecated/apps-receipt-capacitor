@@ -10,16 +10,17 @@ import { TikiService } from "@/service/tiki-service";
 
 const tiki: TikiService | undefined = inject("Tiki");
 
-const amount = ref(tiki?.reward.total ?? 0);
+const amount = ref(tiki?.history.total ?? 0);
 const partyTime = ref(false);
-tiki!.reward.onChange = async (val: number): Promise<void> => {
-  if (val > amount.value) {
+tiki!.history.onEvent("reward-counter", async (event) => {
+  const total = tiki!.history.total;
+  if (total > amount.value) {
     partyTime.value = false;
     await nextTick();
     partyTime.value = true;
   }
-  amount.value = val;
-};
+  amount.value = total;
+});
 </script>
 
 <template>

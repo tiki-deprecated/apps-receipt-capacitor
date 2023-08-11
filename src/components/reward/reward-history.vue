@@ -6,23 +6,21 @@
 <script setup lang="ts">
 import ArrowIcon from "@/components/icons/arrow-icon.vue";
 import { TikiService } from "@/service/tiki-service";
-import { inject } from "vue";
-import type { HistoryEvent } from "@/service/history-event";
-import { HistoryEventType, icon } from "@/service/history-event-type";
+import { inject, ref } from "vue";
+import type { HistoryEvent } from "@/service/history/history-event";
+import type { ReceiptEvent } from "@/service/receipt/receipt-event";
 
 defineEmits(["click"]);
 const tiki: TikiService | undefined = inject("Tiki");
-const event: HistoryEvent | undefined = tiki!.history.all.at(
-  tiki?.history.all.length - 1,
-);
+const event = ref<HistoryEvent | undefined>(tiki!.history.latest);
+tiki!.history.onEvent("reward-history", (evt) => (event.value = evt));
 </script>
 
 <template>
   <div v-if="event != undefined" class="reward-summary">
     <div class="amount">
-      <component :is="icon(event.type)" class="icon" />
-      {{ event.type === HistoryEventType.REDEEM ? "-" : "+"
-      }}{{ event.amount }} pts on
+      <component :is="event.icon" class="icon" />
+      {{ event.amount > 0 ? "+" : "-" }}{{ event.amount }} pts on
       {{
         event.date.toLocaleDateString("en-US", {
           day: "2-digit",

@@ -4,8 +4,9 @@
  */
 
 import { Tag, Usecase } from "@mytiki/tiki-sdk-capacitor";
-import type { Account, Receipt } from "@mytiki/tiki-capture-receipt-capacitor";
+import type { Receipt } from "@mytiki/tiki-capture-receipt-capacitor";
 import type { ReceiptEvent } from "@/service/receipt/receipt-event";
+import type { ReceiptAccount } from "@/service/receipt/receipt-account";
 
 export interface Config {
   key: {
@@ -47,8 +48,8 @@ export interface Reward {
   issuer: (
     event: ReceiptEvent,
     details: {
-      receipts?: Receipt[];
-      account?: Account;
+      receipt?: Receipt;
+      account?: ReceiptAccount;
     },
   ) => number | undefined;
 }

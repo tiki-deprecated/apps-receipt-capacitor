@@ -50,7 +50,11 @@ export class ReceiptService {
     const license = await this.tiki.sdk.getLicense();
     if (license != undefined) {
       const receipt = await this.plugin.scan();
-      await this.addReceipt(receipt);
+      if (receipt.ocrConfidence > ReceiptService.OCR_THRESHOLD) {
+        await this.addReceipt(receipt);
+      } else {
+        console.warn(`Receipt ignored: Confidence: ${receipt.ocrConfidence}`);
+      }
     } else
       throw Error(
         `No license found for ${this.tiki.sdk.id}. User must first consent to the program.`,
@@ -109,14 +113,13 @@ export class ReceiptService {
     receipt: TikiReceiptCapture.Receipt,
     account?: TikiReceiptCapture.Account,
   ): Promise<void> {
-    if (
-      !receipt.duplicate &&
-      !receipt.fraudulent &&
-      receipt.ocrConfidence >= ReceiptService.OCR_THRESHOLD
-    ) {
+    if (!receipt.duplicate && !receipt.fraudulent) {
       await this.process(ReceiptEvent.SCAN, {
         receipt: receipt,
-        account: account,
+        account:
+          account != undefined
+            ? ReceiptAccount.fromCapture(account)
+            : undefined,
       });
       this._onReceiptListeners.forEach((listener) =>
         listener(
@@ -137,7 +140,7 @@ export class ReceiptService {
     event: ReceiptEvent,
     details: {
       receipt?: TikiReceiptCapture.Receipt;
-      account?: TikiReceiptCapture.Account;
+      account?: ReceiptAccount;
     },
   ): Promise<void> {
     const rewards = this.tiki.config.rewards;
