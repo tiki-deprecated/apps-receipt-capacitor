@@ -43,6 +43,7 @@ const update = () => {
 watch(
   () => props.account,
   async (newValue) => {
+    console.log(newValue)
     username.value!.value = newValue?.username ?? "";
     password.value!.value = newValue?.password ?? "";
     account.value!.value = newValue?.type ?? ReceiptAccountType.GMAIL;
@@ -60,16 +61,7 @@ watch(
 <template>
   <form>
     <label for="accounts">Choose Account</label>
-    <select id="accounts" ref="account" required @change="update">
-      <option
-        v-for="account in Object.values(ReceiptAccountType)"
-        :value="account"
-      >
-        {{ account }}
-      </option>
-    </select>
- 
-   <account-dropdown :accounts="Object.values(ReceiptAccountType)" id="accounts"/> 
+   <account-dropdown :accounts="Object.values(ReceiptAccountType)" id="accounts" :account="account" @change="update"/> 
     <label id="username">Username</label>
     <input
       type="text"
@@ -122,7 +114,6 @@ span {
   border-radius: 0.5em;
   margin-bottom: 1.2em;
 }
-
 select {
   padding: 10px 30px 10px 10px;
   -moz-appearance: none;
@@ -136,7 +127,7 @@ select {
   background-size:
     0.65em auto,
     100%;
-}
+} 
 
 input {
   width: 100%;

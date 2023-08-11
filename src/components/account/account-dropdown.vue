@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import GmailIcon from "@/assets/images/gmail.png";
-import type{ PropType } from "vue";
+import { ReceiptAccountType } from "@/main";
 const props = defineProps({
   accounts: {
     type: Array,
@@ -10,12 +10,16 @@ const props = defineProps({
     type: String,
     required: false,
   },
+ selectedAccount: {
+  type: HTMLSelectElement,
+  required: false
+ }
 });
 </script>
 
 <template>
-     <v-select :options="accounts" class="account-select">
-      <template #option="option">
+     <v-select :options="accounts" class="account-select" :value="selectedAccount">
+      <template #option="option" slot="option">
           <img :src="GmailIcon" style=" width: 40px;">
           <span class="option-label">{{ option.label }}</span>
       </template>
@@ -39,11 +43,9 @@ const props = defineProps({
   border-radius: 0.5em;
   margin-bottom: 1.2em;
 }
-
 .account-select .vs__dropdown-toggle{
   border: none;
 }
-
 .account-select .vs__open-indicator {
   padding: 10px 30px 10px 10px;
   -moz-appearance: none;
