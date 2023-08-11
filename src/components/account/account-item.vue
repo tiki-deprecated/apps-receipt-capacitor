@@ -5,6 +5,7 @@
 
 <script setup lang="ts">
 import UnlinkIcon from "@/components/icons/unlink-icon.vue";
+import ErrorIcon from "@/components/icons/error-icon.vue";
 import type { PropType } from "vue";
 import type { Account } from "@/service/account";
 import { icon } from "@/service/account-type";
@@ -23,7 +24,8 @@ defineProps({
     <div class="account-button" role="button" @click="$emit('click', account)">
       <img :alt="account.type" :src="icon(account.type)" class="icon" />
       <div class="unlink" :class="account.verified ? '' : 'unsync-text'">
-        <unlink-icon class="unlink-icon" :syncAccount="account.verified" />
+        <unlink-icon class="account-item-icon" v-if="account.verified" />
+        <error-icon class="account-item-icon" v-else />
         {{ account.verified ? "Unlink" : "Error" }}
       </div>
     </div>
@@ -58,7 +60,7 @@ defineProps({
   padding: 0 0.571em 0.571em 0.571em;
 }
 
-.unlink-icon {
+.account-item-icon {
   margin-right: 0.571em;
   height: 1.714em;
 }
