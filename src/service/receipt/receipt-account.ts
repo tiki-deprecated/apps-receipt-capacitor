@@ -13,8 +13,6 @@ import { ReceiptAccountType } from "./receipt-account-type";
 import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
 import type { Account } from "@mytiki/tiki-capture-receipt-capacitor";
 
-// export { ReceiptAccountType };
-
 export class ReceiptAccount {
   username: string;
   type: ReceiptAccountType;
