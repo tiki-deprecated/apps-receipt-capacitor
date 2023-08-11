@@ -19,6 +19,7 @@ export class ReceiptAccount {
   username: string;
   type: ReceiptAccountType;
   password?: string;
+  verified?: Boolean;
 
   constructor(username: string, type: ReceiptAccountType, password?: string) {
     this.username = username;
@@ -29,7 +30,7 @@ export class ReceiptAccount {
   static fromProvider(
     username: string,
     provider?: AccountProvider,
-    password?: string,
+    password?: string
   ): ReceiptAccount {
     const type: ReceiptAccountType | undefined = fromEmailProvider(provider);
     if (type != undefined) return new ReceiptAccount(username, type, password);
@@ -39,7 +40,7 @@ export class ReceiptAccount {
   static fromValue(
     username: string,
     value: string,
-    password?: string,
+    password?: string
   ): ReceiptAccount {
     const type: ReceiptAccountType | undefined = all.get(value);
     if (type != undefined) return new ReceiptAccount(username, type, password);
