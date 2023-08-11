@@ -19,13 +19,13 @@ const emit = defineEmits(["dismiss"]);
 const isShow = ref(props.show);
 watch(
   () => props.show,
-  (show) => (isShow.value = show)
+  (show) => (isShow.value = show),
 );
 
 const closeUI = () => {
   return function (direction: string) {
     if (direction === "bottom") {
-      emit("dismiss");
+      isShow.value = false;
     }
   };
 };
