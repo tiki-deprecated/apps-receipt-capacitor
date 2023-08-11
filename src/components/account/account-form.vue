@@ -8,12 +8,10 @@ import {
   ReceiptAccount,
   ReceiptAccountType,
 } from "@/service/receipt/receipt-account";
-import { inject, PropType, ref, watch } from "vue";
+import { inject, ref, watch } from "vue";
+import type { PropType } from "vue";
 import { TikiService } from "@/service/tiki-service";
-import type { Account } from "@/service/account";
 import AccountDropdown from './account-dropdown.vue'
-import { icon } from "@/service/account-type";
-import GmailIcon from "@/assets/images/gmail.png";
 
 const emit = defineEmits(["update:account"]);
 const props = defineProps({
@@ -56,6 +54,7 @@ watch(
   () => props.error,
   (newValue) => (errorMessage.value = newValue),
 );
+
 </script>
 
 <template>
@@ -69,13 +68,8 @@ watch(
         {{ account }}
       </option>
     </select>
-    <v-select :options="Object.values(AccountType)" id="accounts" >
-      <template #option="option">
-        <span><img :src="GmailIcon" style=" width: 30px;">{{ option.label }}</span>
-      </template>
-    </v-select>
-
-  <!--  <account-dropdown/> -->
+ 
+   <account-dropdown :accounts="Object.values(ReceiptAccountType)" id="accounts"/> 
     <label id="username">Username</label>
     <input
       type="text"
@@ -127,18 +121,6 @@ span {
   border: solid black 1px;
   border-radius: 0.5em;
   margin-bottom: 1.2em;
-}
-
-#accounts __v-select .vs__dropdown-menu {
-   border: none;
-   background-color: #f04512; 
-}
-#accounts __v-select :is(img) {
-   width: 10px;
-}
-
-#accounts .vs__dropdown-toggle{
-  border: none
 }
 
 select {
