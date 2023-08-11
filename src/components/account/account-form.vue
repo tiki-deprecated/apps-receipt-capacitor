@@ -4,10 +4,8 @@
   -->
 
 <script setup lang="ts">
-import {
-  ReceiptAccount,
-  ReceiptAccountType,
-} from "@/service/receipt/receipt-account";
+import { ReceiptAccount } from "@/service/receipt/receipt-account";
+import { ReceiptAccountType } from "@/service/receipt/receipt-account-type";
 import { inject, PropType, ref, watch } from "vue";
 import { TikiService } from "@/service/tiki-service";
 

@@ -29,7 +29,7 @@ defineProps({
   <reward-counter class="reward-counter" />
   <reward-history class="reward-history" @click="$emit('history')" />
   <reward-carousel :rewards="rewards" />
-  <reward-action @account="$emit('account')" />
+  <reward-action @account="$emit('account')" @redeem="$emit('close')" />
 </template>
 
 <style scoped>

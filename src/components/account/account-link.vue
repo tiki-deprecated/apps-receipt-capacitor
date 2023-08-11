@@ -11,10 +11,8 @@ import HeaderBack from "@/components/header/header-back.vue";
 import CircleButton from "@/components/buttons/circle-button.vue";
 import AccountCarousel from "@/components/account/account-carousel.vue";
 import TextButton from "@/components/buttons/text-button.vue";
-import {
-  ReceiptAccount,
-  ReceiptAccountType,
-} from "@/service/receipt/receipt-account";
+import { ReceiptAccount } from "@/service/receipt/receipt-account";
+import { ReceiptAccountType } from "@/service/receipt/receipt-account-type";
 import { inject, ref } from "vue";
 import { TikiService } from "@/service/tiki-service";
 

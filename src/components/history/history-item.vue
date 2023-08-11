@@ -6,6 +6,7 @@
 <script setup lang="ts">
 import type { PropType } from "vue";
 import type { HistoryEvent } from "@/service/history/history-event";
+import { ReceiptEvent } from "@/service/receipt/receipt-event";
 
 defineProps({
   event: {
@@ -35,8 +36,8 @@ defineProps({
     </div>
   </div>
   <div class="amount">
-    <span v-if="event.amount > 0">+</span>
-    <span v-if="event.amount < 0">-</span>
+    <span v-if="event.type === ReceiptEvent.REDEEM">-</span>
+    <span v-else>+</span>
     {{ event.amount }} pts
   </div>
 </template>
@@ -59,6 +60,7 @@ defineProps({
   color: var(--tiki-primary-text-color);
   font-weight: bold;
   margin: 0;
+  text-transform: capitalize;
 }
 
 .date {

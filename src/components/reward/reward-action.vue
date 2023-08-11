@@ -13,7 +13,12 @@ import { inject } from "vue";
 import { TikiService } from "@/service/tiki-service";
 
 const tiki: TikiService | undefined = inject("Tiki");
-defineEmits(["account"]);
+const emit = defineEmits(["account", "redeem"]);
+
+const redeem = () => {
+  tiki!.history.redeem();
+  emit("redeem");
+};
 </script>
 
 <template>
@@ -24,7 +29,7 @@ defineEmits(["account"]);
       class="account-icon"
       @click="$emit('account')"
     />
-    <square-button :icon="RedeemIcon" text="Redeem Points" />
+    <square-button :icon="RedeemIcon" text="Redeem Points" @click="redeem" />
   </div>
   <text-button
     text="Scan Receipt"

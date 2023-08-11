@@ -27,7 +27,7 @@ export class HistoryEvent {
     date: Date,
     type: ReceiptEvent,
   ) {
-    this.name = name.charAt(0).toUpperCase() + name.slice(1);
+    this.name = name;
     this.amount = amount;
     this.date = date;
     this.type = type;

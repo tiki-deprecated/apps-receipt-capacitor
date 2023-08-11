@@ -5,7 +5,7 @@
 
 import { defineConfig } from "vite";
 import * as path from "path";
-import typescript2 from "rollup-plugin-typescript2";
+import typescript from "rollup-plugin-typescript2";
 import dts from "vite-plugin-dts";
 import vue from "@vitejs/plugin-vue";
 import Markdown from "vite-plugin-vue-markdown";
@@ -16,12 +16,16 @@ export default defineConfig({
     vue({
       include: [/\.vue$/, /\.md$/],
     }),
-    dts({
-      insertTypesEntry: true,
-    }),
-    typescript2({
+    typescript({
       check: false,
-      include: ["src/components/**/*.vue"],
+      include: [
+        "src/service/*.ts",
+        "src/service/history/**/*.ts",
+        "src/service/receipt/**/*.ts",
+        "src/tiki-receipt.vue",
+        "src/tiki-receipt-state.ts",
+        "src/components/**/*.vue",
+      ],
       tsconfigOverride: {
         compilerOptions: {
           outDir: "dist",
@@ -31,6 +35,9 @@ export default defineConfig({
         },
       },
       exclude: ["vite.config.ts"],
+    }),
+    dts({
+      insertTypesEntry: true,
     }),
     Markdown(),
     svgLoader(),

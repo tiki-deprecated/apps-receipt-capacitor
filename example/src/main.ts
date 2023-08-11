@@ -60,5 +60,6 @@ createApp(App)
         },
       },
     ],
+    redeem: (total: number) => (total > 0 ? total : undefined),
   })
   .mount("#app");

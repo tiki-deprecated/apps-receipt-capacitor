@@ -11,10 +11,8 @@ import AccountForm from "@/components/account/account-form.vue";
 import AccountIconOutline from "@/assets/icons/account-outline.svg";
 import TextButton from "@/components/buttons/text-button.vue";
 import { inject, ref } from "vue";
-import {
-  ReceiptAccount,
-  ReceiptAccountType,
-} from "@/service/receipt/receipt-account";
+import { ReceiptAccount } from "@/service/receipt/receipt-account";
+import { ReceiptAccountType } from "@/service/receipt/receipt-account-type";
 import { TikiService } from "@/service/tiki-service";
 
 const tiki: TikiService | undefined = inject("Tiki");

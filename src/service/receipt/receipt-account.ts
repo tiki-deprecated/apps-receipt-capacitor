@@ -4,16 +4,16 @@
  */
 
 import {
-  ReceiptAccountType,
   toEmailProvider,
   fromEmailProvider,
   icon,
   all,
 } from "./receipt-account-type";
+import { ReceiptAccountType } from "./receipt-account-type";
 import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
 import type { Account } from "@mytiki/tiki-capture-receipt-capacitor";
 
-export { ReceiptAccountType };
+// export { ReceiptAccountType };
 
 export class ReceiptAccount {
   username: string;
@@ -30,7 +30,7 @@ export class ReceiptAccount {
   static fromProvider(
     username: string,
     provider?: AccountProvider,
-    password?: string
+    password?: string,
   ): ReceiptAccount {
     const type: ReceiptAccountType | undefined = fromEmailProvider(provider);
     if (type != undefined) return new ReceiptAccount(username, type, password);
@@ -40,7 +40,7 @@ export class ReceiptAccount {
   static fromValue(
     username: string,
     value: string,
-    password?: string
+    password?: string,
   ): ReceiptAccount {
     const type: ReceiptAccountType | undefined = all.get(value);
     if (type != undefined) return new ReceiptAccount(username, type, password);

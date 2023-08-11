@@ -27,6 +27,7 @@
     "@rushstack/eslint-patch": "^1.3.2",
     "@tsconfig/node18": "^18.2.0",
     "@types/node": "^20.4.5",
+    "@types/uuid": "^9.0.2",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^11.0.3",
@@ -43,8 +44,8 @@
     "@capacitor/android": "^5.2.2",
     "@capacitor/core": "^5.2.2",
     "@capacitor/ios": "^5.2.2",
-    "@mytiki/tiki-sdk-capacitor": "^0.2.0",
-    "@mytiki/tiki-capture-receipt-capacitor": "^0.2.0"
+    "@mytiki/tiki-capture-receipt-capacitor": "^0.2.0",
+    "@mytiki/tiki-sdk-capacitor": "^0.2.0"
   },
   "author": "Tiki inc.",
   "license": "MIT"
