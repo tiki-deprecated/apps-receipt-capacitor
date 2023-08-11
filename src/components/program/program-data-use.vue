@@ -5,8 +5,8 @@
 
 <script setup lang="ts">
 import type { ProgramBullet } from "@/service/program-bullet";
-import CrossMarkIcon from "@/components/icons/cross-mark-icon.vue";
-import CheckIcon from "@/components/icons/check-icon.vue";
+import CrossMarkIcon from "@/assets/icons/cross-mark.svg";
+import CheckIcon from "@/assets/icons/check.svg";
 
 defineProps({
   bullets: Array<ProgramBullet>,

@@ -3,9 +3,9 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import AccountIcon from "@/components/icons/account-icon.vue";
-import ReceiptIcon from "@/components/icons/receipt-icon.vue";
-import RedeemIcon from "@/components/icons/redeem-icon.vue";
+import AccountIcon from "@/assets/icons/account.svg";
+import ReceiptIcon from "@/assets/icons/receipt.svg";
+import RedeemIcon from "@/assets/icons/redeem.svg";
 
 import type { PayableRecord, ReceiptRecord } from "@mytiki/tiki-sdk-capacitor";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";

@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import QuestionIcon from "@/components/icons/question-icon.vue";
+import QuestionIcon from "@/assets/icons/question.svg";
 import TextButton from "@/components/buttons/text-button.vue";
 import CircleButton from "@/components/buttons/circle-button.vue";
 import ProgramDataUse from "@/components/program/program-data-use.vue";

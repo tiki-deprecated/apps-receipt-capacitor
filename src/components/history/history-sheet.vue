@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import HistoryDetails from "@/components/history/history-details.vue";
 import HeaderBack from "@/components/header/header-back.vue";
-import CrossMarkIconOutline from "@/components/icons/cross-mark-icon-outline.vue";
+import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg";
 import CircleButton from "@/components/buttons/circle-button.vue";
 
 defineEmits(["close", "back"]);
