@@ -4,9 +4,9 @@
   -->
 
 <script setup lang="ts">
-import AccountIcon from "@/components/icons/account-icon.vue";
-import RedeemIcon from "@/components/icons/redeem-icon.vue";
-import ScanIcon from "@/components/icons/scan-icon.vue";
+import AccountIcon from "@/assets/icons/account.svg";
+import RedeemIcon from "@/assets/icons/redeem.svg";
+import ScanIcon from "@/assets/icons/scan.svg";
 import SquareButton from "@/components/buttons/square-button.vue";
 import TextButton from "@/components/buttons/text-button.vue";
 import { inject } from "vue";
@@ -29,7 +29,7 @@ defineEmits(["account"]);
   <text-button
     text="Scan Receipt"
     :icon="ScanIcon"
-    @click="tiki?.reward.scan()"
+    @click="tiki?.receipt.scan()"
   />
 </template>
 

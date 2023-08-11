@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import type { HistoryEvent } from "@/service/history-event";
+import type { HistoryEvent } from "@/service/history/history-event";
 import HistoryItem from "@/components/history/history-item.vue";
 import { TikiService } from "@/service/tiki-service";
 import { inject } from "vue";

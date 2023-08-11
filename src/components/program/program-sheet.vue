@@ -4,14 +4,14 @@
   -->
 
 <script setup lang="ts">
-import QuestionIcon from "@/components/icons/question-icon.vue";
+import QuestionIcon from "@/assets/icons/question.svg";
 import TextButton from "@/components/buttons/text-button.vue";
 import CircleButton from "@/components/buttons/circle-button.vue";
 import ProgramDataUse from "@/components/program/program-data-use.vue";
 import Card from "@/components/card.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
 import type { PropType } from "vue";
-import type { Program } from "@/service/program";
+import type { Program } from "@/service/config";
 
 defineEmits(["close", "learn", "accept"]);
 const props = defineProps({

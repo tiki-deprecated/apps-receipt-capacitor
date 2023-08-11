@@ -4,15 +4,14 @@
   -->
 
 <script setup lang="ts">
-import UnlinkIcon from "@/components/icons/unlink-icon.vue";
+import UnlinkIcon from "@/assets/icons/unlink.svg";
 import type { PropType } from "vue";
-import type { Account } from "@/service/account";
-import { icon } from "@/service/account-type";
+import type { ReceiptAccount } from "@/service/receipt/receipt-account";
 
 defineEmits(["click"]);
 defineProps({
   account: {
-    type: Object as PropType<Account>,
+    type: Object as PropType<ReceiptAccount>,
     required: true,
   },
 });
@@ -21,8 +20,14 @@ defineProps({
 <template>
   <div>
     <div class="account-button" role="button" @click="$emit('click', account)">
-      <img :alt="account.type" :src="icon(account.type)" class="icon" />
-      <div class="unlink"><unlink-icon class="unlink-icon" /> Unlink</div>
+      <img :alt="account.type" :src="account.icon" class="icon" />
+      <div
+        class="unlink"
+        :class="account.verified ? 'verified' : 'notVerified'"
+      >
+        <unlink-icon class="account-item-icon" />
+        {{ account.verified ? "Unlink" : "Error" }}
+      </div>
     </div>
     <p class="username">{{ account.username }}</p>
   </div>
@@ -49,15 +54,22 @@ defineProps({
   font-size: var(--tiki-font-size-sm);
   line-height: var(--tiki-line-height-sm);
   font-weight: bold;
-  color: var(--tiki-secondary-text-color);
   display: flex;
   align-items: center;
   padding: 0 0.571em 0.571em 0.571em;
 }
 
-.unlink-icon {
+.account-item-icon {
   margin-right: 0.571em;
   height: 1.714em;
+}
+
+.unlink.verified {
+  color: var(--tiki-secondary-text-color);
+}
+
+.unlink.notVerfied {
+  color: #c73000;
 }
 
 .username {

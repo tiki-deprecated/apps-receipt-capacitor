@@ -9,6 +9,7 @@ import typescript2 from "rollup-plugin-typescript2";
 import dts from "vite-plugin-dts";
 import vue from "@vitejs/plugin-vue";
 import Markdown from "vite-plugin-vue-markdown";
+import svgLoader from "vite-svg-loader";
 
 export default defineConfig({
   plugins: [
@@ -32,6 +33,7 @@ export default defineConfig({
       exclude: ["vite.config.ts"],
     }),
     Markdown(),
+    svgLoader(),
   ],
   build: {
     cssCodeSplit: true,

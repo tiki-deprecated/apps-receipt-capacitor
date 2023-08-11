@@ -4,15 +4,14 @@
   -->
 
 <script setup lang="ts">
-import CrossMarkIconOutline from "@/components/icons/cross-mark-icon-outline.vue";
+import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg";
 import CircleButton from "@/components/buttons/circle-button.vue";
-import type { Reward } from "@/service/reward";
+import type { Reward } from "@/service/config";
 import RewardCarousel from "@/components/reward/reward-carousel.vue";
 import RewardHistory from "@/components/reward/reward-history.vue";
 import RewardCounter from "@/components/reward/reward-counter.vue";
 import RewardAction from "@/components/reward/reward-action.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
-import { HistoryEventType, icon } from "@/service/history-event-type";
 
 defineEmits(["close", "history", "account"]);
 defineProps({
@@ -28,13 +27,7 @@ defineProps({
     <circle-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
   </header-title>
   <reward-counter class="reward-counter" />
-  <reward-history
-    class="reward-history"
-    :amount="25"
-    :date="new Date()"
-    :icon="icon(HistoryEventType.SCAN)"
-    @click="$emit('history')"
-  />
+  <reward-history class="reward-history" @click="$emit('history')" />
   <reward-carousel :rewards="rewards" />
   <reward-action @account="$emit('account')" />
 </template>
