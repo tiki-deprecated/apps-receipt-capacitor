@@ -5,6 +5,7 @@
 
 <script setup lang="ts">
 import UnlinkIcon from "@/components/icons/unlink-icon.vue";
+import ErrorIcon from "@/components/icons/error-icon.vue";
 import type { PropType } from "vue";
 import type { ReceiptAccount } from "@/service/receipt/receipt-account";
 
@@ -20,8 +21,12 @@ defineProps({
 <template>
   <div>
     <div class="account-button" role="button" @click="$emit('click', account)">
-      <img :alt="account.type" :src="account.icon" class="icon" />
-      <div class="unlink"><unlink-icon class="unlink-icon" /> Unlink</div>
+      <img :alt="account.type" :src="icon(account.type)" class="icon" />
+      <div class="unlink" :class="account.verified ? '' : 'unsync-text'">
+        <unlink-icon class="account-item-icon" v-if="account.verified" />
+        <error-icon class="account-item-icon" v-else />
+        {{ account.verified ? "Unlink" : "Error" }}
+      </div>
     </div>
     <p class="username">{{ account.username }}</p>
   </div>
@@ -54,11 +59,13 @@ defineProps({
   padding: 0 0.571em 0.571em 0.571em;
 }
 
-.unlink-icon {
+.account-item-icon {
   margin-right: 0.571em;
   height: 1.714em;
 }
-
+.unsync-text {
+  color: #c73000;
+}
 .username {
   white-space: nowrap;
   overflow: hidden;
