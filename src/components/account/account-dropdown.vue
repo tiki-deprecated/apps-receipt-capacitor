@@ -11,15 +11,14 @@ const props = defineProps({
     required: false,
   },
 });
-
+console.log(props.accounts)
 </script>
 
 <template>
      <v-select :options="accounts" class="account-select">
       <template #option="option">
         <div>
-          <img :src="GmailIcon" style=" width: 40px;">
-          <span>{{ option.label }}</span>
+          <span><img :src="GmailIcon" style=" width: 30px;">{{ option.label }}</span>
         </div>     
       </template>
     </v-select>
@@ -29,7 +28,6 @@ const props = defineProps({
 <style>
 
 .account-select .vs__search::placeholder,
-.account-select .vs__dropdown-toggle,
 .account-select .vs__dropdown-menu {
   text-transform: capitalize;
   width: 100%;
@@ -42,7 +40,10 @@ const props = defineProps({
   border-radius: 0.5em;
   margin-bottom: 1.2em;
 }
+.account-select .vs__dropdown-toggle{
+  border: none;
 
+}
 .account-select .vs__open-indicator {
   padding: 10px 30px 10px 10px;
   -moz-appearance: none;
