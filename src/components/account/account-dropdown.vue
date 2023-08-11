@@ -11,15 +11,13 @@ const props = defineProps({
     required: false,
   },
 });
-console.log(props.accounts)
 </script>
 
 <template>
      <v-select :options="accounts" class="account-select">
       <template #option="option">
-        <div>
-          <span><img :src="GmailIcon" style=" width: 30px;">{{ option.label }}</span>
-        </div>     
+          <img :src="GmailIcon" style=" width: 40px;">
+          <span class="option-label">{{ option.label }}</span>
       </template>
     </v-select>
 
@@ -29,6 +27,7 @@ console.log(props.accounts)
 
 .account-select .vs__search::placeholder,
 .account-select .vs__dropdown-menu {
+  display: flex;
   text-transform: capitalize;
   width: 100%;
   font-size: var(--tiki-font-size-xl);
@@ -40,10 +39,11 @@ console.log(props.accounts)
   border-radius: 0.5em;
   margin-bottom: 1.2em;
 }
+
 .account-select .vs__dropdown-toggle{
   border: none;
-
 }
+
 .account-select .vs__open-indicator {
   padding: 10px 30px 10px 10px;
   -moz-appearance: none;
@@ -63,7 +63,16 @@ console.log(props.accounts)
 .account-select .vs__clear{
  display: none;
 }
-
+.account-select .vs__dropdown-option{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  margin-left: -20px;
+}
+.account-select .option-label{
+  flex: 1;
+}
 .account-select .vs__dropdown-option--highlight{
   background-color: white;
   font-size: var(--tiki-font-size-xl);
