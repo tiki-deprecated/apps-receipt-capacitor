@@ -5,7 +5,6 @@
 
 <script setup lang="ts">
 import { initialState, TikiReceiptState } from "@/tiki-receipt-state";
-import { apply } from "@/service/theme";
 import { inject, ref, watch } from "vue";
 import BottomSheet from "@/components/bottom-sheet.vue";
 import ProgramSheet from "@/components/program/program-sheet.vue";
@@ -15,6 +14,7 @@ import RewardSheet from "@/components/reward/reward-sheet.vue";
 import HistorySheet from "@/components/history/history-sheet.vue";
 import AccountSheet from "@/components/account/account-sheet.vue";
 import type { TikiService } from "@/service/tiki-service";
+import type { Theme } from "@/service/config";
 
 const emit = defineEmits(["update:present"]);
 const props = defineProps({
@@ -23,10 +23,6 @@ const props = defineProps({
     default: false,
   },
 });
-
-const tiki: TikiService | undefined = inject("Tiki");
-apply(document, tiki?.config.theme);
-
 const state = ref(TikiReceiptState.Hidden);
 watch(
   () => props.present,
@@ -41,6 +37,19 @@ watch(
     } else state.value = TikiReceiptState.Hidden;
   },
 );
+
+const tiki: TikiService | undefined = inject("Tiki");
+const stylize = (property: String, value?: String) => {
+  if (value != undefined)
+    document.documentElement.style.setProperty(property, value);
+};
+const theme: Theme | undefined = tiki?.config.theme;
+stylize("--tiki-font-family", theme?.fontFamily);
+stylize("--tiki-primary-text-color", theme?.primaryTextColor);
+stylize("--tiki-secondary-text-color", theme?.secondaryTextColor);
+stylize("--tiki-primary-background-color", theme?.primaryBackgroundColor);
+stylize("--tiki-secondary-background-color", theme?.secondaryBackgroundColor);
+stylize("--tiki-accent-color", theme?.accentColor);
 </script>
 
 <template>

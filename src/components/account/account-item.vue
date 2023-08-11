@@ -7,13 +7,12 @@
 import UnlinkIcon from "@/components/icons/unlink-icon.vue";
 import ErrorIcon from "@/components/icons/error-icon.vue";
 import type { PropType } from "vue";
-import type { Account } from "@/service/account";
-import { icon } from "@/service/account-type";
+import type { ReceiptAccount } from "@/service/receipt/receipt-account";
 
 defineEmits(["click"]);
 defineProps({
   account: {
-    type: Object as PropType<Account>,
+    type: Object as PropType<ReceiptAccount>,
     required: true,
   },
 });

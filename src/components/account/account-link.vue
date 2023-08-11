@@ -11,23 +11,23 @@ import HeaderBack from "@/components/header/header-back.vue";
 import CircleButton from "@/components/buttons/circle-button.vue";
 import AccountCarousel from "@/components/account/account-carousel.vue";
 import TextButton from "@/components/buttons/text-button.vue";
-import type { Account } from "@/service/account";
-import { inject, ref, watch } from "vue";
+import {
+  ReceiptAccount,
+  ReceiptAccountType,
+} from "@/service/receipt/receipt-account";
+import { inject, ref } from "vue";
 import { TikiService } from "@/service/tiki-service";
-import { AccountType } from "@/service/account-type";
 
 const tiki: TikiService | undefined = inject("Tiki");
 defineEmits(["close", "back", "unlink"]);
-const accounts = ref<Account[]>(tiki!.account.accounts);
-tiki!.account.onChange = (acc) => {
-  accounts.value = acc;
-};
-const error = ref<string>();
-const form = ref<Account>({
-  username: "",
-  password: "",
-  type: AccountType.GMAIL,
+const accounts = ref<ReceiptAccount[]>(tiki!.receipt.accounts);
+tiki!.receipt.onAccount("account-link", (acc) => {
+  accounts.value = tiki!.receipt.accounts;
 });
+const error = ref<string>();
+const form = ref<ReceiptAccount>(
+  new ReceiptAccount("", ReceiptAccountType.GMAIL, ""),
+);
 const submit = async () => {
   if (
     form.value.username != undefined &&
@@ -36,12 +36,8 @@ const submit = async () => {
     form.value.password?.length > 0
   ) {
     try {
-      await tiki?.account.login(form.value);
-      form.value = {
-        username: "",
-        password: "",
-        type: AccountType.GMAIL,
-      };
+      await tiki?.receipt.login(form.value);
+      form.value = new ReceiptAccount("", ReceiptAccountType.GMAIL, "");
     } catch (err) {
       error.value = err;
     }
@@ -61,12 +57,7 @@ const submit = async () => {
     class="account-carousel"
     @click="$emit('unlink', $event)"
   />
-  <text-button
-    text="Link Account"
-    :icon="AccountIconOutline"
-    @click="submit"
-    :disable="!canSubmit"
-  />
+  <text-button text="Link Account" :icon="AccountIconOutline" @click="submit" />
 </template>
 
 <style scoped>

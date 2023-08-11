@@ -6,7 +6,7 @@
 import GmailIcon from "@/assets/images/gmail.png";
 import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
 
-export enum AccountType {
+export enum ReceiptAccountType {
   // ACME = "ACME",
   // ALBERTSONS = "Albertsons",
   // AMAZON = "Amazon",
@@ -69,156 +69,158 @@ export enum AccountType {
   // WEGMANS = "Wegman’s",
 }
 
-export const icon = (type: AccountType): Object => {
+export const all: Map<string, ReceiptAccountType> = new Map(
+  Object.values(ReceiptAccountType).map(
+    (value) => [`${value}`, value] as const,
+  ),
+);
+
+export const icon = (type: ReceiptAccountType): Object => {
   switch (type) {
-    // case AccountType.ACME:
+    // case ReceiptAccountType.ACME:
     //   return AcmeIcon;
-    // case AccountType.ALBERTSONS:
+    // case ReceiptAccountType.ALBERTSONS:
     //   return AlbertsonsIcon;
-    // case AccountType.AMAZON:
+    // case ReceiptAccountType.AMAZON:
     //   return AmazonIcon;
-    // case AccountType.AOL:
+    // case ReceiptAccountType.AOL:
     //   return AolIcon;
-    // case AccountType.BBB:
+    // case ReceiptAccountType.BBB:
     //   return BedBathBeyondIcon;
-    // case AccountType.BEST_BUY:
+    // case ReceiptAccountType.BEST_BUY:
     //   return BestBuyIcon;
-    // case AccountType.BJS:
+    // case ReceiptAccountType.BJS:
     //   return BJSIcon;
-    // case AccountType.CHEWY:
+    // case ReceiptAccountType.CHEWY:
     //   return ChewyIcon;
-    // case AccountType.COSTCO:
+    // case ReceiptAccountType.COSTCO:
     //   return CostcoIcon;
-    // case AccountType.CVS:
+    // case ReceiptAccountType.CVS:
     //   return CVSIcon;
-    // case AccountType.DICKS:
+    // case ReceiptAccountType.DICKS:
     //   return DicksIcon;
-    // case AccountType.DOLLAR_GENERAL:
+    // case ReceiptAccountType.DOLLAR_GENERAL:
     //   return DollarGeneralIcon;
-    // case AccountType.DOLLAR_TREE:
+    // case ReceiptAccountType.DOLLAR_TREE:
     //   return DollarTreeIcon;
-    // case AccountType.DOMINOS:
+    // case ReceiptAccountType.DOMINOS:
     //   return DominosIcon;
-    // case AccountType.DOOR_DASH:
+    // case ReceiptAccountType.DOOR_DASH:
     //   return DoorDashIcon;
-    // case AccountType.DRIZLY:
+    // case ReceiptAccountType.DRIZLY:
     //   return DrizlyIcon;
-    // case AccountType.FAMILY_DOLLAR:
+    // case ReceiptAccountType.FAMILY_DOLLAR:
     //   return FamilyDollarIcon;
-    // case AccountType.FOOD_4_LESS:
+    // case ReceiptAccountType.FOOD_4_LESS:
     //   return Food4LessIcon;
-    // case AccountType.FOOD_LION:
+    // case ReceiptAccountType.FOOD_LION:
     //   return FoodLionIcon;
-    // case AccountType.FRED_MEYER:
+    // case ReceiptAccountType.FRED_MEYER:
     //   return FredMeyerIcon;
-    // case AccountType.GAP:
+    // case ReceiptAccountType.GAP:
     //   return GapIcon;
-    // case AccountType.GIANT_EAGLE:
+    // case ReceiptAccountType.GIANT_EAGLE:
     //   return GiantEagleIcon;
-    case AccountType.GMAIL:
+    case ReceiptAccountType.GMAIL:
       return GmailIcon;
-    // case AccountType.GRUBHUB:
+    // case ReceiptAccountType.GRUBHUB:
     //   return GrubHubIcon;
-    // case AccountType.HARRIS_TEETER:
+    // case ReceiptAccountType.HARRIS_TEETER:
     //   return HarrisTeeterIcon;
-    // case AccountType.HEB:
+    // case ReceiptAccountType.HEB:
     //   return HEBIcon;
-    // case AccountType.HOME_DEPOT:
+    // case ReceiptAccountType.HOME_DEPOT:
     //   return HomeDepotIcon;
-    // case AccountType.HY_VEE:
+    // case ReceiptAccountType.HY_VEE:
     //   return HyVeeIcon;
-    // case AccountType.INSTACART:
+    // case ReceiptAccountType.INSTACART:
     //   return InstacartIcon;
-    // case AccountType.JEWEL_OSCO:
+    // case ReceiptAccountType.JEWEL_OSCO:
     //   return JewelOscoIcon;
-    // case AccountType.KOHLS:
+    // case ReceiptAccountType.KOHLS:
     //   return KohlsIcon;
-    // case AccountType.KROGER:
+    // case ReceiptAccountType.KROGER:
     //   return KrogerIcon;
-    // case AccountType.LOWES:
+    // case ReceiptAccountType.LOWES:
     //   return LowesIcon;
-    // case AccountType.MACYS:
+    // case ReceiptAccountType.MACYS:
     //   return MacysIcon;
-    // case AccountType.MARSHALLS:
+    // case ReceiptAccountType.MARSHALLS:
     //   return MarshallsIcon;
-    // case AccountType.MEIJER:
+    // case ReceiptAccountType.MEIJER:
     //   return MeijerIcon;
-    // case AccountType.NIKE:
+    // case ReceiptAccountType.NIKE:
     //   return NikeIcon;
-    // case AccountType.PUBLIX:
+    // case ReceiptAccountType.PUBLIX:
     //   return PublixIcon;
-    // case AccountType.RALPHS:
+    // case ReceiptAccountType.RALPHS:
     //   return RalphsIcon;
-    // case AccountType.RITE_AID:
+    // case ReceiptAccountType.RITE_AID:
     //   return RiteAidIcon;
-    // case AccountType.SAFEWAY:
+    // case ReceiptAccountType.SAFEWAY:
     //   return SafewayIcon;
-    // case AccountType.SAMS_CLUB:
+    // case ReceiptAccountType.SAMS_CLUB:
     //   return SamsClubIcon;
-    // case AccountType.SEAMLESS:
+    // case ReceiptAccountType.SEAMLESS:
     //   return SeamlessIcon;
-    // case AccountType.SEPHORA:
+    // case ReceiptAccountType.SEPHORA:
     //   return SephoraIcon;
-    // case AccountType.SHIPT:
+    // case ReceiptAccountType.SHIPT:
     //   return ShiptIcon;
-    // case AccountType.SHOP_RITE:
+    // case ReceiptAccountType.SHOP_RITE:
     //   return ShopRiteIcon;
-    // case AccountType.SPROUTS:
+    // case ReceiptAccountType.SPROUTS:
     //   return SproutsIcon;
-    // case AccountType.STAPLES:
+    // case ReceiptAccountType.STAPLES:
     //   return StaplesIcon;
-    // case AccountType.STAPLES_CANADA:
+    // case ReceiptAccountType.STAPLES_CANADA:
     //   return StaplesCanadaIcon;
-    // case AccountType.STARBUCKS:
+    // case ReceiptAccountType.STARBUCKS:
     //   return StarbucksIcon;
-    // case AccountType.TACO_BELL:
+    // case ReceiptAccountType.TACO_BELL:
     //   return TacoBellIcon;
-    // case AccountType.TARGET:
+    // case ReceiptAccountType.TARGET:
     //   return TargetIcon;
-    // case AccountType.TJ_MAXX:
+    // case ReceiptAccountType.TJ_MAXX:
     //   return TJMaxxIcon;
-    // case AccountType.UBER_EATS:
+    // case ReceiptAccountType.UBER_EATS:
     //   return UberEatsIcon;
-    // case AccountType.ULTA:
+    // case ReceiptAccountType.ULTA:
     //   return UltaIcon;
-    // case AccountType.VONS:
+    // case ReceiptAccountType.VONS:
     //   return VonsIcon;
-    // case AccountType.WALGREENS:
+    // case ReceiptAccountType.WALGREENS:
     //   return WalgreensIcon;
-    // case AccountType.WALMART:
+    // case ReceiptAccountType.WALMART:
     //   return WalmartIcon;
-    // case AccountType.WALMART_CANADA:
+    // case ReceiptAccountType.WALMART_CANADA:
     //   return WalmartCanadaIcon;
-    // case AccountType.WEGMANS:
+    // case ReceiptAccountType.WEGMANS:
     //   return WegmansIcon;
     default:
-      throw Error("Unsupported AccountType");
+      throw Error("Unsupported ReceiptAccountType");
   }
 };
 
 export const fromEmailProvider = (
   provider?: AccountProvider,
-): AccountType | undefined => {
+): ReceiptAccountType | undefined => {
   if (provider === undefined) return undefined;
   switch (provider) {
     case AccountProvider.GMAIL:
-      return AccountType.GMAIL;
+      return ReceiptAccountType.GMAIL;
     default:
       return undefined;
   }
 };
 
 export const toEmailProvider = (
-  type: AccountType,
+  type: ReceiptAccountType,
 ): AccountProvider | undefined => {
   switch (type) {
-    case AccountType.GMAIL:
+    case ReceiptAccountType.GMAIL:
       return AccountProvider.GMAIL;
     default:
       return undefined;
   }
 };
-
-export const types: Map<string, AccountType> = new Map(
-  Object.values(AccountType).map((value) => [`${value}`, value] as const),
-);
