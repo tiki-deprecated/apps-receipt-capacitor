@@ -4,15 +4,17 @@
   -->
 
 <script setup lang="ts">
-import { AccountType, types } from "@/service/account-type";
+import {
+  ReceiptAccount,
+  ReceiptAccountType,
+} from "@/service/receipt/receipt-account";
 import { inject, PropType, ref, watch } from "vue";
 import { TikiService } from "@/service/tiki-service";
-import type { Account } from "@/service/account";
 
 const emit = defineEmits(["update:account"]);
 const props = defineProps({
   account: {
-    type: Object as PropType<Account>,
+    type: Object as PropType<ReceiptAccount>,
     required: true,
   },
   error: {
@@ -26,11 +28,14 @@ const password = ref<HTMLInputElement>();
 const account = ref<HTMLSelectElement>();
 
 const update = () => {
-  emit("update:account", {
-    username: username.value?.value!,
-    password: password.value?.value!,
-    type: types.get(account.value?.value!),
-  } as Account);
+  emit(
+    "update:account",
+    ReceiptAccount.fromValue(
+      username.value?.value ?? "",
+      account.value?.value ?? ReceiptAccountType.GMAIL,
+      password.value?.value,
+    ),
+  );
 };
 
 watch(
@@ -38,7 +43,7 @@ watch(
   async (newValue) => {
     username.value!.value = newValue?.username ?? "";
     password.value!.value = newValue?.password ?? "";
-    account.value!.value = newValue?.type ?? AccountType.GMAIL;
+    account.value!.value = newValue?.type ?? ReceiptAccountType.GMAIL;
   },
 );
 
@@ -53,7 +58,10 @@ watch(
   <form>
     <label for="accounts">Choose Account</label>
     <select id="accounts" ref="account" required @change="update">
-      <option v-for="account in Object.values(AccountType)" :value="account">
+      <option
+        v-for="account in Object.values(ReceiptAccountType)"
+        :value="account"
+      >
         {{ account }}
       </option>
     </select>

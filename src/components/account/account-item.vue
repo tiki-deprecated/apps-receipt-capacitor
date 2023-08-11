@@ -6,13 +6,12 @@
 <script setup lang="ts">
 import UnlinkIcon from "@/components/icons/unlink-icon.vue";
 import type { PropType } from "vue";
-import type { Account } from "@/service/account";
-import { icon } from "@/service/account-type";
+import type { ReceiptAccount } from "@/service/receipt/receipt-account";
 
 defineEmits(["click"]);
 defineProps({
   account: {
-    type: Object as PropType<Account>,
+    type: Object as PropType<ReceiptAccount>,
     required: true,
   },
 });
@@ -21,7 +20,7 @@ defineProps({
 <template>
   <div>
     <div class="account-button" role="button" @click="$emit('click', account)">
-      <img :alt="account.type" :src="icon(account.type)" class="icon" />
+      <img :alt="account.type" :src="account.icon" class="icon" />
       <div class="unlink"><unlink-icon class="unlink-icon" /> Unlink</div>
     </div>
     <p class="username">{{ account.username }}</p>

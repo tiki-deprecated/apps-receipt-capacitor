@@ -11,18 +11,18 @@ import AccountForm from "@/components/account/account-form.vue";
 import AccountIconOutline from "@/components/icons/account-icon-outline.vue";
 import TextButton from "@/components/buttons/text-button.vue";
 import { inject, ref } from "vue";
-import { Account } from "@/service/account";
-import { AccountType } from "@/service/account-type";
+import {
+  ReceiptAccount,
+  ReceiptAccountType,
+} from "@/service/receipt/receipt-account";
 import { TikiService } from "@/service/tiki-service";
 
 const tiki: TikiService | undefined = inject("Tiki");
 const emits = defineEmits(["back", "close"]);
 const error = ref<string>();
-const form = ref<Account>({
-  username: "",
-  password: "",
-  type: AccountType.GMAIL,
-});
+const form = ref<ReceiptAccount>(
+  new ReceiptAccount("", ReceiptAccountType.GMAIL, ""),
+);
 const submit = async () => {
   if (
     form.value.username != undefined &&
@@ -31,7 +31,7 @@ const submit = async () => {
     form.value.password?.length > 0
   ) {
     try {
-      await tiki?.account.logout(form.value);
+      await tiki?.receipt.logout(form.value);
       emits("back");
     } catch (err) {
       error.value = err;

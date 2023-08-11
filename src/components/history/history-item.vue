@@ -5,8 +5,7 @@
 
 <script setup lang="ts">
 import type { PropType } from "vue";
-import type { HistoryEvent } from "@/service/history-event";
-import { icon } from "@/service/history-event-type";
+import type { HistoryEvent } from "@/service/history/history-event";
 
 defineProps({
   event: {
@@ -18,7 +17,7 @@ defineProps({
 
 <template>
   <div class="description">
-    <component :is="icon(event.type)" class="icon" />
+    <component :is="event.icon" class="icon" />
     <div>
       <p class="name">{{ event.name }}</p>
       <p class="date">
