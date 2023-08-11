@@ -4,8 +4,7 @@
   -->
 
 <script setup lang="ts">
-import UnlinkIcon from "@/components/icons/unlink-icon.vue";
-import ErrorIcon from "@/components/icons/error-icon.vue";
+import UnlinkIcon from "@/assets/icons/unlink.svg";
 import type { PropType } from "vue";
 import type { ReceiptAccount } from "@/service/receipt/receipt-account";
 
@@ -21,10 +20,12 @@ defineProps({
 <template>
   <div>
     <div class="account-button" role="button" @click="$emit('click', account)">
-      <img :alt="account.type" :src="icon(account.type)" class="icon" />
-      <div class="unlink" :class="account.verified ? '' : 'unsync-text'">
-        <unlink-icon class="account-item-icon" v-if="account.verified" />
-        <error-icon class="account-item-icon" v-else />
+      <img :alt="account.type" :src="account.icon" class="icon" />
+      <div
+        class="unlink"
+        :class="account.verified ? 'verified' : 'notVerified'"
+      >
+        <unlink-icon class="account-item-icon" />
         {{ account.verified ? "Unlink" : "Error" }}
       </div>
     </div>
@@ -53,7 +54,6 @@ defineProps({
   font-size: var(--tiki-font-size-sm);
   line-height: var(--tiki-line-height-sm);
   font-weight: bold;
-  color: var(--tiki-secondary-text-color);
   display: flex;
   align-items: center;
   padding: 0 0.571em 0.571em 0.571em;
@@ -63,9 +63,15 @@ defineProps({
   margin-right: 0.571em;
   height: 1.714em;
 }
-.unsync-text {
+
+.unlink.verified {
+  color: var(--tiki-secondary-text-color);
+}
+
+.unlink.notVerfied {
   color: #c73000;
 }
+
 .username {
   white-space: nowrap;
   overflow: hidden;
