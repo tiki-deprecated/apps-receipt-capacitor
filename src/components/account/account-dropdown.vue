@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import GmailIcon from "@/assets/images/gmail.png";
-const emits = defineEmits(["update:accountSelect"]);
+const s = defineEmits(["update:accountSelect"]);
 const props = defineProps({
   accounts: {
     type: Array,
@@ -19,8 +19,13 @@ const props = defineProps({
     class="account-select"
     :value="selectedAccount"
     @change="$emit('update:accountSelect', selectedAccount)"
+    ref="selectedAccount"
   >
-    <template #option="option" slot="option">
+    <template #option:selected="option" slot:selection="{option}">
+      <img :src="GmailIcon" style="width: 40px" />
+      <span class="option-label">{{ option.label }}</span>
+    </template>
+    <template #option="option" slot:item="option">
       <img :src="GmailIcon" style="width: 40px" />
       <span class="option-label">{{ option.label }}</span>
     </template>
