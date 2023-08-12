@@ -77,7 +77,7 @@ const updateAccount = (account) => {
       :account="account"
       @update:account-select="updateAccount(account.value)"
       @change="update"
-      ref="account"
+      ref:account="account"
     />
     <label id="username">Username</label>
     <input
