@@ -1,29 +1,33 @@
 <script setup lang="ts">
 import GmailIcon from "@/assets/images/gmail.png";
+const emits = defineEmits(["update:accountSelect"]);
 const props = defineProps({
   accounts: {
     type: Array,
     required: true,
   },
- selectedAccount: {
-  type: HTMLSelectElement,
-  required: false
- }
+  selectedAccount: {
+    type: HTMLSelectElement,
+    required: false,
+  },
 });
 </script>
 
 <template>
-     <v-select :options="accounts" class="account-select" :value="selectedAccount">
-      <template #option="option" slot="option">
-          <img :src="GmailIcon" style=" width: 40px;">
-          <span class="option-label">{{ option.label }}</span>
-      </template>
-    </v-select>
-
+  <v-select
+    :options="accounts"
+    class="account-select"
+    :value="selectedAccount"
+    @change="$emit('update:accountSelect', selectedAccount)"
+  >
+    <template #option="option" slot="option">
+      <img :src="GmailIcon" style="width: 40px" />
+      <span class="option-label">{{ option.label }}</span>
+    </template>
+  </v-select>
 </template>
 
 <style>
-
 .account-select .vs__search::placeholder,
 .account-select .vs__dropdown-menu {
   display: flex;
@@ -38,7 +42,7 @@ const props = defineProps({
   border-radius: 0.5em;
   margin-bottom: 1.2em;
 }
-.account-select .vs__dropdown-toggle{
+.account-select .vs__dropdown-toggle {
   border: none;
 }
 .account-select .vs__open-indicator {
@@ -48,29 +52,25 @@ const props = defineProps({
   appearance: none;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyNSAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEuMTgxODIgMi4wMTMxOEwxMi4yMzY0IDEyLjAxMzJMMjMgMi4wMTMxOCIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLW9wYWNpdHk9IjAuNiIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjwvc3ZnPgo=");
   background-repeat: no-repeat, repeat;
-  background-position:
-    right 0.7em top 50%,
-    0 0;
-  background-size:
-    0.65em auto,
-    100%;
+  background-position: right 0.7em top 50%, 0 0;
+  background-size: 0.65em auto, 100%;
   margin-right: -20px;
 }
 
-.account-select .vs__clear{
- display: none;
+.account-select .vs__clear {
+  display: none;
 }
-.account-select .vs__dropdown-option{
+.account-select .vs__dropdown-option {
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: space-between;
   margin-left: -20px;
 }
-.account-select .option-label{
+.account-select .option-label {
   flex: 1;
 }
-.account-select .vs__dropdown-option--highlight{
+.account-select .vs__dropdown-option--highlight {
   background-color: white;
   font-size: var(--tiki-font-size-xl);
   line-height: var(--tiki-line-height-xl);
@@ -78,6 +78,4 @@ const props = defineProps({
   color: var(--tiki-primary-text-color);
   border-radius: 0.5em;
 }
-
-
 </style>
