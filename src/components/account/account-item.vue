@@ -64,11 +64,11 @@ defineProps({
   height: 1.714em;
 }
 
-.unlink.verified {
+.verified {
   color: var(--tiki-secondary-text-color);
 }
 
-.unlink.notVerfied {
+.notVerified {
   color: #c73000;
 }
 

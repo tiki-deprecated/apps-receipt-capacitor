@@ -67,6 +67,7 @@ export class ReceiptService {
       account.password!,
       account.provider!,
     );
+    account.verified = true;
     this.addAccount(account);
     await this.process(ReceiptEvent.LINK, {
       account: account,

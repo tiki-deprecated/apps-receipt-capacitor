@@ -17,21 +17,29 @@ export class ReceiptAccount {
   username: string;
   type: ReceiptAccountType;
   password?: string;
-  verified?: Boolean;
+  verified: boolean;
 
-  constructor(username: string, type: ReceiptAccountType, password?: string) {
+  constructor(
+    username: string,
+    type: ReceiptAccountType,
+    password?: string,
+    verified?: boolean,
+  ) {
     this.username = username;
     this.type = type;
     this.password = password;
+    this.verified = verified ?? false;
   }
 
   static fromProvider(
     username: string,
     provider?: AccountProvider,
     password?: string,
+    verified?: boolean,
   ): ReceiptAccount {
     const type: ReceiptAccountType | undefined = fromEmailProvider(provider);
-    if (type != undefined) return new ReceiptAccount(username, type, password);
+    if (type != undefined)
+      return new ReceiptAccount(username, type, password, verified);
     else throw Error(`Unsupported provider: ${provider}`);
   }
 
@@ -39,14 +47,21 @@ export class ReceiptAccount {
     username: string,
     value: string,
     password?: string,
+    verified?: boolean,
   ): ReceiptAccount {
     const type: ReceiptAccountType | undefined = all.get(value);
-    if (type != undefined) return new ReceiptAccount(username, type, password);
+    if (type != undefined)
+      return new ReceiptAccount(username, type, password, verified);
     else throw Error(`Unsupported value: ${value}`);
   }
 
   static fromCapture(account: Account): ReceiptAccount {
-    return ReceiptAccount.fromProvider(account.username, account.provider);
+    return ReceiptAccount.fromProvider(
+      account.username,
+      account.provider,
+      undefined,
+      account.verified,
+    );
   }
 
   get icon(): string {
