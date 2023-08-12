@@ -7,7 +7,8 @@
 import VueMarkdown from "vue-markdown-render";
 import TextButton from "@/components/buttons/text-button.vue";
 import HeaderBack from "@/components/header/header-back.vue";
-import { inject, PropType } from "vue";
+import { inject } from "vue";
+import type { PropType } from "vue";
 import type { Program } from "@/service/config";
 import type { TikiService } from "@/service/tiki-service";
 

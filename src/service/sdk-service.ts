@@ -3,7 +3,11 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import type { PayableRecord, TikiSdk } from "@mytiki/tiki-sdk-capacitor";
+import type {
+  PayableRecord,
+  ReceiptRecord,
+  TikiSdk,
+} from "@mytiki/tiki-sdk-capacitor";
 import * as TikiSdkLicensing from "@mytiki/tiki-sdk-capacitor";
 import type { TikiService } from "@/service/tiki-service";
 import type { Program } from "@/service/config";
@@ -86,6 +90,21 @@ export class SdkService {
         undefined,
         description,
         reference,
+      );
+    }
+  }
+
+  async createReceipt(
+    amount: number,
+    description: string,
+  ): Promise<ReceiptRecord | undefined> {
+    const payables: PayableRecord[] = await this.getPayables();
+    const latest = payables.at(-1);
+    if (latest != undefined) {
+      return this.plugin.createReceipt(
+        latest.id,
+        amount.toString(),
+        description,
       );
     }
   }

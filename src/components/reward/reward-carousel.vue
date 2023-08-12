@@ -18,7 +18,7 @@ defineProps({
   <div>
     <p class="rewards-title">Offers</p>
     <carousel :items-to-show="1.05" :wrap-around="true" snapAlign="start">
-      <slide v-for="reward in rewards" :key="reward">
+      <slide v-for="(reward, index) in rewards" :key="index">
         <card
           :image="reward.image"
           :description="reward.description"

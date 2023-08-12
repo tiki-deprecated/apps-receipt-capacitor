@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg";
+import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg?component";
 import CircleButton from "@/components/buttons/circle-button.vue";
 import type { Reward } from "@/service/config";
 import RewardCarousel from "@/components/reward/reward-carousel.vue";
@@ -29,7 +29,7 @@ defineProps({
   <reward-counter class="reward-counter" />
   <reward-history class="reward-history" @click="$emit('history')" />
   <reward-carousel :rewards="rewards" />
-  <reward-action @account="$emit('account')" />
+  <reward-action @account="$emit('account')" @redeem="$emit('close')" />
 </template>
 
 <style scoped>

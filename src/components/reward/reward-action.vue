@@ -4,16 +4,21 @@
   -->
 
 <script setup lang="ts">
-import AccountIcon from "@/assets/icons/account.svg";
-import RedeemIcon from "@/assets/icons/redeem.svg";
-import ScanIcon from "@/assets/icons/scan.svg";
+import AccountIcon from "@/assets/icons/account.svg?component";
+import RedeemIcon from "@/assets/icons/redeem.svg?component";
+import ScanIcon from "@/assets/icons/scan.svg?component";
 import SquareButton from "@/components/buttons/square-button.vue";
 import TextButton from "@/components/buttons/text-button.vue";
 import { inject } from "vue";
 import { TikiService } from "@/service/tiki-service";
 
 const tiki: TikiService | undefined = inject("Tiki");
-defineEmits(["account"]);
+const emit = defineEmits(["account", "redeem"]);
+
+const redeem = () => {
+  tiki!.history.redeem();
+  emit("redeem");
+};
 </script>
 
 <template>
@@ -24,7 +29,7 @@ defineEmits(["account"]);
       class="account-icon"
       @click="$emit('account')"
     />
-    <square-button :icon="RedeemIcon" text="Redeem Points" />
+    <square-button :icon="RedeemIcon" text="Redeem Points" @click="redeem" />
   </div>
   <text-button
     text="Scan Receipt"

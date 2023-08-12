@@ -39,7 +39,7 @@ watch(
 );
 
 const tiki: TikiService | undefined = inject("Tiki");
-const stylize = (property: String, value?: String) => {
+const stylize = (property: string, value?: string) => {
   if (value != undefined)
     document.documentElement.style.setProperty(property, value);
 };

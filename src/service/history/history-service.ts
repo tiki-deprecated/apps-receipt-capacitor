@@ -25,7 +25,7 @@ export class HistoryService {
   }
 
   get all(): HistoryEvent[] {
-    return this._history;
+    return [...this._history];
   }
 
   get latest(): HistoryEvent | undefined {
@@ -60,5 +60,17 @@ export class HistoryService {
         ? this._total - event.amount
         : this._total + event.amount;
     this._onEventListeners.forEach((listener) => listener(event));
+  }
+
+  async redeem(): Promise<void> {
+    const callback = this.tiki.config.redeem;
+    if (callback != undefined) {
+      const points = callback(this._total);
+      if (points != undefined) {
+        const event = HistoryEvent.redeem(points, new Date());
+        this.add(event);
+        await this.tiki.sdk.createReceipt(points, event.name);
+      }
+    }
   }
 }

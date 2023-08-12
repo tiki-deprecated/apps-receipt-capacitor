@@ -6,14 +6,16 @@
 import type { App } from "vue";
 import "@/assets/main.css";
 import TikiReceipt from "@/tiki-receipt.vue";
-import type { Config, Program, Theme, Reward } from "@/service/config";
+import type { Program, Theme, Reward, Config } from "@/service/config";
 import type { ReceiptService } from "@/service/receipt/receipt-service";
 import type { HistoryService } from "@/service/history/history-service";
 import type { SdkService } from "@/service/sdk-service";
 import type { HistoryEvent } from "@/service/history/history-event";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
 import type { ReceiptAccount } from "@/service/receipt/receipt-account";
-import { ReceiptAccountType } from "@/service/receipt/receipt-account";
+import { ReceiptAccountType } from "@/service/receipt/receipt-account-type";
+import { TikiService } from "@/service/tiki-service";
+
 import Vue3TouchEvents from "vue3-touch-events";
 import {
   Usecase,
@@ -45,7 +47,6 @@ import type {
   ReceiptCapture,
 } from "@mytiki/tiki-capture-receipt-capacitor";
 import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
-import { TikiService } from "@/service/tiki-service";
 
 export default {
   install: (app: App, config: Config) => {
@@ -66,7 +67,6 @@ export {
   ReceiptAccountType,
 };
 export type {
-  TikiService,
   Config,
   Theme,
   Program,
@@ -95,4 +95,5 @@ export type {
   SdkService,
   ReceiptService,
   ReceiptAccount,
+  TikiService,
 };

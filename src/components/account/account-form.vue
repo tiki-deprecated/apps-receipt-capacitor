@@ -4,11 +4,10 @@
   -->
 
 <script setup lang="ts">
-import {
-  ReceiptAccount,
-  ReceiptAccountType,
-} from "@/service/receipt/receipt-account";
-import { inject, PropType, ref, watch } from "vue";
+import { ReceiptAccount } from "@/service/receipt/receipt-account";
+import { ReceiptAccountType } from "@/service/receipt/receipt-account-type";
+import { inject, ref, watch } from "vue";
+import type { PropType } from "vue";
 import { TikiService } from "@/service/tiki-service";
 
 const emit = defineEmits(["update:account"]);

@@ -2,15 +2,19 @@
   "name": "@mytiki/tiki-receipt-capacitor",
   "version": "0.0.1",
   "description": "pineapple",
-  "type": "module",
-  "files": [
-    "dist/*"
-  ],
-  "main": "./dist/tiki-receipt-capacitor.umd.js",
+  "files": [ "dist" ],
   "module": "./dist/tiki-receipt-capacitor.es.js",
-  "types": "./dist/main.d.ts",
+  "main": "./dist/tiki-receipt-capacitor.umd.js",
+  "typings": "./dist/types/main.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/main.d.ts",
+      "import": "./dist/tiki-receipt-capacitor.es.js"
+    },
+    "./dist/tiki-receipt-capacitor.css": "./dist/tiki-receipt-capacitor.css"
+  },
   "scripts": {
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "rimraf dist && vue-tsc --declaration --emitDeclarationOnly; vite build",
     "android": "npm run build && cd example && npm run build-only && npx cap run android"
   },
   "keywords": [],

@@ -10,11 +10,11 @@ import { TikiService } from "@/service/tiki-service";
 import { inject } from "vue";
 
 const tiki: TikiService | undefined = inject("Tiki");
-const months: Set<Number> = new Set<Number>();
+const months: Set<number> = new Set<number>();
 const events: HistoryEvent[] = tiki?.history.all ?? [];
 events
-  .sort(function (a, b) {
-    return b.date - a.date;
+  .sort(function (a: HistoryEvent, b: HistoryEvent) {
+    return b.date.getDate() - a.date.getDate();
   })
   .forEach((event) => {
     const trunc = new Date(event.date.getFullYear(), event.date.getMonth());

@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import UnlinkIcon from "@/assets/icons/unlink.svg";
+import UnlinkIcon from "@/assets/icons/unlink.svg?component";
 import type { PropType } from "vue";
 import type { ReceiptAccount } from "@/service/receipt/receipt-account";
 
@@ -64,11 +64,11 @@ defineProps({
   height: 1.714em;
 }
 
-.unlink.verified {
+.verified {
   color: var(--tiki-secondary-text-color);
 }
 
-.unlink.notVerfied {
+.notVerified {
   color: #c73000;
 }
 

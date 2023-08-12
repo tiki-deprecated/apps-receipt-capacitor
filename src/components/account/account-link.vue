@@ -4,17 +4,15 @@
   -->
 
 <script setup lang="ts">
-import AccountIconOutline from "@/assets/icons/account-outline.svg";
-import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg";
+import AccountIconOutline from "@/assets/icons/account-outline.svg?component";
+import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg?component";
 import AccountForm from "@/components/account/account-form.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import CircleButton from "@/components/buttons/circle-button.vue";
 import AccountCarousel from "@/components/account/account-carousel.vue";
 import TextButton from "@/components/buttons/text-button.vue";
-import {
-  ReceiptAccount,
-  ReceiptAccountType,
-} from "@/service/receipt/receipt-account";
+import { ReceiptAccount } from "@/service/receipt/receipt-account";
+import { ReceiptAccountType } from "@/service/receipt/receipt-account-type";
 import { inject, ref } from "vue";
 import { TikiService } from "@/service/tiki-service";
 
@@ -38,8 +36,8 @@ const submit = async () => {
     try {
       await tiki?.receipt.login(form.value);
       form.value = new ReceiptAccount("", ReceiptAccountType.GMAIL, "");
-    } catch (err) {
-      error.value = err;
+    } catch (err: any) {
+      error.value = err.toString();
     }
   }
 };
