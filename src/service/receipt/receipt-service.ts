@@ -152,7 +152,7 @@ export class ReceiptService {
           amount,
           new Date(),
           event,
-          details.account?.provider?.valueOf(),
+          details.account?.type?.valueOf(),
         );
         await this.tiki.sdk.createPayable(
           amount,

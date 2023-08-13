@@ -96,16 +96,16 @@ export class HistoryEvent {
     let name;
     switch (type) {
       case ReceiptEvent.REDEEM:
-        name = [text, HistoryEvent.REDEEM_NAME_POSTFIX].join("");
+        name = [text, HistoryEvent.REDEEM_NAME_POSTFIX].join(" ");
         break;
       case ReceiptEvent.LINK:
-        name = [text, HistoryEvent.LINK_NAME_POSTFIX].join("");
+        name = [text, HistoryEvent.LINK_NAME_POSTFIX].join(" ");
         break;
       case ReceiptEvent.SCAN:
-        name = [text, HistoryEvent.SCAN_NAME_POSTFIX].join("");
+        name = [text, HistoryEvent.SCAN_NAME_POSTFIX].join(" ");
         break;
       case ReceiptEvent.UNLINK:
-        name = [text, HistoryEvent.UNLINK_NAME_POSTFIX].join("");
+        name = [text, HistoryEvent.UNLINK_NAME_POSTFIX].join(" ");
         break;
     }
     return new HistoryEvent(name, amount, date, type);
