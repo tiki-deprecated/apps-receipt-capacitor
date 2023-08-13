@@ -22,10 +22,6 @@ watch(selectedAccount, () => {
     class="account-select"
     v-model="selectedAccount"
   >
-    <template #option:selected="option" slot:selection="{option}">
-      <img :src="GmailIcon" style="width: 40px" />
-      <span class="option-label">{{ option.label }}</span>
-    </template>
     <template #option="option" slot:item="option">
       <img :src="GmailIcon" style="width: 40px" />
       <span class="option-label">{{ option.label }}</span>
