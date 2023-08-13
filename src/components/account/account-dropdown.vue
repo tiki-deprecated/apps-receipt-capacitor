@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import GmailIcon from "@/assets/images/gmail.png";
-const s = defineEmits(["update:accountSelect"]);
+import { ref, watch } from "vue";
+const emits = defineEmits(["input"]);
 const props = defineProps({
   accounts: {
     type: Array,
     required: true,
   },
-  selectedAccount: {
-    type: HTMLSelectElement,
-    required: false,
-  },
+});
+
+const selectedAccount = ref<HTMLSelectElement>();
+
+watch(selectedAccount, () => {
+  emits("input", selectedAccount.value);
 });
 </script>
 
@@ -17,9 +20,7 @@ const props = defineProps({
   <v-select
     :options="accounts"
     class="account-select"
-    :value="selectedAccount"
-    @change="$emit('update:accountSelect', selectedAccount)"
-    ref="selectedAccount"
+    v-model="selectedAccount"
   >
     <template #option:selected="option" slot:selection="{option}">
       <img :src="GmailIcon" style="width: 40px" />
@@ -33,20 +34,6 @@ const props = defineProps({
 </template>
 
 <style>
-.account-select .vs__search::placeholder,
-.account-select .vs__dropdown-menu {
-  display: flex;
-  text-transform: capitalize;
-  width: 100%;
-  font-size: var(--tiki-font-size-xl);
-  line-height: var(--tiki-line-height-xl);
-  font-weight: bold;
-  color: var(--tiki-primary-text-color);
-  padding: 0.6em 0.8em;
-  background-color: var(--tiki-primary-background-color);
-  border-radius: 0.5em;
-  margin-bottom: 1.2em;
-}
 .account-select .vs__dropdown-toggle {
   border: none;
 }
