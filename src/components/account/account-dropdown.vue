@@ -33,6 +33,10 @@ watch(selectedAccount, () => {
 .account-select .vs__dropdown-toggle {
   border: none;
 }
+.account-select .vs__dropdown-menu {
+  border-radius: 0.5em;
+  padding: 5px 8px;
+}
 .account-select .vs__open-indicator {
   padding: 10px 30px 10px 10px;
   -moz-appearance: none;
