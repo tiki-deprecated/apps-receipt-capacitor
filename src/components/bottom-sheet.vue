@@ -22,23 +22,16 @@ watch(
   (show) => (isShow.value = show),
 );
 
-const closeUI = () => {
-  return function (direction: string) {
-    if (direction === "bottom") {
-      isShow.value = false;
-    }
-  };
-};
 </script>
 
 <template>
-  <div class="overlay" @click.stop.prevent="isShow = false" ref="target">
+  <div class="overlay" @click.stop.prevent="isShow = false" >
     <Transition appear name="slide" @leave="$emit('dismiss')">
       <div
         v-if="isShow"
         class="bottom-sheet"
         @click.stop.prevent
-        v-touch:swipe="closeUI()"
+        
       >
         <slot />
       </div>

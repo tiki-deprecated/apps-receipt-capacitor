@@ -50,10 +50,18 @@ stylize("--tiki-secondary-text-color", theme?.secondaryTextColor);
 stylize("--tiki-primary-background-color", theme?.primaryBackgroundColor);
 stylize("--tiki-secondary-background-color", theme?.secondaryBackgroundColor);
 stylize("--tiki-accent-color", theme?.accentColor);
+
+const closeUI = () => {
+  return function (direction: string, a) {
+    if (direction === "bottom" && a.target.className === 'heading' || a.target.className === 'title' || (a.target.className === 'body' && a.target.firstElementChild.className === 'heading')) {
+      state.value = TikiReceiptState.Hidden
+    }
+  };
+};
 </script>
 
 <template>
-  <Transition appear name="fade">
+  <Transition appear name="fade" v-touch:swipe="closeUI()">
     <bottom-sheet
       v-if="present"
       @dismiss="$emit('update:present', false)"
