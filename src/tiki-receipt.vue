@@ -52,8 +52,8 @@ stylize("--tiki-secondary-background-color", theme?.secondaryBackgroundColor);
 stylize("--tiki-accent-color", theme?.accentColor);
 
 const closeUI = () => {
-  return function (direction: string, a) {
-    if (direction === "bottom" && a.target.className === 'heading' || a.target.className === 'title' || (a.target.className === 'body' && a.target.firstElementChild.className === 'heading')) {
+  return function (direction: string, element) {
+    if (direction === "bottom" && element.target.className === 'heading' || element.target.className === 'title' || (element.target.className === 'body' && (element.target.firstElementChild.className === 'heading' || element.target.firstElementChild.className === 'full-screen'))) {
       state.value = TikiReceiptState.Hidden
     }
   };
