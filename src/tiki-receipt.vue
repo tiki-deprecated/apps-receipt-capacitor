@@ -53,10 +53,26 @@ stylize("--tiki-accent-color", theme?.accentColor);
 
 const closeUI = () => {
   return function (direction: string, element) {
-    if (direction === "bottom" && element.target.className === 'heading' || element.target.className === 'title' || (element.target.className === 'body' && (element.target.firstElementChild.className === 'heading' || element.target.firstElementChild.className === 'full-screen'))) {
-      state.value = TikiReceiptState.Hidden
-    }
-  };
+
+  const isHeadingElement = (className: string) : Boolean => ['heading', 'title'].includes(className);
+  const isFullScreenElement = (className: string) : Boolean => className === 'full-screen';
+  if (
+    direction === 'bottom' &&
+    (
+      isHeadingElement(element.target.className) ||
+      (
+        element.target.className === 'body' &&
+        (
+          isHeadingElement(element.target.firstElementChild.className) ||
+          isFullScreenElement(element.target.firstElementChild.className)
+        )
+      )
+    )
+  ) {
+    state.value = TikiReceiptState.Hidden;
+  }
+}
+
 };
 </script>
 
