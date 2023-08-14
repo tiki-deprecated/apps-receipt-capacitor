@@ -53,16 +53,5 @@ The same logic applies here, you can't take back the data you exchanged, but you
 
 Participation is **100% optional**. Declining to participate will not negatively impact your current experience.
 
-
----
-
-<div style="margin: 3em 0;">
-    <strong style="text-align: center; margin-bottom: 0.5em; display: block">built on</strong>
-    <a href="https://mytiki.com">
-        <img alt="TIKI" src="https://cdn.mytiki.com/assets/icon-logo.svg"
-        style="height:3em; margin: auto; width: 100%;">
-    </a>
-    <div style="font-size: 12px; font-style: italic; margin-top: 0.5em; text-align: center">
-        TIKI is infrastructure to make data trade and data licensing possible. Located in Nashville, we strive to improve the exchange of data —fairer, safer, easier to understand.
-    </div>
-</div>
+&nbsp;  
+&nbsp;  
