@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import GmailIcon from "@/assets/images/gmail.png";
 import { ref, watch } from "vue";
+import { icon } from "@/service/receipt/receipt-account-type";
 const emits = defineEmits(["input"]);
 const props = defineProps({
   accounts: {
@@ -23,7 +23,7 @@ watch(selectedAccount, () => {
     v-model="selectedAccount"
   >
     <template #option="option" slot:item="option">
-      <img :src="GmailIcon" style="width: 40px" />
+      <img :src="icon(option.label)" style="width: 40px" />
       <span class="option-label">{{ option.label }}</span>
     </template>
   </v-select>
