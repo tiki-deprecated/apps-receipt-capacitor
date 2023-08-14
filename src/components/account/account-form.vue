@@ -4,11 +4,14 @@
   -->
 
 <script setup lang="ts">
-import { ReceiptAccount } from "@/service/receipt/receipt-account";
-import { ReceiptAccountType } from "@/service/receipt/receipt-account-type";
+import {
+  ReceiptAccount,
+  ReceiptAccountType,
+} from "@/service/receipt/receipt-account";
 import { inject, ref, watch } from "vue";
 import type { PropType } from "vue";
 import { TikiService } from "@/service/tiki-service";
+import AccountDropdown from "./account-dropdown.vue";
 
 const emit = defineEmits(["update:account"]);
 const props = defineProps({
@@ -24,16 +27,16 @@ const props = defineProps({
 const tiki: TikiService | undefined = inject("Tiki");
 const username = ref<HTMLInputElement>();
 const password = ref<HTMLInputElement>();
-const account = ref<HTMLSelectElement>();
+const account = ref<string>();
 
 const update = () => {
   emit(
     "update:account",
     ReceiptAccount.fromValue(
       username.value?.value ?? "",
-      account.value?.value ?? ReceiptAccountType.GMAIL,
-      password.value?.value,
-    ),
+      account.value ?? ReceiptAccountType.GMAIL,
+      password.value?.value
+    )
   );
 };
 
@@ -42,28 +45,32 @@ watch(
   async (newValue) => {
     username.value!.value = newValue?.username ?? "";
     password.value!.value = newValue?.password ?? "";
-    account.value!.value = newValue?.type ?? ReceiptAccountType.GMAIL;
-  },
+    account.value = newValue?.type ?? ReceiptAccountType.GMAIL;
+  }
 );
 
 const errorMessage = ref(props.error);
 watch(
   () => props.error,
-  (newValue) => (errorMessage.value = newValue),
+  (newValue) => (errorMessage.value = newValue)
 );
+
+const teste = (accountSelected: string) => {
+  account.value = accountSelected;
+};
 </script>
 
 <template>
   <form>
     <label for="accounts">Choose Account</label>
-    <select id="accounts" ref="account" required @change="update">
-      <option
-        v-for="account in Object.values(ReceiptAccountType)"
-        :value="account"
-      >
-        {{ account }}
-      </option>
-    </select>
+    <account-dropdown
+      :accounts="Object.values(ReceiptAccountType)"
+      id="accounts"
+      :account="account"
+      required
+      v-model="account"
+      @input="teste"
+    />
     <label id="username">Username</label>
     <input
       type="text"
@@ -98,6 +105,11 @@ label {
   display: block;
 }
 
+span {
+  display: flex;
+  align-items: center;
+}
+
 #accounts {
   text-transform: capitalize;
   width: 100%;
@@ -107,26 +119,10 @@ label {
   color: var(--tiki-primary-text-color);
   padding: 0.6em 0.8em;
   background-color: var(--tiki-primary-background-color);
-  border: none;
+  border: solid black 1px;
   border-radius: 0.5em;
   margin-bottom: 1.2em;
 }
-
-select {
-  padding: 10px 30px 10px 10px;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-  background-repeat: no-repeat, repeat;
-  background-position:
-    right 0.7em top 50%,
-    0 0;
-  background-size:
-    0.65em auto,
-    100%;
-}
-
 input {
   width: 100%;
   font-size: var(--tiki-font-size-xl);

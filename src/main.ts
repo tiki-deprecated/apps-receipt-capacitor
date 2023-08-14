@@ -17,6 +17,8 @@ import { ReceiptAccountType } from "@/service/receipt/receipt-account-type";
 import { TikiService } from "@/service/tiki-service";
 
 import Vue3TouchEvents from "vue3-touch-events";
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
 import {
   Usecase,
   Tag,
@@ -51,6 +53,7 @@ import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
 export default {
   install: (app: App, config: Config) => {
     app.component("TikiReceipt", TikiReceipt);
+    app.component("v-select", vSelect);
     app.provide("Tiki", new TikiService(config));
     app.use(Vue3TouchEvents);
   },
