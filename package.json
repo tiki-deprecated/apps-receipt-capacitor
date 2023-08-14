@@ -36,7 +36,7 @@
     "@tsconfig/node18": "^18.2.0",
     "@types/hammerjs": "^2.0.41",
     "@types/markdown-it": "^12.2.3",
-    "@types/node": "^20.4.5",
+    "@types/node": "^20.5.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^11.0.3",
