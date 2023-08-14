@@ -62,6 +62,7 @@ const accept = () => {
 .terms :deep(h6),
 .terms :deep(p),
 .terms :deep(a),
+.terms :deep(ul),
 .terms :deep(table) {
   font-family: var(--tiki-font-family);
   line-height: var(--tiki-line-height);
@@ -102,5 +103,9 @@ const accept = () => {
 
 .terms :deep(a) {
   color: var(--tiki-accent-color);
+}
+
+.terms :deep(img) {
+  max-width: 100%;
 }
 </style>

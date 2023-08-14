@@ -50,6 +50,7 @@ createApp(App)
         Usecase.common(CommonUsecases.AI_TRAINING),
         Usecase.common(CommonUsecases.ATTRIBUTION),
       ],
+      destinations: ["mytiki.com"],
       tags: [
         Tag.common(CommonTags.USER_ID),
         Tag.common(CommonTags.PURCHASE_HISTORY),
@@ -79,6 +80,7 @@ createApp(App)
           details: { receipt?: Receipt; account?: ReceiptAccount },
         ): number | undefined => {
           if (event == ReceiptEvent.LINK) return 100;
+          else if (event == ReceiptEvent.UNLINK) return -100;
         },
       },
       {
