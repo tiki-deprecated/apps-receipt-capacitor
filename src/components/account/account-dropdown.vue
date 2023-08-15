@@ -6,13 +6,8 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { icon } from "@/service/receipt/receipt-account-type";
+import { ReceiptAccountType } from "@/service/receipt/receipt-account-type";
 const emits = defineEmits(["selectAccount"]);
-const props = defineProps({
-  accounts: {
-    type: Array,
-    required: true,
-  },
-});
 
 const selectedAccount = ref<HTMLSelectElement>();
 
@@ -23,7 +18,7 @@ watch(selectedAccount, () => {
 
 <template>
   <v-select
-    :options="accounts"
+    :options="Object.values(ReceiptAccountType)"
     class="account-select"
     v-model="selectedAccount"
   >

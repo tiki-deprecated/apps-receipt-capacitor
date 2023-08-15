@@ -64,7 +64,6 @@ const handleAccountValue = (accountSelected: string) => {
   <form>
     <label for="accounts">Choose Account</label>
     <account-dropdown
-      :accounts="Object.values(ReceiptAccountType)"
       id="accounts"
       :account="account"
       required
