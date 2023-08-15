@@ -48,7 +48,7 @@
     "path": "^0.12.7",
     "rollup-plugin-typescript2": "^0.35.0",
     "typescript": "^5.1.6",
-    "vite": "^4.4.7",
+    "vite": "^4.4.9",
     "vite-plugin-dts": "^3.3.1",
     "vite-plugin-vue-markdown": "^0.23.7",
     "vite-svg-loader": "^4.0.0",
