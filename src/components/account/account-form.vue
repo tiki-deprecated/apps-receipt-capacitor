@@ -55,7 +55,7 @@ watch(
   (newValue) => (errorMessage.value = newValue)
 );
 
-const teste = (accountSelected: string) => {
+const handleAccountValue = (accountSelected: string) => {
   account.value = accountSelected;
 };
 </script>
@@ -69,7 +69,7 @@ const teste = (accountSelected: string) => {
       :account="account"
       required
       v-model="account"
-      @input="teste"
+      @selectAccount="handleAccountValue"
     />
     <label id="username">Username</label>
     <input

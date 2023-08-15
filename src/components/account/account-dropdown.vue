@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { icon } from "@/service/receipt/receipt-account-type";
-const emits = defineEmits(["input"]);
+const emits = defineEmits(["selectAccount"]);
 const props = defineProps({
   accounts: {
     type: Array,
@@ -17,7 +17,7 @@ const props = defineProps({
 const selectedAccount = ref<HTMLSelectElement>();
 
 watch(selectedAccount, () => {
-  emits("input", selectedAccount.value);
+  emits("selectAccount", selectedAccount.value);
 });
 </script>
 
