@@ -1,8 +1,10 @@
 {
   "name": "@mytiki/tiki-receipt-capacitor",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "pineapple",
-  "files": [ "dist" ],
+  "files": [
+    "dist"
+  ],
   "module": "./dist/tiki-receipt-capacitor.es.js",
   "main": "./dist/tiki-receipt-capacitor.umd.js",
   "typings": "./dist/types/main.d.ts",
