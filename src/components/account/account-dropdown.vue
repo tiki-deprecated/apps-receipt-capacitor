@@ -47,7 +47,7 @@ watch(selectedAccount, () => {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyNSAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEuMTgxODIgMi4wMTMxOEwxMi4yMzY0IDEyLjAxMzJMMjMgMi4wMTMxOCIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLW9wYWNpdHk9IjAuNiIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjwvc3ZnPgo=");
+  background-image: url("../../assets/icons/dropdown-arrow.svg");
   background-repeat: no-repeat, repeat;
   background-position:
     right 0.7em top 50%,

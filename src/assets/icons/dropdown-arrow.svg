@@ -1,0 +1,15 @@
+<!--
+  - Copyright (c) TIKI Inc.
+  - MIT license. See LICENSE file in root directory.
+  -->
+
+<svg 
+        width="25" 
+        height="15" 
+        viewBox="0 0 25 15" 
+        fill="none" 
+        xmlns="http://www.w3.org/2000/svg">
+    <path 
+            d="M1.18188 2L12.2364 12L23.0001 2" stroke="black" stroke-opacity="0.6" stroke-width="3"
+    />
+</svg>
