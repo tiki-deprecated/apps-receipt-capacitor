@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "rimraf dist && vue-tsc --declaration --emitDeclarationOnly; vite build",
-    "android": "npm run build && cd example && npm run build-only && npx cap run android"
+    "example:android": "npm run build && cd example && npm run build-only && npx cap run android"
   },
   "keywords": [],
   "author": "",
