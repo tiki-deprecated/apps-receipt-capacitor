@@ -16,8 +16,20 @@ import AccountSheet from "@/components/account/account-sheet.vue";
 import type { TikiService } from "@/service/tiki-service";
 import type { Theme } from "@/service/config";
 
-const emit = defineEmits(["update:present"]);
+const emit = defineEmits([
+  /**
+   * Updates the v-model present boolean with the
+   * current presentation state of the UI.
+   */
+  "update:present",
+]);
+
 const props = defineProps({
+  /**
+   * Display the UI if true, hide if false.
+   * Recommended to use a v-model e.g.`v-model:present="present"`
+   * to auto-track if the UI was closed by a user action.
+   */
   present: {
     type: Boolean,
     default: false,

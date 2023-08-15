@@ -6,12 +6,18 @@
 import GmailIcon from "@/assets/images/gmail.png";
 import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
 
+/**
+ * Enumeration of the supported account types.
+ */
 export enum ReceiptAccountType {
   // ACME = "ACME",
   // ALBERTSONS = "Albertsons",
   // AMAZON = "Amazon",
   // AOL = "AOL",
   // BBB = "Bed Bath & Beyond",
+  /**
+   * Gmail account type.
+   */
   GMAIL = "Gmail",
   // BEST_BUY = "Best Buy",
   // BJS = "BJ’s Wholesale Club",
@@ -69,12 +75,22 @@ export enum ReceiptAccountType {
   // WEGMANS = "Wegman’s",
 }
 
+/**
+ * Reverse string-value mapping of the {@link ReceiptAccountType}. Use to
+ * resolve an enum by its string value.
+ */
 export const all: Map<string, ReceiptAccountType> = new Map(
   Object.values(ReceiptAccountType).map(
     (value) => [`${value}`, value] as const,
   ),
 );
 
+/**
+ * Gets the icon (image src) associated with a {@link ReceiptAccountType}.
+ * @param type - The receipt account type.
+ * @returns The icon string associated with the receipt account type.
+ * @throws Error if the receipt account type is not supported.
+ */
 export const icon = (type: ReceiptAccountType): string => {
   switch (type) {
     // case ReceiptAccountType.ACME:
@@ -202,6 +218,11 @@ export const icon = (type: ReceiptAccountType): string => {
   }
 };
 
+/**
+ * Converts an email provider to a {@link ReceiptAccountType}.
+ * @param provider - The account provider, such as AccountProvider.GMAIL.
+ * @returns The corresponding receipt account type, or undefined if not supported.
+ */
 export const fromEmailProvider = (
   provider?: AccountProvider,
 ): ReceiptAccountType | undefined => {
@@ -214,6 +235,11 @@ export const fromEmailProvider = (
   }
 };
 
+/**
+ * Converts a {@link ReceiptAccountType} to an email provider.
+ * @param type - The receipt account type.
+ * @returns The corresponding email provider, or undefined if not supported.
+ */
 export const toEmailProvider = (
   type: ReceiptAccountType,
 ): AccountProvider | undefined => {

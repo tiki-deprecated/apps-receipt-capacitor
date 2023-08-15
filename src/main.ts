@@ -3,6 +3,12 @@
  * MIT license. See LICENSE file in root directory.
  */
 
+/**
+ * This module provides a Vue Application with the main {@link TikiService} under the key
+ * 'Tiki' (e.g. `inject("Tiki")`) and install the component TikiReceipt.
+ * @module tiki-receipt-capacitor
+ */
+
 import type { App } from "vue";
 import "@/assets/main.css";
 import TikiReceipt from "@/tiki-receipt.vue";
@@ -49,6 +55,11 @@ import type {
 import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
 
 export default {
+  /**
+   * Installs the {@link TikiReceipt} component and {@link TikiService} onto the Vue app.
+   * @param app - The Vue app instance.
+   * @param config - The configuration settings.
+   */
   install: (app: App, config: Config) => {
     app.component("TikiReceipt", TikiReceipt);
     app.provide("Tiki", new TikiService(config));
