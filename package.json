@@ -21,8 +21,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@mytiki/tiki-capture-receipt-capacitor": "^0.2.0",
-    "@mytiki/tiki-sdk-capacitor": "^0.2.0",
+    "@mytiki/tiki-capture-receipt-capacitor": "^0.2.1",
+    "@mytiki/tiki-sdk-capacitor": "^0.2.1",
     "hammerjs": "^2.0.8",
     "vue": "^3.3.4",
     "vue-confetti-explosion": "^1.0.2",
@@ -55,6 +55,8 @@
   "peerDependencies": {
     "@capacitor/android": "^5.2.2",
     "@capacitor/core": "^5.2.2",
-    "@capacitor/ios": "^5.2.2"
+    "@capacitor/ios": "^5.2.2",
+    "@mytiki/tiki-capture-receipt-capacitor": "^0.2.1",
+    "@mytiki/tiki-sdk-capacitor": "^0.2.1"
   }
 }
