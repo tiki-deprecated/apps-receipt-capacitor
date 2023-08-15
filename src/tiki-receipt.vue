@@ -62,10 +62,28 @@ stylize("--tiki-secondary-text-color", theme?.secondaryTextColor);
 stylize("--tiki-primary-background-color", theme?.primaryBackgroundColor);
 stylize("--tiki-secondary-background-color", theme?.secondaryBackgroundColor);
 stylize("--tiki-accent-color", theme?.accentColor);
+
+const closeUI = () => {
+  return function (direction: string, element) {
+    const isHeadingElement = (className: string): Boolean =>
+      ["heading", "title"].includes(className);
+    const isFullScreenElement = (className: string): Boolean =>
+      className === "full-screen";
+    if (
+      direction === "bottom" &&
+      (isHeadingElement(element.target.className) ||
+        (element.target.className === "body" &&
+          (isHeadingElement(element.target.firstElementChild.className) ||
+            isFullScreenElement(element.target.firstElementChild.className))))
+    ) {
+      state.value = TikiReceiptState.Hidden;
+    }
+  };
+};
 </script>
 
 <template>
-  <Transition appear name="fade">
+  <Transition appear name="fade" v-touch:swipe="closeUI()">
     <bottom-sheet
       v-if="present"
       @dismiss="$emit('update:present', false)"
