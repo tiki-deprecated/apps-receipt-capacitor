@@ -1,3 +1,8 @@
+<!--
+  - Copyright (c) TIKI Inc.
+  - MIT license. See LICENSE file in root directory.
+  -->
+
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { icon } from "@/service/receipt/receipt-account-type";
@@ -22,8 +27,8 @@ watch(selectedAccount, () => {
     class="account-select"
     v-model="selectedAccount"
   >
-    <template #option="option" slot:item="option">
-      <img :src="icon(option.label)" style="width: 40px" />
+    <template #option="option" v-slot:item="option">
+      <img :alt="option.label" :src="icon(option.label)" style="width: 40px" />
       <span class="option-label">{{ option.label }}</span>
     </template>
   </v-select>
@@ -44,8 +49,12 @@ watch(selectedAccount, () => {
   appearance: none;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyNSAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEuMTgxODIgMi4wMTMxOEwxMi4yMzY0IDEyLjAxMzJMMjMgMi4wMTMxOCIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLW9wYWNpdHk9IjAuNiIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjwvc3ZnPgo=");
   background-repeat: no-repeat, repeat;
-  background-position: right 0.7em top 50%, 0 0;
-  background-size: 0.65em auto, 100%;
+  background-position:
+    right 0.7em top 50%,
+    0 0;
+  background-size:
+    0.65em auto,
+    100%;
   margin-right: -20px;
 }
 
@@ -63,7 +72,7 @@ watch(selectedAccount, () => {
   flex: 1;
 }
 .account-select .vs__dropdown-option--highlight {
-  background-color: white;
+  background-color: var(--tiki-primary-background-color);
   font-size: var(--tiki-font-size-xl);
   line-height: var(--tiki-line-height-xl);
   font-weight: bold;
