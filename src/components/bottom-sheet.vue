@@ -21,18 +21,12 @@ watch(
   () => props.show,
   (show) => (isShow.value = show),
 );
-
 </script>
 
 <template>
-  <div class="overlay" @click.stop.prevent="isShow = false" >
+  <div class="overlay" @click.stop.prevent="isShow = false">
     <Transition appear name="slide" @leave="$emit('dismiss')">
-      <div
-        v-if="isShow"
-        class="bottom-sheet"
-        @click.stop.prevent
-        
-      >
+      <div v-if="isShow" class="bottom-sheet" @click.stop.prevent>
         <slot />
       </div>
     </Transition>
