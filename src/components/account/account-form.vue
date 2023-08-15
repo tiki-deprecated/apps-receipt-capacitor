@@ -67,7 +67,6 @@ const handleAccountValue = (accountSelected: string) => {
       id="accounts"
       :account="account"
       required
-      v-model="account"
       @selectAccount="handleAccountValue"
     />
     <label id="username">Username</label>
