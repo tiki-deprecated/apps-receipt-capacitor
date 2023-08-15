@@ -11,8 +11,18 @@ import { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
 import { HistoryEvent } from "@/service/history/history-event";
 
+/**
+ * Service responsible for handling receipt-related operations and events.
+ */
 export class ReceiptService {
+  /**
+   * OCR confidence threshold for considering a receipt scan valid.
+   */
   static readonly OCR_THRESHOLD = 0.8;
+
+  /**
+   * The raw plugin instance. Use to call TikiReceiptCapture directly.
+   */
   readonly plugin: ReceiptCapture = TikiReceiptCapture.instance;
 
   private readonly tiki: TikiService;
@@ -24,14 +34,29 @@ export class ReceiptService {
     (receipt: TikiReceiptCapture.Receipt, account?: ReceiptAccount) => void
   > = new Map();
 
+  /**
+   * Creates an instance of the ReceiptService class.
+   * Do not construct directly. Call from {@link TikiService}.
+   * @param tiki - The parent service instance.
+   */
   constructor(tiki: TikiService) {
     this.tiki = tiki;
   }
 
+  /**
+   * Register an account event listener.
+   * @param id - Identifier for the listener.
+   * @param listener - The callback function to be called when a new account is added or removed.
+   */
   onAccount(id: string, listener: (account: ReceiptAccount) => void): void {
     this._onAccountListeners.set(id, listener);
   }
 
+  /**
+   * Register a receipt event listener.
+   * @param id - Identifier for the listener.
+   * @param listener - The callback function to be called whenever a new receipt is parsed.
+   */
   onReceipt(
     id: string,
     listener: (
@@ -42,10 +67,16 @@ export class ReceiptService {
     this._onReceiptListeners.set(id, listener);
   }
 
+  /**
+   * Get the list of registered accounts.
+   */
   get accounts(): ReceiptAccount[] {
     return this._accounts;
   }
 
+  /**
+   * Scan a physical receipt and if valid, process and add it to the service.
+   */
   async scan(): Promise<void> {
     const license = await this.tiki.sdk.getLicense();
     if (license != undefined) {
@@ -61,6 +92,10 @@ export class ReceiptService {
       );
   }
 
+  /**
+   * Log in with a {@link ReceiptAccount}.
+   * @param account - The receipt account to log in.
+   */
   async login(account: ReceiptAccount): Promise<void> {
     await this.plugin.loginWithEmail(
       account.username,
@@ -74,6 +109,10 @@ export class ReceiptService {
     });
   }
 
+  /**
+   * Log out from a {@link ReceiptAccount}.
+   * @param account - The receipt account to log out.
+   */
   async logout(account: ReceiptAccount): Promise<void> {
     await this.plugin.removeEmail(
       account.username,
@@ -86,12 +125,19 @@ export class ReceiptService {
     });
   }
 
+  /**
+   * Scrape all verified email accounts for new receipts in the last 30 days.
+   * Use on receipt listener to handle processed receipts.
+   */
   scrape = async (): Promise<void> =>
     this.plugin.scrapeEmail(
       async (account: Capture.Account, receipts: Capture.Receipt[]) =>
         receipts.forEach((receipt) => this.addReceipt(receipt, account)),
     );
 
+  /**
+   * Load and verify previously logged-in accounts.
+   */
   load = async (): Promise<void> =>
     (await this.plugin.verifyEmail()).forEach((account) =>
       this.addAccount(ReceiptAccount.fromCapture(account)),
