@@ -111,22 +111,23 @@ export class ReceiptService {
 //   }
 
   async login(account: ReceiptAccount): Promise<void> {
-    if(account.type == 'Gmail') {
+    if(account.provider) {
       await this.plugin.loginWithEmail(
         account.username,
         account.password!,
         account.provider!,
       );
     } else {
-       let accountSigned = await this.plugin.loginWithRetailer(
+         let accountSigned = await this.plugin.loginWithRetailer(
          account.username,
          account.password!,
          toString(account.type!),
        );
-       console.log(accountSigned)
+       console.log('retorno', accountSigned)
+       if(accountSigned.isVerified) account.verified = true
     }
-   
-    account.verified = true;
+    console.log('account', account)
+    //account.verified = true;
     this.addAccount(account);
     await this.process(ReceiptEvent.LINK, {
       account: account,
@@ -144,10 +145,11 @@ export class ReceiptService {
       account.password!,
       account.provider!,
     );} else {
-      await this.plugin.removeRetailer(
+     const removedRetailer = await this.plugin.removeRetailer(
         account.username,
         toString(account.type!),
       );
+      console.log('removed Retailer', removedRetailer)
     }
     this.removeAccount(account);
     await this.process(ReceiptEvent.UNLINK, {
@@ -166,12 +168,11 @@ export class ReceiptService {
     );
     
 
-  // orders = async (): Promise<void> =>
-  //     this.plugin.orders(
-  //       async (account: Capture.Account, orders: Capture.Order[]) =>{
-  //         orders.forEach((order)=> this.addReceipt(order, account))
-  //       }
-  //     )
+  orders = async (): Promise<void> =>{
+    const orders = await this.plugin.orders()
+    console.log(orders)
+  }
+    
   /**
    * Load and verify previously logged-in accounts.
    */
@@ -186,10 +187,10 @@ export class ReceiptService {
       this._onAccountListeners.forEach((listener) => listener(account));
       this.scrape();
     }
-    // else {
-    //   this._onAccountListeners.forEach((listener) => listener(account));
-    //   this.orders();
-    // }
+     else {
+       this._onAccountListeners.forEach((listener) => listener(account));
+       this.orders();
+     }
     }
 
   private removeAccount(account: ReceiptAccount): void {
