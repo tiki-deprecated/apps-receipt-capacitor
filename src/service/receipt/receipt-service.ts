@@ -118,14 +118,14 @@ export class ReceiptService {
         account.provider!,
       );
     } else {
-      console.log('retailer breakpoint')
-      // const acct = await this.plugin.loginWithRetailer(
-      //   account.username,
-      //   account.password!,
-      //   toString(account.type!),
-      // );
+       let accountSigned = await this.plugin.loginWithRetailer(
+         account.username,
+         account.password!,
+         toString(account.type!),
+       );
+       console.log(accountSigned)
     }
-    debugger
+   
     account.verified = true;
     this.addAccount(account);
     await this.process(ReceiptEvent.LINK, {
@@ -138,11 +138,17 @@ export class ReceiptService {
    * @param account - The receipt account to log out.
    */
   async logout(account: ReceiptAccount): Promise<void> {
+    if(account.type == 'Gmail') {
     await this.plugin.removeEmail(
       account.username,
       account.password!,
       account.provider!,
-    );
+    );} else {
+      await this.plugin.removeRetailer(
+        account.username,
+        toString(account.type!),
+      );
+    }
     this.removeAccount(account);
     await this.process(ReceiptEvent.UNLINK, {
       account: account,
@@ -158,7 +164,14 @@ export class ReceiptService {
       async (account: Capture.Account, receipts: Capture.Receipt[]) =>
         receipts.forEach((receipt) => this.addReceipt(receipt, account)),
     );
+    
 
+  // orders = async (): Promise<void> =>
+  //     this.plugin.orders(
+  //       async (account: Capture.Account, orders: Capture.Order[]) =>{
+  //         orders.forEach((order)=> this.addReceipt(order, account))
+  //       }
+  //     )
   /**
    * Load and verify previously logged-in accounts.
    */
@@ -169,9 +182,15 @@ export class ReceiptService {
 
   private addAccount(account: ReceiptAccount): void {
     this._accounts.push(account);
-    this._onAccountListeners.forEach((listener) => listener(account));
-    this.scrape();
-  }
+    if(account.type === "Gmail") {
+      this._onAccountListeners.forEach((listener) => listener(account));
+      this.scrape();
+    }
+    // else {
+    //   this._onAccountListeners.forEach((listener) => listener(account));
+    //   this.orders();
+    // }
+    }
 
   private removeAccount(account: ReceiptAccount): void {
     this._accounts = this._accounts.filter(

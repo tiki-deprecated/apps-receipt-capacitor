@@ -90,7 +90,7 @@ export const all: Map<string, ReceiptAccountType> = new Map(
 );
 
 export const toString = (type: string): string => {
-  return Object.keys(ReceiptAccountType).find((val) => {type.toLowerCase() === val})!
+  return Object.keys(ReceiptAccountType).find((val) =>  type.toLowerCase() === val.toLowerCase())!.toLowerCase()
 }
 /**
  * Gets the icon (image src) associated with a {@link ReceiptAccountType}.
