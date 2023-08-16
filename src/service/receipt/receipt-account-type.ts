@@ -4,7 +4,7 @@
  */
 
 import GmailIcon from "@/assets/images/gmail.png";
-import AmazonIcon from "@assets/images/amazon.png";
+import AmazonIcon from "@/assets/images/amazon.png";
 import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
 
 /**
