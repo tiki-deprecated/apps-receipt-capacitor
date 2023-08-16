@@ -10,7 +10,7 @@ import { TikiService } from "@/service/tiki-service";
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
 import { HistoryEvent } from "@/service/history/history-event";
-import { toString, ReceiptAccountType } from "./receipt-account-type";
+import { toString, ReceiptAccountType, icon } from "./receipt-account-type";
 
 /**
  * Service responsible for handling receipt-related operations and events.
@@ -92,24 +92,6 @@ export class ReceiptService {
         `No license found for ${this.tiki.sdk.id}. User must first consent to the program.`,
       );
   }
-
-//   /**
-//    * Log in with a {@link ReceiptAccount}.
-//    * @param account - The receipt account to log in.
-//    */
-//   async login(account: ReceiptAccount): Promise<void> {
-//     await this.plugin.loginWithEmail(
-//       account.username,
-//       account.password!,
-//       account.provider!,
-//     );
-//     account.verified = true;
-//     this.addAccount(account);
-//     await this.process(ReceiptEvent.LINK, {
-//       account: account,
-//     });
-//   }
-
   async login(account: ReceiptAccount): Promise<void> {
     if(account.provider) {
       await this.plugin.loginWithEmail(
@@ -123,11 +105,8 @@ export class ReceiptService {
          account.password!,
          toString(account.type!),
        );
-       console.log('retorno', accountSigned)
        if(accountSigned.isVerified) account.verified = true
     }
-    console.log('account', account)
-    //account.verified = true;
     this.addAccount(account);
     await this.process(ReceiptEvent.LINK, {
       account: account,
@@ -176,10 +155,20 @@ export class ReceiptService {
   /**
    * Load and verify previously logged-in accounts.
    */
-  load = async (): Promise<void> =>
+  load = async (): Promise<void> =>{
+    (await this.plugin.retailers()).forEach((retailer=> 
+      this.addAccount({
+        username: retailer.username,
+        type: retailer.retailer,
+        verified: retailer.isVerified,
+        icon: icon(retailer.retailer),
+        provider: retailer.retailer
+      })
+    ))
     (await this.plugin.verifyEmail()).forEach((account) =>
       this.addAccount(ReceiptAccount.fromCapture(account)),
-    );
+    )
+  }
 
   private addAccount(account: ReceiptAccount): void {
     this._accounts.push(account);

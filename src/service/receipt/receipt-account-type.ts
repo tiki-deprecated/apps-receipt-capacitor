@@ -99,7 +99,8 @@ export const toString = (type: string): string => {
  * @throws Error if the receipt account type is not supported.
  */
 export const icon = (type: ReceiptAccountType): string => {
-  switch (type) {
+  const retailer = (Object.values(ReceiptAccountType)).find((retailer)=> type.toLowerCase() === retailer.toLowerCase())
+  switch (retailer) {
     // case ReceiptAccountType.ACME_MARKETS:
     //   return AcmeIcon;
     // case ReceiptAccountType.ALBERTSONS:
