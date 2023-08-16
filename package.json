@@ -23,7 +23,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@mytiki/tiki-capture-receipt-capacitor": "^0.2.1",
+    "@mytiki/tiki-capture-receipt-capacitor": "file:../tiki-capture-receipt-capacitor",
     "@mytiki/tiki-sdk-capacitor": "^0.2.1",
     "hammerjs": "^2.0.8",
     "vue": "^3.3.4",

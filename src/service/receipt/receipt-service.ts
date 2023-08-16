@@ -93,10 +93,23 @@ export class ReceiptService {
       );
   }
 
-  /**
-   * Log in with a {@link ReceiptAccount}.
-   * @param account - The receipt account to log in.
-   */
+//   /**
+//    * Log in with a {@link ReceiptAccount}.
+//    * @param account - The receipt account to log in.
+//    */
+//   async login(account: ReceiptAccount): Promise<void> {
+//     await this.plugin.loginWithEmail(
+//       account.username,
+//       account.password!,
+//       account.provider!,
+//     );
+//     account.verified = true;
+//     this.addAccount(account);
+//     await this.process(ReceiptEvent.LINK, {
+//       account: account,
+//     });
+//   }
+
   async login(account: ReceiptAccount): Promise<void> {
     if(account.type == 'Gmail') {
       await this.plugin.loginWithEmail(
