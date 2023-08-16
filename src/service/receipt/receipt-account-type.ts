@@ -4,30 +4,34 @@
  */
 
 import GmailIcon from "@/assets/images/gmail.png";
+import AmazonIcon from "@assets/images/amazon.png";
 import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
 
 /**
  * Enumeration of the supported account types.
  */
 export enum ReceiptAccountType {
-  // ACME = "ACME",
+  // ACME_MARKETS = "ACME",
   // ALBERTSONS = "Albertsons",
-  // AMAZON = "Amazon",
-  // AOL = "AOL",
-  // BBB = "Bed Bath & Beyond",
+  AMAZON = "Amazon",
+  AMAZON_CA = "Amazon Canada",
+  AMAZON_UK = "Amazon United Kingdom",
+  //BED_BATH_AND_BEYOND = "Bed Bath & Beyond",
+  //AOL = "AOL",
+  //BBB = "Bed Bath & Beyond",
   /**
    * Gmail account type.
    */
   GMAIL = "Gmail",
-  // BEST_BUY = "Best Buy",
-  // BJS = "BJ’s Wholesale Club",
+  // BESTBUY = "Best Buy",
+  // BJS_WHOLESALE = "BJ’s Wholesale Club",
   // CHEWY = "Chewy",
   // COSTCO = "Costco",
   // CVS = "CVS",
-  // DICKS = "Dick’s Sporting Goods",
+  // DICKS_SPORTING_GOODS = "Dick’s Sporting Goods",
   // DOLLAR_GENERAL = "Dollar General",
   // DOLLAR_TREE = "DollarTree",
-  // DOMINOS = "Domino’s Pizza",
+  // DOMINOS_PIZZA = "Domino’s Pizza",
   // DOOR_DASH = "DoorDash",
   // DRIZLY = "Drizly",
   // FAMILY_DOLLAR = "Family Dollar",
@@ -40,7 +44,7 @@ export enum ReceiptAccountType {
   // HARRIS_TEETER = "Harris Teeter",
   // HEB = "H.E.B",
   // HOME_DEPOT = "Home Depot",
-  // HY_VEE = "HyVee",
+  // HYVEE = "HyVee",
   // INSTACART = "Instacart",
   // JEWEL_OSCO = "Jewel Osco",
   // KOHLS = "Kohl’s",
@@ -58,10 +62,10 @@ export enum ReceiptAccountType {
   // SEAMLESS = "Seamless",
   // SEPHORA = "Sephora",
   // SHIPT = "Shipt",
-  // SHOP_RITE = "ShopRite",
+  // SHOPRITE = "ShopRite",
   // SPROUTS = "Sprouts",
   // STAPLES = "Staples",
-  // STAPLES_CANADA = "Staples Canada",
+  // STAPLES_CA = "Staples Canada",
   // STARBUCKS = "Starbucks",
   // TACO_BELL = "Taco Bell",
   // TARGET = "Target",
@@ -71,7 +75,7 @@ export enum ReceiptAccountType {
   // VONS = "Vons",
   // WALGREENS = "Walgreens",
   // WALMART = "Walmart",
-  // WALMART_CANADA = "Walmart Canada",
+  // WALMART_CA = "Walmart Canada",
   // WEGMANS = "Wegman’s",
 }
 
@@ -85,6 +89,9 @@ export const all: Map<string, ReceiptAccountType> = new Map(
   ),
 );
 
+export const toString = (type: string): string => {
+  return Object.keys(ReceiptAccountType).find((val) => {type.toLowerCase() === val})!
+}
 /**
  * Gets the icon (image src) associated with a {@link ReceiptAccountType}.
  * @param type - The receipt account type.
@@ -93,19 +100,23 @@ export const all: Map<string, ReceiptAccountType> = new Map(
  */
 export const icon = (type: ReceiptAccountType): string => {
   switch (type) {
-    // case ReceiptAccountType.ACME:
+    // case ReceiptAccountType.ACME_MARKETS:
     //   return AcmeIcon;
     // case ReceiptAccountType.ALBERTSONS:
     //   return AlbertsonsIcon;
-    // case ReceiptAccountType.AMAZON:
-    //   return AmazonIcon;
+    case ReceiptAccountType.AMAZON:
+      return AmazonIcon;
+    case ReceiptAccountType.AMAZON_CA:
+      return AmazonIcon;
+    case ReceiptAccountType.AMAZON_UK:
+       return AmazonIcon;
     // case ReceiptAccountType.AOL:
     //   return AolIcon;
     // case ReceiptAccountType.BBB:
     //   return BedBathBeyondIcon;
-    // case ReceiptAccountType.BEST_BUY:
+    // case ReceiptAccountType.BESTBUY:
     //   return BestBuyIcon;
-    // case ReceiptAccountType.BJS:
+    // case ReceiptAccountType.BJS_WHOLESALE:
     //   return BJSIcon;
     // case ReceiptAccountType.CHEWY:
     //   return ChewyIcon;
@@ -113,13 +124,13 @@ export const icon = (type: ReceiptAccountType): string => {
     //   return CostcoIcon;
     // case ReceiptAccountType.CVS:
     //   return CVSIcon;
-    // case ReceiptAccountType.DICKS:
+    // case ReceiptAccountType.DICKS_SPORTING_GOODS:
     //   return DicksIcon;
     // case ReceiptAccountType.DOLLAR_GENERAL:
     //   return DollarGeneralIcon;
     // case ReceiptAccountType.DOLLAR_TREE:
     //   return DollarTreeIcon;
-    // case ReceiptAccountType.DOMINOS:
+    // case ReceiptAccountType.DOMINOS_PIZZA:
     //   return DominosIcon;
     // case ReceiptAccountType.DOOR_DASH:
     //   return DoorDashIcon;
@@ -135,19 +146,19 @@ export const icon = (type: ReceiptAccountType): string => {
     //   return FredMeyerIcon;
     // case ReceiptAccountType.GAP:
     //   return GapIcon;
-    // case ReceiptAccountType.GIANT_EAGLE:
-    //   return GiantEagleIcon;
+    //  case ReceiptAccountType.GIANT_EAGLE:
+    // return GiantEagleIcon;
     case ReceiptAccountType.GMAIL:
       return GmailIcon;
-    // case ReceiptAccountType.GRUBHUB:
-    //   return GrubHubIcon;
+    //case ReceiptAccountType.GRUBHUB:
+    //  return GrubHubIcon;
     // case ReceiptAccountType.HARRIS_TEETER:
     //   return HarrisTeeterIcon;
     // case ReceiptAccountType.HEB:
     //   return HEBIcon;
     // case ReceiptAccountType.HOME_DEPOT:
     //   return HomeDepotIcon;
-    // case ReceiptAccountType.HY_VEE:
+    // case ReceiptAccountType.HYVEE:
     //   return HyVeeIcon;
     // case ReceiptAccountType.INSTACART:
     //   return InstacartIcon;
@@ -183,13 +194,13 @@ export const icon = (type: ReceiptAccountType): string => {
     //   return SephoraIcon;
     // case ReceiptAccountType.SHIPT:
     //   return ShiptIcon;
-    // case ReceiptAccountType.SHOP_RITE:
+    // case ReceiptAccountType.SHOPRITE:
     //   return ShopRiteIcon;
     // case ReceiptAccountType.SPROUTS:
     //   return SproutsIcon;
     // case ReceiptAccountType.STAPLES:
     //   return StaplesIcon;
-    // case ReceiptAccountType.STAPLES_CANADA:
+    // case ReceiptAccountType.STAPLES_CA:
     //   return StaplesCanadaIcon;
     // case ReceiptAccountType.STARBUCKS:
     //   return StarbucksIcon;
@@ -209,12 +220,13 @@ export const icon = (type: ReceiptAccountType): string => {
     //   return WalgreensIcon;
     // case ReceiptAccountType.WALMART:
     //   return WalmartIcon;
-    // case ReceiptAccountType.WALMART_CANADA:
+    // case ReceiptAccountType.WALMART_CA:
     //   return WalmartCanadaIcon;
     // case ReceiptAccountType.WEGMANS:
     //   return WegmansIcon;
     default:
-      throw Error("Unsupported ReceiptAccountType");
+      return ''
+      //throw Error("Unsupported ReceiptAccountType");
   }
 };
 

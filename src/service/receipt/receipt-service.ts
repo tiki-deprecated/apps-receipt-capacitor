@@ -10,6 +10,7 @@ import { TikiService } from "@/service/tiki-service";
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
 import { HistoryEvent } from "@/service/history/history-event";
+import { toString, ReceiptAccountType } from "./receipt-account-type";
 
 /**
  * Service responsible for handling receipt-related operations and events.
@@ -97,11 +98,21 @@ export class ReceiptService {
    * @param account - The receipt account to log in.
    */
   async login(account: ReceiptAccount): Promise<void> {
-    await this.plugin.loginWithEmail(
-      account.username,
-      account.password!,
-      account.provider!,
-    );
+    if(account.type == 'Gmail') {
+      await this.plugin.loginWithEmail(
+        account.username,
+        account.password!,
+        account.provider!,
+      );
+    } else {
+      console.log('retailer breakpoint')
+      // const acct = await this.plugin.loginWithRetailer(
+      //   account.username,
+      //   account.password!,
+      //   toString(account.type!),
+      // );
+    }
+    debugger
     account.verified = true;
     this.addAccount(account);
     await this.process(ReceiptEvent.LINK, {
