@@ -128,7 +128,6 @@ export class ReceiptService {
         account.username,
         toString(account.type!),
       );
-      console.log('removed Retailer', removedRetailer)
     }
     this.removeAccount(account);
     await this.process(ReceiptEvent.UNLINK, {
@@ -147,9 +146,10 @@ export class ReceiptService {
     );
     
 
-  orders = async (): Promise<void> =>{
+  orders = async (account: ReceiptAccount): Promise<void> =>{
     const orders = await this.plugin.orders()
     console.log(orders)
+    orders.forEach((order)=> this.addReceipt(order, account))
   }
     
   /**
@@ -164,7 +164,7 @@ export class ReceiptService {
         icon: icon(retailer.retailer),
         provider: retailer.retailer
       })
-    ))
+    ));
     (await this.plugin.verifyEmail()).forEach((account) =>
       this.addAccount(ReceiptAccount.fromCapture(account)),
     )
@@ -178,7 +178,7 @@ export class ReceiptService {
     }
      else {
        this._onAccountListeners.forEach((listener) => listener(account));
-       this.orders();
+       this.orders(account);
      }
     }
 
