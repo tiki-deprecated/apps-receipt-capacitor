@@ -34,6 +34,7 @@ const submit = async () => {
     form.value.password?.length > 0
   ) {
     try {
+      error.value = ''
       await tiki?.receipt.login(form.value);
       form.value = new ReceiptAccount("", ReceiptAccountType.GMAIL, "");
     } catch (err: any) {
