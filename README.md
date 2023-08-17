@@ -289,6 +289,7 @@ While this README is helpful, it's always easier to just see it in action. In `/
 
 _Note, if you press start before the initialization is complete, a warning will hit your console logs._
 
+- See `example/README.md` on how to build and run the example
 - Check out `example/src/main.ts` to view an example configuration of the library.
 - In `example/src/app.vue` you'll find Vue template showcasing initialization, logout, and using a button to open the pre-built UI.
 - In `example/src/assets/*` there are samples for program and reward images plus markdown template files for legal terms and the learn more page. Feel free to copy, use, and modify any of these assets.
