@@ -137,7 +137,7 @@ export class HistoryEvent {
     return new HistoryEvent(
       payable.description,
       Number(payable.amount),
-      new Date(),
+      payable.timestamp != undefined ? new Date(payable.timestamp) : new Date(),
       type,
     );
   }
@@ -151,7 +151,7 @@ export class HistoryEvent {
     return new HistoryEvent(
       receipt.description ?? HistoryEvent.REDEEM_NAME_POSTFIX,
       Number(receipt.amount),
-      new Date(),
+      receipt.timestamp != undefined ? new Date(receipt.timestamp) : new Date(),
       ReceiptEvent.REDEEM,
     );
   }

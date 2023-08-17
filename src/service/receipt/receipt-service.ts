@@ -97,12 +97,20 @@ export class ReceiptService {
    * @param account - The receipt account to log in.
    */
   async login(account: ReceiptAccount): Promise<void> {
-    await this.plugin.loginWithEmail(
-      account.username,
-      account.password!,
-      account.provider!,
-    );
-    account.verified = true;
+    if (account.provider) {
+      await this.plugin.loginWithEmail(
+        account.username,
+        account.password!,
+        account.provider!,
+      );
+    } else {
+      let accountSigned = await this.plugin.loginWithRetailer(
+        account.username,
+        account.password!,
+        toString(account.type!),
+      );
+      if (accountSigned.isVerified) account.verified = true;
+    }
     this.addAccount(account);
     await this.process(ReceiptEvent.LINK, {
       account: account,
@@ -114,11 +122,18 @@ export class ReceiptService {
    * @param account - The receipt account to log out.
    */
   async logout(account: ReceiptAccount): Promise<void> {
-    await this.plugin.removeEmail(
-      account.username,
-      account.password!,
-      account.provider!,
-    );
+    if (account.type == "Gmail") {
+      await this.plugin.removeEmail(
+        account.username,
+        account.password!,
+        account.provider!,
+      );
+    } else {
+      const removedRetailer = await this.plugin.removeRetailer(
+        account.username,
+        toString(account.type!),
+      );
+    }
     this.removeAccount(account);
     await this.process(ReceiptEvent.UNLINK, {
       account: account,
@@ -135,18 +150,41 @@ export class ReceiptService {
         receipts.forEach((receipt) => this.addReceipt(receipt, account)),
     );
 
+  orders = async (): Promise<void> => {
+    const order = await this.plugin.orders();
+    this.addReceipt(order.scan);
+  };
+
   /**
    * Load and verify previously logged-in accounts.
    */
-  load = async (): Promise<void> =>
-    (await this.plugin.verifyEmail()).forEach((account) =>
+  load = async (): Promise<void> => {
+    const retailAccounts = await this.plugin.retailers();
+    retailAccounts.forEach((account) =>
+      this.addAccount(
+        ReceiptAccount.fromValue(
+          account.username,
+          account.provider,
+          undefined,
+          account.isVerified,
+        ),
+      ),
+    );
+    const emailAccounts = await this.plugin.verifyEmail();
+    emailAccounts.forEach((account) =>
       this.addAccount(ReceiptAccount.fromCapture(account)),
     );
+  };
 
   private addAccount(account: ReceiptAccount): void {
     this._accounts.push(account);
-    this._onAccountListeners.forEach((listener) => listener(account));
-    this.scrape();
+    if (account.type === "Gmail") {
+      this._onAccountListeners.forEach((listener) => listener(account));
+      this.scrape();
+    } else {
+      this._onAccountListeners.forEach((listener) => listener(account));
+      this.orders();
+    }
   }
 
   private removeAccount(account: ReceiptAccount): void {
