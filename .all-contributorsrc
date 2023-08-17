@@ -27,6 +27,16 @@
         "code",
         "review"
       ]
+    },
+    {
+        "login": "MiroBenicio",
+        "name": "Miro Benício",
+        "avatar_url": "https://avatars.githubusercontent.com/u/96149507?v=4",
+        "profile": "https://github.com/MiroBenicio",
+        "contributions": [
+            "code",
+            "maintenance"
+        ]
     }
   ],
   "contributorsPerLine": 7,
