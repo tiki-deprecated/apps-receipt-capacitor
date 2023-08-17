@@ -10,6 +10,7 @@ import { TikiService } from "@/service/tiki-service";
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
 import { HistoryEvent } from "@/service/history/history-event";
+import { toString, ReceiptAccountType, icon } from "./receipt-account-type";
 
 /**
  * Service responsible for handling receipt-related operations and events.
@@ -91,11 +92,6 @@ export class ReceiptService {
         `No license found for ${this.tiki.sdk.id}. User must first consent to the program.`,
       );
   }
-
-  /**
-   * Log in with a {@link ReceiptAccount}.
-   * @param account - The receipt account to log in.
-   */
   async login(account: ReceiptAccount): Promise<void> {
     if (account.provider) {
       await this.plugin.loginWithEmail(
@@ -149,6 +145,7 @@ export class ReceiptService {
       async (account: Capture.Account, receipts: Capture.Receipt[]) =>
         receipts.forEach((receipt) => this.addReceipt(receipt, account)),
     );
+    
 
   orders = async (): Promise<void> => {
     const order = await this.plugin.orders();
