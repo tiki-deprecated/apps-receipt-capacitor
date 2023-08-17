@@ -1,6 +1,6 @@
 {
   "name": "@mytiki/tiki-receipt-capacitor",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "pineapple",
   "files": [
     "dist"
