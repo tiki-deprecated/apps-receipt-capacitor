@@ -99,6 +99,7 @@ export class ReceiptService {
         account.password!,
         account.provider!,
       );
+      account.verified = true;
     } else {
       let accountSigned = await this.plugin.loginWithRetailer(
         account.username,
@@ -145,7 +146,6 @@ export class ReceiptService {
       async (account: Capture.Account, receipts: Capture.Receipt[]) =>
         receipts.forEach((receipt) => this.addReceipt(receipt, account)),
     );
-    
 
   orders = async (): Promise<void> => {
     const order = await this.plugin.orders();
@@ -171,6 +171,17 @@ export class ReceiptService {
     emailAccounts.forEach((account) =>
       this.addAccount(ReceiptAccount.fromCapture(account)),
     );
+  };
+
+  /**
+   * Logs the user out of all linked accounts and removes credentials
+   * from the local cache.
+   * @returns A Promise that resolves when the logout is complete.
+   */
+  logoutAll = async (): Promise<void> => {
+    await this.plugin.flushRetailer();
+    await this.plugin.flushEmail();
+    this._accounts = [];
   };
 
   private addAccount(account: ReceiptAccount): void {

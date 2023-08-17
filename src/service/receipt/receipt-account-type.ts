@@ -6,7 +6,7 @@
 import AcmeIcon from "@/assets/images/acme.png";
 import AlbertsonsIcon from "@/assets/images/albertsons.png";
 import AmazonIcon from "@/assets/images/amazon.png";
-import AolIcon from "@/assets/images/aol.png";
+//import AolIcon from "@/assets/images/aol.png";
 import BedBathAndBeyondIcon from "@/assets/images/bed-bath-beyond.png";
 import BestBuyIcon from "@/assets/images/best-buy.png";
 import BJsIcon from "@/assets/images/bjs.png";
@@ -40,7 +40,7 @@ import MacysIcon from "@/assets/images/macys.png";
 import MarshallsIcon from "@/assets/images/marshalls.png";
 import MeijerIcon from "@/assets/images/meijer.png";
 import NikeIcon from "@/assets/images/nike.png";
-import OutlookIcon from "@/assets/images/outlook.png";
+//import OutlookIcon from "@/assets/images/outlook.png";
 import PublixIcon from "@/assets/images/publix.png";
 import RalphsIcon from "@/assets/images/ralphs.png";
 import RiteAidIcon from "@/assets/images/rite-aid.png";
@@ -64,7 +64,7 @@ import WalgreensIcon from "@/assets/images/walgreens.png";
 import WalmartIcon from "@/assets/images/walmart.png";
 import WalmartCanadaIcon from "@/assets/images/walmart-canada.png";
 import WegmansIcon from "@/assets/images/wegmans.png";
-import YahooIcon from "@/assets/images/yahoo.png";
+//import YahooIcon from "@/assets/images/yahoo.png";
 
 import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
 
@@ -100,7 +100,7 @@ export enum ReceiptAccountType {
   /**
    * AOL account type.
    */
-  AOL = "AOL",
+  // AOL = "AOL",
 
   /**
    * Bed Bath & Beyond account type.
@@ -268,7 +268,7 @@ export enum ReceiptAccountType {
   /**
    * Microsoft Outlook account type.
    */
-  OUTLOOK = "Outlook",
+  // OUTLOOK = "Outlook",
 
   /**
    * Publix account type.
@@ -387,7 +387,7 @@ export enum ReceiptAccountType {
   /**
    * Yahoo account type.
    */
-  YAHOO = "Yahoo",
+  // YAHOO = "Yahoo",
 }
 
 /**
@@ -426,8 +426,8 @@ export const icon = (type: ReceiptAccountType): string => {
       return AmazonIcon;
     case ReceiptAccountType.AMAZON_UK:
       return AmazonIcon;
-    case ReceiptAccountType.AOL:
-      return AolIcon;
+    // case ReceiptAccountType.AOL:
+    //   return AolIcon;
     case ReceiptAccountType.BED_BATH_AND_BEYOND:
       return BedBathAndBeyondIcon;
     case ReceiptAccountType.BESTBUY:
@@ -494,8 +494,8 @@ export const icon = (type: ReceiptAccountType): string => {
       return MeijerIcon;
     case ReceiptAccountType.NIKE:
       return NikeIcon;
-    case ReceiptAccountType.OUTLOOK:
-      return OutlookIcon;
+    // case ReceiptAccountType.OUTLOOK:
+    //   return OutlookIcon;
     case ReceiptAccountType.PUBLIX:
       return PublixIcon;
     case ReceiptAccountType.RALPHS:
@@ -542,8 +542,8 @@ export const icon = (type: ReceiptAccountType): string => {
       return WalmartCanadaIcon;
     case ReceiptAccountType.WEGMANS:
       return WegmansIcon;
-    case ReceiptAccountType.YAHOO:
-      return YahooIcon;
+    // case ReceiptAccountType.YAHOO:
+    //   return YahooIcon;
     default:
       return "";
     //throw Error("Unsupported ReceiptAccountType");

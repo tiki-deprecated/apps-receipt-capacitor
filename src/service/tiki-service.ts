@@ -83,7 +83,7 @@ export class TikiService {
    * @returns A Promise that resolves when the logout is complete.
    */
   async logout(): Promise<void> {
-    await this.receipt.plugin.flushEmail();
-    await this.receipt.plugin.flushRetailer();
+    await this.receipt.logoutAll();
+    this.history.clear();
   }
 }
