@@ -72,7 +72,18 @@ export class TikiService {
     );
     this._isInitialized = true;
     this.history.load();
-    await this.receipt.load();
-    await this.receipt.scrape();
+    this.receipt.load();
+    this.receipt.scrape();
+    this.receipt.orders();
+  }
+
+  /**
+   * Logs the user out of all linked accounts and removes credentials
+   * from the local cache.
+   * @returns A Promise that resolves when the logout is complete.
+   */
+  async logout(): Promise<void> {
+    await this.receipt.logoutAll();
+    this.history.clear();
   }
 }

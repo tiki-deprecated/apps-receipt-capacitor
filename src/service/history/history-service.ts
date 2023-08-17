@@ -106,4 +106,12 @@ export class HistoryService {
       }
     }
   }
+
+  /**
+   * Clears all in-mem history and balance totals
+   */
+  clear = (): void => {
+    this._history = [];
+    this._total = 0;
+  };
 }
