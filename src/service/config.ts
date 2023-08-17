@@ -77,7 +77,7 @@ export interface Program {
 
   /**
    * An array of all approved data {@link Usecase}s. These should all fall under
-   * one or more of the more user friendly {@link bullets}.,
+   * one or more of the more user friendly {@link bullets}.
    */
   usecases: Usecase[];
 

@@ -1,7 +1,16 @@
 {
   "name": "@mytiki/tiki-receipt-capacitor",
-  "version": "0.2.0",
-  "description": "pineapple",
+  "version": "0.2.1",
+  "description": "The TIKI Receipt library adds to your Vue.js + Capacitor mobile app a Data Reward program for your users to share their receipts in-exchange for loyalty points.",
+  "author": "Tiki inc.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tiki-bar/tiki-receipt-capacitor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tiki-bar/tiki-receipt-capacitor/issues"
+  },
   "files": [
     "dist"
   ],
@@ -19,9 +28,12 @@
     "build": "rimraf dist && vue-tsc --declaration --emitDeclarationOnly; vite build",
     "example:android": "npm run build && cd example && npm run build-only && npx cap sync && npx cap run android"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
+  "keywords": [
+    "tiki",
+    "microblink",
+    "zero-party",
+    "receipt"
+  ],
   "dependencies": {
     "@mytiki/tiki-capture-receipt-capacitor": "^0.3.0",
     "@mytiki/tiki-sdk-capacitor": "^0.3.1",
