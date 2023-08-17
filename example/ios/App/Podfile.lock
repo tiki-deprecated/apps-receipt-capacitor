@@ -2,9 +2,9 @@ PODS:
   - Capacitor (5.2.3):
     - CapacitorCordova
   - CapacitorCordova (5.2.3)
-  - MytikiTikiCaptureReceiptCapacitor (0.2.0):
+  - MytikiTikiCaptureReceiptCapacitor (0.2.1):
     - Capacitor
-  - MytikiTikiSdkCapacitor (0.2.0):
+  - MytikiTikiSdkCapacitor (0.2.1):
     - Capacitor
 
 DEPENDENCIES:
@@ -26,8 +26,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Capacitor: 6f44cbc33839b8a4202b8eac97041fe584083417
   CapacitorCordova: 35def3ebfdef491f0a7b652816eb873ff4b20bbf
-  MytikiTikiCaptureReceiptCapacitor: 7c942a9e13964f165046f5dc5244383203d1e060
-  MytikiTikiSdkCapacitor: 337e2494af6b6c34a1483100da4d4b5cf283d53d
+  MytikiTikiCaptureReceiptCapacitor: 85f962a88bffcf35cecf2d8abff2dcddc694e8be
+  MytikiTikiSdkCapacitor: d15dcdc1796fcdd184e2df2980157a2cb2246ec5
 
 PODFILE CHECKSUM: 2f9a0f322694e9fc6ea5b4ef01d7ecdb29338094
 

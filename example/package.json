@@ -16,7 +16,7 @@
     "@capacitor/android": "^5.2.3",
     "@capacitor/core": "^5.2.3",
     "@capacitor/ios": "^5.2.3",
-    "@mytiki/tiki-capture-receipt-capacitor": "^0.2.1",
+    "@mytiki/tiki-capture-receipt-capacitor": "file:../tiki-capture-receipt-capacitor",
     "@mytiki/tiki-receipt-capacitor": "file:..",
     "@mytiki/tiki-sdk-capacitor": "^0.2.1",
     "uuid": "^9.0.0",

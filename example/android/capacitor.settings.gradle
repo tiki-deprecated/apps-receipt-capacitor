@@ -6,4 +6,4 @@ include ':mytiki-tiki-capture-receipt-capacitor'
 project(':mytiki-tiki-capture-receipt-capacitor').projectDir = new File('../../../tiki-capture-receipt-capacitor/android')
 
 include ':mytiki-tiki-sdk-capacitor'
-project(':mytiki-tiki-sdk-capacitor').projectDir = new File('../../node_modules/@mytiki/tiki-sdk-capacitor/android')
+project(':mytiki-tiki-sdk-capacitor').projectDir = new File('../node_modules/@mytiki/tiki-sdk-capacitor/android')

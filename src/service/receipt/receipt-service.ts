@@ -147,9 +147,8 @@ export class ReceiptService {
     
 
   orders = async (account: ReceiptAccount): Promise<void> =>{
-    const orders = await this.plugin.orders()
-    console.log(orders)
-    orders.forEach((order)=> this.addReceipt(order, account))
+    const order = await this.plugin.orders()
+    this.addReceipt(order.scan)
   }
     
   /**
@@ -159,10 +158,10 @@ export class ReceiptService {
     (await this.plugin.retailers()).forEach((retailer=> 
       this.addAccount({
         username: retailer.username,
-        type: retailer.retailer,
+        type: retailer.provider,
         verified: retailer.isVerified,
-        icon: icon(retailer.retailer),
-        provider: retailer.retailer
+        icon: icon(retailer.provider),
+        provider: retailer.provider
       })
     ));
     (await this.plugin.verifyEmail()).forEach((account) =>

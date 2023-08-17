@@ -17,7 +17,8 @@
   },
   "scripts": {
     "build": "rimraf dist && vue-tsc --declaration --emitDeclarationOnly; vite build",
-    "example:android": "npm run build && cd example && npm run build-only && npx cap run android"
+    "example:android": "npm run build && cd example && npm run build-only && npx cap run android",
+    "build:locally" : "cd .. && cd tiki-capture-receipt-capacitor && npm install && npm run verify:android && npm run build && cd example && npm run build && cd ../.. && cd tiki-receipt-capacitor && npm install && cd example && npm install && cd .. && npm run example:android"
   },
   "keywords": [],
   "author": "",
