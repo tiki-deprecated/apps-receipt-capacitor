@@ -16,6 +16,16 @@
         "code",
         "review",
         "doc"
+        ]
+    },
+    {
+      "login": "ricardobrg",
+      "name": "Ricardo Gonçalves",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8357343?v=4",
+      "profile": "https://www.linkedin.com/in/ricardolg/",
+      "contributions": [
+        "code",
+        "review"
       ]
     }
   ],
