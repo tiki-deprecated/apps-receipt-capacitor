@@ -1,0 +1,27 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Schuler-Gabriel",
+      "name": "Gabriel Schuler Barros",
+      "avatar_url": "https://avatars.githubusercontent.com/u/85256777?v=4",
+      "profile": "https://github.com/Schuler-Gabriel",
+      "contributions": [
+        "code",
+        "maintenance"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "tiki-receipt-capacitor",
+  "projectOwner": "tiki-bar"
+}
