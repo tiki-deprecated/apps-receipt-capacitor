@@ -74,7 +74,8 @@ const closeUI = () => {
       (isHeadingElement(element.target.className) ||
         (element.target.className === "body" &&
           (isHeadingElement(element.target.firstElementChild.className) ||
-            isFullScreenElement(element.target.firstElementChild.className))))
+            isFullScreenElement(element.target.firstElementChild.className)))) ||
+            (element.target.className === 'overlay' && element.target.firstElementChild.className === 'bottom-sheet')
     ) {
       state.value = TikiReceiptState.Hidden;
     }

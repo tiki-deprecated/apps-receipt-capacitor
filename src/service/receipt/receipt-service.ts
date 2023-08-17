@@ -19,7 +19,7 @@ export class ReceiptService {
   /**
    * OCR confidence threshold for considering a receipt scan valid.
    */
-  static readonly OCR_THRESHOLD = 0.8;
+  static readonly OCR_THRESHOLD = 0.9;
 
   /**
    * The raw plugin instance. Use to call TikiReceiptCapture directly.
@@ -193,6 +193,7 @@ export class ReceiptService {
     account?: TikiReceiptCapture.Account,
   ): Promise<void> {
     if (!receipt.duplicate && !receipt.fraudulent) {
+      await this.tiki.sdk.ingest(receipt);
       await this.process(ReceiptEvent.SCAN, {
         receipt: receipt,
         account:

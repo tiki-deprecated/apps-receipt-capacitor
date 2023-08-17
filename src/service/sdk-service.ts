@@ -4,6 +4,7 @@
  */
 
 import type {
+  Jwt,
   PayableRecord,
   ReceiptRecord,
   TikiSdk,
@@ -13,6 +14,7 @@ import type { TikiService } from "@/service/tiki-service";
 import type { Program } from "@/service/config";
 import type { TitleRecord } from "@mytiki/tiki-sdk-capacitor";
 import type { LicenseRecord } from "@mytiki/tiki-sdk-capacitor";
+import type { Receipt } from "@mytiki/tiki-capture-receipt-capacitor";
 
 /**
  * A service class for interacting with the Tiki SDK plugin.
@@ -156,6 +158,24 @@ export class SdkService {
         amount.toString(),
         description,
       );
+    }
+  }
+
+  async ingest(receipt: Receipt): Promise<void> {
+    const jwt: Jwt = await this.plugin.token();
+    const rsp = await fetch(
+      "https://ingest.mytiki.com/api/latest/microblink-receipt",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${jwt.accessToken}`,
+        },
+        body: JSON.stringify(receipt), //TODO FIX THIS.
+      },
+    );
+    if (!rsp.ok) {
+      const body = await rsp.text();
+      throw Error(`Receipt ingestion failed: ${body}`);
     }
   }
 }
