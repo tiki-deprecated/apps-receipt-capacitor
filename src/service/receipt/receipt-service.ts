@@ -159,12 +159,12 @@ export class ReceiptService {
     const retailAccounts = await this.plugin.retailers();
     retailAccounts.forEach((account) =>
       this.addAccount(
-        account
+        ReceiptAccount.fromValue(account)
       ),
     );
     const emailAccounts = await this.plugin.verifyEmail();
     emailAccounts.forEach((account) =>
-      this.addAccount(account),
+      this.addAccount(ReceiptAccount.fromValue(account)),
     );
   };
 
@@ -205,12 +205,12 @@ export class ReceiptService {
       await this.tiki.sdk.ingest(receipt);
       await this.process(ReceiptEvent.SCAN, {
         receipt: receipt,
-        account: account!,
+        account: ReceiptAccount.fromValue(account!),
       });
       this._onReceiptListeners.forEach((listener) =>
         listener(
           receipt,
-          account!
+          ReceiptAccount.fromValue(account!)
         ),
       );
     } else {
