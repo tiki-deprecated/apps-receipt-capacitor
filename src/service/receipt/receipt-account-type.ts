@@ -65,38 +65,55 @@ import WalmartIcon from "@/assets/images/walmart.png";
 import WalmartCanadaIcon from "@/assets/images/walmart-canada.png";
 import WegmansIcon from "@/assets/images/wegmans.png";
 //import YahooIcon from "@/assets/images/yahoo.png";
-
 import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
-
 /**
  * Enumeration of the supported account types.
  */
-export enum ReceiptAccountType {
-  /**
-   * ACME Markets account type.
-   */
-  ACME_MARKETS = "ACME",
 
+export interface AccountType {
+  type: 'Email' | 'Retailer',
+  name: string,
+  icon: string
+}
+
+export class AccountTypeCommom{
+  /**
+   * CME Markets account type 
+   */
+  static readonly CME_MARKETS:AccountType =  {type:'Retailer',name:'Acme', icon:AcmeIcon};
+  
   /**
    * Albertsons account type.
    */
-  ALBERTSONS = "Albertsons",
-
+ static readonly ALBERTSONS: AccountType = {
+  type: "Retailer",
+  icon: AlbertsonsIcon,
+  name: "Albertsons",
+}
   /**
    * Amazon account type.
    */
-  AMAZON = "Amazon",
-
+  static readonly AMAZON: AccountType = {
+    type: "Retailer",
+    icon: AmazonIcon,
+    name: "Amazon",
+}
   /**
    * Amazon Canada account type.
    */
-  AMAZON_CA = "Amazon Canada",
-
+  static readonly AMAZON_CA: AccountType = {
+    type: "Retailer",
+    icon: AmazonIcon,
+    name: "Amazon Canada",
+}
   /**
    * Amazon United Kingdom account type.
    */
-  AMAZON_UK = "Amazon United Kingdom",
-
+  static readonly AMAZON_UK: AccountType = {
+    type: "Retailer",
+    icon: AmazonIcon,
+    name: "Amazon United Kingdom",
+}
   /**
    * AOL account type.
    */
@@ -105,486 +122,463 @@ export enum ReceiptAccountType {
   /**
    * Bed Bath & Beyond account type.
    */
-  BED_BATH_AND_BEYOND = "Bed Bath & Beyond",
-
+  static readonly BED_BATH_AND_BEYOND: AccountType = {
+    type: "Retailer",
+    icon: BedBathAndBeyondIcon,
+    name: "Bed Bath & Beyond",
+}
   /**
    * Gmail account type.
    */
-  GMAIL = "Gmail",
+  static readonly GMAIL: AccountType = {
+   name: "Gmail",
+   type: "Email",
+   icon: GmailIcon
+  }
 
   /**
    * Best Buy account type.
    */
-  BESTBUY = "Best Buy",
-
+  static readonly BESTBUY: AccountType = {
+    type: "Retailer",
+    icon: BestBuyIcon,
+    name: "Best Buy",
+}
   /**
    * BJ’s Wholesale Club account type.
    */
-  BJS_WHOLESALE = "BJ’s Wholesale Club",
-
+  static readonly BJS_WHOLESALE: AccountType = {
+    type: "Retailer",
+    icon: BJsIcon,
+    name: "BJ’s Wholesale Club",
+}
   /**
    * Chewy account type.
    */
-  CHEWY = "Chewy",
-
+  static readonly CHEWY: AccountType = {
+    type: "Retailer",
+    icon: ChewyIcon,
+    name: "Chewy",
+}
   /**
    * Costco account type.
    */
-  COSTCO = "Costco",
-
+  static readonly COSTCO: AccountType = {
+    type: "Retailer",
+    icon: CostcoIcon,
+    name: "Costco",
+}
   /**
    * CVS account type.
    */
-  CVS = "CVS",
-
+  static readonly CVS: AccountType = {
+    type: "Retailer",
+    icon: CVSIcon,
+    name: "CVS",
+}
   /**
    * Dick’s Sporting Goods account type.
    */
-  DICKS_SPORTING_GOODS = "Dick’s Sporting Goods",
-
+  static readonly DICKS_SPORTING_GOODS: AccountType = {
+    type: "Retailer",
+    icon: DicksIcon,
+    name: "Dick’s Sporting Goods",
+}
   /**
    * Dollar General account type.
    */
-  DOLLAR_GENERAL = "Dollar General",
-
+  static readonly DOLLAR_GENERAL: AccountType = {
+    type: "Retailer",
+    icon: DollarGeneralIcon,
+    name: "Dollar General",
+}
   /**
    * DollarTree account type.
    */
-  DOLLAR_TREE = "DollarTree",
-
+  static readonly DOLLAR_TREE: AccountType = {
+    type: "Retailer",
+    icon: DollarTreeIcon,
+    name: "DollarTree",
+}
   /**
    * Domino’s Pizza account type.
    */
-  DOMINOS_PIZZA = "Domino’s Pizza",
-
+  static readonly DOMINOS_PIZZA: AccountType = {
+    type: "Retailer",
+    icon: DominosIcon,
+    name: "Domino’s Pizza",
+}
   /**
    * DoorDash account type.
    */
-  DOOR_DASH = "DoorDash",
-
+  static readonly DOOR_DASH: AccountType = {
+    type: "Retailer",
+    icon: DoorDashIcon,
+    name: "DoorDash",
+}
   /**
    * Drizly account type.
    */
-  DRIZLY = "Drizly",
-
+  static readonly DRIZLY: AccountType = {
+    type: "Retailer",
+    icon: DrizlyIcon,
+    name: "Drizly",
+}
   /**
    * Family Dollar account type.
    */
-  FAMILY_DOLLAR = "Family Dollar",
-  /**
+  static readonly FAMILY_DOLLAR: AccountType = {
+    type: "Retailer",
+    icon: FamilyDollarIcon,
+    name: "Family Dollar",
+  }
+    /**
    * Food 4 Less account type.
    */
-  FOOD_4_LESS = "Food 4 Less",
-
+  static readonly FOOD_4_LESS: AccountType = {
+    type: "Retailer",
+    icon: Food4LessIcon,
+    name: "Food 4 Less",
+}
   /**
    * Food Lion account type.
    */
-  FOOD_LION = "Food Lion",
-
+  static readonly FOOD_LION: AccountType = {
+    type: "Retailer",
+    icon: FoodLionIcon,
+    name: "Food Lion",
+}
   /**
    * Fred Meyer account type.
    */
-  FRED_MEYER = "Fred Meyer",
-
+  static readonly FRED_MEYER: AccountType = {
+    type: "Retailer",
+    icon: FredMeyerIcon,
+    name: "Fred Meyer",
+}
   /**
    * GAP account type.
    */
-  GAP = "GAP",
-
+  static readonly GAP: AccountType = {
+    type: "Retailer",
+    icon: GapIcon,
+    name: "GAP",
+}
   /**
    * Giant Eagle account type.
    */
-  GIANT_EAGLE = "Giant Eagle",
-
+  static readonly GIANT_EAGLE: AccountType = {
+    type: "Retailer",
+    icon: GiantEagleIcon,
+    name: "Giant Eagle",
+}
   /**
    * Grubhub account type.
    */
-  GRUBHUB = "Grubhub",
-
+  static readonly GRUBHUB: AccountType = {
+    type: "Retailer",
+    icon: GrubHubIcon,
+    name: "Grubhub",
+}
   /**
    * Harris Teeter account type.
    */
-  HARRIS_TEETER = "Harris Teeter",
-
+  static readonly HARRIS_TEETER: AccountType = {
+    type: "Retailer",
+    icon: HarrisTeeterIcon,
+    name: "Harris Teeter",
+}
   /**
    * H.E.B account type.
    */
-  HEB = "H.E.B",
-
+  static readonly HEB: AccountType = {
+    type: "Retailer",
+    icon: HEBIcon,
+    name: "H.E.B",
+}
   /**
    * Home Depot account type.
    */
-  HOME_DEPOT = "Home Depot",
-
+  static readonly HOME_DEPOT: AccountType = {
+    type: "Retailer",
+    icon: HomeDepotIcon,
+    name: "Home Depot",
+}
   /**
    * HyVee account type.
    */
-  HYVEE = "HyVee",
-
+  static readonly HYVEE: AccountType = {
+    type: "Retailer",
+    icon: HyVeeIcon,
+    name: "HyVee",
+}
   /**
    * Instacart account type.
    */
-  INSTACART = "Instacart",
-
+  static readonly INSTACART: AccountType = {
+    type: "Retailer",
+    icon: InstacartIcon,
+    name: "Instacart",
+}
   /**
    * Jewel Osco account type.
    */
-  JEWEL_OSCO = "Jewel Osco",
-
+  static readonly JEWEL_OSCO: AccountType = {
+    type: "Retailer",
+    icon: JewelOscoIcon,
+    name: "Jewel Osco",
+}
   /**
    * Kohl’s account type.
    */
-  KOHLS = "Kohl’s",
-
+  static readonly KOHLS: AccountType = {
+    type: "Retailer",
+    icon: KohlsIcon,
+    name: "Kohl’s",
+}
   /**
    * Kroger account type.
    */
-  KROGER = "Kroger",
-
+  static readonly KROGER: AccountType = {
+    type: "Retailer",
+    icon: KrogerIcon,
+    name: "Kroger",
+}
   /**
    * Lowe’s account type.
    */
-  LOWES = "Lowe’s",
-
+  static readonly LOWES: AccountType = {
+    type: "Retailer",
+    icon: LowesIcon,
+    name: "Lowe’s",
+}
   /**
    * Macy’s account type.
    */
-  MACYS = "Macy’s",
-
+  static readonly MACYS: AccountType = {
+    type: "Retailer",
+    icon: MacysIcon,
+    name: "Macy’s",
+}
   /**
    * Marshalls account type.
    */
-  MARSHALLS = "Marshalls",
-
+  static readonly MARSHALLS: AccountType = {
+    type: "Retailer",
+    icon: MarshallsIcon,
+    name: "Marshalls",
+}
   /**
    * Meijer account type.
    */
-  MEIJER = "Meijer",
-
+  static readonly MEIJER: AccountType = {
+    type: "Retailer",
+    icon: MeijerIcon,
+    name: "Meijer",
+}
   /**
    * Nike account type.
    */
-  NIKE = "Nike",
-  /**
+  static readonly NIKE: AccountType = {
+    type: "Retailer",
+    icon: NikeIcon,
+    name: "Nike",}
+  /**}
    * Microsoft Outlook account type.
    */
-  // OUTLOOK = "Outlook",
+  // static readonly OUTLOOK: AccountType =  {
+  //   name:"Outlook",
+  //   type: "Email",
+  //   icon: "",
+  // }
 
   /**
    * Publix account type.
    */
-  PUBLIX = "Publix",
-
+  static readonly PUBLIX: AccountType = {
+    type: "Retailer",
+    icon: PublixIcon,
+    name: "Publix",
+}
   /**
    * Ralphs account type.
    */
-  RALPHS = "Ralphs",
-
+  static readonly RALPHS: AccountType = {
+    type: "Retailer",
+    icon: RalphsIcon,
+    name: "Ralphs",
+}
   /**
    * RiteAid account type.
    */
-  RITE_AID = "RiteAid",
-
+  static readonly RITE_AID: AccountType = {
+    type: "Retailer",
+    icon: RiteAidIcon,
+    name: "RiteAid",
+}
   /**
    * Safeway account type.
    */
-  SAFEWAY = "Safeway",
-
+  static readonly AFEWAY: AccountType = {
+    type: "Retailer",
+    icon: "",
+    name: "Safeway",
+}
   /**
    * Sam’s Club account type.
    */
-  SAMS_CLUB = "Sam’s Club",
-
+  static readonly SAMS_CLUB: AccountType = {
+    type: "Retailer",
+    icon: SamsClubIcon,
+    name: "Sam’s Club",
+}
   /**
    * Seamless account type.
    */
-  SEAMLESS = "Seamless",
-
+  static readonly SEAMLESS: AccountType = {
+    type: "Retailer",
+    icon: SeamlessIcon,
+    name: "Seamless",
+}
   /**
    * Sephora account type.
    */
-  SEPHORA = "Sephora",
-
+  static readonly SEPHORA: AccountType = {
+    type: "Retailer",
+    icon: SephoraIcon,
+    name: "Sephora",
+}
   /**
    * Shipt account type.
    */
-  SHIPT = "Shipt",
-
+  static readonly SHIPT: AccountType = {
+    type: "Retailer",
+    icon: ShiptIcon,
+    name: "Shipt",
+}
   /**
    * ShopRite account type.
    */
-  SHOPRITE = "ShopRite",
+  static readonly SHOPRITE: AccountType = {
+    type: "Retailer",
+    icon: ShopRiteIcon,
+    name: "Shoprite"
+  }
 
   /**
    * Sprouts account type.
    */
-  SPROUTS = "Sprouts",
-
+  static readonly SPROUTS: AccountType = {
+    type: "Retailer",
+    icon: SproutsIcon,
+    name: "Sprouts",
+}
   /**
    * Staples account type.
    */
-  STAPLES = "Staples",
-
+  static readonly STAPLES: AccountType = {
+    type: "Retailer",
+    icon: StaplesIcon,
+    name: "Staples",
+}
   /**
    * Staples Canada account type.
    */
-  STAPLES_CA = "Staples Canada",
-
+  static readonly STAPLES_CA: AccountType = {
+    type: "Retailer",
+    icon: StaplesCanadaIcon,
+    name: "Staples Canada",
+}
   /**
    * Starbucks account type.
    */
-  STARBUCKS = "Starbucks",
-
+  static readonly STARBUCKS: AccountType = {
+    type: "Retailer",
+    icon: StarbucksIcon,
+    name: "Starbucks",
+}
   /**
    * Taco Bell account type.
    */
-  TACO_BELL = "Taco Bell",
-
+  static readonly TACO_BELL: AccountType = {
+    type: "Retailer",
+    icon: TacoBellIcon,
+    name: "Taco Bell",
+}
   /**
    * Target account type.
    */
-  TARGET = "Target",
-
+  static readonly TARGET: AccountType = {
+    type: "Retailer",
+    icon: TargetIcon,
+    name: "Target",
+}
   /**
    * T.J.Maxx account type.
    */
-  TJ_MAXX = "T.J.Maxx",
-
+  static readonly TJ_MAXX: AccountType = {
+    type: "Retailer",
+    icon: TJMaxxIcon,
+    name: "T.J.Maxx",
+}
   /**
    * UberEats account type.
    */
-  UBER_EATS = "UberEats",
-
+  static readonly UBER_EATS: AccountType = {
+    type: "Retailer",
+    icon: UberEatsIcon,
+    name: "UberEats",
+}
   /**
    * Ulta account type.
    */
-  ULTA = "Ulta",
-
+  static readonly ULTA: AccountType = {
+    type: "Retailer",
+    icon: UltaIcon,
+    name: "Ulta",
+}
   /**
    * Vons account type.
    */
-  VONS = "Vons",
-  /**
+  static readonly VONS: AccountType = {
+    type: "Retailer",
+    icon: VonsIcon,
+    name: "Vons", }
+  /**}
    * Walgreens account type.
    */
-  WALGREENS = "Walgreens",
-
+  static readonly WALGREENS: AccountType = {
+    type: "Retailer",
+    icon: WalgreensIcon,
+    name: "Walgreens",
+}
   /**
    * Walmart account type.
    */
-  WALMART = "Walmart",
-
+  static readonly WALMART: AccountType = {
+    type: "Retailer",
+    icon: WalmartIcon,
+    name: "Walmart",
+}
   /**
    * Walmart Canada account type.
    */
-  WALMART_CA = "Walmart Canada",
-
+  static readonly WALMART_CA: AccountType = {
+    type: "Retailer",
+    icon: WalmartCanadaIcon,
+    name: "Walmart Canada",
+}
   /**
    * Wegman’s account type.
    */
-  WEGMANS = "Wegman’s",
-
-  /**
-   * Yahoo account type.
-   */
-  // YAHOO = "Yahoo",
+  static readonly WEGMANS: AccountType = {
+    type: "Retailer",
+    icon: WegmansIcon,
+    name: "Wegman’s",
+} 
+  // static readonly YAHOO: AccountType = {
+  //   type: "Email",
+  //   icon: '',
+  //   name: "Yahoo",
+  // }
 }
-
-/**
- * Reverse string-value mapping of the {@link ReceiptAccountType}. Use to
- * resolve an enum by its string value.
- */
-export const all: Map<string, ReceiptAccountType> = new Map(
-  Object.values(ReceiptAccountType).map(
-    (value) => [`${value}`, value] as const,
-  ),
-);
-
-export const toString = (type: string): string => {
-  return Object.keys(ReceiptAccountType)
-    .find((val) => type.toLowerCase() === val.toLowerCase())!
-    .toLowerCase();
-};
-/**
- * Gets the icon (image src) associated with a {@link ReceiptAccountType}.
- * @param type - The receipt account type.
- * @returns The icon string associated with the receipt account type.
- * @throws Error if the receipt account type is not supported.
- */
-export const icon = (type: ReceiptAccountType): string => {
-  const retailer = Object.values(ReceiptAccountType).find(
-    (retailer) => type.toLowerCase() === retailer.toLowerCase(),
-  );
-  switch (retailer) {
-    case ReceiptAccountType.ACME_MARKETS:
-      return AcmeIcon;
-    case ReceiptAccountType.ALBERTSONS:
-      return AlbertsonsIcon;
-    case ReceiptAccountType.AMAZON:
-      return AmazonIcon;
-    case ReceiptAccountType.AMAZON_CA:
-      return AmazonIcon;
-    case ReceiptAccountType.AMAZON_UK:
-      return AmazonIcon;
-    // case ReceiptAccountType.AOL:
-    //   return AolIcon;
-    case ReceiptAccountType.BED_BATH_AND_BEYOND:
-      return BedBathAndBeyondIcon;
-    case ReceiptAccountType.BESTBUY:
-      return BestBuyIcon;
-    case ReceiptAccountType.BJS_WHOLESALE:
-      return BJsIcon;
-    case ReceiptAccountType.CHEWY:
-      return ChewyIcon;
-    case ReceiptAccountType.COSTCO:
-      return CostcoIcon;
-    case ReceiptAccountType.CVS:
-      return CVSIcon;
-    case ReceiptAccountType.DICKS_SPORTING_GOODS:
-      return DicksIcon;
-    case ReceiptAccountType.DOLLAR_GENERAL:
-      return DollarGeneralIcon;
-    case ReceiptAccountType.DOLLAR_TREE:
-      return DollarTreeIcon;
-    case ReceiptAccountType.DOMINOS_PIZZA:
-      return DominosIcon;
-    case ReceiptAccountType.DOOR_DASH:
-      return DoorDashIcon;
-    case ReceiptAccountType.DRIZLY:
-      return DrizlyIcon;
-    case ReceiptAccountType.FAMILY_DOLLAR:
-      return FamilyDollarIcon;
-    case ReceiptAccountType.FOOD_4_LESS:
-      return Food4LessIcon;
-    case ReceiptAccountType.FOOD_LION:
-      return FoodLionIcon;
-    case ReceiptAccountType.FRED_MEYER:
-      return FredMeyerIcon;
-    case ReceiptAccountType.GAP:
-      return GapIcon;
-    case ReceiptAccountType.GIANT_EAGLE:
-      return GiantEagleIcon;
-    case ReceiptAccountType.GMAIL:
-      return GmailIcon;
-    case ReceiptAccountType.GRUBHUB:
-      return GrubHubIcon;
-    case ReceiptAccountType.HARRIS_TEETER:
-      return HarrisTeeterIcon;
-    case ReceiptAccountType.HEB:
-      return HEBIcon;
-    case ReceiptAccountType.HOME_DEPOT:
-      return HomeDepotIcon;
-    case ReceiptAccountType.HYVEE:
-      return HyVeeIcon;
-    case ReceiptAccountType.INSTACART:
-      return InstacartIcon;
-    case ReceiptAccountType.JEWEL_OSCO:
-      return JewelOscoIcon;
-    case ReceiptAccountType.KOHLS:
-      return KohlsIcon;
-    case ReceiptAccountType.KROGER:
-      return KrogerIcon;
-    case ReceiptAccountType.LOWES:
-      return LowesIcon;
-    case ReceiptAccountType.MACYS:
-      return MacysIcon;
-    case ReceiptAccountType.MARSHALLS:
-      return MarshallsIcon;
-    case ReceiptAccountType.MEIJER:
-      return MeijerIcon;
-    case ReceiptAccountType.NIKE:
-      return NikeIcon;
-    // case ReceiptAccountType.OUTLOOK:
-    //   return OutlookIcon;
-    case ReceiptAccountType.PUBLIX:
-      return PublixIcon;
-    case ReceiptAccountType.RALPHS:
-      return RalphsIcon;
-    case ReceiptAccountType.RITE_AID:
-      return RiteAidIcon;
-    case ReceiptAccountType.SAFEWAY:
-      return SafewayIcon;
-    case ReceiptAccountType.SAMS_CLUB:
-      return SamsClubIcon;
-    case ReceiptAccountType.SEAMLESS:
-      return SeamlessIcon;
-    case ReceiptAccountType.SEPHORA:
-      return SephoraIcon;
-    case ReceiptAccountType.SHIPT:
-      return ShiptIcon;
-    case ReceiptAccountType.SHOPRITE:
-      return ShopRiteIcon;
-    case ReceiptAccountType.SPROUTS:
-      return SproutsIcon;
-    case ReceiptAccountType.STAPLES:
-      return StaplesIcon;
-    case ReceiptAccountType.STAPLES_CA:
-      return StaplesCanadaIcon;
-    case ReceiptAccountType.STARBUCKS:
-      return StarbucksIcon;
-    case ReceiptAccountType.TACO_BELL:
-      return TacoBellIcon;
-    case ReceiptAccountType.TARGET:
-      return TargetIcon;
-    case ReceiptAccountType.TJ_MAXX:
-      return TJMaxxIcon;
-    case ReceiptAccountType.UBER_EATS:
-      return UberEatsIcon;
-    case ReceiptAccountType.ULTA:
-      return UltaIcon;
-    case ReceiptAccountType.VONS:
-      return VonsIcon;
-    case ReceiptAccountType.WALGREENS:
-      return WalgreensIcon;
-    case ReceiptAccountType.WALMART:
-      return WalmartIcon;
-    case ReceiptAccountType.WALMART_CA:
-      return WalmartCanadaIcon;
-    case ReceiptAccountType.WEGMANS:
-      return WegmansIcon;
-    // case ReceiptAccountType.YAHOO:
-    //   return YahooIcon;
-    default:
-      return "";
-    //throw Error("Unsupported ReceiptAccountType");
-  }
-};
-
-/**
- * Converts an email provider to a {@link ReceiptAccountType}.
- * @param provider - The account provider, such as AccountProvider.GMAIL.
- * @returns The corresponding receipt account type, or undefined if not supported.
- */
-export const fromEmailProvider = (
-  provider?: AccountProvider,
-): ReceiptAccountType | undefined => {
-  if (provider === undefined) return undefined;
-  switch (provider) {
-    case AccountProvider.GMAIL:
-      return ReceiptAccountType.GMAIL;
-    // case AccountProvider.AOL:
-    //   return ReceiptAccountType.AOL;
-    // case AccountProvider.YAHOO:
-    //   return ReceiptAccountType.YAHOO;
-    // case AccountProvider.OUTLOOK:
-    //   return ReceiptAccountType.YAHOO;
-    default:
-      return undefined;
-  }
-};
-
-/**
- * Converts a {@link ReceiptAccountType} to an email provider.
- * @param type - The receipt account type.
- * @returns The corresponding email provider, or undefined if not supported.
- */
-export const toEmailProvider = (
-  type: ReceiptAccountType,
-): AccountProvider | undefined => {
-  switch (type) {
-    case ReceiptAccountType.GMAIL:
-      return AccountProvider.GMAIL;
-    default:
-      return undefined;
-  }
-};
