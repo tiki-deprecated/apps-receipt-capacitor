@@ -4,6 +4,7 @@
  */
 
 
+import type { Account } from "@mytiki/tiki-capture-receipt-capacitor";
 import type { AccountType } from "./receipt-account-type";
 
 /**
@@ -47,7 +48,7 @@ export class ReceiptAccount {
     this.isVerified = isVerified ?? false;
   }
 
-  static fromValue(account): ReceiptAccount {
+  static fromValue(account: Account): ReceiptAccount {
     //const type: ReceiptAccountType | undefined = all.get(value);
     if (account)
       return new ReceiptAccount(account.username, account.accountType, undefined, account.isVerified);

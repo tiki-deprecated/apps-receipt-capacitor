@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
-import { ReceiptAccountType } from "@/service/receipt/receipt-account-type";
+import { AccountTypeCommom } from "@/service/receipt/receipt-account-type";
 import { inject, ref, watch } from "vue";
 import type { PropType } from "vue";
 import { TikiService } from "@/service/tiki-service";
@@ -30,9 +30,14 @@ const update = () => {
   emit(
     "update:account",
     ReceiptAccount.fromValue(
-      username.value?.value ?? "",
-      account.value?.value ?? ReceiptAccountType.GMAIL,
-      password.value?.value,
+      {username: username.value?.value ?? "",
+      accountType: {
+        type: account.value?.type,
+        name: account.value?.name,
+        icon: undefined,
+        key: account.value?.key!,
+      },
+      password: password.value?.value,}
     ),
   );
 };
@@ -42,7 +47,7 @@ watch(
   async (newValue) => {
     username.value!.value = newValue?.username ?? "";
     password.value!.value = newValue?.password ?? "";
-    account.value!.value = newValue?.type ?? ReceiptAccountType.GMAIL;
+    account.value!.value = newValue?.accountType.name ?? "";
   },
 );
 
@@ -58,8 +63,10 @@ watch(
     <label for="accounts">Choose Account</label>
     <select id="accounts" ref="account" required @change="update">
       <option
-        v-for="account in Object.values(ReceiptAccountType)"
+        v-for="account in Object.values(AccountTypeCommom)"
         :value="account"
+        :label="account.name"
+        :selected="account.name"
       >
         {{ account }}
       </option>
