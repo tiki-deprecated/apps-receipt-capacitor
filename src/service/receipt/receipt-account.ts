@@ -49,5 +49,5 @@ export class ReceiptAccount {
 
   
   get icon(): string {
-    return this.accountType.icon
+    return this.accountType.icon!
   }}
