@@ -10,7 +10,7 @@ import { TikiService } from "@/service/tiki-service";
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
 import { HistoryEvent } from "@/service/history/history-event";
-import { toString, ReceiptAccountType, icon } from "./receipt-account-type";
+import type { AccountType } from "./receipt-account-type";
 
 /**
  * Service responsible for handling receipt-related operations and events.
@@ -93,20 +93,20 @@ export class ReceiptService {
       );
   }
   async login(account: ReceiptAccount): Promise<void> {
-    if (account.provider) {
+    if (account.accountType.type === 'Email') {
       await this.plugin.loginWithEmail(
         account.username,
         account.password!,
-        account.provider!,
+        account.accountType.key!, //solved
       );
-      account.verified = true;
+      account.isVerified = true;
     } else {
       let accountSigned = await this.plugin.loginWithRetailer(
         account.username,
         account.password!,
-        toString(account.type!),
+        account.accountType.key!,
       );
-      if (accountSigned.isVerified) account.verified = true;
+      if (accountSigned.isVerified) account.isVerified = true;
     }
     this.addAccount(account);
     await this.process(ReceiptEvent.LINK, {
@@ -119,16 +119,16 @@ export class ReceiptService {
    * @param account - The receipt account to log out.
    */
   async logout(account: ReceiptAccount): Promise<void> {
-    if (account.type == "Gmail") {
+    if (account.accountType.type === 'Email') {
       await this.plugin.removeEmail(
         account.username,
         account.password!,
-        account.provider!,
+        account.accountType.key!, //solved
       );
     } else {
       const removedRetailer = await this.plugin.removeRetailer(
         account.username,
-        toString(account.type!),
+        account.accountType.key!,
       );
     }
     this.removeAccount(account);
@@ -159,17 +159,12 @@ export class ReceiptService {
     const retailAccounts = await this.plugin.retailers();
     retailAccounts.forEach((account) =>
       this.addAccount(
-        ReceiptAccount.fromValue(
-          account.username,
-          account.provider,
-          undefined,
-          account.isVerified,
-        ),
+        account
       ),
     );
     const emailAccounts = await this.plugin.verifyEmail();
     emailAccounts.forEach((account) =>
-      this.addAccount(ReceiptAccount.fromCapture(account)),
+      this.addAccount(account),
     );
   };
 
@@ -186,7 +181,7 @@ export class ReceiptService {
 
   private addAccount(account: ReceiptAccount): void {
     this._accounts.push(account);
-    if (account.type === "Gmail") {
+    if (account.accountType.type! === "Email") {
       this._onAccountListeners.forEach((listener) => listener(account));
       this.scrape();
     } else {
@@ -197,7 +192,7 @@ export class ReceiptService {
 
   private removeAccount(account: ReceiptAccount): void {
     this._accounts = this._accounts.filter(
-      (acc) => acc.username != account.username && acc.type != account.type,
+      (acc) => acc.username != account.username && acc.accountType.type != account.accountType.type,
     );
     this._onAccountListeners.forEach((listener) => listener(account));
   }
@@ -210,17 +205,12 @@ export class ReceiptService {
       await this.tiki.sdk.ingest(receipt);
       await this.process(ReceiptEvent.SCAN, {
         receipt: receipt,
-        account:
-          account != undefined
-            ? ReceiptAccount.fromCapture(account)
-            : undefined,
+        account: account!,
       });
       this._onReceiptListeners.forEach((listener) =>
         listener(
           receipt,
-          account != undefined
-            ? ReceiptAccount.fromCapture(account)
-            : undefined,
+          account!
         ),
       );
     } else {
@@ -245,7 +235,7 @@ export class ReceiptService {
           amount,
           new Date(),
           event,
-          details.account?.type?.valueOf(),
+          details.account?.accountType.type?.valueOf(),
         );
         await this.tiki.sdk.createPayable(
           amount,
