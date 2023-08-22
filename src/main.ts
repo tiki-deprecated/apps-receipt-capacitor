@@ -52,7 +52,6 @@ import type {
   Retailer,
   ReceiptCapture,
 } from "@mytiki/tiki-capture-receipt-capacitor";
-import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
 
 export default {
   /**
@@ -73,7 +72,6 @@ export {
   Tag,
   CommonUsecases,
   CommonTags,
-  AccountProvider,
   ReceiptEvent,
   AccountTypeCommom,
 };

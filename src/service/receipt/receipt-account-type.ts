@@ -65,7 +65,6 @@ import WalmartIcon from "@/assets/images/walmart.png";
 import WalmartCanadaIcon from "@/assets/images/walmart-canada.png";
 import WegmansIcon from "@/assets/images/wegmans.png";
 //import YahooIcon from "@/assets/images/yahoo.png";
-import { AccountProvider } from "@mytiki/tiki-capture-receipt-capacitor";
 /**
  * Enumeration of the supported account types.
  */
