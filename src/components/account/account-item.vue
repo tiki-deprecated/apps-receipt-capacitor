@@ -20,13 +20,13 @@ defineProps({
 <template>
   <div>
     <div class="account-button" role="button" @click="$emit('click', account)">
-      <img :alt="account.type" :src="account.icon" class="icon" />
+      <img :alt="account.accountType.name" :src="account.accountType.icon?" class="icon" />
       <div
         class="unlink"
-        :class="account.verified ? 'verified' : 'notVerified'"
+        :class="account.isVerified ? 'verified' : 'notVerified'"
       >
         <unlink-icon class="account-item-icon" />
-        {{ account.verified ? "Unlink" : "Error" }}
+        {{ account.isVerified ? "Unlink" : "Error" }}
       </div>
     </div>
     <p class="username">{{ account.username }}</p>
