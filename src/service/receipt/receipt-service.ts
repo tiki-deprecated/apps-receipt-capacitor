@@ -115,23 +115,38 @@ export class ReceiptService {
   }
 
   /**
-   * Log out from a {@link ReceiptAccount}.
-   * @param account - The receipt account to log out.
+   * Log out from a {@link ReceiptAccount} or remove all the linked accounts.
+   * @param account - The receipt account to log out. 
+   * If the @param account - is null, will flush all the receipt accounts of the count
    */
-  async logout(account: ReceiptAccount): Promise<void> {
-    if (account.accountType.type === 'Email') {
-      await this.plugin.removeEmail(
-        account.username,
-        account.password!,
-        account.accountType.key!, //solved
-      );
-    } else {
-      const removedRetailer = await this.plugin.removeRetailer(
-        account.username,
-        account.accountType.key!,
-      );
+  async logout(account: ReceiptAccount | undefined = undefined): Promise<void> {
+    if(!account){
+        await this.plugin.flushRetailer().catch(error=>{
+          throw Error(`Could not flush emails accounts; Error: ${error}`)
+        });
+        await this.plugin.flushEmail().catch(error=>{
+          throw Error(`Could not flush retailers accounts; Error: ${error}`)
+        });
+        this._accounts = [];
+      return
     }
-    this.removeAccount(account);
+    if (account!.accountType.type === 'Email') {
+      await this.plugin.removeEmail(
+        account!.username,
+        account!.password!,
+        account!.accountType.key!, //solved
+      ).catch(error=>{
+        throw Error(`Could not remove the email account; Error: ${error}`)
+      });
+    } else {
+      await this.plugin.removeRetailer(
+        account!.username,
+        account!.accountType.key!,
+      ).catch(error=>{
+        throw Error(`Could not remove the retailer account; Error: ${error}`)
+      });
+    }
+    this.removeAccount(account!);
     await this.process(ReceiptEvent.UNLINK, {
       account: account,
     });
@@ -166,17 +181,6 @@ export class ReceiptService {
     emailAccounts.forEach((account) =>
       this.addAccount(ReceiptAccount.fromValue(account)),
     );
-  };
-
-  /**
-   * Logs the user out of all linked accounts and removes credentials
-   * from the local cache.
-   * @returns A Promise that resolves when the logout is complete.
-   */
-  logoutAll = async (): Promise<void> => {
-    await this.plugin.flushRetailer();
-    await this.plugin.flushEmail();
-    this._accounts = [];
   };
 
   private addAccount(account: ReceiptAccount): void {
