@@ -78,7 +78,7 @@ export class ReceiptService {
   /**
    * Scan a physical receipt and if valid, process and add it to the service.
    */
-  async scan(scanType?: ScanType): Promise<void> {
+  async scan(scanType: ScanType | undefined, account: ReceiptAccount): Promise<void> {
     if(scanType === 'Physical'){
       const license = await this.tiki.sdk.getLicense();
       if (license != undefined) {
@@ -94,21 +94,10 @@ export class ReceiptService {
         );
     }
     if(!scanType){
-      const receipts = await this.plugin.scan();
-      receipts.forEach(receipt => this.addReceipt(receipt))
-      // const scrape = async (): Promise<void> =>
-      // this.plugin.scrapeEmail(
-      //   async (account: Capture.Account, receipts: Capture.Receipt[]) =>
-      //     receipts.forEach((receipt) => this.addReceipt(receipt, account)),
-      // );
-  
-      // const orders = async (): Promise<void> => {
-      // const order = await this.plugin.orders();
-      // this.addReceipt(order.scan);
-      //  };
+      const receipts = await this.plugin.scan(undefined, account);
+      this.addReceipt(receipts)
     }
   }
-
 
 
   async login(account: ReceiptAccount): Promise<void> {
@@ -188,13 +177,8 @@ export class ReceiptService {
 
   private addAccount(account: ReceiptAccount): void {
     this._accounts.push(account);
-    if (account.accountType.type! === "Email") {
       this._onAccountListeners.forEach((listener) => listener(account));
-      this.scrape();
-    } else {
-      this._onAccountListeners.forEach((listener) => listener(account));
-      this.orders();
-    }
+      this.scan(undefined, account)
   }
 
   private removeAccount(account: ReceiptAccount): void {
