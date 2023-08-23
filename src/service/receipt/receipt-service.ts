@@ -78,7 +78,7 @@ export class ReceiptService {
   /**
    * Scan a physical receipt and if valid, process and add it to the service.
    */
-  async scan(scanType: ScanType | undefined, account: ReceiptAccount): Promise<void> {
+  async scan(scanType: ScanType | undefined, account?: ReceiptAccount): Promise<void> {
     if(scanType === 'Physical'){
       const license = await this.tiki.sdk.getLicense();
       if (license != undefined) {
@@ -168,6 +168,7 @@ export class ReceiptService {
     try {
       (await this.plugin.accounts()).forEach((account) =>{
         this.addAccount(ReceiptAccount.fromValue(account))
+        this.scan(undefined, ReceiptAccount.fromValue(account))
       })
     } catch(error){
       throw Error (`Could not load the accounts; Error: ${error}`)
