@@ -69,7 +69,9 @@ export class TikiService {
     await this.receipt.plugin.initialize(
       this.config.key.scanKey,
       this.config.key.intelKey,
-    );
+    ).catch(error=>{
+      throw Error(`Could not initialize; Error: ${error}`)
+    })
     this._isInitialized = true;
     this.history.load();
     this.receipt.load();
