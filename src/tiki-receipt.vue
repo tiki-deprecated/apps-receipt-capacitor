@@ -64,7 +64,7 @@ stylize("--tiki-secondary-background-color", theme?.secondaryBackgroundColor);
 stylize("--tiki-accent-color", theme?.accentColor);
 
 const closeUI = () => {
-  return function (direction: string, element) {
+  return function (direction: string, element: any) {
     const isHeadingElement = (className: string): Boolean =>
       ["heading", "title"].includes(className);
     const isFullScreenElement = (className: string): Boolean =>
