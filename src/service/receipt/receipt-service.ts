@@ -83,10 +83,10 @@ export class ReceiptService {
       const license = await this.tiki.sdk.getLicense();
       if (license != undefined) {
         const receipt = await this.plugin.scan(scanType);
-        if (receipt.ocrConfidence > ReceiptService.OCR_THRESHOLD) {
-          await this.addReceipt(receipt);
+        if (receipt[0].ocrConfidence > ReceiptService.OCR_THRESHOLD) {
+          await this.addReceipt(receipt[0]);
         } else {
-          console.warn(`Receipt ignored: Confidence: ${receipt.ocrConfidence}`);
+          console.warn(`Receipt ignored: Confidence: ${receipt[0].ocrConfidence}`);
         }
       } else
         throw Error(
@@ -95,7 +95,7 @@ export class ReceiptService {
     }
     if(!scanType){
       const receipts = await this.plugin.scan(undefined, account);
-      this.addReceipt(receipts)
+      this.addReceipt(receipts[0])
     }
   }
 
