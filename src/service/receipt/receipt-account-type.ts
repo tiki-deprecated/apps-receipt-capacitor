@@ -75,6 +75,9 @@ export interface AccountType {
   icon?: string,
   key: string
 }
+
+export type ScanType = 'Physical' | 'Email' | 'Retailer'
+
 export class AccountTypeCommom{
   /**
    * CME Markets account type 

@@ -75,8 +75,7 @@ export class TikiService {
     this._isInitialized = true;
     this.history.load();
     this.receipt.loadAccounts();
-    this.receipt.scrape();
-    this.receipt.orders();
+    this.receipt.scan();
   }
 
   /**

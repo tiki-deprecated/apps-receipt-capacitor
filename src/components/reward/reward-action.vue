@@ -34,7 +34,7 @@ const redeem = () => {
   <text-button
     text="Scan Receipt"
     :icon="ScanIcon"
-    @click="tiki?.receipt.scan()"
+    @click="tiki?.receipt.scan('Physical')"
   />
 </template>
 

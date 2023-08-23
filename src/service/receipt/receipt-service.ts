@@ -10,6 +10,7 @@ import { TikiService } from "@/service/tiki-service";
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
 import { HistoryEvent } from "@/service/history/history-event";
+import type { ScanType } from "./receipt-account-type";
 
 /**
  * Service responsible for handling receipt-related operations and events.
@@ -77,20 +78,39 @@ export class ReceiptService {
   /**
    * Scan a physical receipt and if valid, process and add it to the service.
    */
-  async scan(): Promise<void> {
-    const license = await this.tiki.sdk.getLicense();
-    if (license != undefined) {
-      const receipt = await this.plugin.scan();
-      if (receipt.ocrConfidence > ReceiptService.OCR_THRESHOLD) {
-        await this.addReceipt(receipt);
-      } else {
-        console.warn(`Receipt ignored: Confidence: ${receipt.ocrConfidence}`);
-      }
-    } else
-      throw Error(
-        `No license found for ${this.tiki.sdk.id}. User must first consent to the program.`,
-      );
+  async scan(scanType?: ScanType): Promise<void> {
+    if(scanType === 'Physical'){
+      const license = await this.tiki.sdk.getLicense();
+      if (license != undefined) {
+        const receipt = await this.plugin.scan(scanType);
+        if (receipt.ocrConfidence > ReceiptService.OCR_THRESHOLD) {
+          await this.addReceipt(receipt);
+        } else {
+          console.warn(`Receipt ignored: Confidence: ${receipt.ocrConfidence}`);
+        }
+      } else
+        throw Error(
+          `No license found for ${this.tiki.sdk.id}. User must first consent to the program.`,
+        );
+    }
+    if(!scanType){
+      const receipts = await this.plugin.scan();
+      receipts.forEach(receipt => this.addReceipt(receipt))
+      // const scrape = async (): Promise<void> =>
+      // this.plugin.scrapeEmail(
+      //   async (account: Capture.Account, receipts: Capture.Receipt[]) =>
+      //     receipts.forEach((receipt) => this.addReceipt(receipt, account)),
+      // );
+  
+      // const orders = async (): Promise<void> => {
+      // const order = await this.plugin.orders();
+      // this.addReceipt(order.scan);
+      //  };
+    }
   }
+
+
+
   async login(account: ReceiptAccount): Promise<void> {
     if (account.accountType.type === 'Email') {
       await this.plugin.loginWithEmail(
@@ -151,20 +171,6 @@ export class ReceiptService {
     });
   }
 
-  /**
-   * Scrape all verified email accounts for new receipts in the last 30 days.
-   * Use on receipt listener to handle processed receipts.
-   */
-  scrape = async (): Promise<void> =>
-    this.plugin.scrapeEmail(
-      async (account: Capture.Account, receipts: Capture.Receipt[]) =>
-        receipts.forEach((receipt) => this.addReceipt(receipt, account)),
-    );
-
-  orders = async (): Promise<void> => {
-    const order = await this.plugin.orders();
-    this.addReceipt(order.scan);
-  };
 
   /**
    * Load and verify previously logged-in accounts.
