@@ -10,7 +10,6 @@ import { TikiService } from "@/service/tiki-service";
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
 import { HistoryEvent } from "@/service/history/history-event";
-import type { AccountType } from "./receipt-account-type";
 
 /**
  * Service responsible for handling receipt-related operations and events.
@@ -170,17 +169,15 @@ export class ReceiptService {
   /**
    * Load and verify previously logged-in accounts.
    */
-  load = async (): Promise<void> => {
-    const retailAccounts = await this.plugin.retailers();
-    retailAccounts.forEach((account) =>
-      this.addAccount(
-        ReceiptAccount.fromValue(account)
-      ),
-    );
-    const emailAccounts = await this.plugin.verifyEmail();
-    emailAccounts.forEach((account) =>
-      this.addAccount(ReceiptAccount.fromValue(account)),
-    );
+  loadAccounts = async (): Promise<void> => {
+    try {
+      (await this.plugin.accounts()).forEach((account) =>{
+        this.addAccount(ReceiptAccount.fromValue(account))
+      })
+    } catch(error){
+      throw Error (`Could not load the accounts; Error: ${error}`)
+    }
+
   };
 
   private addAccount(account: ReceiptAccount): void {
