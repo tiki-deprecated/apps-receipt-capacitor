@@ -79,14 +79,14 @@ export class ReceiptService {
    * Scan a physical receipt and if valid, process and add it to the service.
    */
   async scan(scanType: ScanType | undefined, account?: ReceiptAccount): Promise<void> {
-    if(scanType === 'Physical'){
+    if(scanType === 'PHYSICAL'){
       const license = await this.tiki.sdk.getLicense();
       if (license != undefined) {
         const receipt = await this.plugin.scan(scanType);
-        if (receipt[0].ocrConfidence > ReceiptService.OCR_THRESHOLD) {
-          await this.addReceipt(receipt[0]);
+        if (receipt.receipt.ocrConfidence > ReceiptService.OCR_THRESHOLD) {
+          await this.addReceipt(receipt.receipt);
         } else {
-          console.warn(`Receipt ignored: Confidence: ${receipt[0].ocrConfidence}`);
+          console.warn(`Receipt ignored: Confidence: ${receipt.receipt.ocrConfidence}`);
         }
       } else
         throw Error(
@@ -94,14 +94,14 @@ export class ReceiptService {
         );
     }
     if(!scanType){
-      const receipts = await this.plugin.scan(undefined, account);
-      this.addReceipt(receipts[0])
+      const receipts = await this.plugin.scan(undefined, account!);
+      this.addReceipt(receipts.receipt)
     }
   }
 
 
   async login(account: ReceiptAccount): Promise<void> {
-    if (account.accountType.type === 'Email') {
+    if (account.accountType.type === 'EMAIL') {
       await this.plugin.loginWithEmail(
         account.username,
         account.password!,
@@ -138,7 +138,7 @@ export class ReceiptService {
         this._accounts = [];
       return
     }
-    if (account!.accountType.type === 'Email') {
+    if (account!.accountType.type === 'EMAIL') {
       await this.plugin.removeEmail(
         account!.username,
         account!.password!,

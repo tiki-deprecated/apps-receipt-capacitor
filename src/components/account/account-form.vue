@@ -32,17 +32,11 @@ const update = () => {
     ReceiptAccount.fromValue(
       {username: username.value?.value ?? "",
       accountType: {
-         type: "Email",
+         type: account.value?.name == 'Gmail' ? "EMAIL" : 'RETAILER',
          name: account.value?.name!,
          icon: undefined,
          key: account.value?.name!,
-       },
-      // accountType: {
-      //   type: account.value?.name!,
-      //   name: account.value?.name!,
-      //   icon: undefined,
-      //   key: account.value?,
-      // },
+       }, 
       password: password.value?.value,}
     ),
   );

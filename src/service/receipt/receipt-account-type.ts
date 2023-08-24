@@ -70,20 +70,20 @@ import WegmansIcon from "@/assets/images/wegmans.png";
  */
 
 export interface AccountType {
-  type: 'Email' | 'Retailer',
+  type: 'EMAIL' | 'RETAILER',
   name: string,
   icon?: string,
   key: string
 }
 
-export type ScanType = 'Physical' | 'Email' | 'Retailer'
+export type ScanType = 'PHYSICAL' | 'EMAIL' | 'RETAILER' | 'ONLINE'
 
 export class AccountTypeCommom{
   /**
    * CME Markets account type 
    */
   static readonly CME_MARKETS:AccountType =  {
-    type:'Retailer',
+    type:'RETAILER',
     name:'Acme',
     icon:AcmeIcon,
     key: 'CME_MARKETS'
@@ -93,7 +93,7 @@ export class AccountTypeCommom{
    * Albertsons account type.
    */
  static readonly ALBERTSONS: AccountType = {
-  type: "Retailer",
+  type: "RETAILER",
   icon: AlbertsonsIcon,
   name: "Albertsons",
   key: 'ALBERTSONS'
@@ -102,7 +102,7 @@ export class AccountTypeCommom{
    * Amazon account type.
    */
   static readonly AMAZON: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: AmazonIcon,
     name: "Amazon",
     key: 'AMAZON'
@@ -111,7 +111,7 @@ export class AccountTypeCommom{
    * Amazon Canada account type.
    */
   static readonly AMAZON_CA: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: AmazonIcon,
     name: "Amazon Canada",
     key: 'AMAZON_CA'
@@ -120,7 +120,7 @@ export class AccountTypeCommom{
    * Amazon United Kingdom account type.
    */
   static readonly AMAZON_UK: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: AmazonIcon,
     name: "Amazon United Kingdom",
     key: 'AMAZON_UK'
@@ -134,7 +134,7 @@ export class AccountTypeCommom{
    * Bed Bath & Beyond account type.
    */
   static readonly BED_BATH_AND_BEYOND: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: BedBathAndBeyondIcon,
     name: "Bed Bath & Beyond",
     key: 'BED_BATH_AND_BEYOND'
@@ -144,7 +144,7 @@ export class AccountTypeCommom{
    */
   static readonly GMAIL: AccountType = {
    name: "Gmail",
-   type: "Email",
+   type: "EMAIL",
    icon: GmailIcon,
    key: 'GMAIL'
   }
@@ -153,7 +153,7 @@ export class AccountTypeCommom{
    * Best Buy account type.
    */
   static readonly BESTBUY: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: BestBuyIcon,
     name: "Best Buy",
     key: 'BESTBUY'
@@ -162,7 +162,7 @@ export class AccountTypeCommom{
    * BJ’s Wholesale Club account type.
    */
   static readonly BJS_WHOLESALE: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: BJsIcon,
     name: "BJ’s Wholesale Club",
     key: 'BJS_WHOLESALE'
@@ -171,7 +171,7 @@ export class AccountTypeCommom{
    * Chewy account type.
    */
   static readonly CHEWY: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: ChewyIcon,
     name: "Chewy",
     key: 'CHEWY'
@@ -180,7 +180,7 @@ export class AccountTypeCommom{
    * Costco account type.
    */
   static readonly COSTCO: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: CostcoIcon,
     name: "Costco",
     key: 'COSTCO'
@@ -189,7 +189,7 @@ export class AccountTypeCommom{
    * CVS account type.
    */
   static readonly CVS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: CVSIcon,
     name: "CVS",
     key: 'CVS'
@@ -198,7 +198,7 @@ export class AccountTypeCommom{
    * Dick’s Sporting Goods account type.
    */
   static readonly DICKS_SPORTING_GOODS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: DicksIcon,
     name: "Dick’s Sporting Goods",
     key: 'DICKS_SPORTING_GOODS'
@@ -207,7 +207,7 @@ export class AccountTypeCommom{
    * Dollar General account type.
    */
   static readonly DOLLAR_GENERAL: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: DollarGeneralIcon,
     name: "Dollar General",
     key: 'DOLLAR_GENERAL'
@@ -216,7 +216,7 @@ export class AccountTypeCommom{
    * DollarTree account type.
    */
   static readonly DOLLAR_TREE: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: DollarTreeIcon,
     name: "DollarTree",
     key: 'DOLLAR_TREE'
@@ -225,7 +225,7 @@ export class AccountTypeCommom{
    * Domino’s Pizza account type.
    */
   static readonly DOMINOS_PIZZA: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: DominosIcon,
     name: "Domino’s Pizza",
     key: 'DOMINOS_PIZZA'
@@ -234,7 +234,7 @@ export class AccountTypeCommom{
    * DoorDash account type.
    */
   static readonly DOOR_DASH: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: DoorDashIcon,
     name: "DoorDash",
     key: 'DOOR_DASH'
@@ -243,7 +243,7 @@ export class AccountTypeCommom{
    * Drizly account type.
    */
   static readonly DRIZLY: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: DrizlyIcon,
     name: "Drizly",
     key: 'DRIZLY'
@@ -252,7 +252,7 @@ export class AccountTypeCommom{
    * Family Dollar account type.
    */
   static readonly FAMILY_DOLLAR: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: FamilyDollarIcon,
     name: "Family Dollar",
     key: 'FAMILY_DOLLAR'
@@ -261,7 +261,7 @@ export class AccountTypeCommom{
    * Food 4 Less account type.
    */
   static readonly FOOD_4_LESS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: Food4LessIcon,
     name: "Food 4 Less",
     key: 'FOOD_4_LESS'
@@ -270,7 +270,7 @@ export class AccountTypeCommom{
    * Food Lion account type.
    */
   static readonly FOOD_LION: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: FoodLionIcon,
     name: "Food Lion",
     key: 'FOOD_LION'
@@ -279,7 +279,7 @@ export class AccountTypeCommom{
    * Fred Meyer account type.
    */
   static readonly FRED_MEYER: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: FredMeyerIcon,
     name: "Fred Meyer",
     key: 'FRED_MEYER'
@@ -288,7 +288,7 @@ export class AccountTypeCommom{
    * GAP account type.
    */
   static readonly GAP: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: GapIcon,
     name: "GAP",
     key: 'GAP'
@@ -297,7 +297,7 @@ export class AccountTypeCommom{
    * Giant Eagle account type.
    */
   static readonly GIANT_EAGLE: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: GiantEagleIcon,
     name: "Giant Eagle",
     key: 'GIANT_EAGLE'
@@ -306,7 +306,7 @@ export class AccountTypeCommom{
    * Grubhub account type.
    */
   static readonly GRUBHUB: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: GrubHubIcon,
     name: "Grubhub",
     key: 'GRUBHUB'
@@ -315,7 +315,7 @@ export class AccountTypeCommom{
    * Harris Teeter account type.
    */
   static readonly HARRIS_TEETER: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: HarrisTeeterIcon,
     name: "Harris Teeter",
     key: 'HARRIS_TEETER'
@@ -324,7 +324,7 @@ export class AccountTypeCommom{
    * H.E.B account type.
    */
   static readonly HEB: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: HEBIcon,
     name: "H.E.B",
     key: 'HEB'
@@ -333,7 +333,7 @@ export class AccountTypeCommom{
    * Home Depot account type.
    */
   static readonly HOME_DEPOT: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: HomeDepotIcon,
     name: "Home Depot",
     key: 'HOME_DEPOT'
@@ -342,7 +342,7 @@ export class AccountTypeCommom{
    * HyVee account type.
    */
   static readonly HYVEE: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: HyVeeIcon,
     key: 'HYVEE',
     name: "HyVee",
@@ -351,7 +351,7 @@ export class AccountTypeCommom{
    * Instacart account type.
    */
   static readonly INSTACART: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: InstacartIcon,
     name: "Instacart",
     key: 'INSTACART',
@@ -360,7 +360,7 @@ export class AccountTypeCommom{
    * Jewel Osco account type.
    */
   static readonly JEWEL_OSCO: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: JewelOscoIcon,
     name: "Jewel Osco",
     key: 'JEWEL_OSCO',
@@ -369,7 +369,7 @@ export class AccountTypeCommom{
    * Kohl’s account type.
    */
   static readonly KOHLS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: KohlsIcon,
     name: "Kohl’s",
     key: 'KOHLS',
@@ -378,7 +378,7 @@ export class AccountTypeCommom{
    * Kroger account type.
    */
   static readonly KROGER: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: KrogerIcon,
     name: "Kroger",
     key: 'KROGER',
@@ -387,7 +387,7 @@ export class AccountTypeCommom{
    * Lowe’s account type.
    */
   static readonly LOWES: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: LowesIcon,
     name: "Lowe’s",
     key: 'LOWES',
@@ -396,7 +396,7 @@ export class AccountTypeCommom{
    * Macy’s account type.
    */
   static readonly MACYS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: MacysIcon,
     name: "Macy’s",
     key: 'MACYS',
@@ -405,7 +405,7 @@ export class AccountTypeCommom{
    * Marshalls account type.
    */
   static readonly MARSHALLS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: MarshallsIcon,
     name: "Marshalls",
     key: 'MARSHALLS',
@@ -414,7 +414,7 @@ export class AccountTypeCommom{
    * Meijer account type.
    */
   static readonly MEIJER: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: MeijerIcon,
     name: "Meijer",
     key: 'MEIJER',
@@ -423,7 +423,7 @@ export class AccountTypeCommom{
    * Nike account type.
    */
   static readonly NIKE: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: NikeIcon,
     name: "Nike",
     key: 'NIKE',
@@ -441,7 +441,7 @@ export class AccountTypeCommom{
    * Publix account type.
    */
   static readonly PUBLIX: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: PublixIcon,
     name: "Publix",
     key: 'PUBLIX',
@@ -450,7 +450,7 @@ export class AccountTypeCommom{
    * Ralphs account type.
    */
   static readonly RALPHS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: RalphsIcon,
     name: "Ralphs",
     key: 'RALPHS',
@@ -459,7 +459,7 @@ export class AccountTypeCommom{
    * RiteAid account type.
    */
   static readonly RITE_AID: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: RiteAidIcon,
     name: "RiteAid",
     key: 'RITE_AID',
@@ -468,7 +468,7 @@ export class AccountTypeCommom{
    * Safeway account type.
    */
   static readonly AFEWAY: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: "",
     name: "Safeway",
     key: 'AFEWAY',
@@ -477,7 +477,7 @@ export class AccountTypeCommom{
    * Sam’s Club account type.
    */
   static readonly SAMS_CLUB: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: SamsClubIcon,
     name: "Sam’s Club",
     key: 'SAMS_CLUB',
@@ -486,7 +486,7 @@ export class AccountTypeCommom{
    * Seamless account type.
    */
   static readonly SEAMLESS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: SeamlessIcon,
     name: "Seamless",
     key: 'SEAMLESS',
@@ -495,7 +495,7 @@ export class AccountTypeCommom{
    * Sephora account type.
    */
   static readonly SEPHORA: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: SephoraIcon,
     name: "Sephora",
     key: 'SEPHORA',
@@ -504,7 +504,7 @@ export class AccountTypeCommom{
    * Shipt account type.
    */
   static readonly SHIPT: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: ShiptIcon,
     name: "Shipt",
     key: 'SHIPT',
@@ -513,7 +513,7 @@ export class AccountTypeCommom{
    * ShopRite account type.
    */
   static readonly SHOPRITE: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: ShopRiteIcon,
     name: "Shoprite",
     key: 'SHOPRITE',
@@ -523,7 +523,7 @@ export class AccountTypeCommom{
    * Sprouts account type.
    */
   static readonly SPROUTS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: SproutsIcon,
     name: "Sprouts",
     key: 'SPROUTS',
@@ -532,7 +532,7 @@ export class AccountTypeCommom{
    * Staples account type.
    */
   static readonly STAPLES: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: StaplesIcon,
     name: "Staples",
     key: 'STAPLES',
@@ -541,7 +541,7 @@ export class AccountTypeCommom{
    * Staples Canada account type.
    */
   static readonly STAPLES_CA: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: StaplesCanadaIcon,
     name: "Staples Canada",
     key: 'STAPLES_CA',
@@ -550,7 +550,7 @@ export class AccountTypeCommom{
    * Starbucks account type.
    */
   static readonly STARBUCKS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: StarbucksIcon,
     name: "Starbucks",
     key: 'STARBUCKS',
@@ -559,7 +559,7 @@ export class AccountTypeCommom{
    * Taco Bell account type.
    */
   static readonly TACO_BELL: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: TacoBellIcon,
     name: "Taco Bell",
     key: 'TACO_BELL',
@@ -568,7 +568,7 @@ export class AccountTypeCommom{
    * Target account type.
    */
   static readonly TARGET: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: TargetIcon,
     name: "Target",
     key: 'TARGET',
@@ -577,7 +577,7 @@ export class AccountTypeCommom{
    * T.J.Maxx account type.
    */
   static readonly TJ_MAXX: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: TJMaxxIcon,
     name: "T.J.Maxx",
     key: 'TJ_MAXX',
@@ -586,7 +586,7 @@ export class AccountTypeCommom{
    * UberEats account type.
    */
   static readonly UBER_EATS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: UberEatsIcon,
     name: "UberEats",
     key: 'UBER_EATS',
@@ -595,7 +595,7 @@ export class AccountTypeCommom{
    * Ulta account type.
    */
   static readonly ULTA: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: UltaIcon,
     name: "Ulta",
     key: 'ULTA',
@@ -604,7 +604,7 @@ export class AccountTypeCommom{
    * Vons account type.
    */
   static readonly VONS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: VonsIcon,
     name: "Vons", 
     key: 'VONS',
@@ -613,7 +613,7 @@ export class AccountTypeCommom{
    * Walgreens account type.
    */
   static readonly WALGREENS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: WalgreensIcon,
     name: "Walgreens",
     key: 'WALGREENS',
@@ -622,7 +622,7 @@ export class AccountTypeCommom{
    * Walmart account type.
    */
   static readonly WALMART: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: WalmartIcon,
     name: "Walmart",
     key: 'WALMART',
@@ -631,7 +631,7 @@ export class AccountTypeCommom{
    * Walmart Canada account type.
    */
   static readonly WALMART_CA: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: WalmartCanadaIcon,
     name: "Walmart Canada",
     key: 'WALMART_CA',
@@ -640,7 +640,7 @@ export class AccountTypeCommom{
    * Wegman’s account type.
    */
   static readonly WEGMANS: AccountType = {
-    type: "Retailer",
+    type: "RETAILER",
     icon: WegmansIcon,
     name: "Wegman’s",
     key: 'WEGMANS',
