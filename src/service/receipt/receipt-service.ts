@@ -94,7 +94,7 @@ export class ReceiptService {
         );
     }
     if(!scanType){
-      const receipts = await this.plugin.scan(undefined, account!);
+      const receipts = await this.plugin.scan('ONLINE', account!);
       this.addReceipt(receipts.receipt)
     }
   }
@@ -168,7 +168,7 @@ export class ReceiptService {
     try {
       (await this.plugin.accounts()).forEach((account) =>{
         this.addAccount(ReceiptAccount.fromValue(account))
-        this.scan(undefined, ReceiptAccount.fromValue(account))
+        this.scan('ONLINE', ReceiptAccount.fromValue(account))
       })
     } catch(error){
       throw Error (`Could not load the accounts; Error: ${error}`)
@@ -179,7 +179,7 @@ export class ReceiptService {
   private addAccount(account: ReceiptAccount): void {
     this._accounts.push(account);
       this._onAccountListeners.forEach((listener) => listener(account));
-      this.scan(undefined, account)
+      this.scan('ONLINE', account)
   }
 
   private removeAccount(account: ReceiptAccount): void {
