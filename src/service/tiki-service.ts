@@ -69,12 +69,12 @@ export class TikiService {
     await this.receipt.plugin.initialize(
       this.config.key.scanKey,
       this.config.key.intelKey,
-    );
+    ).catch(error=>{
+      throw Error(`Could not initialize; Error: ${error}`)
+    })
     this._isInitialized = true;
     this.history.load();
-    this.receipt.load();
-    this.receipt.scrape();
-    this.receipt.orders();
+    this.receipt.loadAccounts();
   }
 
   /**
@@ -83,7 +83,7 @@ export class TikiService {
    * @returns A Promise that resolves when the logout is complete.
    */
   async logout(): Promise<void> {
-    await this.receipt.logoutAll();
+    await this.receipt.logout();
     this.history.clear();
   }
 }

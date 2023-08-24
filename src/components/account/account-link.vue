@@ -12,7 +12,7 @@ import CircleButton from "@/components/buttons/circle-button.vue";
 import AccountCarousel from "@/components/account/account-carousel.vue";
 import TextButton from "@/components/buttons/text-button.vue";
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
-import { ReceiptAccountType } from "@/service/receipt/receipt-account-type";
+import { AccountTypeCommom } from "@/service/receipt/receipt-account-type";
 import { inject, ref } from "vue";
 import { TikiService } from "@/service/tiki-service";
 
@@ -24,7 +24,7 @@ tiki!.receipt.onAccount("account-link", (acc) => {
 });
 const error = ref<string>();
 const form = ref<ReceiptAccount>(
-  new ReceiptAccount("", ReceiptAccountType.GMAIL, ""),
+  new ReceiptAccount("", AccountTypeCommom.GMAIL, ""),
 );
 const submit = async () => {
   if (
@@ -36,7 +36,7 @@ const submit = async () => {
     try {
       error.value = ''
       await tiki?.receipt.login(form.value);
-      form.value = new ReceiptAccount("", ReceiptAccountType.GMAIL, "");
+      form.value = new ReceiptAccount("", AccountTypeCommom.GMAIL, "");
     } catch (err: any) {
       error.value = err.toString();
     }

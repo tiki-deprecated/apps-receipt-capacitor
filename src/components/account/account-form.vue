@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
-import { ReceiptAccountType } from "@/service/receipt/receipt-account-type";
+import { AccountTypeCommom, type AccountType } from "@/service/receipt/receipt-account-type";
 import { inject, ref, watch } from "vue";
 import type { PropType } from "vue";
 import { TikiService } from "@/service/tiki-service";
@@ -25,14 +25,27 @@ const tiki: TikiService | undefined = inject("Tiki");
 const username = ref<HTMLInputElement>();
 const password = ref<HTMLInputElement>();
 const account = ref<HTMLSelectElement>();
-
+let accountSelected = ref<AccountType>()
+  watch(
+  () => account,
+  async (newValue) => {
+    accountSelected = (Object.values(AccountTypeCommom)).find((accountObj)=>{
+      accountObj.name === newValue
+    })
+  },
+);
 const update = () => {
   emit(
     "update:account",
     ReceiptAccount.fromValue(
-      username.value?.value ?? "",
-      account.value?.value ?? ReceiptAccountType.GMAIL,
-      password.value?.value,
+      {username: username.value?.value ?? "",
+      accountType: {
+         type: accountSelected?.value?.type!,
+         name: accountSelected?.value?.name!,
+         icon: undefined,
+         key: accountSelected?.value?.key!,
+       }, 
+      password: password.value?.value,}
     ),
   );
 };
@@ -42,7 +55,7 @@ watch(
   async (newValue) => {
     username.value!.value = newValue?.username ?? "";
     password.value!.value = newValue?.password ?? "";
-    account.value!.value = newValue?.type ?? ReceiptAccountType.GMAIL;
+    account.value!.value = newValue?.accountType.name ?? "";
   },
 );
 
@@ -58,8 +71,10 @@ watch(
     <label for="accounts">Choose Account</label>
     <select id="accounts" ref="account" required @change="update">
       <option
-        v-for="account in Object.values(ReceiptAccountType)"
-        :value="account"
+        v-for="account in Object.values(AccountTypeCommom)"
+        :value="account.name"
+        :label="account.name"
+        :selected="account.name"
       >
         {{ account }}
       </option>

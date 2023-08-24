@@ -10,7 +10,7 @@ import { TikiService } from "@/service/tiki-service";
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
 import { HistoryEvent } from "@/service/history/history-event";
-import { toString, ReceiptAccountType, icon } from "./receipt-account-type";
+import type { ScanType } from "./receipt-account-type";
 
 /**
  * Service responsible for handling receipt-related operations and events.
@@ -78,35 +78,43 @@ export class ReceiptService {
   /**
    * Scan a physical receipt and if valid, process and add it to the service.
    */
-  async scan(): Promise<void> {
-    const license = await this.tiki.sdk.getLicense();
-    if (license != undefined) {
-      const receipt = await this.plugin.scan();
-      if (receipt.ocrConfidence > ReceiptService.OCR_THRESHOLD) {
-        await this.addReceipt(receipt);
-      } else {
-        console.warn(`Receipt ignored: Confidence: ${receipt.ocrConfidence}`);
-      }
-    } else
-      throw Error(
-        `No license found for ${this.tiki.sdk.id}. User must first consent to the program.`,
-      );
+  async scan(scanType: ScanType | undefined, account?: ReceiptAccount): Promise<void> {
+    if(scanType === 'PHYSICAL'){
+      const license = await this.tiki.sdk.getLicense();
+      if (license != undefined) {
+        const receipt = await this.plugin.scan(scanType);
+        if (receipt.receipt.ocrConfidence > ReceiptService.OCR_THRESHOLD) {
+          await this.addReceipt(receipt.receipt);
+        } else {
+          console.warn(`Receipt ignored: Confidence: ${receipt.receipt.ocrConfidence}`);
+        }
+      } else
+        throw Error(
+          `No license found for ${this.tiki.sdk.id}. User must first consent to the program.`,
+        );
+    }
+    if(!scanType){
+      const receipts = await this.plugin.scan('ONLINE', account!);
+      this.addReceipt(receipts.receipt)
+    }
   }
+
+
   async login(account: ReceiptAccount): Promise<void> {
-    if (account.provider) {
+    if (account.accountType.type === 'EMAIL') {
       await this.plugin.loginWithEmail(
         account.username,
         account.password!,
-        account.provider!,
+        account.accountType.key!, //solved
       );
-      account.verified = true;
+      account.isVerified = true;
     } else {
       let accountSigned = await this.plugin.loginWithRetailer(
         account.username,
         account.password!,
-        toString(account.type!),
+        account.accountType.key!,
       );
-      if (accountSigned.isVerified) account.verified = true;
+      if (accountSigned.isVerified) account.isVerified = true;
     }
     this.addAccount(account);
     await this.process(ReceiptEvent.LINK, {
@@ -115,89 +123,68 @@ export class ReceiptService {
   }
 
   /**
-   * Log out from a {@link ReceiptAccount}.
-   * @param account - The receipt account to log out.
+   * Log out from a {@link ReceiptAccount} or remove all the linked accounts.
+   * @param account - The receipt account to log out. 
+   * If the @param account - is null, will flush all the receipt accounts of the count
    */
-  async logout(account: ReceiptAccount): Promise<void> {
-    if (account.type == "Gmail") {
-      await this.plugin.removeEmail(
-        account.username,
-        account.password!,
-        account.provider!,
-      );
-    } else {
-      const removedRetailer = await this.plugin.removeRetailer(
-        account.username,
-        toString(account.type!),
-      );
+  async logout(account: ReceiptAccount | undefined = undefined): Promise<void> {
+    if(!account){
+        await this.plugin.flushRetailer().catch(error=>{
+          throw Error(`Could not flush emails accounts; Error: ${error}`)
+        });
+        await this.plugin.flushEmail().catch(error=>{
+          throw Error(`Could not flush retailers accounts; Error: ${error}`)
+        });
+        this._accounts = [];
+      return
     }
-    this.removeAccount(account);
+    if (account!.accountType.type === 'EMAIL') {
+      await this.plugin.removeEmail(
+        account!.username,
+        account!.password!,
+        account!.accountType.key!, //solved
+      ).catch(error=>{
+        throw Error(`Could not remove the email account; Error: ${error}`)
+      });
+    } else {
+      await this.plugin.removeRetailer(
+        account!.username,
+        account!.accountType.key!,
+      ).catch(error=>{
+        throw Error(`Could not remove the retailer account; Error: ${error}`)
+      });
+    }
+    this.removeAccount(account!);
     await this.process(ReceiptEvent.UNLINK, {
       account: account,
     });
   }
 
-  /**
-   * Scrape all verified email accounts for new receipts in the last 30 days.
-   * Use on receipt listener to handle processed receipts.
-   */
-  scrape = async (): Promise<void> =>
-    this.plugin.scrapeEmail(
-      async (account: Capture.Account, receipts: Capture.Receipt[]) =>
-        receipts.forEach((receipt) => this.addReceipt(receipt, account)),
-    );
-
-  orders = async (): Promise<void> => {
-    const order = await this.plugin.orders();
-    this.addReceipt(order.scan);
-  };
 
   /**
    * Load and verify previously logged-in accounts.
    */
-  load = async (): Promise<void> => {
-    const retailAccounts = await this.plugin.retailers();
-    retailAccounts.forEach((account) =>
-      this.addAccount(
-        ReceiptAccount.fromValue(
-          account.username,
-          account.provider,
-          undefined,
-          account.isVerified,
-        ),
-      ),
-    );
-    const emailAccounts = await this.plugin.verifyEmail();
-    emailAccounts.forEach((account) =>
-      this.addAccount(ReceiptAccount.fromCapture(account)),
-    );
-  };
+  loadAccounts = async (): Promise<void> => {
+    try {
+      (await this.plugin.accounts()).forEach((account) =>{
+        this.addAccount(ReceiptAccount.fromValue(account))
+        this.scan('ONLINE', ReceiptAccount.fromValue(account))
+      })
+    } catch(error){
+      throw Error (`Could not load the accounts; Error: ${error}`)
+    }
 
-  /**
-   * Logs the user out of all linked accounts and removes credentials
-   * from the local cache.
-   * @returns A Promise that resolves when the logout is complete.
-   */
-  logoutAll = async (): Promise<void> => {
-    await this.plugin.flushRetailer();
-    await this.plugin.flushEmail();
-    this._accounts = [];
   };
 
   private addAccount(account: ReceiptAccount): void {
     this._accounts.push(account);
-    if (account.type === "Gmail") {
       this._onAccountListeners.forEach((listener) => listener(account));
-      this.scrape();
-    } else {
-      this._onAccountListeners.forEach((listener) => listener(account));
-      this.orders();
-    }
+      this.scan('ONLINE', account)
   }
 
   private removeAccount(account: ReceiptAccount): void {
     this._accounts = this._accounts.filter(
-      (acc) => acc.username != account.username && acc.type != account.type,
+      (acc) => acc.username != account.username && acc.accountType.type != account.accountType.type,
     );
     this._onAccountListeners.forEach((listener) => listener(account));
   }
@@ -210,17 +197,12 @@ export class ReceiptService {
       await this.tiki.sdk.ingest(receipt);
       await this.process(ReceiptEvent.SCAN, {
         receipt: receipt,
-        account:
-          account != undefined
-            ? ReceiptAccount.fromCapture(account)
-            : undefined,
+        account: ReceiptAccount.fromValue(account!),
       });
       this._onReceiptListeners.forEach((listener) =>
         listener(
           receipt,
-          account != undefined
-            ? ReceiptAccount.fromCapture(account)
-            : undefined,
+          ReceiptAccount.fromValue(account!)
         ),
       );
     } else {
@@ -245,7 +227,7 @@ export class ReceiptService {
           amount,
           new Date(),
           event,
-          details.account?.type?.valueOf(),
+          details.account?.accountType.type?.valueOf(),
         );
         await this.tiki.sdk.createPayable(
           amount,
