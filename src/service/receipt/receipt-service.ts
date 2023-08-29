@@ -76,7 +76,8 @@ export class ReceiptService {
   }
 
   /**
-   * Scan a physical receipt and if valid, process and add it to the service.
+   * @param scanType equals to PHYSICAL Scan a physical receipt and if valid, process and add it to the service.
+   * @param scanType undefined will load all receipt data from the @param account
    */
   async scan(scanType: ScanType | undefined, account?: ReceiptAccount): Promise<void> {
     if(scanType === 'PHYSICAL'){
@@ -99,7 +100,10 @@ export class ReceiptService {
     }
   }
 
-
+  /**
+   * Log in a {@link ReceiptAccount}
+   * @param account - the receipt account to log in
+   */
   async login(account: ReceiptAccount): Promise<void> {
     if (account.accountType.type === 'EMAIL') {
       await this.plugin.loginWithEmail(
@@ -107,15 +111,14 @@ export class ReceiptService {
         account.password!,
         account.accountType.key!, //solved
       );
-      account.isVerified = true;
     } else {
-      let accountSigned = await this.plugin.loginWithRetailer(
+      await this.plugin.loginWithRetailer(
         account.username,
         account.password!,
         account.accountType.key!,
       );
-      if (accountSigned.isVerified) account.isVerified = true;
     }
+    account.isVerified = true;
     this.addAccount(account);
     await this.process(ReceiptEvent.LINK, {
       account: account,
@@ -176,12 +179,21 @@ export class ReceiptService {
 
   };
 
+  /**
+   * Add an account to the cache and scan the receipts from it
+   * @param account - the Receipt Account to be saved in mem
+   * calls @scan - to load the receipt data from the account
+   */
   private addAccount(account: ReceiptAccount): void {
     this._accounts.push(account);
       this._onAccountListeners.forEach((listener) => listener(account));
       this.scan('ONLINE', account)
   }
 
+  /**
+   * Remove an account from the cache
+   * @param account - the Receipt Account to be removed
+   */
   private removeAccount(account: ReceiptAccount): void {
     this._accounts = this._accounts.filter(
       (acc) => acc.username != account.username && acc.accountType.type != account.accountType.type,
@@ -189,6 +201,11 @@ export class ReceiptService {
     this._onAccountListeners.forEach((listener) => listener(account));
   }
 
+  /**
+   * Verify the receipt to process it
+   * @param receipt - the receipt to be processed
+   * @param account - the Receipt Account that owns the receipt
+   */
   private async addReceipt(
     receipt: TikiReceiptCapture.Receipt,
     account?: TikiReceiptCapture.Account,
@@ -211,7 +228,12 @@ export class ReceiptService {
       );
     }
   }
-
+  /**
+   * Process the receipts that passed in the addReceipt verification
+   * @param event - the type of the event that will be processed, in this case its SCAN
+   * @param details - the receipt and account 
+   * will add the receipt to the history and rewards points to the account
+   */
   private async process(
     event: ReceiptEvent,
     details: {

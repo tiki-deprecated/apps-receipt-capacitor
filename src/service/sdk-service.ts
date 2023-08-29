@@ -161,6 +161,10 @@ export class SdkService {
     }
   }
 
+  /**
+   * ingest the receipt to microblink to process it
+   * @param receipt - the receipt that will be scanned
+   */
   async ingest(receipt: Receipt): Promise<void> {
     const jwt: Jwt = await this.plugin.token();
     const rsp = await fetch(

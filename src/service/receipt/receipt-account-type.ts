@@ -69,6 +69,13 @@ import WegmansIcon from "@/assets/images/wegmans.png";
  * Enumeration of the supported account types.
  */
 
+
+/** The interface with the 3rd-party account info
+ * @type - indicates if the account its from an email service or a retailer service
+ * @name - The name of the email/retailer service
+ * @icon - the icon of the email/retailer service that will be show in the UI
+ * @key - the key of the enum value, that will be send to tiki-capture-receipt-capacitor
+ */
 export interface AccountType {
   type: 'EMAIL' | 'RETAILER',
   name: string,
@@ -76,6 +83,12 @@ export interface AccountType {
   key: string
 }
 
+/** The type of the Scan Method
+ * the @PHYSICAL type calls the camera to scan a physical receipt
+ * the @EMAIL type will call the data from linked emails accounts
+ * the @RETAILER type will call the data from linked retailers accounts
+ * the @ONLINE type will call the receipts from linked emails and linked retailers accounts
+ */
 export type ScanType = 'PHYSICAL' | 'EMAIL' | 'RETAILER' | 'ONLINE'
 
 export class AccountTypeCommom{

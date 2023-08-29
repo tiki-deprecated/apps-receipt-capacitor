@@ -16,7 +16,7 @@ export class ReceiptAccount {
    */
   username: string;
   /**
-   * The 3rd-party account type.
+   * The 3rd-party account type infos.
    */
   accountType: AccountType
   /**
@@ -49,7 +49,6 @@ export class ReceiptAccount {
   }
 
   static fromValue(account: Account): ReceiptAccount {
-    //const type: ReceiptAccountType | undefined = all.get(value);
     if (account)
       return new ReceiptAccount(account.username, account.accountType, undefined, account.isVerified);
     else throw Error(`Unsupported value: ${account}`);
