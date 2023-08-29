@@ -101,21 +101,12 @@ export class ReceiptService {
 
 
   async login(account: ReceiptAccount): Promise<void> {
-    if (account.accountType.type === 'EMAIL') {
-      await this.plugin.loginWithEmail(
-        account.username,
-        account.password!,
-        account.accountType.key!, //solved
-      );
-      account.isVerified = true;
-    } else {
-      let accountSigned = await this.plugin.loginWithRetailer(
-        account.username,
-        account.password!,
-        account.accountType.key!,
-      );
-      if (accountSigned.isVerified) account.isVerified = true;
-    }
+    await this.plugin.login(
+      account.username,
+      account.password!,
+      account.accountType.key!,
+    )
+    account.isVerified = true;
     this.addAccount(account);
     await this.process(ReceiptEvent.LINK, {
       account: account,
@@ -129,31 +120,11 @@ export class ReceiptService {
    */
   async logout(account: ReceiptAccount | undefined = undefined): Promise<void> {
     if(!account){
-        await this.plugin.flushRetailer().catch(error=>{
-          throw Error(`Could not flush emails accounts; Error: ${error}`)
-        });
-        await this.plugin.flushEmail().catch(error=>{
-          throw Error(`Could not flush retailers accounts; Error: ${error}`)
-        });
-        this._accounts = [];
+      await this.plugin.logout()
+      this._accounts = [];
       return
     }
-    if (account!.accountType.type === 'EMAIL') {
-      await this.plugin.removeEmail(
-        account!.username,
-        account!.password!,
-        account!.accountType.key!, //solved
-      ).catch(error=>{
-        throw Error(`Could not remove the email account; Error: ${error}`)
-      });
-    } else {
-      await this.plugin.removeRetailer(
-        account!.username,
-        account!.accountType.key!,
-      ).catch(error=>{
-        throw Error(`Could not remove the retailer account; Error: ${error}`)
-      });
-    }
+    await this.plugin.logout(account.username, account.password, account.accountType.key)
     this.removeAccount(account!);
     await this.process(ReceiptEvent.UNLINK, {
       account: account,
