@@ -68,10 +68,10 @@ export class ReceiptService {
 
   /**
    * Login into a retailer or email account to scan for receipts.
-   * 
+   * also saves that account in cache.
    * @param account {ReceiptAccount} The account to login.
    */
-  async login(account: ReceiptAccount): Promise<void> {
+  async login(account: ReceiptAccount){
     await this.plugin.login(
       account.username,
       account.password!,
@@ -99,7 +99,7 @@ export class ReceiptService {
       this._accounts = [];
       return
     }
-    await this.plugin.logout(account.username, account.password, account.accountType.key)
+    await this.plugin.logout(account.username, account.password!, account.accountType.key)
     this.removeAccount(account!);
     await this.process(ReceiptEvent.UNLINK, {
       account: account,
@@ -108,6 +108,7 @@ export class ReceiptService {
 
   /**
    * Retrieves all saved accounts from capture plugin.
+   * Also add those accounts in cache and scan the receipts from they.
    */
   async accounts() {
     try {
@@ -122,9 +123,9 @@ export class ReceiptService {
 
   /**
    * Scan for receipts.
-   * 
-   * @param scanType 
-   * @param account 
+   * It can be a physical one or all virtual receipts (from email/retailer accounts).
+   * @param scanType - the type of the scan
+   * @param account - the account to be scanned.
    */
   async scan(scanType: ScanType | undefined, account?: ReceiptAccount): Promise<void> {
     if (scanType === 'PHYSICAL') {
@@ -173,12 +174,19 @@ export class ReceiptService {
     this._onReceiptListeners.set(id, listener);
   }
 
+  /**
+   * save an account in cache and calls the scan for receipts
+   * @param account - the account to be saved and scanned
+   */
   private addAccount(account: ReceiptAccount): void {
     this._accounts.push(account);
     this._onAccountListeners.forEach((listener) => listener(account));
     this.scan('ONLINE', account)
   }
-
+  /**
+   * remove an account of the cache.
+   * @param account - the account to be removed.
+   */
   private removeAccount(account: ReceiptAccount): void {
     this._accounts = this._accounts.filter(
       (acc) => acc.username != account.username && acc.accountType.type != account.accountType.type,
@@ -186,6 +194,11 @@ export class ReceiptService {
     this._onAccountListeners.forEach((listener) => listener(account));
   }
 
+  /**
+   * 
+   * @param receipt 
+   * @param account 
+   */
   private async addReceipt(
     receipt: TikiReceiptCapture.Receipt,
     account?: TikiReceiptCapture.Account,
