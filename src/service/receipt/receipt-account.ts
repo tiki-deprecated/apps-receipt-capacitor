@@ -54,8 +54,7 @@ export class ReceiptAccount {
       return new ReceiptAccount(account.username, account.accountType, undefined, account.isVerified);
     else throw Error(`Unsupported value: ${account}`);
   }
- 
-  
+
   get icon(): string {
     return this.accountType.icon!
   }

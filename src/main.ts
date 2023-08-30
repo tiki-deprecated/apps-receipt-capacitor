@@ -19,7 +19,7 @@ import type { SdkService } from "@/service/sdk-service";
 import type { HistoryEvent } from "@/service/history/history-event";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
 import type { ReceiptAccount } from "@/service/receipt/receipt-account";
-import { AccountTypeCommom } from "@/service/receipt/receipt-account-type";
+import { AccountTypeCommom } from "@/service/receipt/account-type";
 import { TikiService } from "@/service/tiki-service";
 
 import Vue3TouchEvents from "vue3-touch-events";

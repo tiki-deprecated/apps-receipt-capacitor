@@ -66,15 +66,10 @@ export class TikiService {
    */
   async initialize(id: string): Promise<void> {
     await this.sdk.initialize(id);
-    await this.receipt.plugin.initialize(
-      this.config.key.scanKey,
-      this.config.key.intelKey,
-    ).catch(error=>{
-      throw Error(`Could not initialize; Error: ${error}`)
-    })
+    await this.receipt.initialize(this.config.key.scanKey, this.config.key.intelKey);
     this._isInitialized = true;
     this.history.load();
-    this.receipt.loadAccounts();
+    this.receipt.accounts();
   }
 
   /**

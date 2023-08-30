@@ -5,7 +5,6 @@
 
 import type { ReceiptCapture } from "@mytiki/tiki-capture-receipt-capacitor";
 import * as TikiReceiptCapture from "@mytiki/tiki-capture-receipt-capacitor";
-import * as Capture from "@mytiki/tiki-capture-receipt-capacitor";
 import { TikiService } from "@/service/tiki-service";
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
@@ -22,14 +21,20 @@ export class ReceiptService {
   static readonly OCR_THRESHOLD = 0.9;
 
   /**
-   * The raw plugin instance. Use to call TikiReceiptCapture directly.
+   * The raw plugin instance. Use to call {@link TikiReceiptCapture} directly.
    */
   readonly plugin: ReceiptCapture = TikiReceiptCapture.instance;
 
+  /**
+   * The local cached accounts
+   */
+  get cachedAccounts(){
+    return this._accounts
+  }
+
   private readonly tiki: TikiService;
   private _accounts: ReceiptAccount[] = [];
-  private _onAccountListeners: Map<string, (account: ReceiptAccount) => void> =
-    new Map();
+  private _onAccountListeners: Map<string, (account: ReceiptAccount) => void> = new Map();
   private _onReceiptListeners: Map<
     string,
     (receipt: TikiReceiptCapture.Receipt, account?: ReceiptAccount) => void
@@ -37,49 +42,92 @@ export class ReceiptService {
 
   /**
    * Creates an instance of the ReceiptService class.
+   * 
    * Do not construct directly. Call from {@link TikiService}.
-   * @param tiki - The parent service instance.
+   * 
+   * @param tiki {TikiService} The parent service instance.
    */
   constructor(tiki: TikiService) {
     this.tiki = tiki;
   }
 
   /**
-   * Register an account event listener.
-   * @param id - Identifier for the listener.
-   * @param listener - The callback function to be called when a new account is added or removed.
+   * Initializes the Microblink SDK.
+   * 
+   * Ask your account manager for the keys.
+   * 
+   * @param scanKey {string} Microblink scan Key
+   * @param intelKey {string} Microblik product intel key
    */
-  onAccount(id: string, listener: (account: ReceiptAccount) => void): void {
-    this._onAccountListeners.set(id, listener);
+  async initialize(scanKey: string, intelKey: string) {
+    await this.plugin.initialize(scanKey, intelKey)
+      .catch(error => {
+        throw Error(`Could not initialize; Error: ${error}`)
+      })
   }
 
   /**
-   * Register a receipt event listener.
-   * @param id - Identifier for the listener.
-   * @param listener - The callback function to be called whenever a new receipt is parsed.
+   * Login into a retailer or email account to scan for receipts.
+   * 
+   * @param account {ReceiptAccount} The account to login.
    */
-  onReceipt(
-    id: string,
-    listener: (
-      receipt: TikiReceiptCapture.Receipt,
-      account?: ReceiptAccount,
-    ) => void,
-  ) {
-    this._onReceiptListeners.set(id, listener);
+  async login(account: ReceiptAccount): Promise<void> {
+    await this.plugin.login(
+      account.username,
+      account.password!,
+      account.accountType.key!,
+    )
+    account.isVerified = true;
+    this.addAccount(account);
+    await this.process(ReceiptEvent.LINK, {
+      account: account,
+    });
+  }
+  
+  /**
+   * Log out from one or all {@link ReceiptAccount}.
+   * 
+   * The logout method will remove the credentials from the cache and remove all 
+   * cached data for this account.
+   * 
+   * @param {ReceiptAccount} account - which account logout from. Logout from all 
+   * accounts if undefined.
+   */
+  async logout(account: ReceiptAccount | undefined = undefined) {
+    if (!account) {
+      await this.plugin.logout()
+      this._accounts = [];
+      return
+    }
+    await this.plugin.logout(account.username, account.password, account.accountType.key)
+    this.removeAccount(account!);
+    await this.process(ReceiptEvent.UNLINK, {
+      account: account,
+    });
   }
 
   /**
-   * Get the list of registered accounts.
+   * Retrieves all saved accounts from capture plugin.
    */
-  get accounts(): ReceiptAccount[] {
-    return this._accounts;
+  async accounts() {
+    try {
+      (await this.plugin.accounts()).forEach((account) => {
+        this.addAccount(ReceiptAccount.fromValue(account))
+        this.scan('ONLINE', ReceiptAccount.fromValue(account))
+      })
+    } catch (error) {
+      throw Error(`Could not load the accounts; Error: ${error}`)
+    }
   }
 
   /**
-   * Scan a physical receipt and if valid, process and add it to the service.
+   * Scan for receipts.
+   * 
+   * @param scanType 
+   * @param account 
    */
   async scan(scanType: ScanType | undefined, account?: ReceiptAccount): Promise<void> {
-    if(scanType === 'PHYSICAL'){
+    if (scanType === 'PHYSICAL') {
       const license = await this.tiki.sdk.getLicense();
       if (license != undefined) {
         const receipt = await this.plugin.scan(scanType);
@@ -93,64 +141,42 @@ export class ReceiptService {
           `No license found for ${this.tiki.sdk.id}. User must first consent to the program.`,
         );
     }
-    if(!scanType){
+    if (!scanType) {
       const receipts = await this.plugin.scan('ONLINE', account!);
       this.addReceipt(receipts.receipt)
     }
   }
 
-
-  async login(account: ReceiptAccount): Promise<void> {
-    await this.plugin.login(
-      account.username,
-      account.password!,
-      account.accountType.key!,
-    )
-    account.isVerified = true;
-    this.addAccount(account);
-    await this.process(ReceiptEvent.LINK, {
-      account: account,
-    });
+  /**
+   * Register an account event listener.
+   * 
+   * @param id - Identifier for the listener.
+   * @param listener - The callback function to be called when a new account is added or removed.
+   */
+  onAccount(id: string, listener: (account: ReceiptAccount) => void): void {
+    this._onAccountListeners.set(id, listener);
   }
 
   /**
-   * Log out from a {@link ReceiptAccount} or remove all the linked accounts.
-   * @param account - The receipt account to log out. 
-   * If the @param account - is null, will flush all the receipt accounts of the count
+   * Register a receipt event listener.
+   * 
+   * @param id - Identifier for the listener.
+   * @param listener - The callback function to be called whenever a new receipt is parsed.
    */
-  async logout(account: ReceiptAccount | undefined = undefined): Promise<void> {
-    if(!account){
-      await this.plugin.logout()
-      this._accounts = [];
-      return
-    }
-    await this.plugin.logout(account.username, account.password, account.accountType.key)
-    this.removeAccount(account!);
-    await this.process(ReceiptEvent.UNLINK, {
-      account: account,
-    });
+  onReceipt(
+    id: string,
+    listener: (
+      receipt: TikiReceiptCapture.Receipt,
+      account?: ReceiptAccount,
+    ) => void,
+  ) {
+    this._onReceiptListeners.set(id, listener);
   }
-
-
-  /**
-   * Load and verify previously logged-in accounts.
-   */
-  loadAccounts = async (): Promise<void> => {
-    try {
-      (await this.plugin.accounts()).forEach((account) =>{
-        this.addAccount(ReceiptAccount.fromValue(account))
-        this.scan('ONLINE', ReceiptAccount.fromValue(account))
-      })
-    } catch(error){
-      throw Error (`Could not load the accounts; Error: ${error}`)
-    }
-
-  };
 
   private addAccount(account: ReceiptAccount): void {
     this._accounts.push(account);
-      this._onAccountListeners.forEach((listener) => listener(account));
-      this.scan('ONLINE', account)
+    this._onAccountListeners.forEach((listener) => listener(account));
+    this.scan('ONLINE', account)
   }
 
   private removeAccount(account: ReceiptAccount): void {
