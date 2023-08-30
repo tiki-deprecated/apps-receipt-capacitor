@@ -195,14 +195,14 @@ export class ReceiptService {
   }
 
   /**
-   * 
-   * @param receipt 
-   * @param account 
+   * verify/validate a Receipt to process it.
+   * @param receipt - the receipt to be verified and processed after
+   * @param account - the account that owns the receipt.
    */
   private async addReceipt(
     receipt: TikiReceiptCapture.Receipt,
     account?: TikiReceiptCapture.Account,
-  ): Promise<void> {
+  ) {
     if (!receipt.duplicate && !receipt.fraudulent) {
       await this.tiki.sdk.ingest(receipt);
       await this.process(ReceiptEvent.SCAN, {
@@ -222,13 +222,19 @@ export class ReceiptService {
     }
   }
 
+   /**
+   * Process the receipts that passed in the addReceipt verification
+   * @param event - the type of the event that will be processed, in this case its SCAN
+   * @param details - the receipt and account 
+   * will add the receipt to the history and rewards points to the account
+   */
   private async process(
     event: ReceiptEvent,
     details: {
       receipt?: TikiReceiptCapture.Receipt;
       account?: ReceiptAccount;
     },
-  ): Promise<void> {
+  ){
     const rewards = this.tiki.config.rewards;
     for (const reward of rewards) {
       const amount = reward.issuer(event, details);
