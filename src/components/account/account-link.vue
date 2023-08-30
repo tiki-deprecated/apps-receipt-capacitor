@@ -18,9 +18,9 @@ import { TikiService } from "@/service/tiki-service";
 
 const tiki: TikiService | undefined = inject("Tiki");
 defineEmits(["close", "back", "unlink"]);
-const accounts = ref<ReceiptAccount[]>(tiki!.receipt.accounts);
+const accounts = ref<ReceiptAccount[]>(tiki!.receipt.cachedAccounts);
 tiki!.receipt.onAccount("account-link", (acc) => {
-  accounts.value = tiki!.receipt.accounts;
+  accounts.value = tiki!.receipt.cachedAccounts;
 });
 const error = ref<string>();
 const form = ref<ReceiptAccount>(

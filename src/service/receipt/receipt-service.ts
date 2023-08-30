@@ -5,7 +5,6 @@
 
 import type { ReceiptCapture } from "@mytiki/tiki-capture-receipt-capacitor";
 import * as TikiReceiptCapture from "@mytiki/tiki-capture-receipt-capacitor";
-import * as Capture from "@mytiki/tiki-capture-receipt-capacitor";
 import { TikiService } from "@/service/tiki-service";
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
@@ -22,14 +21,20 @@ export class ReceiptService {
   static readonly OCR_THRESHOLD = 0.9;
 
   /**
-   * The raw plugin instance. Use to call TikiReceiptCapture directly.
+   * The raw plugin instance. Use to call {@link TikiReceiptCapture} directly.
    */
   readonly plugin: ReceiptCapture = TikiReceiptCapture.instance;
 
+  /**
+   * The local cached accounts
+   */
+  get cachedAccounts(){
+    return this._accounts
+  }
+
   private readonly tiki: TikiService;
   private _accounts: ReceiptAccount[] = [];
-  private _onAccountListeners: Map<string, (account: ReceiptAccount) => void> =
-    new Map();
+  private _onAccountListeners: Map<string, (account: ReceiptAccount) => void> = new Map();
   private _onReceiptListeners: Map<
     string,
     (receipt: TikiReceiptCapture.Receipt, account?: ReceiptAccount) => void
@@ -37,15 +42,115 @@ export class ReceiptService {
 
   /**
    * Creates an instance of the ReceiptService class.
+   * 
    * Do not construct directly. Call from {@link TikiService}.
-   * @param tiki - The parent service instance.
+   * 
+   * @param tiki {TikiService} The parent service instance.
    */
   constructor(tiki: TikiService) {
     this.tiki = tiki;
   }
 
   /**
+   * Initializes the Microblink SDK.
+   * 
+   * Ask your account manager for the keys.
+   * 
+   * @param scanKey {string} Microblink scan Key
+   * @param intelKey {string} Microblik product intel key
+   */
+  async initialize(scanKey: string, intelKey: string) {
+    await this.plugin.initialize(scanKey, intelKey)
+      .catch(error => {
+        throw Error(`Could not initialize; Error: ${error}`)
+      })
+  }
+
+  /**
+   * Login into a retailer or email account to scan for receipts.
+   * also saves that account in cache.
+   * @param account {ReceiptAccount} The account to login.
+   */
+  async login(account: ReceiptAccount){
+    await this.plugin.login(
+      account.username,
+      account.password!,
+      account.accountType.key!,
+    )
+    account.isVerified = true;
+    this.addAccount(account);
+    await this.process(ReceiptEvent.LINK, {
+      account: account,
+    });
+  }
+  
+  /**
+   * Log out from one or all {@link ReceiptAccount}.
+   * 
+   * The logout method will remove the credentials from the cache and remove all 
+   * cached data for this account.
+   * 
+   * @param {ReceiptAccount} account - which account logout from. Logout from all 
+   * accounts if undefined.
+   */
+  async logout(account: ReceiptAccount | undefined = undefined) {
+    if (!account) {
+      await this.plugin.logout()
+      this._accounts = [];
+      return
+    }
+    await this.plugin.logout(account.username, account.password!, account.accountType.key)
+    this.removeAccount(account!);
+    await this.process(ReceiptEvent.UNLINK, {
+      account: account,
+    });
+  }
+
+  /**
+   * Retrieves all saved accounts from capture plugin.
+   * Also add those accounts in cache and scan the receipts from they.
+   */
+  async accounts() {
+    try {
+      (await this.plugin.accounts()).forEach((account) => {
+        this.addAccount(ReceiptAccount.fromValue(account))
+        this.scan('ONLINE', ReceiptAccount.fromValue(account))
+      })
+    } catch (error) {
+      throw Error(`Could not load the accounts; Error: ${error}`)
+    }
+  }
+
+  /**
+   * Scan for receipts.
+   * It can be a physical one or all virtual receipts (from email/retailer accounts).
+   * @param scanType - the type of the scan
+   * @param account - the account to be scanned.
+   */
+  async scan(scanType: ScanType | undefined, account?: ReceiptAccount): Promise<void> {
+    if (scanType === 'PHYSICAL') {
+      const license = await this.tiki.sdk.getLicense();
+      if (license != undefined) {
+        const receipt = await this.plugin.scan(scanType);
+        if (receipt.receipt.ocrConfidence > ReceiptService.OCR_THRESHOLD) {
+          await this.addReceipt(receipt.receipt);
+        } else {
+          console.warn(`Receipt ignored: Confidence: ${receipt.receipt.ocrConfidence}`);
+        }
+      } else
+        throw Error(
+          `No license found for ${this.tiki.sdk.id}. User must first consent to the program.`,
+        );
+    }
+    if (!scanType) {
+      const receipts = await this.plugin.scan('ONLINE', account!);
+      this.addReceipt(receipts.receipt)
+    }
+  }
+
+  /**
    * Register an account event listener.
+   * 
    * @param id - Identifier for the listener.
    * @param listener - The callback function to be called when a new account is added or removed.
    */
@@ -55,6 +160,7 @@ export class ReceiptService {
 
   /**
    * Register a receipt event listener.
+   * 
    * @param id - Identifier for the listener.
    * @param listener - The callback function to be called whenever a new receipt is parsed.
    */
@@ -69,119 +175,18 @@ export class ReceiptService {
   }
 
   /**
-   * Get the list of registered accounts.
+   * save an account in cache and calls the scan for receipts
+   * @param account - the account to be saved and scanned
    */
-  get accounts(): ReceiptAccount[] {
-    return this._accounts;
-  }
-
-  /**
-   * Scan a physical receipt and if valid, process and add it to the service.
-   */
-  async scan(scanType: ScanType | undefined, account?: ReceiptAccount): Promise<void> {
-    if(scanType === 'PHYSICAL'){
-      const license = await this.tiki.sdk.getLicense();
-      if (license != undefined) {
-        const receipt = await this.plugin.scan(scanType);
-        if (receipt.receipt.ocrConfidence > ReceiptService.OCR_THRESHOLD) {
-          await this.addReceipt(receipt.receipt);
-        } else {
-          console.warn(`Receipt ignored: Confidence: ${receipt.receipt.ocrConfidence}`);
-        }
-      } else
-        throw Error(
-          `No license found for ${this.tiki.sdk.id}. User must first consent to the program.`,
-        );
-    }
-    if(!scanType){
-      const receipts = await this.plugin.scan('ONLINE', account!);
-      this.addReceipt(receipts.receipt)
-    }
-  }
-
-
-  async login(account: ReceiptAccount): Promise<void> {
-    if (account.accountType.type === 'EMAIL') {
-      await this.plugin.loginWithEmail(
-        account.username,
-        account.password!,
-        account.accountType.key!, //solved
-      );
-      account.isVerified = true;
-    } else {
-      let accountSigned = await this.plugin.loginWithRetailer(
-        account.username,
-        account.password!,
-        account.accountType.key!,
-      );
-      if (accountSigned.isVerified) account.isVerified = true;
-    }
-    this.addAccount(account);
-    await this.process(ReceiptEvent.LINK, {
-      account: account,
-    });
-  }
-
-  /**
-   * Log out from a {@link ReceiptAccount} or remove all the linked accounts.
-   * @param account - The receipt account to log out. 
-   * If the @param account - is null, will flush all the receipt accounts of the count
-   */
-  async logout(account: ReceiptAccount | undefined = undefined): Promise<void> {
-    if(!account){
-        await this.plugin.flushRetailer().catch(error=>{
-          throw Error(`Could not flush emails accounts; Error: ${error}`)
-        });
-        await this.plugin.flushEmail().catch(error=>{
-          throw Error(`Could not flush retailers accounts; Error: ${error}`)
-        });
-        this._accounts = [];
-      return
-    }
-    if (account!.accountType.type === 'EMAIL') {
-      await this.plugin.removeEmail(
-        account!.username,
-        account!.password!,
-        account!.accountType.key!, //solved
-      ).catch(error=>{
-        throw Error(`Could not remove the email account; Error: ${error}`)
-      });
-    } else {
-      await this.plugin.removeRetailer(
-        account!.username,
-        account!.accountType.key!,
-      ).catch(error=>{
-        throw Error(`Could not remove the retailer account; Error: ${error}`)
-      });
-    }
-    this.removeAccount(account!);
-    await this.process(ReceiptEvent.UNLINK, {
-      account: account,
-    });
-  }
-
-
-  /**
-   * Load and verify previously logged-in accounts.
-   */
-  loadAccounts = async (): Promise<void> => {
-    try {
-      (await this.plugin.accounts()).forEach((account) =>{
-        this.addAccount(ReceiptAccount.fromValue(account))
-        this.scan('ONLINE', ReceiptAccount.fromValue(account))
-      })
-    } catch(error){
-      throw Error (`Could not load the accounts; Error: ${error}`)
-    }
-
-  };
-
   private addAccount(account: ReceiptAccount): void {
     this._accounts.push(account);
-      this._onAccountListeners.forEach((listener) => listener(account));
-      this.scan('ONLINE', account)
+    this._onAccountListeners.forEach((listener) => listener(account));
+    this.scan('ONLINE', account)
   }
-
+  /**
+   * remove an account of the cache.
+   * @param account - the account to be removed.
+   */
   private removeAccount(account: ReceiptAccount): void {
     this._accounts = this._accounts.filter(
       (acc) => acc.username != account.username && acc.accountType.type != account.accountType.type,
@@ -189,10 +194,15 @@ export class ReceiptService {
     this._onAccountListeners.forEach((listener) => listener(account));
   }
 
+  /**
+   * verify/validate a Receipt to process it.
+   * @param receipt - the receipt to be verified and processed after
+   * @param account - the account that owns the receipt.
+   */
   private async addReceipt(
     receipt: TikiReceiptCapture.Receipt,
     account?: TikiReceiptCapture.Account,
-  ): Promise<void> {
+  ) {
     if (!receipt.duplicate && !receipt.fraudulent) {
       await this.tiki.sdk.ingest(receipt);
       await this.process(ReceiptEvent.SCAN, {
@@ -212,13 +222,19 @@ export class ReceiptService {
     }
   }
 
+   /**
+   * Process the receipts that passed in the addReceipt verification
+   * @param event - the type of the event that will be processed, in this case its SCAN
+   * @param details - the receipt and account 
+   * will add the receipt to the history and rewards points to the account
+   */
   private async process(
     event: ReceiptEvent,
     details: {
       receipt?: TikiReceiptCapture.Receipt;
       account?: ReceiptAccount;
     },
-  ): Promise<void> {
+  ){
     const rewards = this.tiki.config.rewards;
     for (const reward of rewards) {
       const amount = reward.issuer(event, details);
