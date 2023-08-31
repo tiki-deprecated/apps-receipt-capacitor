@@ -26,7 +26,11 @@
   },
   "scripts": {
     "build": "rimraf dist && vue-tsc --declaration --emitDeclarationOnly; vite build",
-    "example:android": "npm run build && cd example && npm run build-only && npx cap sync && npx cap run android"
+    "example:android": "npm run build && cd example && npm run build-only && npx cap sync android && npx cap run android",
+    "example:ios": "npm run build && cd example && npm run build-only && npx cap sync ios && npx cap run ios",
+    "setup:local": "./setup-local.sh",
+    "setup:prod": "./setup-prod.sh",
+    "setup:ios": "./setup-local-ios.sh"
   },
   "keywords": [
     "tiki",
