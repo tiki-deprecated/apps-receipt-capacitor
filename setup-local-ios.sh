@@ -13,4 +13,4 @@ cd example
 npm install ../../tiki-capture-receipt-capacitor
 npm install ../
 cd ..
-npm run example:android
+npm run example:ios
