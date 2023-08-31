@@ -6,6 +6,7 @@
 
 import type { Account } from "@mytiki/tiki-capture-receipt-capacitor";
 import type { AccountType } from "./receipt-account-type";
+import { AccountTypeCommom } from "./receipt-account-type";
 
 /**
  * Represents a 3rd-party account used to scrape receipts.
@@ -49,9 +50,17 @@ export class ReceiptAccount {
   }
 
   static fromValue(account: Account): ReceiptAccount {
-    //const type: ReceiptAccountType | undefined = all.get(value);
     if (account)
       return new ReceiptAccount(account.username, account.accountType, account.password, account.isVerified);
+    else throw Error(`Unsupported value: ${account}`);
+  }
+  static fromSource(account: Account): ReceiptAccount {
+    if(account){
+      let accountSource  = Object.values(AccountTypeCommom).find((accountObj) => 
+      accountObj.key === account.source
+      )
+      return new ReceiptAccount(account.username, accountSource, undefined, account.isVerified)
+    }
     else throw Error(`Unsupported value: ${account}`);
   }
 

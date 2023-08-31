@@ -112,9 +112,9 @@ export class ReceiptService {
    */
   async accounts() {
     try {
-      (await this.plugin.accounts()).forEach((account) => {
-        this.addAccount(ReceiptAccount.fromValue(account))
-        this.scan('ONLINE', ReceiptAccount.fromValue(account))
+      (await this.plugin.accounts()).accounts.forEach((account) => {
+        this.addAccount(ReceiptAccount.fromSource(account))
+        this.scan('ONLINE', ReceiptAccount.fromSource(account))
       })
     } catch (error) {
       throw Error(`Could not load the accounts; Error: ${error}`)
