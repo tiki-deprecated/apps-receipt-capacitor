@@ -35,9 +35,9 @@ const update = () => {
      ReceiptAccount.fromValue(
        {
          username: username.value?.value ?? "",
-         accountType: selectedAccount,
          password: password.value?.value,
-         isVerified: undefined
+         accountType: selectedAccount,
+         isVerified: true
        }
      ),
   );
