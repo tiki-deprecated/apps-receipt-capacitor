@@ -51,7 +51,7 @@ export class ReceiptAccount {
   static fromValue(account: Account): ReceiptAccount {
     //const type: ReceiptAccountType | undefined = all.get(value);
     if (account)
-      return new ReceiptAccount(account.username, account.accountType, undefined, account.isVerified);
+      return new ReceiptAccount(account.username, account.accountType, account.password, account.isVerified);
     else throw Error(`Unsupported value: ${account}`);
   }
 

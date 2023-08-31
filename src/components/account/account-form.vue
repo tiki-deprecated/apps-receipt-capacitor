@@ -25,30 +25,21 @@ const tiki: TikiService | undefined = inject("Tiki");
 const username = ref<HTMLInputElement>();
 const password = ref<HTMLInputElement>();
 const account = ref<HTMLSelectElement>();
-let accountSelected = ref<AccountType>()
-watch(
-  () => account,
-  async (newValue) => {
-    accountSelected = (Object.values(AccountTypeCommom)).find((accountObj) => {
-      accountObj.name === newValue
-    })
-  },
-);
+
 const update = () => {
+  let selectedAccount  = Object.values(AccountTypeCommom).find((accountObj) => 
+       accountObj.name == account.value!.value
+     )
   emit(
     "update:account",
-    ReceiptAccount.fromValue(
-      {
-        username: username.value?.value ?? "",
-        accountType: {
-          type: accountSelected?.value?.type!,
-          name: accountSelected?.value?.name!,
-          icon: undefined,
-          key: accountSelected?.value?.key!,
-        },
-        password: password.value?.value,
-      }
-    ),
+     ReceiptAccount.fromValue(
+       {
+         username: username.value?.value ?? "",
+         password: password.value?.value,
+         accountType: selectedAccount,
+         isVerified: true
+       }
+     ),
   );
 };
 
@@ -71,13 +62,11 @@ watch(
 <template>
   <form>
     <label for="accounts">Choose Account</label>
-    <select id="accounts" ref="account" required @change="update">
-      <option v-for="account in Object.values(AccountTypeCommom)" :value="account.name" :label="account.name"
-        :selected="account.name">
-        {{ account }}
+    <select id="accounts" required @change="update" ref="account">
+      <option v-for="account of Object.values(AccountTypeCommom)" :value="account.name" :label="account.name" :selected="account.name">
       </option>
     </select>
-    <label id="username">Username</label>
+     <label id="username">Username</label>
     <input type="text" autocomplete="false" id="username" ref="username" required @change="update" />
     <label id="password">Password</label>
     <input type="password" autocomplete="false" id="password" ref="password" required @change="update" />
