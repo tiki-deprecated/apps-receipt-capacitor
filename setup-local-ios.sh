@@ -3,7 +3,7 @@
 cd ../tiki-capture-receipt-capacitor
 npm install
 npm run build
-npm run verify:android
+npm run verify:ios
 cd example
 npm install
 npm run build-only
