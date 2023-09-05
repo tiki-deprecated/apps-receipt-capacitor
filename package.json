@@ -6,10 +6,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tiki-bar/tiki-receipt-capacitor.git"
+    "url": "https://github.com/tiki/tiki-receipt-capacitor.git"
   },
   "bugs": {
-    "url": "https://github.com/tiki-bar/tiki-receipt-capacitor/issues"
+    "url": "https://github.com/tiki/tiki-receipt-capacitor/issues"
   },
   "files": [
     "dist"
