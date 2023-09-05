@@ -15,7 +15,7 @@ Reward users with points for scanning physical receipts, linking their inbox, or
 
 _Microblink is a closed-source, licensed SDK. For new customers, we offer a **free Microblink license**. Schedule a meeting at [mytiki.com](https://mytiki.com) to get your license keys._
 
-![app-screen-highlights](https://github.com/tiki-bar/tiki-receipt-capacitor/assets/3769672/f167490e-bac7-4d9c-a0de-71fa4d89cc3e)
+![app-screen-highlights](https://github.com/tiki/tiki-receipt-capacitor/assets/3769672/f167490e-bac7-4d9c-a0de-71fa4d89cc3e)
 
 ## Installation
 ```shell
@@ -31,7 +31,7 @@ Microblink is closed source, and subsequently it's AARs are hosted by [GitHub's 
 
 ```groovy
 maven {
-    url = uri("https://maven.pkg.github.com/tiki-bar/tiki-capture-receipt-capacitor")
+    url = uri("https://maven.pkg.github.com/tiki/tiki-capture-receipt-capacitor")
     credentials {
         username = providers
                 .gradleProperty("gpr.user")
@@ -305,12 +305,12 @@ _Note, if you press start before the initialization is complete, a warning will 
 
 #### @mytiki/tiki-sdk-capacitor
 [🤖 NPM](https://www.npmjs.com/package/@mytiki/tiki-sdk-capacitor)  
-[👀 Source](https://github.com/tiki-bar/tiki-sdk-capacitor)  
+[👀 Source](https://github.com/tiki/tiki-sdk-capacitor)  
 [📚 TSDoc](https://tiki-sdk-capacitor.mytiki.com)  
 
 #### @mytiki/tiki-sdk-capacitor
 [🤖 NPM](https://www.npmjs.com/package/@mytiki/tiki-capture-receipt-capacitor)  
-[👀 Source](https://github.com/tiki-bar/tiki-capture-receipt-capacitor)  
+[👀 Source](https://github.com/tiki/tiki-capture-receipt-capacitor)  
 [📚 TSDoc](https://tiki-capture-receipt-capacitor.mytiki.com)
 
 #### Other TIKI Links
@@ -325,7 +325,7 @@ _Note, if you press start before the initialization is complete, a warning will 
 [🍎 BlinkReceipt - iOS](https://microblink.com)  
 
 ## Open Issues
-You can find active issues here in GitHub under [Issues](https://github.com/tiki-bar/tiki-receipt-capacitor/issues). If you run into a bug or have a question, just create a new Issue or reach out to a team member on 👾 [Discord](https://discord.gg/tiki).
+You can find active issues here in GitHub under [Issues](https://github.com/tiki/tiki-receipt-capacitor/issues). If you run into a bug or have a question, just create a new Issue or reach out to a team member on 👾 [Discord](https://discord.gg/tiki).
 
 ### Key open issues to take note of:
 1. iOS is not functional (yet) — our team is still working through a handful of critical bugs/issues. Estimated by: 8/23.
@@ -335,7 +335,7 @@ You can find active issues here in GitHub under [Issues](https://github.com/tiki
 
 # Contributing
 
-- Use [GitHub Issues](https://github.com/tiki-bar/tiki-receipt-capacitor/issues) to report any bugs you find or to request enhancements.
+- Use [GitHub Issues](https://github.com/tiki/tiki-receipt-capacitor/issues) to report any bugs you find or to request enhancements.
 - If you'd like to get in touch with our team or other active contributors, pop in our 👾 [Discord](https://discord.gg/tiki).
 - Please use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) if you intend to add code to this project.
 
@@ -356,11 +356,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="http://mytiki.com"><img src="https://avatars.githubusercontent.com/u/3769672?v=4?s=100" width="100px;" alt="Mike Audi"/><br /><sub><b>Mike Audi</b></sub></a><br /><a href="https://github.com/tiki-bar/tiki-receipt-capacitor/commits?author=mike-audi" title="Code">💻</a> <a href="https://github.com/tiki-bar/tiki-receipt-capacitor/pulls?q=is%3Apr+reviewed-by%3Amike-audi" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/tiki-bar/tiki-receipt-capacitor/commits?author=mike-audi" title="Documentation">📖</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/ricardolg/"><img src="https://avatars.githubusercontent.com/u/8357343?v=4?s=100" width="100px;" alt="Ricardo Gonçalves"/><br /><sub><b>Ricardo Gonçalves</b></sub></a><br /><a href="https://github.com/tiki-bar/tiki-receipt-capacitor/commits?author=ricardobrg" title="Code">💻</a> <a href="https://github.com/tiki-bar/tiki-receipt-capacitor/pulls?q=is%3Apr+reviewed-by%3Aricardobrg" title="Reviewed Pull Requests">👀</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/MiroBenicio"><img src="https://avatars.githubusercontent.com/u/96149507?v=4?s=100" width="100px;" alt="Miro Benício"/><br /><sub><b>Miro Benício</b></sub></a><br /><a href="https://github.com/tiki-bar/tiki-receipt-capacitor/commits?author=MiroBenicio" title="Code">💻</a> <a href="#maintenance-MiroBenicio" title="Maintenance">🚧</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Schuler-Gabriel"><img src="https://avatars.githubusercontent.com/u/85256777?v=4?s=100" width="100px;" alt="Gabriel Schuler Barros"/><br /><sub><b>Gabriel Schuler Barros</b></sub></a><br /><a href="https://github.com/tiki-bar/tiki-receipt-capacitor/commits?author=Schuler-Gabriel" title="Code">💻</a> <a href="#maintenance-Schuler-Gabriel" title="Maintenance">🚧</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://www.jessemonteiro.com"><img src="https://avatars.githubusercontent.com/u/8730443?v=4?s=100" width="100px;" alt="Jessé Monteiro"/><br /><sub><b>Jessé Monteiro</b></sub></a><br /><a href="https://github.com/tiki-bar/tiki-receipt-capacitor/commits?author=JesseMonteiro" title="Code">💻</a> <a href="#maintenance-JesseMonteiro" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://mytiki.com"><img src="https://avatars.githubusercontent.com/u/3769672?v=4?s=100" width="100px;" alt="Mike Audi"/><br /><sub><b>Mike Audi</b></sub></a><br /><a href="https://github.com/tiki/tiki-receipt-capacitor/commits?author=mike-audi" title="Code">💻</a> <a href="https://github.com/tiki/tiki-receipt-capacitor/pulls?q=is%3Apr+reviewed-by%3Amike-audi" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/tiki/tiki-receipt-capacitor/commits?author=mike-audi" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/ricardolg/"><img src="https://avatars.githubusercontent.com/u/8357343?v=4?s=100" width="100px;" alt="Ricardo Gonçalves"/><br /><sub><b>Ricardo Gonçalves</b></sub></a><br /><a href="https://github.com/tiki/tiki-receipt-capacitor/commits?author=ricardobrg" title="Code">💻</a> <a href="https://github.com/tiki/tiki-receipt-capacitor/pulls?q=is%3Apr+reviewed-by%3Aricardobrg" title="Reviewed Pull Requests">👀</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/MiroBenicio"><img src="https://avatars.githubusercontent.com/u/96149507?v=4?s=100" width="100px;" alt="Miro Benício"/><br /><sub><b>Miro Benício</b></sub></a><br /><a href="https://github.com/tiki/tiki-receipt-capacitor/commits?author=MiroBenicio" title="Code">💻</a> <a href="#maintenance-MiroBenicio" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Schuler-Gabriel"><img src="https://avatars.githubusercontent.com/u/85256777?v=4?s=100" width="100px;" alt="Gabriel Schuler Barros"/><br /><sub><b>Gabriel Schuler Barros</b></sub></a><br /><a href="https://github.com/tiki/tiki-receipt-capacitor/commits?author=Schuler-Gabriel" title="Code">💻</a> <a href="#maintenance-Schuler-Gabriel" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://www.jessemonteiro.com"><img src="https://avatars.githubusercontent.com/u/8730443?v=4?s=100" width="100px;" alt="Jessé Monteiro"/><br /><sub><b>Jessé Monteiro</b></sub></a><br /><a href="https://github.com/tiki/tiki-receipt-capacitor/commits?author=JesseMonteiro" title="Code">💻</a> <a href="#maintenance-JesseMonteiro" title="Maintenance">🚧</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/timoguin"><img src="https://avatars.githubusercontent.com/u/671968?v=4?s=100" width="100px;" alt="Tim O'Guin"/><br /><sub><b>Tim O'Guin</b></sub></a><br /><a href="#projectManagement-timoguin" title="Project Management">📆</a></td>
     </tr>
   </tbody>
