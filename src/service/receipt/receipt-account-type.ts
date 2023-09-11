@@ -64,6 +64,7 @@ import WalgreensIcon from "@/assets/images/walgreens.png";
 import WalmartIcon from "@/assets/images/walmart.png";
 import WalmartCanadaIcon from "@/assets/images/walmart-canada.png";
 import WegmansIcon from "@/assets/images/wegmans.png";
+import type { Account } from "@mytiki/tiki-capture-receipt-capacitor";
 //import YahooIcon from "@/assets/images/yahoo.png";
 /**
  * Enumeration of the supported account types.
@@ -128,7 +129,12 @@ export class AccountTypeCommom{
   /**
    * AOL account type.
    */
-  // AOL = "AOL",
+  static readonly AOL: AccountType = {
+    type: "EMAIL",
+    icon: "",
+    name: "AOL",
+    key: "AOL"
+  }
 
   /**
    * Bed Bath & Beyond account type.
@@ -431,11 +437,12 @@ export class AccountTypeCommom{
   /**}
    * Microsoft Outlook account type.
    */
-  // static readonly OUTLOOK: AccountType =  {
-  //   name:"Outlook",
-  //   type: "Email",
-  //   icon: "",
-  // }
+   static readonly OUTLOOK: AccountType =  {
+     name:"Outlook",
+     type: "EMAIL",
+     key: "OUTLOOK",
+     icon: "",
+   }
 
   /**
    * Publix account type.
@@ -645,11 +652,11 @@ export class AccountTypeCommom{
     name: "Wegman’s",
     key: 'WEGMANS',
 } 
-  // static readonly YAHOO: AccountType = {
-  //   type: "Email",
-  //   icon: '',
-  //   name: "Yahoo",
-  //   key: "YAHOO"
-  // }
+   static readonly YAHOO: AccountType = {
+     type: "EMAIL",
+     icon: '',
+     name: "Yahoo",
+     key: "YAHOO"
+   }
 }
 
