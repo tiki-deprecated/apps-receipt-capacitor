@@ -6,7 +6,7 @@
 import AcmeIcon from "@/assets/images/acme.png";
 import AlbertsonsIcon from "@/assets/images/albertsons.png";
 import AmazonIcon from "@/assets/images/amazon.png";
-//import AolIcon from "@/assets/images/aol.png";
+import AolIcon from "@/assets/images/aol.png";
 import BedBathAndBeyondIcon from "@/assets/images/bed-bath-beyond.png";
 import BestBuyIcon from "@/assets/images/best-buy.png";
 import BJsIcon from "@/assets/images/bjs.png";
@@ -40,7 +40,7 @@ import MacysIcon from "@/assets/images/macys.png";
 import MarshallsIcon from "@/assets/images/marshalls.png";
 import MeijerIcon from "@/assets/images/meijer.png";
 import NikeIcon from "@/assets/images/nike.png";
-//import OutlookIcon from "@/assets/images/outlook.png";
+import OutlookIcon from "@/assets/images/outlook.png";
 import PublixIcon from "@/assets/images/publix.png";
 import RalphsIcon from "@/assets/images/ralphs.png";
 import RiteAidIcon from "@/assets/images/rite-aid.png";
@@ -64,8 +64,7 @@ import WalgreensIcon from "@/assets/images/walgreens.png";
 import WalmartIcon from "@/assets/images/walmart.png";
 import WalmartCanadaIcon from "@/assets/images/walmart-canada.png";
 import WegmansIcon from "@/assets/images/wegmans.png";
-import type { Account } from "@mytiki/tiki-capture-receipt-capacitor";
-//import YahooIcon from "@/assets/images/yahoo.png";
+import YahooIcon from "@/assets/images/yahoo.png";
 /**
  * Enumeration of the supported account types.
  */
@@ -131,7 +130,7 @@ export class AccountTypeCommom{
    */
   static readonly AOL: AccountType = {
     type: "EMAIL",
-    icon: "",
+    icon: AolIcon,
     name: "AOL",
     key: "AOL"
   }
@@ -437,12 +436,12 @@ export class AccountTypeCommom{
   /**}
    * Microsoft Outlook account type.
    */
-   static readonly OUTLOOK: AccountType =  {
-     name:"Outlook",
-     type: "EMAIL",
-     key: "OUTLOOK",
-     icon: "",
-   }
+    static readonly OUTLOOK: AccountType =  {
+      name:"Outlook",
+      type: "EMAIL",
+      key: "OUTLOOK_SDK",
+      icon: OutlookIcon,
+    }
 
   /**
    * Publix account type.
@@ -474,11 +473,11 @@ export class AccountTypeCommom{
   /**
    * Safeway account type.
    */
-  static readonly AFEWAY: AccountType = {
+  static readonly SAFEWAY: AccountType = {
     type: "RETAILER",
-    icon: "",
+    icon: SafewayIcon,
     name: "Safeway",
-    key: 'AFEWAY',
+    key: 'SAFEWAY',
 }
   /**
    * Sam’s Club account type.
@@ -654,7 +653,7 @@ export class AccountTypeCommom{
 } 
    static readonly YAHOO: AccountType = {
      type: "EMAIL",
-     icon: '',
+     icon: YahooIcon,
      name: "Yahoo",
      key: "YAHOO"
    }
