@@ -27,20 +27,10 @@ npx cap sync
 Next, if you don't already have a `publishingId` from TIKI, **create a free account** and make a project at [console.mytiki.com](https://console.mytiki.com).
 
 ### Android
-Microblink is closed source, and subsequently it's AARs are hosted by [GitHub's maven repository](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry), not Maven Central. You need to add the GitHub maven endpoint to your `android/build.gradle` file in your project's android folder.
+Microblink is closed source, and subsequently it's AARs are hosted by Microblink's Maven repository, not Maven Central. You need to add the maven endpoint to your `android/build.gradle` file in your project's android folder.
 
 ```groovy
-maven {
-    url = uri("https://maven.pkg.github.com/tiki/tiki-capture-receipt-capacitor")
-    credentials {
-        username = providers
-                .gradleProperty("gpr.user")
-                .getOrElse(System.getenv("GITHUB_USER"))
-        password = providers
-                .gradleProperty("gpr.key")
-                .getOrElse(System.getenv("GITHUB_KEY"))
-    }
-}
+maven { url  "https://maven.microblink.com" }
 ```
 
 Depending on your project's configuration you may also need to add the following `packagingOptions` to your `android/app/build.gradle` file.
