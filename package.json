@@ -1,6 +1,6 @@
 {
   "name": "@mytiki/tiki-receipt-capacitor",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "The TIKI Receipt library adds to your Vue.js + Capacitor mobile app a Data Reward program for your users to share their receipts in-exchange for loyalty points.",
   "author": "Tiki inc.",
   "license": "MIT",
