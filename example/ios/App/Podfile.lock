@@ -1,8 +1,8 @@
 PODS:
-  - Capacitor (5.2.3):
+  - Capacitor (5.4.0):
     - CapacitorCordova
-  - CapacitorCordova (5.2.3)
-  - MytikiTikiCaptureReceiptCapacitor (0.3.0):
+  - CapacitorCordova (5.4.0)
+  - MytikiTikiCaptureReceiptCapacitor (0.5.0):
     - Capacitor
   - MytikiTikiSdkCapacitor (0.3.1):
     - Capacitor
@@ -24,11 +24,11 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@mytiki/tiki-sdk-capacitor"
 
 SPEC CHECKSUMS:
-  Capacitor: 6f44cbc33839b8a4202b8eac97041fe584083417
-  CapacitorCordova: 35def3ebfdef491f0a7b652816eb873ff4b20bbf
-  MytikiTikiCaptureReceiptCapacitor: 33e80ff6f86c5c93998d9da1f84f0096a56d1721
+  Capacitor: a5cd803e02b471591c81165f400ace01f40b11d3
+  CapacitorCordova: 66ce22f9976de30fd816f746e9e92e07d6befafd
+  MytikiTikiCaptureReceiptCapacitor: 337afd3f86997542d29542650ed00b293ea84cc5
   MytikiTikiSdkCapacitor: 7fb71c6099dd3bba5c75ee7ec1dd30bd90c78c9c
 
-PODFILE CHECKSUM: 2f9a0f322694e9fc6ea5b4ef01d7ecdb29338094
+PODFILE CHECKSUM: edbf290d46d3a64e29e690774515107f33cfbba3
 
 COCOAPODS: 1.12.1
