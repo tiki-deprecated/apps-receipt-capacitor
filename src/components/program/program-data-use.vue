@@ -7,6 +7,7 @@
 import progressIcon from "@/assets/icons/progress-box.svg?component";
 import QuestionIcon from "@/assets/icons/question.svg?component";
 import IconButton from "@/components/buttons/icon-button.vue";
+import BulletPoint from "@/components/bullet/bullet-point.vue"
 
 defineProps({
   bullets: Array<{
@@ -21,7 +22,7 @@ defineProps({
       <icon-button :icon="QuestionIcon" @click="$emit('learn')" />
     </span></p>
     <div v-for="bullet in bullets" class="bullet">
-      <progress-icon class="icon"/>
+      <bullet-point class="icon"/>
       {{ bullet.text }}
     </div>
   </div>
