@@ -4,27 +4,24 @@
   -->
 
 <script setup lang="ts">
-import CrossMarkIcon from "@/assets/icons/cross-mark.svg?component";
-import CheckIcon from "@/assets/icons/check.svg?component";
+import progressIcon from "@/assets/icons/progress-box.svg?component";
+import QuestionIcon from "@/assets/icons/question.svg?component";
+import CircleButton from "@/components/buttons/circle-button.vue";
 
 defineProps({
   bullets: Array<{
     text: string;
-    isUsed: boolean;
   }>,
 });
 </script>
 
 <template>
   <div>
-    <p class="title">How your data will be used</p>
+    <p class="title">How to earn $1/Month <span> 
+      <circle-button :icon="QuestionIcon" @click="$emit('learn')" />
+    </span></p>
     <div v-for="bullet in bullets" class="bullet">
-      <check-icon class="icon" v-if="bullet.isUsed" style="color: #00b272" />
-      <cross-mark-icon
-        class="icon"
-        v-if="!bullet.isUsed"
-        style="color: #c73000"
-      />
+      <progress-icon class="icon"/>
       {{ bullet.text }}
     </div>
   </div>
@@ -38,6 +35,8 @@ defineProps({
   font-weight: bold;
   text-transform: uppercase;
   color: var(--tiki-primary-text-color);
+  display: flex;
+  justify-content: space-between;
 }
 
 .bullet {
@@ -45,14 +44,13 @@ defineProps({
   display: flex;
   align-items: center;
   font-family: var(--tiki-font-family);
+  font-size: 17px;
   font-weight: bold;
-  font-size: var(--tiki-font-size);
   line-height: var(--tiki-line-height);
   color: var(--tiki-secondary-text-color);
 }
 
 .icon {
   margin-right: 0.625em;
-  height: 0.75em;
 }
 </style>

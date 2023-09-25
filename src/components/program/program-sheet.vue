@@ -4,9 +4,9 @@
   -->
 
 <script setup lang="ts">
-import QuestionIcon from "@/assets/icons/question.svg?component";
 import TextButton from "@/components/buttons/text-button.vue";
 import CircleButton from "@/components/buttons/circle-button.vue";
+import CrossMark from "@/assets/icons/cross-mark-outline.svg?component"
 import ProgramDataUse from "@/components/program/program-data-use.vue";
 import Card from "@/components/card.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
@@ -23,11 +23,11 @@ const props = defineProps({
 </script>
 
 <template>
-  <header-title title="Data Rewards" subtitle="Share data. Earn rewards.">
-    <circle-button :icon="QuestionIcon" @click="$emit('learn')" />
+  <header-title title="Rewards" subtitle="Share data. Earn cash.">
+    <circle-button :icon="CrossMark" @click="$emit('close')" />
   </header-title>
   <card :image="program.image" :description="program.description" />
-  <program-data-use :bullets="program.bullets" class="data-use" />
+  <program-data-use :bullets="program.bullets" class="data-use" @learn="$emit('learn')"/>
   <div class="footer">
     <text-button
       text="Back off"
@@ -53,5 +53,6 @@ const props = defineProps({
 .data-use {
   margin-top: 1.5em;
   margin-bottom: 2em;
+  padding: 0 1em 0 1em;
 }
 </style>

@@ -29,7 +29,7 @@ const accept = () => {
 
 <template>
   <div class="full-screen">
-    <header-back text="Back" @click="$emit('back')" />
+    <header-back text="Terms and Conditions" @click="$emit('back')" />
     <vue-markdown :source="program.terms" class="terms" />
     <text-button text="I agree" class="agree" @click="accept" />
   </div>

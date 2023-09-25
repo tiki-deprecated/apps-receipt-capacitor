@@ -5,12 +5,13 @@
 
 import { Tag, Usecase } from "@mytiki/tiki-sdk-capacitor";
 import type { Receipt } from "@mytiki/tiki-capture-receipt-capacitor";
-import type { ReceiptEvent } from "@/service/receipt/receipt-event";
+import { ReceiptEvent } from "@/service/receipt/receipt-event";
 import type { ReceiptAccount } from "@/service/receipt/receipt-account";
+import { CommonUsecases, CommonTags } from "@mytiki/tiki-sdk-capacitor";
+import offerImage from "@/assets/images/offer-image.png"
+import LearnMore from "@/assets/learn-more.md?raw";
+import Terms from "@/assets/terms.md?raw";
 
-/**
- * Configuration settings for the Library
- */
 export interface Config {
   /**
    * License keys required for use of the Library. Sign up at [mytiki.com](https://mytiki.com).
@@ -72,7 +73,6 @@ export interface Program {
    */
   bullets: {
     text: string;
-    isUsed: boolean;
   }[];
 
   /**
@@ -184,4 +184,77 @@ export interface Key {
    * Your application's Microblink Product Intelligence Key. Request one from your TIKI account manager.
    */
   intelKey: string;
+}
+
+
+export const defaultConfig =  {
+  key: {
+    publishingId: "be19730a-00d5-45f5-b18e-2e19eb25f311",
+    scanKey:
+      "sRwAAAAoY29tLm15dGlraS5zZGsuY2FwdHVyZS5yZWNlaXB0LmNhcGFjaXRvcgY6SQlVDCCrMOCc/jLI1A3BmOhqNvtZLzShMcb3/OLQLiqgWjuHuFiqGfg4fnAiPtRcc5uRJ6bCBRkg8EsKabMQkEsMOuVjvEOejVD497WkMgobMbk/X+bdfhPPGdcAHWn5Vnz86SmGdHX5xs6RgYe5jmJCSLiPmB7cjWmxY5ihkCG12Q==",
+    intelKey:
+      "wSNX3mu+YGc/2I1DDd0NmrYHS6zS1BQt2geMUH7DDowER43JGeJRUErOHVwU2tz6xHDXia8BuvXQI3j37I0uYw==",
+  },
+  program: {
+    image: offerImage,
+    description:
+      "Connect your accounts to turn your receipts into real cash each month!",
+    terms: Terms,
+    learn: LearnMore,
+    bullets: [
+      { text: "Link a Gmail account" },
+      { text: "Link a supported retailer account"},
+      { text: "Open and use the app each week"},
+      { text: "Share 5 new receipts"},
+    ],
+    usecases: [
+      Usecase.common(CommonUsecases.DISTRIBUTION),
+      Usecase.common(CommonUsecases.ANALYTICS),
+      Usecase.common(CommonUsecases.AI_TRAINING),
+      Usecase.common(CommonUsecases.ATTRIBUTION),
+    ],
+    destinations: ["mytiki.com"],
+    tags: [
+      Tag.common(CommonTags.USER_ID),
+      Tag.common(CommonTags.PURCHASE_HISTORY),
+    ],
+  },
+  rewards: [
+    {
+      image: '',
+      description:
+        "Earn 10 points for every receipt you scan or in your linked accounts.",
+      issuer: (
+        event: ReceiptEvent,
+        details: { receipt?: Receipt; account?: ReceiptAccount },
+      ): number | undefined => {
+        if (event == ReceiptEvent.SCAN) return 10;
+      },
+    },
+    {
+      image: '',
+      description:
+        "Earn 100 points for every account you link. We only check it for receipts.",
+      issuer: (
+        event: ReceiptEvent,
+        details: { receipt?: Receipt; account?: ReceiptAccount },
+      ): number | undefined => {
+        if (event == ReceiptEvent.LINK) return 100;
+        else if (event == ReceiptEvent.UNLINK) return -100;
+      },
+    },
+    {
+      image: '',
+      description:
+        "Check back for special offers and more ways to earn cash for your data.",
+      issuer: (
+        event: ReceiptEvent,
+        details: { receipt?: Receipt; account?: ReceiptAccount },
+      ): number | undefined => {
+        return undefined;
+      },
+    },
+  ],
+  redeem: (total: number): number | undefined =>
+    total > 0 ? total : undefined,
 }

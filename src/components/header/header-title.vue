@@ -28,7 +28,7 @@ defineProps({
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin: 0 0.5em 2em 0.5em;
+  margin: 0.5em 0.5em 2em 0.5em;
 }
 
 .title {
