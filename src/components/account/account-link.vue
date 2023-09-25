@@ -58,7 +58,7 @@ const submit = async () => {
 
 <template>
   <header-back :text="`Add ${accountType}`" @back="$emit('back')">
-    <circle-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
+    <icon-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
   </header-back>
   <account-form v-model:account="form" :error="error" :accountType="accountType"/>
   <p v-if="accounts.length > 0" class="linked-accounts">Linked Accounts</p>

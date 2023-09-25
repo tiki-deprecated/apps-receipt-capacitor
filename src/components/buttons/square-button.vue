@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import CircleButton from "@/components/buttons/circle-button.vue";
+import bulletPoint from "@/components/bullet/bullet-point.vue"
 
 defineProps({
   icon: {
@@ -22,7 +22,7 @@ defineEmits(["click"]);
     <span>
       {{ text }}
     </span>
-    <circle-button :icon="icon" class="noAccount"/>
+    <bullet-point :state="7" />
   </div>
 </template>
 
