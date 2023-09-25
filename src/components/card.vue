@@ -43,7 +43,7 @@ defineProps({
   font-family: var(--tiki-font-family);
   font-size: var(--tiki-font-size);
   line-height: var(--tiki-line-height);
-  color: var(--tiki-secondary-text-color);
+  color: rgba(28, 0, 0, 0.6);
   font-weight: bold;
   text-align: left;
 }
