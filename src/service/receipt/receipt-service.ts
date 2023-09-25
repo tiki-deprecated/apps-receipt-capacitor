@@ -82,6 +82,7 @@ export class ReceiptService {
     await this.process(ReceiptEvent.LINK, {
       account: account,
     });
+    
   }
   
   /**
@@ -114,7 +115,7 @@ export class ReceiptService {
     try {
       (await this.plugin.accounts()).accounts.forEach((account) => {
         this.addAccount(ReceiptAccount.fromSource(account))
-        this.scan('ONLINE', ReceiptAccount.fromSource(account))
+        this.scan('ONLINE')
       })
     } catch (error) {
       throw Error(`Could not load the accounts; Error: ${error}`)
@@ -138,14 +139,15 @@ export class ReceiptService {
           console.warn(`Receipt ignored: Confidence: ${receipt.receipt.ocrConfidence}`);
         }
       } else
-        throw Error(
+        throw new Error(
           `No license found for ${this.tiki.sdk.id}. User must first consent to the program.`,
         );
     }
-    if (!scanType) {
-      const receipts = await this.plugin.scan('ONLINE', account!);
-      this.addReceipt(receipts.receipt)
-    }
+    const receipts = await this.plugin.scan(scanType, account!).catch(error=>{
+      throw new Error(error)
+    });
+    this.addReceipt(receipts.receipt)
+    
   }
 
   /**
@@ -178,10 +180,10 @@ export class ReceiptService {
    * save an account in cache and calls the scan for receipts
    * @param account - the account to be saved and scanned
    */
-  private addAccount(account: ReceiptAccount): void {
+  private addAccount(account: ReceiptAccount): string | void {
     this._accounts.push(account);
     this._onAccountListeners.forEach((listener) => listener(account));
-    this.scan('ONLINE', account)
+    this.scan(account.accountType.type, account).catch((error)=>{ throw new Error(error)})
   }
   /**
    * remove an account of the cache.
