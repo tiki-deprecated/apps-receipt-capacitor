@@ -9,7 +9,7 @@ import type { PropType } from "vue";
 import type { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { watch, ref } from "vue";
 
-defineEmits(["click"]);
+defineEmits(["delete"]);
 const props = defineProps({
   account: {
     type: Object as PropType<ReceiptAccount>,
@@ -39,7 +39,7 @@ watch(
         </div>
       </div>
     </div>
-    <button @click="$emit('click')" class="delete">
+    <button @click="$emit('delete')" class="delete">
       <icon-minus class="ico" />
     </button>
   </div>
