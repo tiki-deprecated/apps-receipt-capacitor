@@ -13,10 +13,7 @@ import { TikiService } from "@/service/tiki-service";
 const tiki: TikiService | undefined = inject("Tiki");
 const emit = defineEmits(["account", "redeem"]);
 
-const redeem = () => {
-  tiki!.history.redeem();
-  emit("redeem");
-};
+
 </script>
 
 <template>
