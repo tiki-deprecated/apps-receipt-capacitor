@@ -4,63 +4,60 @@
   -->
 
 <script setup lang="ts">
-import bulletPoint from "@/components/bullet/bullet-point.vue"
+import BulletPoint from "@/components/bullet/bullet-point.vue";
+import { BulletState } from "@/components/bullet/bullet-state";
+import type { PropType } from "vue";
 
 defineProps({
-  icon: {
-    type: Object,
+  state: {
+    type: Number as PropType<
+      BulletState.NULL | BulletState.ERROR | BulletState.P100 | BulletState.SYNC
+    >,
+    required: false,
+    default: BulletState.NULL,
+  },
+  text: {
+    type: String,
     required: true,
   },
-  text: String,
 });
 
 defineEmits(["click"]);
 </script>
 
 <template>
-  <div class="square-button icon" @click="$emit('click')"> 
-    <span>
+  <div class="square-button" @click="$emit('click')">
+    <span class="text">
       {{ text }}
     </span>
-    <bullet-point :state="7" />
+    <bullet-point :state="state" class="state" />
   </div>
 </template>
 
 <style scoped>
-
-span {
-  font-size: 16px;
-  font-weight: bold;
-  line-height: var(--tiki-line-height-xs);
-  margin-bottom: 1em;
-  color: var(--tiki-secondary-text-color);
-}
 .square-button {
-  border: none;
-  background: transparent;
+  background: var(--tiki-primary-background-color);
   font-family: var(--tiki-font-family);
-  line-height: var(--tiki-line-height-xs);
-  font-size: var(--tiki-font-size-xs);
-  font-weight: 500;
-  color: var(--tiki-secondary-text-color);
-}
-
-.icon {
-  padding: 1.75em;
-  border-radius: 0.833em;
-  height: 5em;
-  background-color: var(--tiki-primary-background-color);
-  display: flex;
-  margin-bottom: 0.667em;
-  color: var(--tiki-primary-text-color);
+  line-height: var(--tiki-line-height);
+  font-size: var(--tiki-font-size);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 5%);
+  height: 5.3125em;
+  width: 5.3125em;
+  border-radius: 0.833em;
+  display: flex;
   flex-flow: column;
   align-items: center;
-  width: 4em;
+  justify-content: center;
 }
 
-.noAccount {
-  background-color: rgba(220,220,220, 0.3);
-  border: none
+.text {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  color: var(--tiki-secondary-text-color);
+}
+
+.state {
+  height: 1.875em;
+  width: 1.875em;
 }
 </style>
