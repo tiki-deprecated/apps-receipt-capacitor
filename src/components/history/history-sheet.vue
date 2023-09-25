@@ -7,14 +7,14 @@
 import HistoryDetails from "@/components/history/history-details.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg?component";
-import CircleButton from "@/components/buttons/circle-button.vue";
+import IconButton from "@/components/buttons/icon-button.vue";
 
 defineEmits(["close", "back"]);
 </script>
 
 <template>
   <header-back text="Rewards" @back="$emit('back')">
-    <circle-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
+    <icon-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
   </header-back>
   <history-details />
 </template>

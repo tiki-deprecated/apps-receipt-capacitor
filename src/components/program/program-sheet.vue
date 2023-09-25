@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import TextButton from "@/components/buttons/text-button.vue";
-import CircleButton from "@/components/buttons/circle-button.vue";
+import IconButton from "@/components/buttons/icon-button.vue";
 import CrossMark from "@/assets/icons/cross-mark-outline.svg?component"
 import ProgramDataUse from "@/components/program/program-data-use.vue";
 import Card from "@/components/card.vue";
@@ -23,8 +23,8 @@ const props = defineProps({
 </script>
 
 <template>
-  <header-title title="Rewards" subtitle="Share data. Earn cash.">
-    <circle-button :icon="CrossMark" @click="$emit('close')" />
+  <header-title title="Data Rewards" subtitle="Share data. Earn rewards.">
+    <icon-button :icon="CrossMark" @click="$emit('learn')" />
   </header-title>
   <card :image="program.image" :description="program.description" />
   <program-data-use :bullets="program.bullets" class="data-use" @learn="$emit('learn')"/>

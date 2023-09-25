@@ -8,7 +8,7 @@ import AccountIconOutline from "@/assets/icons/account-outline.svg?component";
 import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg?component";
 import AccountForm from "@/components/account/account-form.vue";
 import HeaderBack from "@/components/header/header-back.vue";
-import CircleButton from "@/components/buttons/circle-button.vue";
+import IconButton from "@/components/buttons/icon-button.vue";
 import AccountCarousel from "@/components/account/account-carousel.vue";
 import TextButton from "@/components/buttons/text-button.vue";
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
