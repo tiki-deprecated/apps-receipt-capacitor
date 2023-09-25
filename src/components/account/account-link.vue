@@ -34,7 +34,7 @@ const submit = async () => {
     form.value.password?.length > 0
   ) {
     try {
-      error.value = ''
+      error.value = "";
       await tiki?.receipt.login(form.value);
       form.value = new ReceiptAccount("", AccountTypeCommom.GMAIL, "");
     } catch (err: any) {
@@ -56,7 +56,7 @@ const submit = async () => {
     class="account-carousel"
     @click="$emit('unlink', $event)"
   />
-  <text-button text="Link Account" :icon="AccountIconOutline" @click="submit" />
+  <text-button text="Link Account" @click="submit" />
 </template>
 
 <style scoped>

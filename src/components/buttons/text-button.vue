@@ -15,7 +15,6 @@ const props = defineProps({
     required: false,
     default: true,
   },
-  icon: Object,
 });
 </script>
 
@@ -25,7 +24,7 @@ const props = defineProps({
     :class="focus ? 'focus' : 'nofocus'"
     @click.stop.prevent="$emit('click')"
   >
-    <component :is="icon" v-if="icon != null" class="icon" />{{ text }}
+    {{ text }}
   </button>
 </template>
 
@@ -57,11 +56,5 @@ const props = defineProps({
   border-color: var(--tiki-primary-background-color);
   background-color: var(--tiki-primary-background-color);
   color: var(--tiki-primary-text-color);
-}
-
-.icon {
-  height: 1.2em;
-  width: auto;
-  margin-right: 0.5em;
 }
 </style>
