@@ -4,16 +4,18 @@
   -->
 
 <script setup lang="ts">
-import progressIcon from "@/assets/icons/progress-box.svg?component";
 import QuestionIcon from "@/assets/icons/question.svg?component";
 import IconButton from "@/components/buttons/icon-button.vue";
 import BulletPoint from "@/components/bullet/bullet-point.vue"
+import type { BulletState } from "../bullet/bullet-state";
 
 defineProps({
   bullets: Array<{
-    text: string;
-  }>,
+    text: string,
+    state?: BulletState
+  }>
 });
+
 </script>
 
 <template>
@@ -22,7 +24,7 @@ defineProps({
       <icon-button :icon="QuestionIcon" @click="$emit('learn')" />
     </span></p>
     <div v-for="bullet in bullets" class="bullet">
-      <bullet-point class="icon"/>
+      <bullet-point class="icon" :state="bullet.state"/>
       {{ bullet.text }}
     </div>
   </div>

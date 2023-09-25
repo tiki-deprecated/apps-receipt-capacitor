@@ -26,14 +26,14 @@ defineProps({
 
 <template>
   <div>
-    <progress-icon v-if="state == BulletState.P0" class="icon p0" />
-    <icon25p v-if="state == BulletState.P25" class="icon p25" />
-    <icon50p v-if="state == BulletState.P50" class="icon p50" />
-    <icon75p v-if="state == BulletState.P75" class="icon p75" />
-    <icon-check v-if="state == BulletState.P100" class="icon p100" />
-    <icon-crossmark v-if="state == BulletState.NULL" class="icon null" />
-    <icon-crossmark v-if="state == BulletState.ERROR" class="icon error" />
-    <icon-sync v-if="state == BulletState.SYNC" class="icon sync" />
+    <progress-icon v-if="state === BulletState.P0" class="icon p0" />
+    <icon25p v-if="state === BulletState.P25" class="icon p25" />
+    <icon50p v-if="state === BulletState.P50" class="icon p50" />
+    <icon75p v-if="state === BulletState.P75" class="icon p75" />
+    <icon-check v-if="state === BulletState.P100" class="icon p100" />
+    <icon-crossmark v-if="state === BulletState.NULL" class="icon null" />
+    <icon-crossmark v-if="state === BulletState.ERROR" class="icon error" />
+    <icon-sync v-if="state === BulletState.SYNC" class="icon sync" />
   </div>
 </template>
 
