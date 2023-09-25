@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg?component";
-import CircleButton from "@/components/buttons/circle-button.vue";
+import IconButton from "@/components/buttons/icon-button.vue";
 import type { Reward } from "@/service/config";
 import RewardCarousel from "@/components/reward/reward-carousel.vue";
 import RewardHistory from "@/components/reward/reward-history.vue";
@@ -24,7 +24,7 @@ defineProps({
 
 <template>
   <header-title title="Data Rewards" subtitle="Share data. Earn rewards.">
-    <circle-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
+    <icon-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
   </header-title>
   <reward-counter class="reward-counter" />
   <reward-history class="reward-history" @click="$emit('history')" />
