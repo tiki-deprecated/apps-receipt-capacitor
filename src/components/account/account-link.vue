@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import AccountIconOutline from "@/assets/icons/account-outline.svg?component";
-import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg?component";
+import CrossMarkIconOutline from "@/assets/icons/crossmark-outline.svg?component";
 import AccountForm from "@/components/account/account-form.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import IconButton from "@/components/buttons/icon-button.vue";

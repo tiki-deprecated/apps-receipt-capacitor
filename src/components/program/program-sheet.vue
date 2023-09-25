@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import TextButton from "@/components/buttons/text-button.vue";
 import IconButton from "@/components/buttons/icon-button.vue";
-import CrossMark from "@/assets/icons/cross-mark-outline.svg?component"
+import CrossMark from "@/assets/icons/crossmark-outline.svg?component"
 import ProgramDataUse from "@/components/program/program-data-use.vue";
 import Card from "@/components/card.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
