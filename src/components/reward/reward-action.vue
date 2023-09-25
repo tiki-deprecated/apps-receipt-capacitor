@@ -31,11 +31,7 @@ const redeem = () => {
     />
     <square-button :icon="RedeemIcon" text="Redeem Points" @click="redeem" />
   </div>
-  <text-button
-    text="Scan Receipt"
-    :icon="ScanIcon"
-    @click="tiki?.receipt.scan('PHYSICAL')"
-  />
+  <text-button text="Scan Receipt" @click="tiki?.receipt.scan('PHYSICAL')" />
 </template>
 
 <style scoped>
