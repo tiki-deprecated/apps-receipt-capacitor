@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import QuestionIcon from "@/assets/icons/question.svg?component";
 import TextButton from "@/components/buttons/text-button.vue";
-import CircleButton from "@/components/buttons/circle-button.vue";
+import IconButton from "@/components/buttons/icon-button.vue";
 import ProgramDataUse from "@/components/program/program-data-use.vue";
 import Card from "@/components/card.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
@@ -24,7 +24,7 @@ const props = defineProps({
 
 <template>
   <header-title title="Data Rewards" subtitle="Share data. Earn rewards.">
-    <circle-button :icon="QuestionIcon" @click="$emit('learn')" />
+    <icon-button :icon="QuestionIcon" @click="$emit('learn')" />
   </header-title>
   <card :image="program.image" :description="program.description" />
   <program-data-use :bullets="program.bullets" class="data-use" />

@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg?component";
-import CircleButton from "@/components/buttons/circle-button.vue";
+import IconButton from "@/components/buttons/icon-button.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import AccountForm from "@/components/account/account-form.vue";
 import AccountIconOutline from "@/assets/icons/account-outline.svg?component";
@@ -40,7 +40,7 @@ const submit = async () => {
 
 <template>
   <header-back text="Accounts" @back="$emit('back')">
-    <circle-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
+    <icon-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
   </header-back>
   <account-form v-model:account="form" />
   <text-button text="Unlink Account" :icon="AccountIconOutline" @click="submit" />
