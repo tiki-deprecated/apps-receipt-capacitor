@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import progressIcon from "@/assets/icons/progress-box.svg?component";
 import QuestionIcon from "@/assets/icons/question.svg?component";
-import CircleButton from "@/components/buttons/circle-button.vue";
+import IconButton from "@/components/buttons/icon-button.vue";
 
 defineProps({
   bullets: Array<{
@@ -17,11 +17,14 @@ defineProps({
 
 <template>
   <div>
-    <p class="title">How to earn $1/Month <span> 
-      <circle-button :icon="QuestionIcon" @click="$emit('learn')" />
-    </span></p>
+    <p class="title">
+      How to earn $1/Month
+      <span>
+        <icon-button :icon="QuestionIcon" @click="$emit('learn')" />
+      </span>
+    </p>
     <div v-for="bullet in bullets" class="bullet">
-      <progress-icon class="icon"/>
+      <progress-icon class="icon" />
       {{ bullet.text }}
     </div>
   </div>
