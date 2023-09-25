@@ -17,15 +17,27 @@ import { inject, ref } from "vue";
 import { TikiService } from "@/service/tiki-service";
 
 const tiki: TikiService | undefined = inject("Tiki");
+
 defineEmits(["close", "back", "unlink"]);
+defineProps({
+  accountType:{
+    type: String,
+    required: true
+  }
+})
+
 const accounts = ref<ReceiptAccount[]>(tiki!.receipt.cachedAccounts);
+
 tiki!.receipt.onAccount("account-link", (acc) => {
   accounts.value = tiki!.receipt.cachedAccounts;
 });
+
 const error = ref<string>();
+
 const form = ref<ReceiptAccount>(
   new ReceiptAccount("", AccountTypeCommom.GMAIL, ""),
 );
+
 const submit = async () => {
   if (
     form.value.username != undefined &&
@@ -45,10 +57,10 @@ const submit = async () => {
 </script>
 
 <template>
-  <header-back text="Rewards" @back="$emit('back')">
+  <header-back :text="`Add ${accountType}`" @back="$emit('back')">
     <circle-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
   </header-back>
-  <account-form v-model:account="form" :error="error" />
+  <account-form v-model:account="form" :error="error" :accountType="accountType"/>
   <p v-if="accounts.length > 0" class="linked-accounts">Linked Accounts</p>
   <account-carousel
     v-if="accounts.length > 0"

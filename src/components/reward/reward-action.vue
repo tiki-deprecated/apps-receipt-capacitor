@@ -25,9 +25,9 @@ const redeem = () => {
       :icon="CrossMark"
       text="Gmail"
       class="account-icon"
-      @click="$emit('account')"
+      @click="$emit('accountGmail')"
     />
-    <square-button :icon="CrossMark" text="Retailer" @click="redeem" />
+    <square-button :icon="CrossMark" text="Retailer" @click="$emit('accountRetailer')" />
   </div>
   <text-button
     text="$1 Cash Out"

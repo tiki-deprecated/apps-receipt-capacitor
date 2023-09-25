@@ -7,9 +7,6 @@
 import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg?component";
 import CircleButton from "@/components/buttons/circle-button.vue";
 import type { Reward } from "@/service/config";
-import RewardCarousel from "@/components/reward/reward-carousel.vue";
-import RewardHistory from "@/components/reward/reward-history.vue";
-import RewardCounter from "@/components/reward/reward-counter.vue";
 import RewardAction from "@/components/reward/reward-action.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
 
@@ -26,7 +23,7 @@ defineProps({
   <header-title title="Rewards" subtitle="Share data. Earn rewards.">
     <circle-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
   </header-title>
-  <reward-action @account="$emit('account')" @redeem="$emit('close')" />
+  <reward-action @accountGmail="$emit('accountGmail')"  @accountRetailer="$emit('accountRetailer')"/>
 </template>
 
 <style scoped>

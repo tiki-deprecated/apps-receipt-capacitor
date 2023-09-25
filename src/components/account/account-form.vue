@@ -20,6 +20,10 @@ const props = defineProps({
     type: String,
     required: false,
   },
+  accountType:{
+    type: String,
+    required: true
+  }
 });
 const tiki: TikiService | undefined = inject("Tiki");
 const username = ref<HTMLInputElement>();
@@ -61,8 +65,8 @@ watch(
 
 <template>
   <form>
-    <label for="accounts">Choose Account</label>
-    <select id="accounts" required @change="update" ref="account">
+    <label for="accounts" v-if="accountType === 'Retailer'">Choose Account</label>
+    <select id="accounts" required @change="update" ref="account" v-if="accountType === 'Retailer'">
       <option v-for="account of Object.values(AccountTypeCommom)" :value="account.name" :label="account.name" :selected="account.name">
       </option>
     </select>
