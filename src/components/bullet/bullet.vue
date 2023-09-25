@@ -49,7 +49,7 @@ defineProps({
 .p25,
 .p50,
 .p75 {
-  color: #00b272;
+  color: var(--tiki-ok-color);
 }
 
 .p100,
@@ -59,11 +59,11 @@ defineProps({
 }
 
 .p100 :deep(.background) {
-  fill: #00b272;
+  fill: var(--tiki-ok-color);
 }
 
 .error :deep(.background) {
-  fill: #c73000;
+  fill: var(--tiki-error-color);
 }
 
 .sync :deep(.background) {

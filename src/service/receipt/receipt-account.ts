@@ -3,7 +3,6 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-
 import type { Account } from "@mytiki/tiki-capture-receipt-capacitor";
 import type { AccountType } from "./receipt-account-type";
 import { AccountTypeCommom } from "./receipt-account-type";
@@ -19,7 +18,7 @@ export class ReceiptAccount {
   /**
    * The 3rd-party account type.
    */
-  accountType: AccountType
+  accountType: AccountType;
   /**
    * The password of the account. Only present during login.
    */
@@ -41,32 +40,38 @@ export class ReceiptAccount {
     accountType: AccountType,
     password?: string,
     isVerified?: boolean,
-
   ) {
     this.username = username;
-    this.accountType = accountType
+    this.accountType = accountType;
     this.password = password;
     this.isVerified = isVerified ?? false;
   }
 
   static fromValue(account: Account): ReceiptAccount {
     if (account)
-      return new ReceiptAccount(account.username, account.accountType, account.password, account.isVerified);
+      return new ReceiptAccount(
+        account.username,
+        account.accountType,
+        account.password,
+        account.isVerified,
+      );
     else throw Error(`Unsupported value: ${account}`);
   }
   static fromSource(account: Account): ReceiptAccount {
-    if(account){
-      let accountSource  = Object.values(AccountTypeCommom).find((accountObj) => 
-      accountObj.key === account.source
-      )
-      return new ReceiptAccount(account.username, accountSource, undefined, account.isVerified)
-    }
-    else throw Error(`Unsupported value: ${account}`);
+    if (account) {
+      let accountSource = Object.values(AccountTypeCommom).find(
+        (accountObj) => accountObj.key === account.source,
+      );
+      return new ReceiptAccount(
+        account.username,
+        accountSource,
+        undefined,
+        account.isVerified,
+      );
+    } else throw Error(`Unsupported value: ${account}`);
   }
 
   get icon(): string {
-    return this.accountType.icon!
+    return this.accountType.icon!;
   }
-
-
 }
