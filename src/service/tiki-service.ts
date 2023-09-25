@@ -7,6 +7,7 @@ import type { Config } from "@/service/config";
 import { ReceiptService } from "@/service/receipt/receipt-service";
 import { SdkService } from "@/service/sdk-service";
 import { HistoryService } from "@/service/history/history-service";
+import { defaultConfig } from "@/service/config";
 
 /**
  * The primary service class for the Library.
@@ -44,8 +45,8 @@ export class TikiService {
    * Do not construct directly. Use as a Vue Plugin.
    * @param config - The configuration settings for the service.
    */
-  constructor(config: Config) {
-    this.config = config;
+  constructor() {
+    this.config = defaultConfig
     this.receipt = new ReceiptService(this);
     this.history = new HistoryService(this);
     this.sdk = new SdkService(this);

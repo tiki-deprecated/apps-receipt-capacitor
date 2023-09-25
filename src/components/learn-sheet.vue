@@ -20,7 +20,7 @@ defineProps({
 
 <template>
   <div class="full-screen">
-    <header-back text="Back" @click="$emit('back')" />
+    <header-back text="Learn More" @click="$emit('back')" />
     <vue-markdown :source="program.learn" class="learn-more" />
   </div>
 </template>
