@@ -122,6 +122,7 @@ const closeUI = () => {
           :rewards="tiki!.config.rewards"
           @close="state = TikiReceiptState.Hidden"
           @history="state = TikiReceiptState.History"
+          @learn="state = TikiReceiptState.Learn"
           @accountGmail="handleAccountSheet('Gmail')"
           @accountRetailer="handleAccountSheet('Retailer')"
         />

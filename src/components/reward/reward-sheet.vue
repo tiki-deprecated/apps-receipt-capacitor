@@ -25,7 +25,7 @@ defineProps({
   <header-title title="Rewards" subtitle="Share data. Earn rewards.">
     <circle-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
   </header-title>
-  <reward-action @accountGmail="$emit('accountGmail')"  @accountRetailer="$emit('accountRetailer')"/>
+  <reward-action @accountGmail="$emit('accountGmail')"  @accountRetailer="$emit('accountRetailer')" @learn="$emit('learn')"/>
 </template>
 
 <style scoped>
