@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import bulletPoint from "@/components/bullet/bullet-point.vue"
+import BulletPoint from "@/components/bullet/bullet-point.vue"
 
 defineProps({
   icon: {
@@ -22,7 +22,7 @@ defineEmits(["click"]);
     <span>
       {{ text }}
     </span>
-    <bullet-point :state="7" />
+    <bullet-point :state="5"/>
   </div>
 </template>
 
