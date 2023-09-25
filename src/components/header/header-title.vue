@@ -28,7 +28,7 @@ defineProps({
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin: 0 0.5em 2em 0.5em;
+  margin: 0.5em 0.5em 2em 0.5em;
 }
 
 .title {
@@ -44,7 +44,7 @@ defineProps({
   margin: 0.5em 0 0 0;
   font-family: var(--tiki-font-family);
   color: var(--tiki-secondary-text-color);
-  font-weight: 500;
+  font-weight: 600;
   font-size: var(--tiki-font-size);
   line-height: var(--tiki-line-height);
 }

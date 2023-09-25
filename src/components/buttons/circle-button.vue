@@ -21,7 +21,7 @@ defineEmits(["click"]);
 
 <style scoped>
 .ring {
-  border: 2px solid var(--tiki-secondary-text-color);
+  border: 2px solid;
   background-color: var(--tiki-primary-background-color);
   border-radius: 999px;
   height: 2em;
