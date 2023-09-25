@@ -23,12 +23,9 @@ defineProps({
 </script>
 
 <template>
-  <header-title title="Data Rewards" subtitle="Share data. Earn rewards.">
+  <header-title title="Rewards" subtitle="Share data. Earn rewards.">
     <circle-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
   </header-title>
-  <reward-counter class="reward-counter" />
-  <reward-history class="reward-history" @click="$emit('history')" />
-  <reward-carousel :rewards="rewards" />
   <reward-action @account="$emit('account')" @redeem="$emit('close')" />
 </template>
 

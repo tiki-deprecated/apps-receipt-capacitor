@@ -4,9 +4,7 @@
   -->
 
 <script setup lang="ts">
-import AccountIcon from "@/assets/icons/account.svg?component";
-import RedeemIcon from "@/assets/icons/redeem.svg?component";
-import ScanIcon from "@/assets/icons/scan.svg?component";
+import CrossMark from "@/assets/icons/cross-mark-outline.svg?component"
 import SquareButton from "@/components/buttons/square-button.vue";
 import TextButton from "@/components/buttons/text-button.vue";
 import { inject } from "vue";
@@ -24,17 +22,15 @@ const redeem = () => {
 <template>
   <div class="button-row">
     <square-button
-      :icon="AccountIcon"
-      text="Link Accounts"
+      :icon="CrossMark"
+      text="Gmail"
       class="account-icon"
       @click="$emit('account')"
     />
-    <square-button :icon="RedeemIcon" text="Redeem Points" @click="redeem" />
+    <square-button :icon="CrossMark" text="Retailer" @click="redeem" />
   </div>
   <text-button
-    text="Scan Receipt"
-    :icon="ScanIcon"
-    @click="tiki?.receipt.scan('PHYSICAL')"
+    text="$1 Cash Out"
   />
 </template>
 

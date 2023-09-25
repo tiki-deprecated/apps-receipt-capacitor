@@ -4,6 +4,8 @@
   -->
 
 <script setup lang="ts">
+import CircleButton from "@/components/buttons/circle-button.vue";
+
 defineProps({
   icon: {
     type: Object,
@@ -16,13 +18,23 @@ defineEmits(["click"]);
 </script>
 
 <template>
-  <button class="square-button" @click="$emit('click')">
-    <component :is="icon" class="icon" />
-    {{ text }}
-  </button>
+  <div class="square-button icon" @click="$emit('click')"> 
+    <span>
+      {{ text }}
+    </span>
+    <circle-button :icon="icon" class="noAccount"/>
+  </div>
 </template>
 
 <style scoped>
+
+span {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: var(--tiki-line-height-xs);
+  margin-bottom: 1em;
+  color: var(--tiki-secondary-text-color);
+}
 .square-button {
   border: none;
   background: transparent;
@@ -34,13 +46,21 @@ defineEmits(["click"]);
 }
 
 .icon {
-  padding: 1.333em;
+  padding: 1.75em;
   border-radius: 0.833em;
-  height: 4.167em;
+  height: 5em;
   background-color: var(--tiki-primary-background-color);
-  display: block;
+  display: flex;
   margin-bottom: 0.667em;
   color: var(--tiki-primary-text-color);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 5%);
+  flex-flow: column;
+  align-items: center;
+  width: 4em;
+}
+
+.noAccount {
+  background-color: rgba(220,220,220, 0.3);
+  border: none
 }
 </style>
