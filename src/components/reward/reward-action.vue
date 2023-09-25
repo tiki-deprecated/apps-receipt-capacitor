@@ -23,15 +23,15 @@ const milestoneBullets = [
   },
   {
   text: 'Connect Retailer Account',
-  state: BulletState.SYNC
+  state: BulletState.P0
   },
   {
   text: 'Use app weekly',
-  state: BulletState.ERROR
+  state: BulletState.P0
   },
   {
   text: 'Share 5 New Receipts',
-  state: BulletState.NULL
+  state: BulletState.P0
   }
 ]
 
@@ -72,4 +72,5 @@ const milestoneBullets = [
   margin-bottom: 2em;
   padding: 0 2em 0 2em;
 }
+
 </style>
