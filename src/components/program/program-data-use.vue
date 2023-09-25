@@ -44,7 +44,7 @@ defineProps({
   display: flex;
   align-items: center;
   font-family: var(--tiki-font-family);
-  font-size: var(--tiki-font-size);
+  font-size: 17px;
   font-weight: bold;
   line-height: var(--tiki-line-height);
   color: var(--tiki-secondary-text-color);

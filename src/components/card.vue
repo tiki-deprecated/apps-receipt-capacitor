@@ -41,7 +41,7 @@ defineProps({
 .description {
   margin: 0.3125em 0 1.2em 0;
   font-family: var(--tiki-font-family);
-  font-size: var(--tiki-font-size);
+  font-size: 17px;
   line-height: var(--tiki-line-height);
   color: rgba(28, 0, 0, 0.6);
   font-weight: bold;
