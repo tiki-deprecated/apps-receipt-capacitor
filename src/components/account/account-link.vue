@@ -4,7 +4,6 @@
   -->
 
 <script setup lang="ts">
-import AccountIconOutline from "@/assets/icons/account-outline.svg?component";
 import CrossMarkIconOutline from "@/assets/icons/crossmark-outline.svg?component";
 import AccountForm from "@/components/account/account-form.vue";
 import HeaderBack from "@/components/header/header-back.vue";
@@ -19,7 +18,7 @@ import { TikiService } from "@/service/tiki-service";
 const tiki: TikiService | undefined = inject("Tiki");
 
 defineEmits(["close", "back", "unlink"]);
-defineProps({
+const props = defineProps({
   accountType:{
     type: String,
     required: true
@@ -34,11 +33,13 @@ tiki!.receipt.onAccount("account-link", (acc) => {
 
 const error = ref<string>();
 
-const form = ref<ReceiptAccount>(
-  new ReceiptAccount("", AccountTypeCommom.GMAIL, ""),
-);
+ const form = ref<ReceiptAccount>(
+  props.accountType === 'Gmail' ? 
+  new ReceiptAccount("", AccountTypeCommom.GMAIL, "", undefined) : 
+  new ReceiptAccount("", AccountTypeCommom.AMAZON, "", undefined)
+  )
 
-const submit = async () => {
+  const submit = async () => {
   if (
     form.value.username != undefined &&
     form.value.password != undefined &&
@@ -47,9 +48,9 @@ const submit = async () => {
   ) {
     try {
       error.value = "";
-      await tiki?.receipt.login(form.value);
-      form.value = new ReceiptAccount("", AccountTypeCommom.GMAIL, "");
-    } catch (err: any) {
+      await tiki?.receipt.login(form.value!);
+      if(props.accountType === 'Gmail') form.value = new ReceiptAccount("", AccountTypeCommom.GMAIL, "")
+      else form.value = new ReceiptAccount("", AccountTypeCommom.AMAZON, "")    } catch (err: any) {
       error.value = err.toString();
     }
   }

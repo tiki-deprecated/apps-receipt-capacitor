@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { AccountTypeCommom, type AccountType } from "@/service/receipt/receipt-account-type";
-import { inject, ref, watch } from "vue";
+import { inject, onMounted, ref, watch } from "vue";
 import type { PropType } from "vue";
 import { TikiService } from "@/service/tiki-service";
 
@@ -29,6 +29,10 @@ const tiki: TikiService | undefined = inject("Tiki");
 const username = ref<HTMLInputElement>();
 const password = ref<HTMLInputElement>();
 const account = ref<HTMLSelectElement>();
+
+onMounted(()=>{
+  account.value!.value = props.account.accountType.name ?? ""
+})
 
 const update = () => {
   let selectedAccount  = Object.values(AccountTypeCommom).find((accountObj) => 
@@ -66,7 +70,7 @@ watch(
 <template>
   <form>
     <label for="accounts" v-if="accountType === 'Retailer'">Choose Account</label>
-    <select id="accounts" required @change="update" ref="account" v-if="accountType === 'Retailer'">
+    <select id="accounts" required @change="update" ref="account" v-show="accountType === 'Retailer'">
       <option v-for="account of Object.values(AccountTypeCommom)" :value="account.name" :label="account.name" :selected="account.name">
       </option>
     </select>
