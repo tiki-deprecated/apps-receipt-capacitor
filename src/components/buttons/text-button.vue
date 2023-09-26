@@ -15,13 +15,19 @@ const props = defineProps({
     required: false,
     default: true,
   },
+  isWarning: {
+    required: false,
+    default: false
+  }
 });
+
+
 </script>
 
 <template>
   <button
     class="textButton"
-    :class="focus ? 'focus' : 'nofocus'"
+    :class="(focus ? 'focus' : 'nofocus') + (isWarning ? ' warning' : '')"
     @click.stop.prevent="$emit('click')"
   >
     {{ text }}
@@ -52,9 +58,9 @@ const props = defineProps({
   color: var(--tiki-primary-background-color);
 }
 
-.textButton.nofocus {
-  border-color: var(--tiki-primary-background-color);
-  background-color: var(--tiki-primary-background-color);
-  color: var(--tiki-primary-text-color);
+.textButton.warning{
+  border-color: var(--tiki-error-color);
+  background-color: var(--tiki-error-color);
+  color: var(--tiki-primary-background-color);
 }
 </style>
