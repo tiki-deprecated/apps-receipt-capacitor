@@ -4,43 +4,60 @@
   -->
 
 <script setup lang="ts">
+import BulletPoint from "@/components/bullet/bullet-point.vue";
+import { BulletState } from "@/components/bullet/bullet-state";
+import type { PropType } from "vue";
+
 defineProps({
-  icon: {
-    type: Object,
+  state: {
+    type: Number as PropType<
+      BulletState.NULL | BulletState.ERROR | BulletState.P100 | BulletState.SYNC
+    >,
+    required: false,
+    default: BulletState.NULL,
+  },
+  text: {
+    type: String,
     required: true,
   },
-  text: String,
 });
 
 defineEmits(["click"]);
 </script>
 
 <template>
-  <button class="square-button" @click="$emit('click')">
-    <component :is="icon" class="icon" />
-    {{ text }}
-  </button>
+  <div class="square-button" @click="$emit('click')">
+    <span class="text">
+      {{ text }}
+    </span>
+    <bullet-point :state="state" class="state" />
+  </div>
 </template>
 
 <style scoped>
 .square-button {
-  border: none;
-  background: transparent;
+  background: var(--tiki-primary-background-color);
   font-family: var(--tiki-font-family);
-  line-height: var(--tiki-line-height-xs);
-  font-size: var(--tiki-font-size-xs);
-  font-weight: 500;
+  line-height: var(--tiki-line-height);
+  font-size: var(--tiki-font-size);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 5%);
+  height: 5.3125em;
+  width: 5.3125em;
+  border-radius: 0.833em;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  font-weight: bold;
+  margin-bottom: 0.5em;
   color: var(--tiki-secondary-text-color);
 }
 
-.icon {
-  padding: 1.333em;
-  border-radius: 0.833em;
-  height: 4.167em;
-  background-color: var(--tiki-primary-background-color);
-  display: block;
-  margin-bottom: 0.667em;
-  color: var(--tiki-primary-text-color);
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 5%);
+.state {
+  height: 1.875em;
+  width: 1.875em;
 }
 </style>

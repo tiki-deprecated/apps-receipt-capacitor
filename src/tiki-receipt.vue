@@ -35,7 +35,9 @@ const props = defineProps({
     default: false,
   },
 });
+
 const state = ref(TikiReceiptState.Hidden);
+
 watch(
   () => props.present,
   async (present) => {
@@ -49,6 +51,12 @@ watch(
     } else state.value = TikiReceiptState.Hidden;
   },
 );
+const accountType = ref<'Gmail' | 'Retailer'>()
+
+const handleAccountSheet = (type: 'Gmail'|'Retailer')=>{
+  state.value = TikiReceiptState.Account
+  accountType.value = type
+}
 
 const tiki: TikiService | undefined = inject("Tiki");
 const stylize = (property: string, value?: string) => {
@@ -114,7 +122,9 @@ const closeUI = () => {
           :rewards="tiki!.config.rewards"
           @close="state = TikiReceiptState.Hidden"
           @history="state = TikiReceiptState.History"
-          @account="state = TikiReceiptState.Account"
+          @learn="state = TikiReceiptState.Learn"
+          @accountGmail="handleAccountSheet('Gmail')"
+          @accountRetailer="handleAccountSheet('Retailer')"
         />
         <history-sheet
           v-if="state === TikiReceiptState.History"
@@ -125,6 +135,7 @@ const closeUI = () => {
           v-if="state === TikiReceiptState.Account"
           @close="state = TikiReceiptState.Hidden"
           @back="state = TikiReceiptState.Reward"
+          :accountType="accountType!"
         />
       </div>
     </bottom-sheet>

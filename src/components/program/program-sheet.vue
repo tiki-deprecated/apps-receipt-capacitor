@@ -6,12 +6,13 @@
 <script setup lang="ts">
 import TextButton from "@/components/buttons/text-button.vue";
 import IconButton from "@/components/buttons/icon-button.vue";
-import CrossMark from "@/assets/icons/cross-mark-outline.svg?component"
-import ProgramDataUse from "@/components/program/program-data-use.vue";
+import IconCrossMark from "@/assets/icons/crossmark-outline.svg?component";
 import Card from "@/components/card.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
 import type { PropType } from "vue";
 import type { Program } from "@/service/config";
+import BulletList from "@/components/bullet/bullet-list.vue";
+import { BulletState } from "@/components/bullet/bullet-state";
 
 defineEmits(["close", "learn", "accept"]);
 const props = defineProps({
@@ -20,14 +21,17 @@ const props = defineProps({
     required: true,
   },
 });
+const bullets = props.program?.bullets.map((bullet) => {
+  return { text: bullet, state: BulletState.P0 };
+});
 </script>
 
 <template>
   <header-title title="Data Rewards" subtitle="Share data. Earn rewards.">
-    <icon-button :icon="CrossMark" @click="$emit('learn')" />
+    <icon-button :icon="IconCrossMark" @click="$emit('close')" />
   </header-title>
   <card :image="program.image" :description="program.description" />
-  <program-data-use :bullets="program.bullets" class="data-use" @learn="$emit('learn')"/>
+  <bullet-list :bullets="bullets" class="how" @learn="$emit('learn')" />
   <div class="footer">
     <text-button
       text="Back off"
@@ -50,9 +54,19 @@ const props = defineProps({
   margin-right: 1.5em;
 }
 
-.data-use {
+.how {
   margin-top: 1.5em;
   margin-bottom: 2em;
   padding: 0 1em 0 1em;
+  width: fit-content;
+}
+
+.how :deep(.bullet .icon) {
+  width: 0.9em;
+  margin-right: 0.625em;
+}
+
+.how :deep(.bullet) {
+  font-weight: bold;
 }
 </style>

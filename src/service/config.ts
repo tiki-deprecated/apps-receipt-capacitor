@@ -8,7 +8,7 @@ import type { Receipt } from "@mytiki/tiki-capture-receipt-capacitor";
 import { ReceiptEvent } from "@/service/receipt/receipt-event";
 import type { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { CommonUsecases, CommonTags } from "@mytiki/tiki-sdk-capacitor";
-import offerImage from "@/assets/images/offer-image.png"
+import offerImage from "@/assets/images/offer-image.png";
 import LearnMore from "@/assets/learn-more.md?raw";
 import Terms from "@/assets/terms.md?raw";
 
@@ -71,9 +71,7 @@ export interface Program {
    * An array (maximum 3) of bullet points explaining how a user's data will be
    * used (true) or not used (false).
    */
-  bullets: {
-    text: string;
-  }[];
+  bullets: string[];
 
   /**
    * An array of all approved data {@link Usecase}s. These should all fall under
@@ -186,8 +184,7 @@ export interface Key {
   intelKey: string;
 }
 
-
-export const defaultConfig =  {
+export const defaultConfig = {
   key: {
     publishingId: "be19730a-00d5-45f5-b18e-2e19eb25f311",
     scanKey:
@@ -202,10 +199,10 @@ export const defaultConfig =  {
     terms: Terms,
     learn: LearnMore,
     bullets: [
-      { text: "Link a Gmail account" },
-      { text: "Link a supported retailer account"},
-      { text: "Open and use the app each week"},
-      { text: "Share 5 new receipts"},
+      "Link a Gmail account",
+      "Link a supported retailer account",
+      "Open and use the app each week",
+      "Share 5 new receipts",
     ],
     usecases: [
       Usecase.common(CommonUsecases.DISTRIBUTION),
@@ -221,7 +218,7 @@ export const defaultConfig =  {
   },
   rewards: [
     {
-      image: '',
+      image: "",
       description:
         "Earn 10 points for every receipt you scan or in your linked accounts.",
       issuer: (
@@ -232,7 +229,7 @@ export const defaultConfig =  {
       },
     },
     {
-      image: '',
+      image: "",
       description:
         "Earn 100 points for every account you link. We only check it for receipts.",
       issuer: (
@@ -244,7 +241,7 @@ export const defaultConfig =  {
       },
     },
     {
-      image: '',
+      image: "",
       description:
         "Check back for special offers and more ways to earn cash for your data.",
       issuer: (
@@ -257,4 +254,4 @@ export const defaultConfig =  {
   ],
   redeem: (total: number): number | undefined =>
     total > 0 ? total : undefined,
-}
+};

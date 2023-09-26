@@ -4,14 +4,14 @@
   -->
 
 <script setup lang="ts">
-import CrossMarkIconOutline from "@/assets/icons/cross-mark-outline.svg?component";
-import IconButton from "@/components/buttons/icon-button.vue";
 import type { Reward } from "@/service/config";
-import RewardCarousel from "@/components/reward/reward-carousel.vue";
-import RewardHistory from "@/components/reward/reward-history.vue";
-import RewardCounter from "@/components/reward/reward-counter.vue";
-import RewardAction from "@/components/reward/reward-action.vue";
+import IconCrossMark from "@/assets/icons/crossmark-outline.svg?component";
+import IconButton from "@/components/buttons/icon-button.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
+import { BulletState } from "@/components/bullet/bullet-state";
+import BulletList from "@/components/bullet/bullet-list.vue";
+import SquareButton from "@/components/buttons/square-button.vue";
+import TextButton from "@/components/buttons/text-button.vue";
 
 defineEmits(["close", "history", "account"]);
 defineProps({
@@ -20,20 +20,83 @@ defineProps({
     required: true,
   },
 });
+const milestoneBullets = [
+  {
+    text: "Connect Gmail Account",
+    state: BulletState.P0,
+  },
+  {
+    text: "Connect Retailer Account",
+    state: BulletState.P25,
+  },
+  {
+    text: "Use app weekly",
+    state: BulletState.P75,
+  },
+  {
+    text: "Share 5 New Receipts",
+    state: BulletState.P100,
+  },
+];
 </script>
 
 <template>
-  <header-title title="Data Rewards" subtitle="Share data. Earn rewards.">
-    <icon-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
+  <header-title
+    title="Rewards"
+    subtitle="Share data. Earn rewards."
+    class="title"
+  >
+    <icon-button @click="$emit('close')" :icon="IconCrossMark" />
   </header-title>
-  <reward-counter class="reward-counter" />
-  <reward-history class="reward-history" @click="$emit('history')" />
-  <reward-carousel :rewards="rewards" />
-  <reward-action @account="$emit('account')" @redeem="$emit('close')" />
+  <div class="body">
+    <div class="accounts">
+      <square-button
+        text="Gmail"
+        class="button"
+        @click="$emit('accountGmail')"
+        :state="BulletState.SYNC"
+      />
+      <square-button
+        text="Retailer"
+        class="button"
+        @click="$emit('accountRetailer')"
+        :state="BulletState.NULL"
+      />
+    </div>
+    <bullet-list
+      :bullets="milestoneBullets"
+      class="bullets"
+      @learn="$emit('learn')"
+    />
+  </div>
+  <text-button text="$1 Cash Out" class="cash" />
 </template>
 
 <style scoped>
-.reward-history {
-  margin: 2em 0;
+.title {
+  margin-bottom: 1.25em;
+}
+.body {
+  padding: 1.25em 0;
+  margin: auto;
+}
+.cash {
+  margin-top: 1.25em;
+}
+
+.accounts {
+  display: flex;
+  align-items: start;
+  margin: 0 auto 1em auto;
+  width: fit-content;
+}
+
+.accounts .button {
+  margin: 0 1em;
+}
+
+.bullets {
+  margin: 2em auto 2em auto;
+  width: fit-content;
 }
 </style>

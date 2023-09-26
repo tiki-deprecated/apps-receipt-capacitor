@@ -6,8 +6,14 @@
 <script setup lang="ts">
 import AccountLink from "@/components/account/account-link.vue";
 import AccountUnlink from "@/components/account/account-unlink.vue";
-import { ref } from "vue";
+import { ref, defineProps } from "vue";
 
+defineProps({
+  accountType:{
+    type: String,
+    required: true
+  }
+})
 defineEmits(["close", "back"]);
 const unlink = ref<Boolean>(false);
 </script>
@@ -18,6 +24,7 @@ const unlink = ref<Boolean>(false);
     @unlink="unlink = true"
     @close="$emit('close')"
     @back="$emit('back')"
+    :accountType="accountType"
   />
   <account-unlink
     v-if="unlink"
