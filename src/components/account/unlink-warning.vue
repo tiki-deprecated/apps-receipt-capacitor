@@ -36,7 +36,7 @@ defineEmits(['remove', 'close', 'back'])
   font-size: var(--tiki-font-size);
   line-height: var(--tiki-line-height);
   color: var(--tiki-secondary-text-color);
-  margin: 0;
+  margin: 0 0 1.5em 0;
 }
 
 .alert-text-bold{
