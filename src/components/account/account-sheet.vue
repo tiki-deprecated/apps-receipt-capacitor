@@ -30,5 +30,6 @@ const unlink = ref<Boolean>(false);
     v-if="unlink"
     @back="unlink = false"
     @close="$emit('close')"
+    :accountType="accountType"
   />
 </template>
