@@ -43,5 +43,5 @@ const submit = async () => {
     <icon-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
   </header-back>
   <account-form v-model:account="form" />
-  <text-button text="Unlink Account" :icon="AccountIconOutline" @click="submit" />
+  <text-button text="Unlink Account" @click="submit" />
 </template>
