@@ -9,19 +9,25 @@ import IconButton from "@/components/buttons/icon-button.vue";
 import IconCrossMark from "@/assets/icons/crossmark-outline.svg?component";
 import Card from "@/components/card.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
-import type { PropType } from "vue";
-import type { Program } from "@/service/config";
 import BulletList from "@/components/bullet/bullet-list.vue";
 import { BulletState } from "@/components/bullet/bullet-state";
 
 defineEmits(["close", "learn", "accept"]);
 const props = defineProps({
-  program: {
-    type: Object as PropType<Program>,
+  description: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: true,
+  },
+  bullets: {
+    type: Array<String>,
     required: true,
   },
 });
-const bullets = props.program?.bullets.map((bullet) => {
+const bulletList = props.bullets.map((bullet) => {
   return { text: bullet, state: BulletState.P0 };
 });
 </script>
@@ -30,8 +36,8 @@ const bullets = props.program?.bullets.map((bullet) => {
   <header-title title="Data Rewards" subtitle="Share data. Earn rewards.">
     <icon-button :icon="IconCrossMark" @click="$emit('close')" />
   </header-title>
-  <card :image="program.image" :description="program.description" />
-  <bullet-list :bullets="bullets" class="how" @learn="$emit('learn')" />
+  <card :image="image" :description="description" />
+  <bullet-list :bullets="bulletList" class="how" @learn="$emit('learn')" />
   <div class="footer">
     <text-button
       text="Back off"

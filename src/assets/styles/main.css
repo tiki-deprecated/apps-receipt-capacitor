@@ -11,9 +11,8 @@
   --tiki-secondary-text-color: rgb(90 90 90);
   --tiki-primary-background-color: rgb(255 255 255);
   --tiki-secondary-background-color: rgb(246 246 246);
-  --tiki-accent-color: rgb(0 178 114);
   --tiki-error-color: rgb(199, 48, 0);
-  --tiki-ok-color: rgb(0 178 114);
+  --tiki-success-color: rgb(0 178 114);
   --tiki-font-size-base: 12px;
   --tiki-font-size-xs: calc(var(--tiki-font-size-base) * 0.75);
   --tiki-line-height-xs: calc(var(--tiki-font-size-base) * 1);

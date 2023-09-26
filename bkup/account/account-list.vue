@@ -4,8 +4,8 @@
   -->
 
 <script setup lang="ts">
-import { ReceiptAccount } from "@/service/receipt/receipt-account";
-import AccountStatus from "@/components/account/account-status.vue";
+import { ReceiptAccount } from "../receipt/receipt-account";
+import AccountStatus from "./account-status.vue";
 
 defineEmits(["delete"]);
 const props = defineProps({

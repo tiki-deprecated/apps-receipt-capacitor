@@ -6,13 +6,11 @@
 <script setup lang="ts">
 import VueMarkdown from "vue-markdown-render";
 import HeaderBack from "@/components/header/header-back.vue";
-import type { PropType } from "vue";
-import type { Program } from "@/service/config";
 
 defineEmits(["back"]);
 defineProps({
-  program: {
-    type: Object as PropType<Program>,
+  markdown: {
+    type: String,
     required: true,
   },
 });
@@ -21,7 +19,7 @@ defineProps({
 <template>
   <div class="full-screen">
     <header-back text="Learn More" @click="$emit('back')" />
-    <vue-markdown :source="program.learn" class="learn-more" />
+    <vue-markdown :source="markdown" class="learn-more" />
   </div>
 </template>
 

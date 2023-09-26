@@ -3,12 +3,12 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import AccountIcon from "@/assets/icons/account.svg?component";
-import ReceiptIcon from "@/assets/icons/receipt.svg?component";
-import RedeemIcon from "@/assets/icons/redeem.svg?component";
+import AccountIcon from "../../src/assets/icons/account.svg?component";
+import ReceiptIcon from "../../src/assets/icons/receipt.svg?component";
+import RedeemIcon from "../../src/assets/icons/redeem.svg?component";
 
 import type { PayableRecord, ReceiptRecord } from "@mytiki/tiki-sdk-capacitor";
-import { ReceiptEvent } from "@/service/receipt/receipt-event";
+import { ReceiptEvent } from "../receipt/receipt-event";
 
 /**
  * Represents an event in the user's history, such as scanning a receipt, redeeming points, linking an account, etc.

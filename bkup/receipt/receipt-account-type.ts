@@ -3,101 +3,101 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import AcmeIcon from "@/assets/images/acme.png";
-import AlbertsonsIcon from "@/assets/images/albertsons.png";
-import AmazonIcon from "@/assets/images/amazon.png";
+import AcmeIcon from "../../src/assets/images/acme.png";
+import AlbertsonsIcon from "../../src/assets/images/albertsons.png";
+import AmazonIcon from "../../src/assets/images/amazon.png";
 //import AolIcon from "@/assets/images/aol.png";
-import BedBathAndBeyondIcon from "@/assets/images/bed-bath-beyond.png";
-import BestBuyIcon from "@/assets/images/best-buy.png";
-import BJsIcon from "@/assets/images/bjs.png";
-import ChewyIcon from "@/assets/images/chewy.png";
-import CostcoIcon from "@/assets/images/costco.png";
-import CVSIcon from "@/assets/images/cvs.png";
-import DicksIcon from "@/assets/images/dicks.png";
-import DollarGeneralIcon from "@/assets/images/dollar-general.png";
-import DollarTreeIcon from "@/assets/images/dollar-tree.png";
-import DominosIcon from "@/assets/images/dominos.png";
-import DoorDashIcon from "@/assets/images/door-dash.png";
-import DrizlyIcon from "@/assets/images/drizly.png";
-import FamilyDollarIcon from "@/assets/images/family-dollar.png";
-import Food4LessIcon from "@/assets/images/food-4-less.png";
-import FoodLionIcon from "@/assets/images/food-lion.png";
-import FredMeyerIcon from "@/assets/images/fred-meyer.png";
-import GapIcon from "@/assets/images/gap.png";
-import GiantEagleIcon from "@/assets/images/giant-eagle.png";
-import GmailIcon from "@/assets/images/gmail.png";
-import GrubHubIcon from "@/assets/images/grubhub.png";
-import HarrisTeeterIcon from "@/assets/images/harris-teeter.png";
-import HEBIcon from "@/assets/images/heb.png";
-import HomeDepotIcon from "@/assets/images/home-depot.png";
-import HyVeeIcon from "@/assets/images/hy-vee.png";
-import InstacartIcon from "@/assets/images/instacart.png";
-import JewelOscoIcon from "@/assets/images/jewel-osco.png";
-import KohlsIcon from "@/assets/images/kohls.png";
-import KrogerIcon from "@/assets/images/kroger.png";
-import LowesIcon from "@/assets/images/lowes.png";
-import MacysIcon from "@/assets/images/macys.png";
-import MarshallsIcon from "@/assets/images/marshalls.png";
-import MeijerIcon from "@/assets/images/meijer.png";
-import NikeIcon from "@/assets/images/nike.png";
+import BedBathAndBeyondIcon from "../../src/assets/images/bed-bath-beyond.png";
+import BestBuyIcon from "../../src/assets/images/best-buy.png";
+import BJsIcon from "../../src/assets/images/bjs.png";
+import ChewyIcon from "../../src/assets/images/chewy.png";
+import CostcoIcon from "../../src/assets/images/costco.png";
+import CVSIcon from "../../src/assets/images/cvs.png";
+import DicksIcon from "../../src/assets/images/dicks.png";
+import DollarGeneralIcon from "../../src/assets/images/dollar-general.png";
+import DollarTreeIcon from "../../src/assets/images/dollar-tree.png";
+import DominosIcon from "../../src/assets/images/dominos.png";
+import DoorDashIcon from "../../src/assets/images/door-dash.png";
+import DrizlyIcon from "../../src/assets/images/drizly.png";
+import FamilyDollarIcon from "../../src/assets/images/family-dollar.png";
+import Food4LessIcon from "../../src/assets/images/food-4-less.png";
+import FoodLionIcon from "../../src/assets/images/food-lion.png";
+import FredMeyerIcon from "../../src/assets/images/fred-meyer.png";
+import GapIcon from "../../src/assets/images/gap.png";
+import GiantEagleIcon from "../../src/assets/images/giant-eagle.png";
+import GmailIcon from "../../src/assets/images/gmail.png";
+import GrubHubIcon from "../../src/assets/images/grubhub.png";
+import HarrisTeeterIcon from "../../src/assets/images/harris-teeter.png";
+import HEBIcon from "../../src/assets/images/heb.png";
+import HomeDepotIcon from "../../src/assets/images/home-depot.png";
+import HyVeeIcon from "../../src/assets/images/hy-vee.png";
+import InstacartIcon from "../../src/assets/images/instacart.png";
+import JewelOscoIcon from "../../src/assets/images/jewel-osco.png";
+import KohlsIcon from "../../src/assets/images/kohls.png";
+import KrogerIcon from "../../src/assets/images/kroger.png";
+import LowesIcon from "../../src/assets/images/lowes.png";
+import MacysIcon from "../../src/assets/images/macys.png";
+import MarshallsIcon from "../../src/assets/images/marshalls.png";
+import MeijerIcon from "../../src/assets/images/meijer.png";
+import NikeIcon from "../../src/assets/images/nike.png";
 //import OutlookIcon from "@/assets/images/outlook.png";
-import PublixIcon from "@/assets/images/publix.png";
-import RalphsIcon from "@/assets/images/ralphs.png";
-import RiteAidIcon from "@/assets/images/rite-aid.png";
-import SafewayIcon from "@/assets/images/safeway.png";
-import SamsClubIcon from "@/assets/images/sams-club.png";
-import SeamlessIcon from "@/assets/images/seamless.png";
-import SephoraIcon from "@/assets/images/sephora.png";
-import ShiptIcon from "@/assets/images/shipt.png";
-import ShopRiteIcon from "@/assets/images/shop-rite.png";
-import SproutsIcon from "@/assets/images/sprouts.png";
-import StaplesIcon from "@/assets/images/staples.png";
-import StaplesCanadaIcon from "@/assets/images/staples-canada.png";
-import StarbucksIcon from "@/assets/images/starbucks.png";
-import TacoBellIcon from "@/assets/images/tacobell.png";
-import TargetIcon from "@/assets/images/target.png";
-import TJMaxxIcon from "@/assets/images/tj-maxx.png";
-import UberEatsIcon from "@/assets/images/uber-eats.png";
-import UltaIcon from "@/assets/images/ulta.png";
-import VonsIcon from "@/assets/images/vons.png";
-import WalgreensIcon from "@/assets/images/walgreens.png";
-import WalmartIcon from "@/assets/images/walmart.png";
-import WalmartCanadaIcon from "@/assets/images/walmart-canada.png";
-import WegmansIcon from "@/assets/images/wegmans.png";
+import PublixIcon from "../../src/assets/images/publix.png";
+import RalphsIcon from "../../src/assets/images/ralphs.png";
+import RiteAidIcon from "../../src/assets/images/rite-aid.png";
+import SafewayIcon from "../../src/assets/images/safeway.png";
+import SamsClubIcon from "../../src/assets/images/sams-club.png";
+import SeamlessIcon from "../../src/assets/images/seamless.png";
+import SephoraIcon from "../../src/assets/images/sephora.png";
+import ShiptIcon from "../../src/assets/images/shipt.png";
+import ShopRiteIcon from "../../src/assets/images/shop-rite.png";
+import SproutsIcon from "../../src/assets/images/sprouts.png";
+import StaplesIcon from "../../src/assets/images/staples.png";
+import StaplesCanadaIcon from "../../src/assets/images/staples-canada.png";
+import StarbucksIcon from "../../src/assets/images/starbucks.png";
+import TacoBellIcon from "../../src/assets/images/tacobell.png";
+import TargetIcon from "../../src/assets/images/target.png";
+import TJMaxxIcon from "../../src/assets/images/tj-maxx.png";
+import UberEatsIcon from "../../src/assets/images/uber-eats.png";
+import UltaIcon from "../../src/assets/images/ulta.png";
+import VonsIcon from "../../src/assets/images/vons.png";
+import WalgreensIcon from "../../src/assets/images/walgreens.png";
+import WalmartIcon from "../../src/assets/images/walmart.png";
+import WalmartCanadaIcon from "../../src/assets/images/walmart-canada.png";
+import WegmansIcon from "../../src/assets/images/wegmans.png";
 //import YahooIcon from "@/assets/images/yahoo.png";
 /**
  * Enumeration of the supported account types.
  */
 
 export interface AccountType {
-  type: 'EMAIL' | 'RETAILER',
-  name: string,
-  icon?: string,
-  key: string
+  type: "EMAIL" | "RETAILER";
+  name: string;
+  icon?: string;
+  key: string;
 }
 
-export type ScanType = 'PHYSICAL' | 'EMAIL' | 'RETAILER' | 'ONLINE'
+export type ScanType = "PHYSICAL" | "EMAIL" | "RETAILER" | "ONLINE";
 
-export class AccountTypeCommom{
+export class AccountTypeCommom {
   /**
-   * CME Markets account type 
+   * CME Markets account type
    */
-  static readonly CME_MARKETS:AccountType =  {
-    type:'RETAILER',
-    name:'Acme',
-    icon:AcmeIcon,
-    key: 'CME_MARKETS'
+  static readonly CME_MARKETS: AccountType = {
+    type: "RETAILER",
+    name: "Acme",
+    icon: AcmeIcon,
+    key: "CME_MARKETS",
   };
-  
+
   /**
    * Albertsons account type.
    */
- static readonly ALBERTSONS: AccountType = {
-  type: "RETAILER",
-  icon: AlbertsonsIcon,
-  name: "Albertsons",
-  key: 'ALBERTSONS'
-}
+  static readonly ALBERTSONS: AccountType = {
+    type: "RETAILER",
+    icon: AlbertsonsIcon,
+    name: "Albertsons",
+    key: "ALBERTSONS",
+  };
   /**
    * Amazon account type.
    */
@@ -105,8 +105,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: AmazonIcon,
     name: "Amazon",
-    key: 'AMAZON'
-}
+    key: "AMAZON",
+  };
   /**
    * Amazon Canada account type.
    */
@@ -114,8 +114,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: AmazonIcon,
     name: "Amazon Canada",
-    key: 'AMAZON_CA'
-}
+    key: "AMAZON_CA",
+  };
   /**
    * Amazon United Kingdom account type.
    */
@@ -123,8 +123,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: AmazonIcon,
     name: "Amazon United Kingdom",
-    key: 'AMAZON_UK'
-}
+    key: "AMAZON_UK",
+  };
   /**
    * AOL account type.
    */
@@ -137,8 +137,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: BedBathAndBeyondIcon,
     name: "Bed Bath & Beyond",
-    key: 'BED_BATH_AND_BEYOND'
-}
+    key: "BED_BATH_AND_BEYOND",
+  };
   /**
    * Gmail account type.
    */
@@ -156,8 +156,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: BestBuyIcon,
     name: "Best Buy",
-    key: 'BESTBUY'
-}
+    key: "BESTBUY",
+  };
   /**
    * BJ’s Wholesale Club account type.
    */
@@ -165,8 +165,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: BJsIcon,
     name: "BJ’s Wholesale Club",
-    key: 'BJS_WHOLESALE'
-}
+    key: "BJS_WHOLESALE",
+  };
   /**
    * Chewy account type.
    */
@@ -174,8 +174,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: ChewyIcon,
     name: "Chewy",
-    key: 'CHEWY'
-}
+    key: "CHEWY",
+  };
   /**
    * Costco account type.
    */
@@ -183,8 +183,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: CostcoIcon,
     name: "Costco",
-    key: 'COSTCO'
-}
+    key: "COSTCO",
+  };
   /**
    * CVS account type.
    */
@@ -192,8 +192,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: CVSIcon,
     name: "CVS",
-    key: 'CVS'
-}
+    key: "CVS",
+  };
   /**
    * Dick’s Sporting Goods account type.
    */
@@ -201,8 +201,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: DicksIcon,
     name: "Dick’s Sporting Goods",
-    key: 'DICKS_SPORTING_GOODS'
-}
+    key: "DICKS_SPORTING_GOODS",
+  };
   /**
    * Dollar General account type.
    */
@@ -210,8 +210,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: DollarGeneralIcon,
     name: "Dollar General",
-    key: 'DOLLAR_GENERAL'
-}
+    key: "DOLLAR_GENERAL",
+  };
   /**
    * DollarTree account type.
    */
@@ -219,8 +219,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: DollarTreeIcon,
     name: "DollarTree",
-    key: 'DOLLAR_TREE'
-}
+    key: "DOLLAR_TREE",
+  };
   /**
    * Domino’s Pizza account type.
    */
@@ -228,8 +228,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: DominosIcon,
     name: "Domino’s Pizza",
-    key: 'DOMINOS_PIZZA'
-}
+    key: "DOMINOS_PIZZA",
+  };
   /**
    * DoorDash account type.
    */
@@ -237,8 +237,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: DoorDashIcon,
     name: "DoorDash",
-    key: 'DOOR_DASH'
-}
+    key: "DOOR_DASH",
+  };
   /**
    * Drizly account type.
    */
@@ -246,8 +246,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: DrizlyIcon,
     name: "Drizly",
-    key: 'DRIZLY'
-}
+    key: "DRIZLY",
+  };
   /**
    * Family Dollar account type.
    */
@@ -255,17 +255,17 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: FamilyDollarIcon,
     name: "Family Dollar",
-    key: 'FAMILY_DOLLAR'
-  }
-    /**
+    key: "FAMILY_DOLLAR",
+  };
+  /**
    * Food 4 Less account type.
    */
   static readonly FOOD_4_LESS: AccountType = {
     type: "RETAILER",
     icon: Food4LessIcon,
     name: "Food 4 Less",
-    key: 'FOOD_4_LESS'
-}
+    key: "FOOD_4_LESS",
+  };
   /**
    * Food Lion account type.
    */
@@ -273,8 +273,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: FoodLionIcon,
     name: "Food Lion",
-    key: 'FOOD_LION'
-}
+    key: "FOOD_LION",
+  };
   /**
    * Fred Meyer account type.
    */
@@ -282,8 +282,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: FredMeyerIcon,
     name: "Fred Meyer",
-    key: 'FRED_MEYER'
-}
+    key: "FRED_MEYER",
+  };
   /**
    * GAP account type.
    */
@@ -291,8 +291,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: GapIcon,
     name: "GAP",
-    key: 'GAP'
-}
+    key: "GAP",
+  };
   /**
    * Giant Eagle account type.
    */
@@ -300,8 +300,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: GiantEagleIcon,
     name: "Giant Eagle",
-    key: 'GIANT_EAGLE'
-}
+    key: "GIANT_EAGLE",
+  };
   /**
    * Grubhub account type.
    */
@@ -309,8 +309,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: GrubHubIcon,
     name: "Grubhub",
-    key: 'GRUBHUB'
-}
+    key: "GRUBHUB",
+  };
   /**
    * Harris Teeter account type.
    */
@@ -318,8 +318,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: HarrisTeeterIcon,
     name: "Harris Teeter",
-    key: 'HARRIS_TEETER'
-}
+    key: "HARRIS_TEETER",
+  };
   /**
    * H.E.B account type.
    */
@@ -327,8 +327,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: HEBIcon,
     name: "H.E.B",
-    key: 'HEB'
-}
+    key: "HEB",
+  };
   /**
    * Home Depot account type.
    */
@@ -336,17 +336,17 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: HomeDepotIcon,
     name: "Home Depot",
-    key: 'HOME_DEPOT'
-}
+    key: "HOME_DEPOT",
+  };
   /**
    * HyVee account type.
    */
   static readonly HYVEE: AccountType = {
     type: "RETAILER",
     icon: HyVeeIcon,
-    key: 'HYVEE',
+    key: "HYVEE",
     name: "HyVee",
-}
+  };
   /**
    * Instacart account type.
    */
@@ -354,8 +354,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: InstacartIcon,
     name: "Instacart",
-    key: 'INSTACART',
-}
+    key: "INSTACART",
+  };
   /**
    * Jewel Osco account type.
    */
@@ -363,8 +363,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: JewelOscoIcon,
     name: "Jewel Osco",
-    key: 'JEWEL_OSCO',
-}
+    key: "JEWEL_OSCO",
+  };
   /**
    * Kohl’s account type.
    */
@@ -372,8 +372,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: KohlsIcon,
     name: "Kohl’s",
-    key: 'KOHLS',
-}
+    key: "KOHLS",
+  };
   /**
    * Kroger account type.
    */
@@ -381,8 +381,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: KrogerIcon,
     name: "Kroger",
-    key: 'KROGER',
-}
+    key: "KROGER",
+  };
   /**
    * Lowe’s account type.
    */
@@ -390,8 +390,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: LowesIcon,
     name: "Lowe’s",
-    key: 'LOWES',
-}
+    key: "LOWES",
+  };
   /**
    * Macy’s account type.
    */
@@ -399,8 +399,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: MacysIcon,
     name: "Macy’s",
-    key: 'MACYS',
-}
+    key: "MACYS",
+  };
   /**
    * Marshalls account type.
    */
@@ -408,8 +408,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: MarshallsIcon,
     name: "Marshalls",
-    key: 'MARSHALLS',
-}
+    key: "MARSHALLS",
+  };
   /**
    * Meijer account type.
    */
@@ -417,8 +417,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: MeijerIcon,
     name: "Meijer",
-    key: 'MEIJER',
-}
+    key: "MEIJER",
+  };
   /**
    * Nike account type.
    */
@@ -426,8 +426,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: NikeIcon,
     name: "Nike",
-    key: 'NIKE',
-  }
+    key: "NIKE",
+  };
   /**}
    * Microsoft Outlook account type.
    */
@@ -444,8 +444,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: PublixIcon,
     name: "Publix",
-    key: 'PUBLIX',
-}
+    key: "PUBLIX",
+  };
   /**
    * Ralphs account type.
    */
@@ -453,8 +453,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: RalphsIcon,
     name: "Ralphs",
-    key: 'RALPHS',
-}
+    key: "RALPHS",
+  };
   /**
    * RiteAid account type.
    */
@@ -462,8 +462,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: RiteAidIcon,
     name: "RiteAid",
-    key: 'RITE_AID',
-}
+    key: "RITE_AID",
+  };
   /**
    * Safeway account type.
    */
@@ -471,8 +471,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: "",
     name: "Safeway",
-    key: 'AFEWAY',
-}
+    key: "AFEWAY",
+  };
   /**
    * Sam’s Club account type.
    */
@@ -480,8 +480,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: SamsClubIcon,
     name: "Sam’s Club",
-    key: 'SAMS_CLUB',
-}
+    key: "SAMS_CLUB",
+  };
   /**
    * Seamless account type.
    */
@@ -489,8 +489,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: SeamlessIcon,
     name: "Seamless",
-    key: 'SEAMLESS',
-}
+    key: "SEAMLESS",
+  };
   /**
    * Sephora account type.
    */
@@ -498,8 +498,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: SephoraIcon,
     name: "Sephora",
-    key: 'SEPHORA',
-}
+    key: "SEPHORA",
+  };
   /**
    * Shipt account type.
    */
@@ -507,8 +507,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: ShiptIcon,
     name: "Shipt",
-    key: 'SHIPT',
-}
+    key: "SHIPT",
+  };
   /**
    * ShopRite account type.
    */
@@ -516,8 +516,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: ShopRiteIcon,
     name: "Shoprite",
-    key: 'SHOPRITE',
-  }
+    key: "SHOPRITE",
+  };
 
   /**
    * Sprouts account type.
@@ -526,8 +526,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: SproutsIcon,
     name: "Sprouts",
-    key: 'SPROUTS',
-}
+    key: "SPROUTS",
+  };
   /**
    * Staples account type.
    */
@@ -535,8 +535,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: StaplesIcon,
     name: "Staples",
-    key: 'STAPLES',
-}
+    key: "STAPLES",
+  };
   /**
    * Staples Canada account type.
    */
@@ -544,8 +544,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: StaplesCanadaIcon,
     name: "Staples Canada",
-    key: 'STAPLES_CA',
-}
+    key: "STAPLES_CA",
+  };
   /**
    * Starbucks account type.
    */
@@ -553,8 +553,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: StarbucksIcon,
     name: "Starbucks",
-    key: 'STARBUCKS',
-}
+    key: "STARBUCKS",
+  };
   /**
    * Taco Bell account type.
    */
@@ -562,8 +562,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: TacoBellIcon,
     name: "Taco Bell",
-    key: 'TACO_BELL',
-}
+    key: "TACO_BELL",
+  };
   /**
    * Target account type.
    */
@@ -571,8 +571,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: TargetIcon,
     name: "Target",
-    key: 'TARGET',
-}
+    key: "TARGET",
+  };
   /**
    * T.J.Maxx account type.
    */
@@ -580,8 +580,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: TJMaxxIcon,
     name: "T.J.Maxx",
-    key: 'TJ_MAXX',
-}
+    key: "TJ_MAXX",
+  };
   /**
    * UberEats account type.
    */
@@ -589,8 +589,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: UberEatsIcon,
     name: "UberEats",
-    key: 'UBER_EATS',
-}
+    key: "UBER_EATS",
+  };
   /**
    * Ulta account type.
    */
@@ -598,17 +598,17 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: UltaIcon,
     name: "Ulta",
-    key: 'ULTA',
-}
+    key: "ULTA",
+  };
   /**
    * Vons account type.
    */
   static readonly VONS: AccountType = {
     type: "RETAILER",
     icon: VonsIcon,
-    name: "Vons", 
-    key: 'VONS',
-}
+    name: "Vons",
+    key: "VONS",
+  };
   /**}
    * Walgreens account type.
    */
@@ -616,8 +616,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: WalgreensIcon,
     name: "Walgreens",
-    key: 'WALGREENS',
-}
+    key: "WALGREENS",
+  };
   /**
    * Walmart account type.
    */
@@ -625,8 +625,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: WalmartIcon,
     name: "Walmart",
-    key: 'WALMART',
-}
+    key: "WALMART",
+  };
   /**
    * Walmart Canada account type.
    */
@@ -634,8 +634,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: WalmartCanadaIcon,
     name: "Walmart Canada",
-    key: 'WALMART_CA',
-}
+    key: "WALMART_CA",
+  };
   /**
    * Wegman’s account type.
    */
@@ -643,8 +643,8 @@ export class AccountTypeCommom{
     type: "RETAILER",
     icon: WegmansIcon,
     name: "Wegman’s",
-    key: 'WEGMANS',
-} 
+    key: "WEGMANS",
+  };
   // static readonly YAHOO: AccountType = {
   //   type: "Email",
   //   icon: '',
@@ -652,4 +652,3 @@ export class AccountTypeCommom{
   //   key: "YAHOO"
   // }
 }
-

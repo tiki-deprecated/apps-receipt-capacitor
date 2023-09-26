@@ -4,7 +4,6 @@
   -->
 
 <script setup lang="ts">
-import type { Reward } from "@/service/config";
 import IconCrossMark from "@/assets/icons/crossmark-outline.svg?component";
 import IconButton from "@/components/buttons/icon-button.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
@@ -16,7 +15,7 @@ import TextButton from "@/components/buttons/text-button.vue";
 defineEmits(["close", "history", "account"]);
 defineProps({
   rewards: {
-    type: Array<Reward>,
+    type: Array<Object>,
     required: true,
   },
 });

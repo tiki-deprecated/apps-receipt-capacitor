@@ -4,17 +4,15 @@
   -->
 
 <script setup lang="ts">
-import { initialState, TikiReceiptState } from "@/tiki-receipt-state";
-import { inject, ref, watch } from "vue";
-import BottomSheet from "@/components/bottom-sheet.vue";
-import ProgramSheet from "@/components/program/program-sheet.vue";
-import TermsSheet from "@/components/terms-sheet.vue";
-import LearnSheet from "@/components/learn-sheet.vue";
-import RewardSheet from "@/components/reward/reward-sheet.vue";
-import HistorySheet from "@/components/history/history-sheet.vue";
-import AccountSheet from "@/components/account/account-sheet.vue";
+import * as SheetState from "@/components/sheet/sheet-state";
+import { inject, ref, watch, type RendererElement } from "vue";
+import BottomSheet from "@/components/sheet/sheet-bottom.vue";
+import Program from "@/components/sheet/sheet-program.vue";
+import Terms from "@/components/sheet/sheet-terms.vue";
+import Learn from "@/components/sheet/sheet-learn.vue";
 import type { TikiService } from "@/service/tiki-service";
-import type { Theme } from "@/service/config";
+import * as Swipe from "@/utils/swipe";
+import * as Theme from "@/config/theme";
 
 const emit = defineEmits([
   /**
@@ -23,7 +21,6 @@ const emit = defineEmits([
    */
   "update:present",
 ]);
-
 const props = defineProps({
   /**
    * Display the UI if true, hide if false.
@@ -36,107 +33,62 @@ const props = defineProps({
   },
 });
 
-const state = ref(TikiReceiptState.Hidden);
-
+const state = ref(SheetState.Sheets.Hidden);
 watch(
   () => props.present,
   async (present) => {
     if (present) {
       try {
-        state.value = await initialState(tiki!);
+        state.value = await SheetState.initial(tiki!);
       } catch (e) {
         console.error(e);
         emit("update:present", false);
       }
-    } else state.value = TikiReceiptState.Hidden;
+    } else state.value = SheetState.Sheets.Hidden;
   },
 );
-const accountType = ref<'Gmail' | 'Retailer'>()
-
-const handleAccountSheet = (type: 'Gmail'|'Retailer')=>{
-  state.value = TikiReceiptState.Account
-  accountType.value = type
-}
 
 const tiki: TikiService | undefined = inject("Tiki");
-const stylize = (property: string, value?: string) => {
-  if (value != undefined)
-    document.documentElement.style.setProperty(property, value);
-};
-const theme: Theme | undefined = tiki?.config.theme;
-stylize("--tiki-font-family", theme?.fontFamily);
-stylize("--tiki-primary-text-color", theme?.primaryTextColor);
-stylize("--tiki-secondary-text-color", theme?.secondaryTextColor);
-stylize("--tiki-primary-background-color", theme?.primaryBackgroundColor);
-stylize("--tiki-secondary-background-color", theme?.secondaryBackgroundColor);
-stylize("--tiki-accent-color", theme?.accentColor);
-
-const closeUI = () => {
-  return function (direction: string, element: any) {
-    const isHeadingElement = (className: string): Boolean =>
-      ["heading", "title"].includes(className);
-    const isFullScreenElement = (className: string): Boolean =>
-      className === "full-screen";
-    if (
-      direction === "bottom" &&
-      (isHeadingElement(element.target.className) ||
-        (element.target.className === "body" &&
-          (isHeadingElement(element.target.firstElementChild.className) ||
-            isFullScreenElement(element.target.firstElementChild.className)))) ||
-            (element.target.className === 'overlay' && element.target.firstElementChild.className === 'bottom-sheet')
-    ) {
-      state.value = TikiReceiptState.Hidden;
-    }
-  };
+Theme.apply(document, tiki?.config.theme);
+const swipe = (direction: string, element: RendererElement) => {
+  if (Swipe.close(direction, element)) state.value = SheetState.Sheets.Hidden;
 };
 </script>
 
 <template>
-  <Transition appear name="fade" v-touch:swipe="closeUI()">
+  <Transition appear name="fade" v-touch:swipe="swipe">
     <bottom-sheet
       v-if="present"
       @dismiss="$emit('update:present', false)"
-      :show="state !== TikiReceiptState.Hidden"
+      :show="state !== SheetState.Sheets.Hidden"
     >
       <div class="body">
-        <program-sheet
-          v-if="state === TikiReceiptState.Program"
-          @learn="state = TikiReceiptState.Learn"
-          @accept="state = TikiReceiptState.Terms"
-          @close="state = TikiReceiptState.Hidden"
-          :program="tiki!.config.program"
+        <program
+          v-if="state === SheetState.Sheets.Program"
+          @learn="state = SheetState.Sheets.Learn"
+          @accept="state = SheetState.Sheets.Terms"
+          @close="state = SheetState.Sheets.Hidden"
+          :description="tiki!.config.offer.details.description!"
+          :image="tiki!.config.offer.details.image!"
+          :bullets="tiki!.config.offer.details.bullets!"
         />
-        <terms-sheet
-          v-if="state === TikiReceiptState.Terms"
-          :program="tiki!.config.program"
-          @back="state = TikiReceiptState.Program"
-          @accept="state = TikiReceiptState.Reward"
+        <terms
+          v-if="state === SheetState.Sheets.Terms"
+          :markdown="tiki!.config.terms"
+          @back="state = SheetState.Sheets.Program"
+          @accept="state = SheetState.Sheets.Reward"
         />
-        <learn-sheet
-          v-if="state === TikiReceiptState.Learn"
-          :program="tiki!.config.program"
-          @back="state = TikiReceiptState.Program"
+        <learn
+          v-if="state === SheetState.Sheets.Learn"
+          :markdown="tiki!.config.learn"
+          @back="state = SheetState.Sheets.Program"
         />
-        <reward-sheet
-          v-if="state === TikiReceiptState.Reward"
-          :rewards="tiki!.config.rewards"
-          @close="state = TikiReceiptState.Hidden"
-          @history="state = TikiReceiptState.History"
-          @learn="state = TikiReceiptState.Learn"
-          @accountGmail="handleAccountSheet('Gmail')"
-          @accountRetailer="handleAccountSheet('Retailer')"
-        />
-        <history-sheet
-          v-if="state === TikiReceiptState.History"
-          @close="state = TikiReceiptState.Hidden"
-          @back="state = TikiReceiptState.Reward"
-        />
-        <account-sheet
-          v-if="state === TikiReceiptState.Account"
-          @close="state = TikiReceiptState.Hidden"
-          @back="state = TikiReceiptState.Reward"
-          :accountType="accountType!"
-        />
+        <!--        <account-sheet-->
+        <!--          v-if="state === TikiReceiptState.Account"-->
+        <!--          @close="state = TikiReceiptState.Hidden"-->
+        <!--          @back="state = TikiReceiptState.Reward"-->
+        <!--          :accountType="accountType!"-->
+        <!--        />-->
       </div>
     </bottom-sheet>
   </Transition>

@@ -5,10 +5,10 @@
 
 import type { ReceiptCapture } from "@mytiki/tiki-capture-receipt-capacitor";
 import * as TikiReceiptCapture from "@mytiki/tiki-capture-receipt-capacitor";
-import { TikiService } from "@/service/tiki-service";
-import { ReceiptAccount } from "@/service/receipt/receipt-account";
-import { ReceiptEvent } from "@/service/receipt/receipt-event";
-import { HistoryEvent } from "@/service/history/history-event";
+import { TikiService } from "../../src/service/tiki-service";
+import { ReceiptAccount } from "./receipt-account";
+import { ReceiptEvent } from "./receipt-event";
+import { HistoryEvent } from "../history/history-event";
 import type { ScanType } from "./receipt-account-type";
 
 /**
@@ -28,13 +28,14 @@ export class ReceiptService {
   /**
    * The local cached accounts
    */
-  get cachedAccounts(){
-    return this._accounts
+  get cachedAccounts() {
+    return this._accounts;
   }
 
   private readonly tiki: TikiService;
   private _accounts: ReceiptAccount[] = [];
-  private _onAccountListeners: Map<string, (account: ReceiptAccount) => void> = new Map();
+  private _onAccountListeners: Map<string, (account: ReceiptAccount) => void> =
+    new Map();
   private _onReceiptListeners: Map<
     string,
     (receipt: TikiReceiptCapture.Receipt, account?: ReceiptAccount) => void
@@ -42,9 +43,9 @@ export class ReceiptService {
 
   /**
    * Creates an instance of the ReceiptService class.
-   * 
+   *
    * Do not construct directly. Call from {@link TikiService}.
-   * 
+   *
    * @param tiki {TikiService} The parent service instance.
    */
   constructor(tiki: TikiService) {
@@ -53,17 +54,16 @@ export class ReceiptService {
 
   /**
    * Initializes the Microblink SDK.
-   * 
+   *
    * Ask your account manager for the keys.
-   * 
+   *
    * @param scanKey {string} Microblink scan Key
    * @param intelKey {string} Microblik product intel key
    */
   async initialize(scanKey: string, intelKey: string) {
-    await this.plugin.initialize(scanKey, intelKey)
-      .catch(error => {
-        throw Error(`Could not initialize; Error: ${error}`)
-      })
+    await this.plugin.initialize(scanKey, intelKey).catch((error) => {
+      throw Error(`Could not initialize; Error: ${error}`);
+    });
   }
 
   /**
@@ -71,36 +71,39 @@ export class ReceiptService {
    * also saves that account in cache.
    * @param account {ReceiptAccount} The account to login.
    */
-  async login(account: ReceiptAccount){
+  async login(account: ReceiptAccount) {
     await this.plugin.login(
       account.username,
       account.password!,
       account.accountType.key!,
-    )
+    );
     account.isVerified = true;
     this.addAccount(account);
     await this.process(ReceiptEvent.LINK, {
       account: account,
     });
-    
   }
-  
+
   /**
    * Log out from one or all {@link ReceiptAccount}.
-   * 
-   * The logout method will remove the credentials from the cache and remove all 
+   *
+   * The logout method will remove the credentials from the cache and remove all
    * cached data for this account.
-   * 
-   * @param {ReceiptAccount} account - which account logout from. Logout from all 
+   *
+   * @param {ReceiptAccount} account - which account logout from. Logout from all
    * accounts if undefined.
    */
   async logout(account: ReceiptAccount | undefined = undefined) {
     if (!account) {
-      await this.plugin.logout()
+      await this.plugin.logout();
       this._accounts = [];
-      return
+      return;
     }
-    await this.plugin.logout(account.username, account.password!, account.accountType.key)
+    await this.plugin.logout(
+      account.username,
+      account.password!,
+      account.accountType.key,
+    );
     this.removeAccount(account!);
     await this.process(ReceiptEvent.UNLINK, {
       account: account,
@@ -114,11 +117,11 @@ export class ReceiptService {
   async accounts() {
     try {
       (await this.plugin.accounts()).accounts.forEach((account) => {
-        this.addAccount(ReceiptAccount.fromSource(account))
-        this.scan('ONLINE')
-      })
+        this.addAccount(ReceiptAccount.fromSource(account));
+        this.scan("ONLINE");
+      });
     } catch (error) {
-      throw Error(`Could not load the accounts; Error: ${error}`)
+      throw Error(`Could not load the accounts; Error: ${error}`);
     }
   }
 
@@ -128,31 +131,37 @@ export class ReceiptService {
    * @param scanType - the type of the scan
    * @param account - the account to be scanned.
    */
-  async scan(scanType: ScanType | undefined, account?: ReceiptAccount): Promise<void> {
-    if (scanType === 'PHYSICAL') {
+  async scan(
+    scanType: ScanType | undefined,
+    account?: ReceiptAccount,
+  ): Promise<void> {
+    if (scanType === "PHYSICAL") {
       const license = await this.tiki.sdk.getLicense();
       if (license != undefined) {
         const receipt = await this.plugin.scan(scanType);
         if (receipt.receipt.ocrConfidence > ReceiptService.OCR_THRESHOLD) {
           await this.addReceipt(receipt.receipt);
         } else {
-          console.warn(`Receipt ignored: Confidence: ${receipt.receipt.ocrConfidence}`);
+          console.warn(
+            `Receipt ignored: Confidence: ${receipt.receipt.ocrConfidence}`,
+          );
         }
       } else
         throw new Error(
           `No license found for ${this.tiki.sdk.id}. User must first consent to the program.`,
         );
     }
-    const receipts = await this.plugin.scan(scanType, account!).catch(error=>{
-      throw new Error(error)
-    });
-    this.addReceipt(receipts.receipt)
-    
+    const receipts = await this.plugin
+      .scan(scanType, account!)
+      .catch((error) => {
+        throw new Error(error);
+      });
+    this.addReceipt(receipts.receipt);
   }
 
   /**
    * Register an account event listener.
-   * 
+   *
    * @param id - Identifier for the listener.
    * @param listener - The callback function to be called when a new account is added or removed.
    */
@@ -162,7 +171,7 @@ export class ReceiptService {
 
   /**
    * Register a receipt event listener.
-   * 
+   *
    * @param id - Identifier for the listener.
    * @param listener - The callback function to be called whenever a new receipt is parsed.
    */
@@ -183,7 +192,9 @@ export class ReceiptService {
   private addAccount(account: ReceiptAccount): string | void {
     this._accounts.push(account);
     this._onAccountListeners.forEach((listener) => listener(account));
-    this.scan(account.accountType.type, account).catch((error)=>{ throw new Error(error)})
+    this.scan(account.accountType.type, account).catch((error) => {
+      throw new Error(error);
+    });
   }
   /**
    * remove an account of the cache.
@@ -191,7 +202,9 @@ export class ReceiptService {
    */
   private removeAccount(account: ReceiptAccount): void {
     this._accounts = this._accounts.filter(
-      (acc) => acc.username != account.username && acc.accountType.type != account.accountType.type,
+      (acc) =>
+        acc.username != account.username &&
+        acc.accountType.type != account.accountType.type,
     );
     this._onAccountListeners.forEach((listener) => listener(account));
   }
@@ -212,10 +225,7 @@ export class ReceiptService {
         account: ReceiptAccount.fromValue(account!),
       });
       this._onReceiptListeners.forEach((listener) =>
-        listener(
-          receipt,
-          ReceiptAccount.fromValue(account!)
-        ),
+        listener(receipt, ReceiptAccount.fromValue(account!)),
       );
     } else {
       console.warn(
@@ -224,10 +234,10 @@ export class ReceiptService {
     }
   }
 
-   /**
+  /**
    * Process the receipts that passed in the addReceipt verification
    * @param event - the type of the event that will be processed, in this case its SCAN
-   * @param details - the receipt and account 
+   * @param details - the receipt and account
    * will add the receipt to the history and rewards points to the account
    */
   private async process(
@@ -236,7 +246,7 @@ export class ReceiptService {
       receipt?: TikiReceiptCapture.Receipt;
       account?: ReceiptAccount;
     },
-  ){
+  ) {
     const rewards = this.tiki.config.rewards;
     for (const reward of rewards) {
       const amount = reward.issuer(event, details);

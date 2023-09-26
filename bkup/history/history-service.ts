@@ -3,11 +3,11 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import { TikiService } from "@/service/tiki-service";
-import { HistoryEvent } from "@/service/history/history-event";
+import { TikiService } from "../../src/service/tiki-service";
+import { HistoryEvent } from "./history-event";
 import type { PayableRecord, ReceiptRecord } from "@mytiki/tiki-sdk-capacitor";
-import { SdkService } from "@/service/sdk-service";
-import { ReceiptEvent } from "@/service/receipt/receipt-event";
+import { SdkService } from "../sdk-service";
+import { ReceiptEvent } from "../receipt/receipt-event";
 
 /**
  * Manages the user's history events, such as scanning receipts, redeeming points, and more.

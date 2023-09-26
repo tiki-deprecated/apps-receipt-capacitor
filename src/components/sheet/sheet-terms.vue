@@ -8,21 +8,19 @@ import VueMarkdown from "vue-markdown-render";
 import TextButton from "@/components/buttons/text-button.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import { inject } from "vue";
-import type { PropType } from "vue";
-import type { Program } from "@/service/config";
 import type { TikiService } from "@/service/tiki-service";
 
 const tiki: TikiService | undefined = inject("Tiki");
 const emit = defineEmits(["back", "accept"]);
-const props = defineProps({
-  program: {
-    type: Object as PropType<Program>,
+defineProps({
+  markdown: {
+    type: String,
     required: true,
   },
 });
 
 const accept = () => {
-  tiki!.sdk.createLicense();
+  //tiki!.sdk.createLicense();
   emit("accept");
 };
 </script>
@@ -30,7 +28,7 @@ const accept = () => {
 <template>
   <div class="full-screen">
     <header-back text="Terms and Conditions" @click="$emit('back')" />
-    <vue-markdown :source="program.terms" class="terms" />
+    <vue-markdown :source="markdown" class="terms" />
     <text-button text="I agree" class="agree" @click="accept" />
   </div>
 </template>
