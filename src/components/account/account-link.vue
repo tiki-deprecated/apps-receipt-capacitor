@@ -18,7 +18,7 @@ import { TikiService } from "@/service/tiki-service";
 const tiki: TikiService | undefined = inject("Tiki");
 
 defineEmits(["close", "back", "unlink"]);
-defineProps({
+const props = defineProps({
   accountType:{
     type: String,
     required: true
@@ -33,9 +33,10 @@ tiki!.receipt.onAccount("account-link", (acc) => {
 
 const error = ref<string>();
 
-const form = ref<ReceiptAccount>(
-  new ReceiptAccount("", AccountTypeCommom.GMAIL, ""),
-);
+const form = ref<ReceiptAccount>( props.accountType === 'Gmail' ?
+  new ReceiptAccount("", AccountTypeCommom.GMAIL, "") :
+  new ReceiptAccount("", AccountTypeCommom.AMAZON, "")
+  )
 
 const submit = async () => {
   if (
@@ -47,7 +48,9 @@ const submit = async () => {
     try {
       error.value = "";
       await tiki?.receipt.login(form.value);
-      form.value = new ReceiptAccount("", AccountTypeCommom.GMAIL, "");
+      form.value =  props.accountType === 'Gmail' ? 
+      new ReceiptAccount("", AccountTypeCommom.GMAIL, "") : 
+      new ReceiptAccount("", AccountTypeCommom.AMAZON, "");
     } catch (err: any) {
       error.value = err.toString();
     }
@@ -67,7 +70,7 @@ const submit = async () => {
     class="account-carousel"
     @click="$emit('unlink', $event)"
   />
-  <text-button text="Link Account" @click="submit" />
+  <text-button :text="`Link ${accountType}`" @click="submit" />
 </template>
 
 <style scoped>

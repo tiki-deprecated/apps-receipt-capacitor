@@ -142,12 +142,12 @@ export class AccountTypeCommom{
   /**
    * Gmail account type.
    */
-  // static readonly GMAIL: AccountType = {
-  //  name: "Gmail",
-  //  type: "EMAIL",
-  //  icon: GmailIcon,
-  //  key: 'GMAIL'
-  // }
+  static readonly GMAIL: AccountType = {
+   name: "Gmail",
+   type: "EMAIL",
+   icon: GmailIcon,
+   key: 'GMAIL'
+  }
 
   /**
    * Best Buy account type.
