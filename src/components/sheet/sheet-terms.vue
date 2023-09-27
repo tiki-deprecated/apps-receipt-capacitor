@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import VueMarkdown from "vue-markdown-render";
-import TextButton from "@/components/buttons/text-button.vue";
+import ButtonText from "@/components/button/button-text.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import { inject } from "vue";
 import type { TikiService } from "@/service/tiki-service";
@@ -29,7 +29,7 @@ const accept = () => {
   <div class="full-screen">
     <header-back text="Terms and Conditions" @click="$emit('back')" />
     <vue-markdown :source="markdown" class="terms" />
-    <text-button text="I agree" class="agree" @click="accept" />
+    <button-text text="I agree" class="agree" @click="accept" />
   </div>
 </template>
 
@@ -49,7 +49,7 @@ const accept = () => {
   overflow-y: scroll;
   overflow-x: clip;
   flex: 1 1 auto;
-  border-bottom: 1px solid var(--tiki-accent-color);
+  border-bottom: 1px solid var(--tiki-success-color);
 }
 
 .terms :deep(h1),
@@ -100,7 +100,7 @@ const accept = () => {
 }
 
 .terms :deep(a) {
-  color: var(--tiki-accent-color);
+  color: var(--tiki-success-color);
 }
 
 .terms :deep(img) {

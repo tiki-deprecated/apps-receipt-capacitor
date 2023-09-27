@@ -4,15 +4,16 @@
   -->
 
 <script setup lang="ts">
-import * as SheetState from "@/components/sheet/sheet-state";
-import { inject, ref, watch, type RendererElement } from "vue";
-import BottomSheet from "@/components/sheet/sheet-bottom.vue";
-import Program from "@/components/sheet/sheet-program.vue";
-import Terms from "@/components/sheet/sheet-terms.vue";
-import Learn from "@/components/sheet/sheet-learn.vue";
+import { inject, watch, type RendererElement } from "vue";
+import SheetBottom from "@/components/sheet/sheet-bottom.vue";
+import SheetOffer from "@/components/sheet/sheet-offer.vue";
+import SheetTerms from "@/components/sheet/sheet-terms.vue";
+import SheetLearn from "@/components/sheet/sheet-learn.vue";
+import SheetHome from "@/components/sheet/sheet-home.vue";
 import type { TikiService } from "@/service/tiki-service";
 import * as Swipe from "@/utils/swipe";
 import * as Theme from "@/config/theme";
+import { Navigate, Sheets } from "@/utils/navigate";
 
 const emit = defineEmits([
   /**
@@ -33,56 +34,57 @@ const props = defineProps({
   },
 });
 
-const state = ref(SheetState.Sheets.Hidden);
+const navigate = new Navigate();
 watch(
   () => props.present,
   async (present) => {
     if (present) {
       try {
-        state.value = await SheetState.initial(tiki!);
+        await navigate.initialize(tiki!);
       } catch (e) {
         console.error(e);
         emit("update:present", false);
       }
-    } else state.value = SheetState.Sheets.Hidden;
+    } else navigate.clear();
   },
 );
 
 const tiki: TikiService | undefined = inject("Tiki");
 Theme.apply(document, tiki?.config.theme);
 const swipe = (direction: string, element: RendererElement) => {
-  if (Swipe.close(direction, element)) state.value = SheetState.Sheets.Hidden;
+  if (Swipe.close(direction, element)) navigate.clear();
 };
 </script>
 
 <template>
   <Transition appear name="fade" v-touch:swipe="swipe">
-    <bottom-sheet
+    <sheet-bottom
       v-if="present"
       @dismiss="$emit('update:present', false)"
-      :show="state !== SheetState.Sheets.Hidden"
+      :show="navigate.ref.value !== Sheets.Hidden"
     >
       <div class="body">
-        <program
-          v-if="state === SheetState.Sheets.Program"
-          @learn="state = SheetState.Sheets.Learn"
-          @accept="state = SheetState.Sheets.Terms"
-          @close="state = SheetState.Sheets.Hidden"
-          :description="tiki!.config.offer.details.description!"
-          :image="tiki!.config.offer.details.image!"
-          :bullets="tiki!.config.offer.details.bullets!"
+        <sheet-offer
+          v-if="navigate.ref.value === Sheets.Offer"
+          @learn="navigate.to(Sheets.Learn)"
+          @accept="navigate.to(Sheets.Terms)"
+          @close="navigate.clear()"
+          :description="tiki!.config.offer.description!"
+          :image="tiki!.config.offer.image!"
+          :bullets="tiki!.config.offer.bullets!"
         />
-        <terms
-          v-if="state === SheetState.Sheets.Terms"
+        <sheet-terms
+          v-if="navigate.ref.value === Sheets.Terms"
           :markdown="tiki!.config.terms"
-          @back="state = SheetState.Sheets.Program"
-          @accept="state = SheetState.Sheets.Reward"
+          @back="navigate.pop()"
+          @accept="navigate.to(Sheets.Home)"
         />
-        <learn
-          v-if="state === SheetState.Sheets.Learn"
+        <sheet-learn
+          v-if="navigate.ref.value === Sheets.Learn"
           :markdown="tiki!.config.learn"
-          @back="state = SheetState.Sheets.Program"
+          @back="navigate.pop()"
         />
+        <sheet-home v-if="navigate.ref.value === Sheets.Home" />
         <!--        <account-sheet-->
         <!--          v-if="state === TikiReceiptState.Account"-->
         <!--          @close="state = TikiReceiptState.Hidden"-->
@@ -90,7 +92,7 @@ const swipe = (direction: string, element: RendererElement) => {
         <!--          :accountType="accountType!"-->
         <!--        />-->
       </div>
-    </bottom-sheet>
+    </sheet-bottom>
   </Transition>
 </template>
 

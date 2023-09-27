@@ -4,8 +4,8 @@
   -->
 
 <script setup lang="ts">
-import TextButton from "@/components/buttons/text-button.vue";
-import IconButton from "@/components/buttons/icon-button.vue";
+import ButtonText from "@/components/button/button-text.vue";
+import ButtonIcon from "@/components/button/button-icon.vue";
 import IconCrossMark from "@/assets/icons/crossmark-outline.svg?component";
 import Card from "@/components/card.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
@@ -33,19 +33,19 @@ const bulletList = props.bullets.map((bullet) => {
 </script>
 
 <template>
-  <header-title title="Data Rewards" subtitle="Share data. Earn rewards.">
-    <icon-button :icon="IconCrossMark" @click="$emit('close')" />
+  <header-title title="Rewards" subtitle="Share data. Earn rewards.">
+    <button-icon :icon="IconCrossMark" @click="$emit('close')" />
   </header-title>
   <card :image="image" :description="description" />
   <bullet-list :bullets="bulletList" class="how" @learn="$emit('learn')" />
   <div class="footer">
-    <text-button
+    <button-text
       text="Back off"
-      :focus="false"
+      state="BORING"
       class="back-off"
       @click="$emit('close')"
     />
-    <text-button text="I'm in" @click="$emit('accept')" />
+    <button-text text="I'm in" @click="$emit('accept')" />
   </div>
 </template>
 

@@ -5,12 +5,12 @@
 
 <script setup lang="ts">
 import IconCrossMark from "@/assets/icons/crossmark-outline.svg?component";
-import IconButton from "@/components/buttons/icon-button.vue";
+import ButtonIcon from "@/components/button/button-icon.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
 import { BulletState } from "@/components/bullet/bullet-state";
 import BulletList from "@/components/bullet/bullet-list.vue";
-import SquareButton from "@/components/buttons/square-button.vue";
-import TextButton from "@/components/buttons/text-button.vue";
+import ButtonSquare from "@/components/button/button-square.vue";
+import TextButton from "@/components/button/button-text.vue";
 
 defineEmits(["close", "history", "account"]);
 defineProps({
@@ -45,17 +45,17 @@ const milestoneBullets = [
     subtitle="Share data. Earn rewards."
     class="title"
   >
-    <icon-button @click="$emit('close')" :icon="IconCrossMark" />
+    <button-icon @click="$emit('close')" :icon="IconCrossMark" />
   </header-title>
   <div class="body">
     <div class="accounts">
-      <square-button
+      <button-square
         text="Gmail"
         class="button"
         @click="$emit('accountGmail')"
         :state="BulletState.SYNC"
       />
-      <square-button
+      <button-square
         text="Retailer"
         class="button"
         @click="$emit('accountRetailer')"
@@ -68,7 +68,7 @@ const milestoneBullets = [
       @learn="$emit('learn')"
     />
   </div>
-  <text-button text="$1 Cash Out" class="cash" />
+  <button-text text="$1 Cash Out" class="cash" />
 </template>
 
 <style scoped>

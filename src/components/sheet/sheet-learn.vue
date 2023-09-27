@@ -34,7 +34,7 @@ defineProps({
   overflow-y: scroll;
   overflow-x: clip;
   flex: 1 1 auto;
-  border-bottom: 1px solid var(--tiki-accent-color);
+  border-bottom: 1px solid var(--tiki-success-color);
 }
 
 .learn-more :deep(h1),
@@ -85,7 +85,7 @@ defineProps({
 }
 
 .learn-more :deep(a) {
-  color: var(--tiki-accent-color);
+  color: var(--tiki-success-color);
 }
 
 .learn-more :deep(img) {

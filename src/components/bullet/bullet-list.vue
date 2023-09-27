@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { BulletState } from "@/components/bullet/bullet-state";
-import IconButton from "@/components/buttons/icon-button.vue";
+import ButtonIcon from "@/components/button/button-icon.vue";
 import BulletPoint from "@/components/bullet/bullet-point.vue";
 import IconQuestion from "@/assets/icons/question.svg?component";
 
@@ -32,7 +32,7 @@ defineProps({
     <div class="title">
       <div>How to earn $1/Month</div>
       <div>
-        <icon-button :icon="IconQuestion" @click="$emit('learn')" />
+        <button-icon :icon="IconQuestion" @click="$emit('learn')" />
       </div>
     </div>
     <div v-for="bullet in bullets" class="bullet">

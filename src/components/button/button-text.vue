@@ -4,30 +4,30 @@
   -->
 
 <script setup lang="ts">
+import type { PropType } from "vue";
+
 const emit = defineEmits(["click"]);
 const props = defineProps({
   text: {
     type: String,
     required: true,
   },
-  focus: {
-    type: Boolean,
+  state: {
+    type: String as PropType<"STANDARD" | "BORING" | "ALERT">,
     required: false,
-    default: true,
+    default: "STANDARD",
   },
-  isWarning: {
-    required: false,
-    default: false
-  }
 });
-
-
 </script>
 
 <template>
   <button
     class="textButton"
-    :class="(focus ? 'focus' : 'nofocus') + (isWarning ? ' warning' : '')"
+    :class="{
+      standard: state === 'STANDARD',
+      boring: state === 'BORING',
+      alert: state === 'ALERT',
+    }"
     @click.stop.prevent="$emit('click')"
   >
     {{ text }}
@@ -52,15 +52,21 @@ const props = defineProps({
   -webkit-tap-highlight-color: transparent;
 }
 
-.textButton.focus {
-  border-color: var(--tiki-accent-color);
-  background-color: var(--tiki-accent-color);
+.standard {
+  border-color: var(--tiki-success-color);
+  background-color: var(--tiki-success-color);
   color: var(--tiki-primary-background-color);
 }
 
-.textButton.warning{
+.boring {
+  border-color: var(--tiki-primary-background-color);
+  background-color: var(--tiki-primary-background-color);
+  color: var(--tiki-primary-text-color);
+}
+
+.alert {
   border-color: var(--tiki-error-color);
   background-color: var(--tiki-error-color);
-  color: var(--tiki-primary-background-color);
+  color: var(--tiki-primary-text-color);
 }
 </style>

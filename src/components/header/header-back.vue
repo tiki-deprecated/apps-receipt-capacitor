@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import BackButton from "@/components/buttons/back-button.vue";
+import ButtonBack from "@/components/button/button-back.vue";
 
 defineEmits(["back"]);
 defineProps({
@@ -17,7 +17,7 @@ defineProps({
 
 <template>
   <div class="heading">
-    <back-button :text="text" @click="$emit('back')" />
+    <button-back :text="text" @click="$emit('back')" />
     <slot />
   </div>
 </template>

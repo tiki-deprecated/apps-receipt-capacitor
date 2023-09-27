@@ -5,32 +5,33 @@
 <script setup lang="ts">
 import CrossMarkIconOutline from "@/assets/icons/crossmark-outline.svg?component";
 import HeaderBack from "@/components/header/header-back.vue";
-import IconButton from "@/components/buttons/icon-button.vue";
-import TextButton from "@/components/buttons/text-button.vue";
+import ButtonIcon from "@/components/button/button-icon.vue";
+import ButtonText from "@/components/button/button-text.vue";
 
-defineEmits(['remove', 'close', 'back'])
+defineEmits(["remove", "close", "back"]);
 </script>
 
-  <template>
-    <header-back text="Remove Account" @back="$emit('back')">
-      <icon-button @click="$emit('close')" :icon="CrossMarkIconOutline" />
-    </header-back>
-    <div class="alert-text">
-        <p class="alert-text-bold">
-            Warning! Removing this account may disqualify you from payout. 
-        </p>
-        <p>
-            To swap accounts, first connect the other one. Then remove this one.
-        </p>
-        <p>
-            Are you sure you want to proceed?
-        </p>
-    </div>
-    <text-button text="Remove Account" @click="$emit('remove')" class="warning-button" :isWarning="true"/>
-  </template>
+<template>
+  <header-back text="Remove Account" @back="$emit('back')">
+    <button-icon @click="$emit('close')" :icon="CrossMarkIconOutline" />
+  </header-back>
+  <div class="alert-text">
+    <p class="alert-text-bold">
+      Warning! Removing this account may disqualify you from payout.
+    </p>
+    <p>To swap accounts, first connect the other one. Then remove this one.</p>
+    <p>Are you sure you want to proceed?</p>
+  </div>
+  <button-text
+    text="Remove Account"
+    @click="$emit('remove')"
+    class="warning-button"
+    state="ALERT"
+  />
+</template>
 
 <style>
-.alert-text{
+.alert-text {
   text-align: center;
   font-family: var(--tiki-font-family);
   font-size: var(--tiki-font-size);
@@ -39,7 +40,7 @@ defineEmits(['remove', 'close', 'back'])
   margin: 0 0 1.5em 0;
 }
 
-.alert-text-bold{
+.alert-text-bold {
   font-weight: bold;
 }
 </style>
