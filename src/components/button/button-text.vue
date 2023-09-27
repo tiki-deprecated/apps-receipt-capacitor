@@ -5,6 +5,7 @@
 
 <script setup lang="ts">
 import type { PropType } from "vue";
+import { ButtonTextState } from "@/components/button/button-text-state";
 
 const emit = defineEmits(["click"]);
 const props = defineProps({
@@ -13,22 +14,27 @@ const props = defineProps({
     required: true,
   },
   state: {
-    type: String as PropType<"STANDARD" | "BORING" | "ALERT">,
+    type: String as PropType<ButtonTextState>,
     required: false,
     default: "STANDARD",
   },
 });
+
+const click = () => {
+  if (props.state != ButtonTextState.DISABLED) emit("click");
+};
 </script>
 
 <template>
   <button
     class="textButton"
     :class="{
-      standard: state === 'STANDARD',
-      boring: state === 'BORING',
-      alert: state === 'ALERT',
+      standard: state === ButtonTextState.STANDARD,
+      boring: state === ButtonTextState.BORING,
+      alert: state === ButtonTextState.ALERT,
+      disable: state === ButtonTextState.DISABLED,
     }"
-    @click.stop.prevent="$emit('click')"
+    @click.stop.prevent="click"
   >
     {{ text }}
   </button>
@@ -68,5 +74,12 @@ const props = defineProps({
   border-color: var(--tiki-error-color);
   background-color: var(--tiki-error-color);
   color: var(--tiki-primary-text-color);
+}
+
+.disable {
+  opacity: 50%;
+  border-color: var(--tiki-success-color);
+  background-color: var(--tiki-success-color);
+  color: var(--tiki-primary-background-color);
 }
 </style>

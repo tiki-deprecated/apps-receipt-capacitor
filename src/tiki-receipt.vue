@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import { inject, watch, type RendererElement } from "vue";
+import { inject, type RendererElement, watch } from "vue";
 import SheetBottom from "@/components/sheet/sheet-bottom.vue";
 import SheetOffer from "@/components/sheet/sheet-offer.vue";
 import SheetTerms from "@/components/sheet/sheet-terms.vue";
@@ -84,7 +84,14 @@ const swipe = (direction: string, element: RendererElement) => {
           :markdown="tiki!.config.learn"
           @back="navigate.pop()"
         />
-        <sheet-home v-if="navigate.ref.value === Sheets.Home" />
+        <sheet-home
+          v-if="navigate.ref.value === Sheets.Home"
+          @close="navigate.clear()"
+          @learn="navigate.to(Sheets.Learn)"
+          @withdraw="tiki!.config.callback"
+          @gmail=""
+          @retailer=""
+        />
         <!--        <account-sheet-->
         <!--          v-if="state === TikiReceiptState.Account"-->
         <!--          @close="state = TikiReceiptState.Hidden"-->

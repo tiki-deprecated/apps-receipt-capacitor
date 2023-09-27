@@ -5,16 +5,16 @@
 
 <script setup lang="ts">
 import BulletPoint from "@/components/bullet/bullet-point.vue";
-import { BulletState } from "@/components/bullet/bullet-state";
 import type { PropType } from "vue";
+import { BulletState } from "@/components/bullet/bullet-state";
 
 defineProps({
   state: {
-    type: Number as PropType<
+    type: String as PropType<
       BulletState.NULL | BulletState.ERROR | BulletState.P100 | BulletState.SYNC
     >,
     required: false,
-    default: BulletState.NULL,
+    default: "NULL",
   },
   text: {
     type: String,

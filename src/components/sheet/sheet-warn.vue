@@ -7,6 +7,7 @@ import CrossMarkIconOutline from "@/assets/icons/crossmark-outline.svg?component
 import HeaderBack from "@/components/header/header-back.vue";
 import ButtonIcon from "@/components/button/button-icon.vue";
 import ButtonText from "@/components/button/button-text.vue";
+import { ButtonTextState } from "@/components/button/button-text-state";
 
 defineEmits(["remove", "close", "back"]);
 </script>
@@ -26,7 +27,7 @@ defineEmits(["remove", "close", "back"]);
     text="Remove Account"
     @click="$emit('remove')"
     class="warning-button"
-    state="ALERT"
+    :state="ButtonTextState.ALERT"
   />
 </template>
 

@@ -11,6 +11,7 @@ import Card from "@/components/card.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
 import BulletList from "@/components/bullet/bullet-list.vue";
 import { BulletState } from "@/components/bullet/bullet-state";
+import { ButtonTextState } from "@/components/button/button-text-state";
 
 defineEmits(["close", "learn", "accept"]);
 const props = defineProps({
@@ -41,7 +42,7 @@ const bulletList = props.bullets.map((bullet) => {
   <div class="footer">
     <button-text
       text="Back off"
-      state="BORING"
+      :state="ButtonTextState.BORING"
       class="back-off"
       @click="$emit('close')"
     />
@@ -64,7 +65,6 @@ const bulletList = props.bullets.map((bullet) => {
   margin-top: 1.5em;
   margin-bottom: 2em;
   padding: 0 1em 0 1em;
-  width: fit-content;
 }
 
 .how :deep(.bullet .icon) {
