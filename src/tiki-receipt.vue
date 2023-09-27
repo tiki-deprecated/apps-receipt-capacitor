@@ -16,6 +16,7 @@ import * as Theme from "@/config/theme";
 import { Navigate, Sheets } from "@/utils/navigate";
 import SheetGoogle from "@/components/sheet/sheet-google.vue";
 import SheetRetailer from "@/components/sheet/sheet-retailer.vue";
+import SheetLinkRetailer from "@/components/sheet/sheet-link-retailer.vue"
 
 const emit = defineEmits([
   /**
@@ -103,6 +104,12 @@ const swipe = (direction: string, element: RendererElement) => {
         />
         <sheet-retailer
           v-if="navigate.ref.value === Sheets.Retailer"
+          @back="navigate.pop()"
+          @close="navigate.clear()"
+          @link="navigate.to(Sheets.LinkRetailer)"
+        />
+        <sheet-link-retailer
+          v-if="navigate.ref.value === Sheets.LinkRetailer"
           @back="navigate.pop()"
           @close="navigate.clear()"
         />

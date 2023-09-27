@@ -4,45 +4,39 @@
   -->
 
 <script setup lang="ts">
-import { ReceiptAccount } from "@/service/receipt/receipt-account";
-import { type AccountType, AccountTypeCommom } from "@/service/receipt/receipt-account-type";
+import { AccountCreds } from "@/components/account/account-creds";
+import * as AccountTypes from "@/components/account/account-type";
 import { inject, ref, watch } from "vue";
 import type { PropType } from "vue";
 import { TikiService } from "@/service/tiki-service";
-import AccountSelect from "@/components/account/account-select.vue"
+
 
 const emit = defineEmits(["update:account"]);
 const props = defineProps({
   account: {
-    type: Object as PropType<ReceiptAccount>,
+    type: Object as PropType<AccountCreds>,
     required: true,
   },
   error: {
     type: String,
     required: false,
   },
-  accountType:{
-    type: String,
-    required: true
+  accountSelected: {
+    type: Object as PropType<AccountTypes.AccountType>
   }
 });
 const tiki: TikiService | undefined = inject("Tiki");
 const username = ref<HTMLInputElement>();
 const password = ref<HTMLInputElement>();
-const selectedAccount = ref<AccountType>()
-const updateAccount = (account: HTMLSelectElement) =>{
-  selectedAccount.value  = Object.values(AccountTypeCommom).find((accountObj) => 
-        accountObj.name === account.value
-      )
-}
+
 const update = () => {
   emit(
     "update:account",
-     ReceiptAccount.fromValue(
+      AccountCreds.from(
        {
          username: username.value?.value ?? "",
          password: password.value?.value,
-         accountType: selectedAccount?.value! ?? AccountTypeCommom.GMAIL,
+         accountType: props.accountSelected!,
          isVerified: true
        }
      ),
@@ -66,7 +60,6 @@ watch(
 
 <template>
   <form>
-    <account-select @update="updateAccount" v-if="accountType === 'Retailer'" :account="account.accountType"/>
     <label id="username">Username</label>
     <input type="text" autocomplete="false" id="username" ref="username" required @change="update" />
     <label id="password">Password</label>

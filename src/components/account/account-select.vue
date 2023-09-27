@@ -1,28 +1,27 @@
 <script setup lang="ts">
-import  type {AccountType} from "@/service/receipt/receipt-account-type";
-import { AccountTypeCommom } from "@/service/receipt/receipt-account-type";
-import { onMounted, ref, watch } from "vue";
-import type { PropType } from "vue";
+import * as Type from "@/components/account/account-type";
+import { onMounted, ref, type PropType } from "vue";
+
 
 
 defineEmits(['update'])
 const props = defineProps({
-    account:{
-        type: Object as PropType<AccountType>,
-        required: true
-    }
+  account: {
+    type: String,
+    required: false
+  }
 })
 const account = ref<HTMLSelectElement>()
 onMounted(()=>{
-    account.value!.value = props.account.name;
+    account.value!.value = props.account!;
 })
 
 </script>
 
 <template>
-    <label for="accounts" >Choose Account</label>
+    <label for="accounts">Choose Account</label>
     <select id="accounts" required @change="$emit('update', account)" ref="account">
-      <option v-for="account of Object.values(AccountTypeCommom)" :value="account.name" :label="account.name" :selected="account.name">
+      <option v-for="account of Type.index" :value="account[0]" :label="account[1].name">
       </option>
     </select>
 </template>
