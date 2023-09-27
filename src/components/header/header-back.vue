@@ -4,9 +4,11 @@
   -->
 
 <script setup lang="ts">
+import IconCrossMark from "@/assets/icons/crossmark-outline.svg?component";
 import ButtonBack from "@/components/button/button-back.vue";
+import ButtonIcon from "@/components/button/button-icon.vue";
 
-defineEmits(["back"]);
+defineEmits(["back", "close"]);
 defineProps({
   text: {
     type: String,
@@ -18,7 +20,7 @@ defineProps({
 <template>
   <div class="heading">
     <button-back :text="text" @click="$emit('back')" />
-    <slot />
+    <button-icon :icon="IconCrossMark" @click="$emit('close')" />
   </div>
 </template>
 

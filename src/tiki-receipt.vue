@@ -80,11 +80,13 @@ const swipe = (direction: string, element: RendererElement) => {
           :markdown="tiki!.config.terms"
           @back="navigate.pop()"
           @accept="navigate.to(Sheets.Home)"
+          @close="navigate.clear()"
         />
         <sheet-learn
           v-if="navigate.ref.value === Sheets.Learn"
           :markdown="tiki!.config.learn"
           @back="navigate.pop()"
+          @close="navigate.clear()"
         />
         <sheet-home
           v-if="navigate.ref.value === Sheets.Home"
@@ -97,10 +99,12 @@ const swipe = (direction: string, element: RendererElement) => {
         <sheet-google
           v-if="navigate.ref.value === Sheets.Google"
           @back="navigate.pop()"
+          @close="navigate.clear()"
         />
         <sheet-retailer
           v-if="navigate.ref.value === Sheets.Retailer"
           @back="navigate.pop()"
+          @close="navigate.clear()"
         />
         <!--        <account-sheet-->
         <!--          v-if="state === TikiReceiptState.Account"-->
@@ -125,7 +129,7 @@ const swipe = (direction: string, element: RendererElement) => {
 }
 
 .body {
-  padding: 1.5em 1em 2.5em 1em;
+  padding: 1.25em 1em 2.5em 1em;
   box-sizing: border-box;
 }
 </style>

@@ -36,7 +36,11 @@ const filtered = props.accounts?.filter(
 </script>
 
 <template>
-  <header-back text="Google Accounts" @click="$emit('back')" />
+  <header-back
+    text="Google Accounts"
+    @back="$emit('back')"
+    @close="$emit('close')"
+  />
   <account-list :accounts="filtered" class="list" />
   <button-text text="Add Account" />
 </template>

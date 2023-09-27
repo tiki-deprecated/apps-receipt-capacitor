@@ -34,9 +34,11 @@ const bulletList = props.bullets.map((bullet) => {
 </script>
 
 <template>
-  <header-title title="Rewards" subtitle="Share data. Earn rewards.">
-    <button-icon :icon="IconCrossMark" @click="$emit('close')" />
-  </header-title>
+  <header-title
+    title="Rewards"
+    subtitle="Share data. Earn rewards."
+    @close="$emit('close')"
+  />
   <card :image="image" :description="description" />
   <bullet-list :bullets="bulletList" class="how" @learn="$emit('learn')" />
   <div class="footer">

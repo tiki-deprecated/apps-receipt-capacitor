@@ -11,7 +11,7 @@ import { inject } from "vue";
 import type { TikiService } from "@/service/tiki-service";
 
 const tiki: TikiService | undefined = inject("Tiki");
-const emit = defineEmits(["back", "accept"]);
+const emit = defineEmits(["back", "accept", "close"]);
 defineProps({
   markdown: {
     type: String,
@@ -27,7 +27,11 @@ const accept = () => {
 
 <template>
   <div class="full-screen">
-    <header-back text="Terms and Conditions" @click="$emit('back')" />
+    <header-back
+      text="Terms and Conditions"
+      @back="$emit('back')"
+      @close="$emit('close')"
+    />
     <vue-markdown :source="markdown" class="terms" />
     <button-text text="I agree" class="agree" @click="accept" />
   </div>

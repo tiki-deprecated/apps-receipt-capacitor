@@ -4,7 +4,6 @@
   -->
 
 <script setup lang="ts">
-import IconCrossMark from "@/assets/icons/crossmark-outline.svg?component";
 import HeaderTitle from "@/components/header/header-title.vue";
 import ButtonIcon from "@/components/button/button-icon.vue";
 import ButtonText from "@/components/button/button-text.vue";
@@ -17,9 +16,11 @@ defineEmits(["close", "learn", "retailer", "gmail", "withdraw"]);
 </script>
 
 <template>
-  <header-title title="Rewards" subtitle="Share data. Earn rewards.">
-    <button-icon :icon="IconCrossMark" @click="$emit('close')" />
-  </header-title>
+  <header-title
+    title="Rewards"
+    subtitle="Share data. Earn rewards."
+    @close="$emit('close')"
+  />
   <div class="body">
     <div class="accounts">
       <button-square

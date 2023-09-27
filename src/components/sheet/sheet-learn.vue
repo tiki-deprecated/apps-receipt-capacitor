@@ -18,7 +18,11 @@ defineProps({
 
 <template>
   <div class="full-screen">
-    <header-back text="Learn More" @click="$emit('back')" />
+    <header-back
+      text="Learn More"
+      @back="$emit('back')"
+      @close="$emit('close')"
+    />
     <vue-markdown :source="markdown" class="learn-more" />
   </div>
 </template>

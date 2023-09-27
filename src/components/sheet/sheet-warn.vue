@@ -13,9 +13,11 @@ defineEmits(["remove", "close", "back"]);
 </script>
 
 <template>
-  <header-back text="Remove Account" @back="$emit('back')">
-    <button-icon @click="$emit('close')" :icon="CrossMarkIconOutline" />
-  </header-back>
+  <header-back
+    text="Remove Account"
+    @back="$emit('back')"
+    @close="$emit('close')"
+  />
   <div class="alert-text">
     <p class="alert-text-bold">
       Warning! Removing this account may disqualify you from payout.
