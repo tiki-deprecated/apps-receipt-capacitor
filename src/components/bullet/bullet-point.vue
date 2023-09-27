@@ -9,7 +9,7 @@ import Icon25p from "@/assets/icons/25p.svg?component";
 import Icon50p from "@/assets/icons/25p.svg?component";
 import Icon75p from "@/assets/icons/25p.svg?component";
 import IconCheck from "@/assets/icons/check.svg?component";
-import IconCrossMark from "@/assets/icons/crossmark-outline.svg?component";
+import IconCrossMark from "@/assets/icons/crossmark.svg?component";
 import IconSync from "@/assets/icons/sync.svg?component";
 import IconCircle from "@/assets/icons/circle.svg?component";
 import { BulletState } from "@/components/bullet/bullet-state";
@@ -71,7 +71,7 @@ defineProps({
 }
 
 .null :deep(.background) {
-  fill: transparent;
+  fill: var(--tiki-secondary-background-color);
 }
 
 .null {
