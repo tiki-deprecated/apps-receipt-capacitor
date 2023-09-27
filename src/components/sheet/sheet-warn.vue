@@ -3,9 +3,7 @@
   - MIT license. See LICENSE file in root directory.
   -->
 <script setup lang="ts">
-import CrossMarkIconOutline from "@/assets/icons/crossmark-outline.svg?component";
 import HeaderBack from "@/components/header/header-back.vue";
-import ButtonIcon from "@/components/button/button-icon.vue";
 import ButtonText from "@/components/button/button-text.vue";
 import { ButtonTextState } from "@/components/button/button-text-state";
 
