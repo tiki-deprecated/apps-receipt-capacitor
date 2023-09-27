@@ -6,10 +6,8 @@
 <script setup lang="ts">
 import { AccountCreds } from "@/components/account/account-creds";
 import * as AccountTypes from "@/components/account/account-type";
-import { inject, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import type { PropType } from "vue";
-import { TikiService } from "@/service/tiki-service";
-
 
 const emit = defineEmits(["update:account"]);
 const props = defineProps({
@@ -21,25 +19,24 @@ const props = defineProps({
     type: String,
     required: false,
   },
-  accountSelected: {
-    type: Object as PropType<AccountTypes.AccountType>
-  }
+  accountType: {
+    type: Object as PropType<AccountTypes.AccountType>,
+    required: true,
+  },
 });
-const tiki: TikiService | undefined = inject("Tiki");
+
 const username = ref<HTMLInputElement>();
 const password = ref<HTMLInputElement>();
 
 const update = () => {
   emit(
     "update:account",
-      AccountCreds.from(
-       {
-         username: username.value?.value ?? "",
-         password: password.value?.value,
-         accountType: props.accountSelected!,
-         isVerified: true
-       }
-     ),
+    new AccountCreds(
+      username.value?.value ?? "",
+      props.accountType!,
+      password.value?.value,
+      true,
+    ),
   );
 };
 
@@ -61,9 +58,23 @@ watch(
 <template>
   <form>
     <label id="username">Username</label>
-    <input type="text" autocomplete="false" id="username" ref="username" required @change="update" />
+    <input
+      type="text"
+      autocomplete="false"
+      id="username"
+      ref="username"
+      required
+      @change="update"
+    />
     <label id="password">Password</label>
-    <input type="password" autocomplete="false" id="password" ref="password" required @change="update" />
+    <input
+      type="password"
+      autocomplete="false"
+      id="password"
+      ref="password"
+      required
+      @change="update"
+    />
     <div class="error">
       <p class="error-message" v-if="error">{{ error }}</p>
     </div>

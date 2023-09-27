@@ -4,7 +4,6 @@
   -->
 
 <script setup lang="ts">
-import AccountSelect from "../account/account-select.vue";
 import AccountForm from "../account/account-form.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import TextButton from "@/components/button/button-text.vue";
@@ -13,7 +12,7 @@ import * as Type from "@/components/account/account-type";
 import { ref } from "vue";
 
 defineEmits(["close", "back"]);
-const form = ref<AccountCreds>(new AccountCreds("", Type.AMAZON, ""));
+const form = ref<AccountCreds>(new AccountCreds("", Type.GMAIL, ""));
 const error = ref<string>();
 
 const submit = async () => {
@@ -25,7 +24,7 @@ const submit = async () => {
   ) {
     try {
       error.value = "";
-      form.value = new AccountCreds("", Type.AMAZON, "", undefined);
+      form.value = new AccountCreds("", Type.GMAIL, "", undefined);
     } catch (err: any) {
       error.value = err.toString();
     }
@@ -34,16 +33,11 @@ const submit = async () => {
 </script>
 
 <template>
-  <header-back
-    text="Add Retailer"
-    @back="$emit('back')"
-    @close="$emit('close')"
-  />
-  <account-select v-model:account-type="form.type" />
+  <header-back text="Add Gmail" @back="$emit('back')" @close="$emit('close')" />
   <account-form
     v-model:account="form"
     :error="error"
     :account-type="form.type"
   />
-  <text-button text="Connect Retailer" @click="submit" />
+  <text-button text="Connect Gmail" @click="submit" />
 </template>

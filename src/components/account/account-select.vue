@@ -1,29 +1,40 @@
+<!--
+  - Copyright (c) TIKI Inc.
+  - MIT license. See LICENSE file in root directory.
+  -->
+
 <script setup lang="ts">
 import * as Type from "@/components/account/account-type";
-import { onMounted, ref, type PropType } from "vue";
+import { type PropType, ref } from "vue";
+import * as AccountTypes from "@/components/account/account-type";
 
-
-
-defineEmits(['update'])
-const props = defineProps({
-  account: {
-    type: String,
-    required: false
+const emit = defineEmits(["update:accountType"]);
+defineProps({
+  accountType: {
+    type: Object as PropType<AccountTypes.AccountType>,
+    required: false,
+  },
+});
+const account = ref<HTMLSelectElement>();
+const update = () => {
+  const value = account.value?.value;
+  if (value != undefined) {
+    const type = AccountTypes.findByKey(value);
+    if (type === undefined) throw new Error("Unsupported account type");
+    else emit("update:accountType", type);
   }
-})
-const account = ref<HTMLSelectElement>()
-onMounted(()=>{
-    account.value!.value = props.account!;
-})
-
+};
 </script>
 
 <template>
-    <label for="accounts">Choose Account</label>
-    <select id="accounts" required @change="$emit('update', account)" ref="account">
-      <option v-for="account of Type.index" :value="account[0]" :label="account[1].name">
-      </option>
-    </select>
+  <label for="accounts">Choose Account</label>
+  <select id="accounts" required @change="update" ref="account">
+    <option
+      v-for="account of Type.index"
+      :value="account[0]"
+      :label="account[1].name"
+    ></option>
+  </select>
 </template>
 
 <style>

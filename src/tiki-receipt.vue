@@ -14,10 +14,10 @@ import type { TikiService } from "@/service/tiki-service";
 import * as Swipe from "@/utils/swipe";
 import * as Theme from "@/config/theme";
 import { Navigate, Sheets } from "@/utils/navigate";
-import SheetGoogle from "@/components/sheet/sheet-google.vue";
+import SheetGmail from "@/components/sheet/sheet-gmail.vue";
 import SheetRetailer from "@/components/sheet/sheet-retailer.vue";
-import SheetLinkRetailer from "@/components/sheet/sheet-link-retailer.vue"
-import SheetLinkGmail from "@/components/sheet/sheet-link-gmail.vue";
+import SheetAddGmail from "@/components/sheet/sheet-add-gmail.vue";
+import SheetAddRetailer from "@/components/sheet/sheet-add-retailer.vue";
 
 const emit = defineEmits([
   /**
@@ -98,34 +98,28 @@ const swipe = (direction: string, element: RendererElement) => {
           @gmail="navigate.to(Sheets.Google)"
           @retailer="navigate.to(Sheets.Retailer)"
         />
-        <sheet-google
+        <sheet-gmail
           v-if="navigate.ref.value === Sheets.Google"
           @back="navigate.pop()"
           @close="navigate.clear()"
-          @link="navigate.to(Sheets.LinkGmail)"
+          @link="navigate.to(Sheets.AddGoogle)"
         />
         <sheet-retailer
           v-if="navigate.ref.value === Sheets.Retailer"
           @back="navigate.pop()"
           @close="navigate.clear()"
-          @link="navigate.to(Sheets.LinkRetailer)"
+          @link="navigate.to(Sheets.AddRetailer)"
         />
-        <sheet-link-retailer
-          v-if="navigate.ref.value === Sheets.LinkRetailer"
+        <sheet-add-retailer
+          v-if="navigate.ref.value === Sheets.AddRetailer"
           @back="navigate.pop()"
           @close="navigate.clear()"
         />
-        <sheet-link-gmail
-          v-if="navigate.ref.value === Sheets.LinkGmail"
+        <sheet-add-gmail
+          v-if="navigate.ref.value === Sheets.AddGoogle"
           @back="navigate.pop()"
           @close="navigate.clear()"
         />
-        <!--        <account-sheet-->
-        <!--          v-if="state === TikiReceiptState.Account"-->
-        <!--          @close="state = TikiReceiptState.Hidden"-->
-        <!--          @back="state = TikiReceiptState.Reward"-->
-        <!--          :accountType="accountType!"-->
-        <!--        />-->
       </div>
     </sheet-bottom>
   </Transition>

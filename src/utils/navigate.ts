@@ -15,8 +15,8 @@ export enum Sheets {
   Connected,
   Retailer,
   Google,
-  LinkRetailer,
-  LinkGmail,
+  AddRetailer,
+  AddGoogle,
 }
 
 export class Navigate {

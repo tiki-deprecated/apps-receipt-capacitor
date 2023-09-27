@@ -42,7 +42,7 @@ const filtered = props.accounts?.filter(
     @close="$emit('close')"
   />
   <account-list :accounts="filtered" class="list" />
-  <button-text text="Add Account" @click="$emit('link')"/>
+  <button-text text="Add Account" @click="$emit('link')" />
 </template>
 
 <style scoped>
