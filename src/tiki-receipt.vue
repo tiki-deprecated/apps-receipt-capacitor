@@ -14,6 +14,8 @@ import type { TikiService } from "@/service/tiki-service";
 import * as Swipe from "@/utils/swipe";
 import * as Theme from "@/config/theme";
 import { Navigate, Sheets } from "@/utils/navigate";
+import SheetGoogle from "@/components/sheet/sheet-google.vue";
+import SheetRetailer from "@/components/sheet/sheet-retailer.vue";
 
 const emit = defineEmits([
   /**
@@ -89,8 +91,16 @@ const swipe = (direction: string, element: RendererElement) => {
           @close="navigate.clear()"
           @learn="navigate.to(Sheets.Learn)"
           @withdraw="tiki!.config.callback"
-          @gmail=""
-          @retailer=""
+          @gmail="navigate.to(Sheets.Google)"
+          @retailer="navigate.to(Sheets.Retailer)"
+        />
+        <sheet-google
+          v-if="navigate.ref.value === Sheets.Google"
+          @back="navigate.pop()"
+        />
+        <sheet-retailer
+          v-if="navigate.ref.value === Sheets.Retailer"
+          @back="navigate.pop()"
         />
         <!--        <account-sheet-->
         <!--          v-if="state === TikiReceiptState.Account"-->

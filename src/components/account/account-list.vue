@@ -32,7 +32,9 @@ defineProps({
   overflow: scroll;
   font-size: var(--tiki-font-size);
 }
+
 .status {
   margin: 1em 0;
+  padding: 0.5em;
 }
 </style>
