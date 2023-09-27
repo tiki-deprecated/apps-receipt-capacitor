@@ -1,0 +1,126 @@
+<!--
+  - Copyright (c) TIKI Inc.
+  - MIT license. See LICENSE file in root directory.
+  -->
+
+<script setup lang="ts">
+import { ReceiptAccount } from "@/service/receipt/receipt-account";
+import { type AccountType, AccountTypeCommom } from "@/service/receipt/receipt-account-type";
+import { inject, ref, watch } from "vue";
+import type { PropType } from "vue";
+import { TikiService } from "@/service/tiki-service";
+import AccountSelect from "@/components/account/account-select.vue"
+
+const emit = defineEmits(["update:account"]);
+const props = defineProps({
+  account: {
+    type: Object as PropType<ReceiptAccount>,
+    required: true,
+  },
+  error: {
+    type: String,
+    required: false,
+  },
+  accountType:{
+    type: String,
+    required: true
+  }
+});
+const tiki: TikiService | undefined = inject("Tiki");
+const username = ref<HTMLInputElement>();
+const password = ref<HTMLInputElement>();
+const selectedAccount = ref<AccountType>()
+const updateAccount = (account: HTMLSelectElement) =>{
+  selectedAccount.value  = Object.values(AccountTypeCommom).find((accountObj) => 
+        accountObj.name === account.value
+      )
+}
+const update = () => {
+  emit(
+    "update:account",
+     ReceiptAccount.fromValue(
+       {
+         username: username.value?.value ?? "",
+         password: password.value?.value,
+         accountType: selectedAccount?.value! ?? AccountTypeCommom.GMAIL,
+         isVerified: true
+       }
+     ),
+  );
+};
+
+watch(
+  () => props.account,
+  async (newValue) => {
+    username.value!.value = newValue?.username ?? "";
+    password.value!.value = newValue?.password ?? "";
+  },
+);
+
+const errorMessage = ref(props.error);
+watch(
+  () => props.error,
+  (newValue) => (errorMessage.value = newValue),
+);
+</script>
+
+<template>
+  <form>
+    <account-select @update="updateAccount" v-if="accountType === 'Retailer'" :account="account.accountType"/>
+    <label id="username">Username</label>
+    <input type="text" autocomplete="false" id="username" ref="username" required @change="update" />
+    <label id="password">Password</label>
+    <input type="password" autocomplete="false" id="password" ref="password" required @change="update" />
+    <div class="error">
+      <p class="error-message" v-if="error">{{ error }}</p>
+    </div>
+  </form>
+</template>
+
+<style scoped>
+form {
+  font-family: var(--tiki-font-family);
+  box-sizing: border-box;
+}
+
+input {
+  width: 100%;
+  font-size: var(--tiki-font-size-xl);
+  line-height: var(--tiki-line-height-xl);
+  font-weight: bold;
+  color: var(--tiki-primary-text-color);
+  padding: 0.6em 0.8em;
+  background-color: var(--tiki-primary-background-color);
+  border: none;
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  margin-bottom: 1.2em;
+}
+
+.error {
+  font-family: var(--tiki-font-family);
+  font-size: var(--tiki-font-size);
+  margin: 0 0 2em 0;
+  color: #c73000;
+  text-align: center;
+  font-weight: 500;
+}
+
+.error-message {
+  margin: 0;
+  line-height: 0;
+}
+
+input:focus {
+  outline: none;
+}
+
+label {
+  display: block;
+  font-size: var(--tiki-font-size);
+  line-height: var(--tiki-line-height);
+  font-weight: bold;
+  color: var(--tiki-secondary-text-color);
+  margin-bottom: 0.5em;
+}
+</style>
