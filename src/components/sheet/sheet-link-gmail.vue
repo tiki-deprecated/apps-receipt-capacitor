@@ -11,7 +11,7 @@ import { ref } from 'vue';
 defineEmits(["close", "back", "unlink"]);
 
 const selectedAccount = ref<Type.AccountType>()
-const form = ref<AccountCreds>(new AccountCreds("", Type.AMAZON, ""))
+const form = ref<AccountCreds>(new AccountCreds("", Type.GMAIL, ""))
 const error = ref<string>();
 
 const updateAccount = (account: HTMLSelectElement) =>{
@@ -28,7 +28,7 @@ const submit = async () => {
   ) {
     try {
       error.value = "";
-      form.value = new AccountCreds("", Type.AMAZON, "", undefined);
+      form.value = new AccountCreds("", Type.GMAIL, "", undefined);
     } catch (err: any) {
       error.value = err.toString();
     }
@@ -37,9 +37,8 @@ const submit = async () => {
 </script>
 
 <template>
-    <header-back text="Add Retailer" @back="$emit('back')" @close="$emit('close')">
+    <header-back text="Add Gmail" @back="$emit('back')" @close="$emit('close')">
     </header-back>
-    <account-select @update="updateAccount" :account="form.type.key"/>
     <account-form v-model:account="form" :error="error" :accountSelected="form.type"/>
-    <text-button text="Connect Retailer" @click="submit" />
+    <text-button text="Connect Gmail" @click="submit" />
 </template>

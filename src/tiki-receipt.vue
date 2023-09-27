@@ -17,6 +17,7 @@ import { Navigate, Sheets } from "@/utils/navigate";
 import SheetGoogle from "@/components/sheet/sheet-google.vue";
 import SheetRetailer from "@/components/sheet/sheet-retailer.vue";
 import SheetLinkRetailer from "@/components/sheet/sheet-link-retailer.vue"
+import SheetLinkGmail from "@/components/sheet/sheet-link-gmail.vue";
 
 const emit = defineEmits([
   /**
@@ -101,6 +102,7 @@ const swipe = (direction: string, element: RendererElement) => {
           v-if="navigate.ref.value === Sheets.Google"
           @back="navigate.pop()"
           @close="navigate.clear()"
+          @link="navigate.to(Sheets.LinkGmail)"
         />
         <sheet-retailer
           v-if="navigate.ref.value === Sheets.Retailer"
@@ -110,6 +112,11 @@ const swipe = (direction: string, element: RendererElement) => {
         />
         <sheet-link-retailer
           v-if="navigate.ref.value === Sheets.LinkRetailer"
+          @back="navigate.pop()"
+          @close="navigate.clear()"
+        />
+        <sheet-link-gmail
+          v-if="navigate.ref.value === Sheets.LinkGmail"
           @back="navigate.pop()"
           @close="navigate.clear()"
         />
