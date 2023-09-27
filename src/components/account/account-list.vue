@@ -4,13 +4,13 @@
   -->
 
 <script setup lang="ts">
-import { ReceiptAccount } from "../receipt/receipt-account";
 import AccountStatus from "./account-status.vue";
+import type { AccountCreds } from "@/components/account/account-creds";
 
 defineEmits(["delete"]);
-const props = defineProps({
+defineProps({
   accounts: {
-    type: Array<ReceiptAccount>,
+    type: Array<AccountCreds>,
     required: true,
   },
 });
