@@ -645,7 +645,7 @@ export const WEGMANS: AccountType = {
 export const findByKey = (key: string): AccountType | undefined =>
   index.get(key);
 
-const index: Map<string, AccountType> = new Map([
+export const index: Map<string, AccountType> = new Map([
   [ALBERTSONS.key, ALBERTSONS],
   [AMAZON.key, AMAZON],
   [AMAZON_CA.key, AMAZON_CA],

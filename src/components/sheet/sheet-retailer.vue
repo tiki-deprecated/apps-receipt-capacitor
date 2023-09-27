@@ -10,7 +10,7 @@ import AccountList from "@/components/account/account-list.vue";
 import { AccountCreds } from "@/components/account/account-creds";
 import * as AccountTypes from "@/components/account/account-type";
 
-defineEmits(["back"]);
+defineEmits(["back", "close", "link"]);
 const props = defineProps({
   accounts: {
     type: Array<AccountCreds>,
@@ -42,7 +42,7 @@ const filtered = props.accounts?.filter(
     @close="$emit('close')"
   />
   <account-list :accounts="filtered" class="list" />
-  <button-text text="Add Account" />
+  <button-text text="Add Account" @click="$emit('link')"/>
 </template>
 
 <style scoped>
