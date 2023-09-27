@@ -6,13 +6,13 @@
 <script setup lang="ts">
 import IconMinus from "@/assets/icons/minus.svg?component";
 import type { PropType } from "vue";
-import type { ReceiptAccount } from "@/service/receipt/receipt-account";
 import { watch, ref } from "vue";
+import type { AccountCreds } from "@/components/account/account-creds";
 
 defineEmits(["delete"]);
 const props = defineProps({
   account: {
-    type: Object as PropType<ReceiptAccount>,
+    type: Object as PropType<AccountCreds>,
     required: true,
   },
 });
@@ -28,11 +28,11 @@ watch(
     <div class="account">
       <div class="img">
         <div class="overlay" v-if="isError" />
-        <img :alt="account.accountType.name" :src="account.accountType.icon" />
+        <img :alt="account.type.name" :src="account.type.icon" />
       </div>
       <div class="text" :class="{ error: isError }">
         <div class="type">
-          {{ account.accountType.name }}
+          {{ account.type.name }}
         </div>
         <div class="username">
           {{ account.username }}

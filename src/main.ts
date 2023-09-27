@@ -9,49 +9,16 @@
  * @module tiki-receipt-capacitor
  */
 
-import type { App } from "vue";
-import "@/assets/main.css";
-import TikiReceipt from "@/tiki-receipt.vue";
-import type { Program, Theme, Reward, Config } from "@/service/config";
-import type { ReceiptService } from "@/service/receipt/receipt-service";
-import type { HistoryService } from "@/service/history/history-service";
-import type { SdkService } from "@/service/sdk-service";
-import type { HistoryEvent } from "@/service/history/history-event";
-import { ReceiptEvent } from "@/service/receipt/receipt-event";
-import type { ReceiptAccount } from "@/service/receipt/receipt-account";
-import { AccountTypeCommom } from "@/service/receipt/receipt-account-type";
+import type { App, Plugin } from "vue";
+import "@/assets/styles/main.css";
+import TikiReceipt from "./tiki-receipt.vue";
 import { TikiService } from "@/service/tiki-service";
-
 import Vue3TouchEvents from "vue3-touch-events";
-import {
-  Usecase,
-  Tag,
-  CommonUsecases,
-  CommonTags,
-} from "@mytiki/tiki-sdk-capacitor";
-import type {
-  TikiSdk,
-  LicenseRecord,
-  ReceiptRecord,
-  TitleRecord,
-  PayableRecord,
-} from "@mytiki/tiki-sdk-capacitor";
-import type {
-  AdditionalLine,
-  Coupon,
-  StringType,
-  FloatType,
-  Product,
-  Promotion,
-  PaymentMethod,
-  Survey,
-  SurveyAnswer,
-  SurveyQuestion,
-  Shipment,
-  Receipt,
-  Retailer,
-  ReceiptCapture,
-} from "@mytiki/tiki-capture-receipt-capacitor";
+
+import type { Options } from "@/config/options";
+import type { Key } from "@/config/key";
+import type { Offer } from "@/config/offer";
+import type { Theme } from "@/config/theme";
 
 export default {
   /**
@@ -59,50 +26,18 @@ export default {
    * @param app - The Vue app instance.
    * @param config - The configuration settings.
    */
-  install: (app: App) => {
+  install: (app: App, options: Options) => {
     app.component("TikiReceipt", TikiReceipt);
-    app.provide("Tiki", new TikiService());
-    app.use(Vue3TouchEvents);
+    app.provide("Tiki", new TikiService(options));
+    app.use(Vue3TouchEvents as Plugin);
   },
 };
 
-export {
-  TikiReceipt,
-  Usecase,
-  Tag,
-  CommonUsecases,
-  CommonTags,
-  ReceiptEvent,
-  AccountTypeCommom,
-};
+export { TikiReceipt };
 export type {
-  Config,
-  Theme,
-  Program,
-  TikiSdk,
-  LicenseRecord,
-  ReceiptRecord,
-  TitleRecord,
-  PayableRecord,
-  AdditionalLine,
-  Coupon,
-  StringType,
-  FloatType,
-  Product,
-  Promotion,
-  PaymentMethod,
-  Survey,
-  SurveyAnswer,
-  SurveyQuestion,
-  Shipment,
-  Receipt,
-  Retailer,
-  ReceiptCapture,
-  Reward,
-  HistoryService,
-  HistoryEvent,
-  SdkService,
-  ReceiptService,
-  ReceiptAccount,
   TikiService,
+  Options as TikiOptions,
+  Key as TikiKey,
+  Offer as TikiOffer,
+  Theme as TikiTheme,
 };

@@ -4,6 +4,10 @@
   -->
 
 <script setup lang="ts">
+import IconCrossMark from "@/assets/icons/crossmark-outline.svg?component";
+import ButtonIcon from "@/components/button/button-icon.vue";
+
+defineEmits(["close"]);
 defineProps({
   title: {
     type: String,
@@ -19,7 +23,7 @@ defineProps({
       <p class="title">{{ title }}</p>
       <p class="subtitle">{{ subtitle }}</p>
     </div>
-    <slot />
+    <button-icon :icon="IconCrossMark" @click="$emit('close')" />
   </div>
 </template>
 

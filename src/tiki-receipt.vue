@@ -4,17 +4,20 @@
   -->
 
 <script setup lang="ts">
-import { initialState, TikiReceiptState } from "@/tiki-receipt-state";
-import { inject, ref, watch } from "vue";
-import BottomSheet from "@/components/bottom-sheet.vue";
-import ProgramSheet from "@/components/program/program-sheet.vue";
-import TermsSheet from "@/components/terms-sheet.vue";
-import LearnSheet from "@/components/learn-sheet.vue";
-import RewardSheet from "@/components/reward/reward-sheet.vue";
-import HistorySheet from "@/components/history/history-sheet.vue";
-import AccountSheet from "@/components/account/account-sheet.vue";
+import { inject, type RendererElement, watch } from "vue";
+import SheetBottom from "@/components/sheet/sheet-bottom.vue";
+import SheetOffer from "@/components/sheet/sheet-offer.vue";
+import SheetTerms from "@/components/sheet/sheet-terms.vue";
+import SheetLearn from "@/components/sheet/sheet-learn.vue";
+import SheetHome from "@/components/sheet/sheet-home.vue";
 import type { TikiService } from "@/service/tiki-service";
-import type { Theme } from "@/service/config";
+import * as Swipe from "@/utils/swipe";
+import * as Theme from "@/config/theme";
+import { Navigate, Sheets } from "@/utils/navigate";
+import SheetGmail from "@/components/sheet/sheet-gmail.vue";
+import SheetRetailer from "@/components/sheet/sheet-retailer.vue";
+import SheetAddGmail from "@/components/sheet/sheet-add-gmail.vue";
+import SheetAddRetailer from "@/components/sheet/sheet-add-retailer.vue";
 
 const emit = defineEmits([
   /**
@@ -23,7 +26,6 @@ const emit = defineEmits([
    */
   "update:present",
 ]);
-
 const props = defineProps({
   /**
    * Display the UI if true, hide if false.
@@ -36,109 +38,90 @@ const props = defineProps({
   },
 });
 
-const state = ref(TikiReceiptState.Hidden);
-
+const navigate = new Navigate();
 watch(
   () => props.present,
   async (present) => {
     if (present) {
       try {
-        state.value = await initialState(tiki!);
+        await navigate.initialize(tiki!);
       } catch (e) {
         console.error(e);
         emit("update:present", false);
       }
-    } else state.value = TikiReceiptState.Hidden;
+    } else navigate.clear();
   },
 );
-const accountType = ref<'Gmail' | 'Retailer'>()
-
-const handleAccountSheet = (type: 'Gmail'|'Retailer')=>{
-  state.value = TikiReceiptState.Account
-  accountType.value = type
-}
 
 const tiki: TikiService | undefined = inject("Tiki");
-const stylize = (property: string, value?: string) => {
-  if (value != undefined)
-    document.documentElement.style.setProperty(property, value);
-};
-const theme: Theme | undefined = tiki?.config.theme;
-stylize("--tiki-font-family", theme?.fontFamily);
-stylize("--tiki-primary-text-color", theme?.primaryTextColor);
-stylize("--tiki-secondary-text-color", theme?.secondaryTextColor);
-stylize("--tiki-primary-background-color", theme?.primaryBackgroundColor);
-stylize("--tiki-secondary-background-color", theme?.secondaryBackgroundColor);
-stylize("--tiki-accent-color", theme?.accentColor);
-
-const closeUI = () => {
-  return function (direction: string, element: any) {
-    const isHeadingElement = (className: string): Boolean =>
-      ["heading", "title"].includes(className);
-    const isFullScreenElement = (className: string): Boolean =>
-      className === "full-screen";
-    if (
-      direction === "bottom" &&
-      (isHeadingElement(element.target.className) ||
-        (element.target.className === "body" &&
-          (isHeadingElement(element.target.firstElementChild.className) ||
-            isFullScreenElement(element.target.firstElementChild.className)))) ||
-            (element.target.className === 'overlay' && element.target.firstElementChild.className === 'bottom-sheet')
-    ) {
-      state.value = TikiReceiptState.Hidden;
-    }
-  };
+Theme.apply(document, tiki?.config.theme);
+const swipe = (direction: string, element: RendererElement) => {
+  if (Swipe.close(direction, element)) navigate.clear();
 };
 </script>
 
 <template>
-  <Transition appear name="fade" v-touch:swipe="closeUI()">
-    <bottom-sheet
+  <Transition appear name="fade" v-touch:swipe="swipe">
+    <sheet-bottom
       v-if="present"
       @dismiss="$emit('update:present', false)"
-      :show="state !== TikiReceiptState.Hidden"
+      :show="navigate.ref.value !== Sheets.Hidden"
     >
       <div class="body">
-        <program-sheet
-          v-if="state === TikiReceiptState.Program"
-          @learn="state = TikiReceiptState.Learn"
-          @accept="state = TikiReceiptState.Terms"
-          @close="state = TikiReceiptState.Hidden"
-          :program="tiki!.config.program"
+        <sheet-offer
+          v-if="navigate.ref.value === Sheets.Offer"
+          @learn="navigate.to(Sheets.Learn)"
+          @accept="navigate.to(Sheets.Terms)"
+          @close="navigate.clear()"
+          :description="tiki!.config.offer.description!"
+          :image="tiki!.config.offer.image!"
+          :bullets="tiki!.config.offer.bullets!"
         />
-        <terms-sheet
-          v-if="state === TikiReceiptState.Terms"
-          :program="tiki!.config.program"
-          @back="state = TikiReceiptState.Program"
-          @accept="state = TikiReceiptState.Reward"
+        <sheet-terms
+          v-if="navigate.ref.value === Sheets.Terms"
+          :markdown="tiki!.config.terms"
+          @back="navigate.pop()"
+          @accept="navigate.to(Sheets.Home)"
+          @close="navigate.clear()"
         />
-        <learn-sheet
-          v-if="state === TikiReceiptState.Learn"
-          :program="tiki!.config.program"
-          @back="state = TikiReceiptState.Program"
+        <sheet-learn
+          v-if="navigate.ref.value === Sheets.Learn"
+          :markdown="tiki!.config.learn"
+          @back="navigate.pop()"
+          @close="navigate.clear()"
         />
-        <reward-sheet
-          v-if="state === TikiReceiptState.Reward"
-          :rewards="tiki!.config.rewards"
-          @close="state = TikiReceiptState.Hidden"
-          @history="state = TikiReceiptState.History"
-          @learn="state = TikiReceiptState.Learn"
-          @accountGmail="handleAccountSheet('Gmail')"
-          @accountRetailer="handleAccountSheet('Retailer')"
+        <sheet-home
+          v-if="navigate.ref.value === Sheets.Home"
+          @close="navigate.clear()"
+          @learn="navigate.to(Sheets.Learn)"
+          @withdraw="tiki!.config.callback"
+          @gmail="navigate.to(Sheets.Google)"
+          @retailer="navigate.to(Sheets.Retailer)"
         />
-        <history-sheet
-          v-if="state === TikiReceiptState.History"
-          @close="state = TikiReceiptState.Hidden"
-          @back="state = TikiReceiptState.Reward"
+        <sheet-gmail
+          v-if="navigate.ref.value === Sheets.Google"
+          @back="navigate.pop()"
+          @close="navigate.clear()"
+          @link="navigate.to(Sheets.AddGoogle)"
         />
-        <account-sheet
-          v-if="state === TikiReceiptState.Account"
-          @close="state = TikiReceiptState.Hidden"
-          @back="state = TikiReceiptState.Reward"
-          :accountType="accountType!"
+        <sheet-retailer
+          v-if="navigate.ref.value === Sheets.Retailer"
+          @back="navigate.pop()"
+          @close="navigate.clear()"
+          @link="navigate.to(Sheets.AddRetailer)"
+        />
+        <sheet-add-retailer
+          v-if="navigate.ref.value === Sheets.AddRetailer"
+          @back="navigate.pop()"
+          @close="navigate.clear()"
+        />
+        <sheet-add-gmail
+          v-if="navigate.ref.value === Sheets.AddGoogle"
+          @back="navigate.pop()"
+          @close="navigate.clear()"
         />
       </div>
-    </bottom-sheet>
+    </sheet-bottom>
   </Transition>
 </template>
 
@@ -154,7 +137,7 @@ const closeUI = () => {
 }
 
 .body {
-  padding: 1.5em 1em 2.5em 1em;
+  padding: 1.25em 1em 2.5em 1em;
   box-sizing: border-box;
 }
 </style>

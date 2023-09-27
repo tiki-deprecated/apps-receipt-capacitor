@@ -4,9 +4,11 @@
   -->
 
 <script setup lang="ts">
-import BackButton from "@/components/buttons/back-button.vue";
+import IconCrossMark from "@/assets/icons/crossmark-outline.svg?component";
+import ButtonBack from "@/components/button/button-back.vue";
+import ButtonIcon from "@/components/button/button-icon.vue";
 
-defineEmits(["back"]);
+defineEmits(["back", "close"]);
 defineProps({
   text: {
     type: String,
@@ -17,8 +19,8 @@ defineProps({
 
 <template>
   <div class="heading">
-    <back-button :text="text" @click="$emit('back')" />
-    <slot />
+    <button-back :text="text" @click="$emit('back')" />
+    <button-icon :icon="IconCrossMark" @click="$emit('close')" />
   </div>
 </template>
 

@@ -1,0 +1,63 @@
+/*
+ * Copyright (c) TIKI Inc.
+ * MIT license. See LICENSE file in root directory.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --tiki-font-family: "Space Grotesk", sans-serif;
+  --tiki-primary-text-color: rgb(0 0 0);
+  --tiki-secondary-text-color: rgb(90 90 90);
+  --tiki-primary-background-color: rgb(255 255 255);
+  --tiki-secondary-background-color: rgb(246 246 246);
+  --tiki-error-color: rgb(199, 48, 0);
+  --tiki-success-color: rgb(0 178 114);
+  --tiki-font-size-base: 12px;
+  --tiki-font-size-xs: calc(var(--tiki-font-size-base) * 0.75);
+  --tiki-line-height-xs: calc(var(--tiki-font-size-base) * 1);
+  --tiki-font-size-sm: calc(var(--tiki-font-size-base) * 0.875);
+  --tiki-line-height-sm: calc(var(--tiki-font-size-base) * 1.25);
+  --tiki-font-size: calc(var(--tiki-font-size-base) * 1);
+  --tiki-line-height: calc(var(--tiki-font-size-base) * 1.5);
+  --tiki-font-size-lg: calc(var(--tiki-font-size-base) * 1.125);
+  --tiki-line-height-lg: calc(var(--tiki-font-size-base) * 1.75);
+  --tiki-font-size-xl: calc(var(--tiki-font-size-base) * 1.25);
+  --tiki-line-height-xl: calc(var(--tiki-font-size-base) * 1.75);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* place dark theme var overrides here */
+  }
+}
+
+@media (min-height: 640px){
+  :root {
+    --tiki-font-size-base: 12px;
+  }
+}
+
+@media (min-height: 667px){
+  :root {
+    --tiki-font-size-base: 13px;
+  }
+}
+
+@media (min-height: 740px){
+  :root {
+    --tiki-font-size-base: 14px;
+  }
+}
+
+@media (min-height: 780px){
+  :root {
+    --tiki-font-size-base: 15px;
+  }
+}
+
+@media (min-height: 812px){
+  :root {
+    --tiki-font-size-base: 16px;
+  }
+}

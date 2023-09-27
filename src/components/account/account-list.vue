@@ -4,13 +4,13 @@
   -->
 
 <script setup lang="ts">
-import { ReceiptAccount } from "@/service/receipt/receipt-account";
-import AccountStatus from "@/components/account/account-status.vue";
+import AccountStatus from "./account-status.vue";
+import type { AccountCreds } from "@/components/account/account-creds";
 
 defineEmits(["delete"]);
-const props = defineProps({
+defineProps({
   accounts: {
-    type: Array<ReceiptAccount>,
+    type: Array<AccountCreds>,
     required: true,
   },
 });
@@ -32,7 +32,9 @@ const props = defineProps({
   overflow: scroll;
   font-size: var(--tiki-font-size);
 }
+
 .status {
   margin: 1em 0;
+  padding: 0.5em;
 }
 </style>

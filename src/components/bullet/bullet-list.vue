@@ -4,23 +4,20 @@
   -->
 
 <script setup lang="ts">
-import { BulletState } from "@/components/bullet/bullet-state";
-import IconButton from "@/components/buttons/icon-button.vue";
+import ButtonIcon from "@/components/button/button-icon.vue";
 import BulletPoint from "@/components/bullet/bullet-point.vue";
 import IconQuestion from "@/assets/icons/question.svg?component";
+import type { BulletState } from "@/components/bullet/bullet-state";
 
 defineEmits(["learn"]);
 defineProps({
   title: {
     type: String,
     required: false,
-    default: "How to earn $1/Month",
+    default: "How to earn $1 / Month",
   },
   bullets: {
-    type: Array<{
-      text: String;
-      state?: BulletState;
-    }>,
+    type: Array<{ text: String; state?: BulletState }>,
     required: false,
     default: [],
   },
@@ -30,10 +27,8 @@ defineProps({
 <template>
   <div>
     <div class="title">
-      <div>How to earn $1/Month</div>
-      <div>
-        <icon-button :icon="IconQuestion" @click="$emit('learn')" />
-      </div>
+      <div>{{ title }}</div>
+      <button-icon :icon="IconQuestion" @click="$emit('learn')" class="btn" />
     </div>
     <div v-for="bullet in bullets" class="bullet">
       <bullet-point class="icon" :state="bullet.state" />
@@ -68,5 +63,9 @@ defineProps({
 .bullet .icon {
   width: 1.21875em;
   margin-right: 1em;
+}
+
+.title .btn {
+  margin-left: 1em;
 }
 </style>
