@@ -64,7 +64,7 @@ watch(
       id="username"
       ref="username"
       required
-      @change="update"
+      @input="update"
     />
     <label id="password">Password</label>
     <input
@@ -73,7 +73,7 @@ watch(
       id="password"
       ref="password"
       required
-      @change="update"
+      @input="update"
     />
     <div class="error">
       <p class="error-message" v-if="error">{{ error }}</p>

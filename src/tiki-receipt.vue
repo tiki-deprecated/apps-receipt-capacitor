@@ -102,7 +102,11 @@ const swipe = (direction: string, element: RendererElement) => {
           v-if="navigate.ref.value === Sheets.Google"
           @back="navigate.pop()"
           @close="navigate.clear()"
-          @link="navigate.to(Sheets.AddGoogle)"
+          @skip="
+            navigate.pop();
+            navigate.to(Sheets.AddGoogle);
+          "
+          @add="navigate.to(Sheets.AddGoogle)"
         />
         <sheet-retailer
           v-if="navigate.ref.value === Sheets.Retailer"

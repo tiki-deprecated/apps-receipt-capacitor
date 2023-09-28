@@ -9,25 +9,31 @@ import HeaderBack from "@/components/header/header-back.vue";
 import TextButton from "@/components/button/button-text.vue";
 import { AccountCreds } from "@/components/account/account-creds";
 import * as Type from "@/components/account/account-type";
-import { ref } from "vue";
+import { computed, ref, inject } from "vue";
+import { TikiService } from "@/service/tiki-service";
+import { ButtonTextState } from "@/components/button/button-text-state";
 
 defineEmits(["close", "back"]);
+const tiki: TikiService | undefined = inject("Tiki");
+
 const form = ref<AccountCreds>(new AccountCreds("", Type.GMAIL, ""));
 const error = ref<string>();
 
-const submit = async () => {
-  if (
+const canSubmit = computed(
+  () =>
     form.value.username != undefined &&
     form.value.password != undefined &&
     form.value.username?.length > 0 &&
-    form.value.password?.length > 0
-  ) {
-    try {
-      error.value = "";
-      form.value = new AccountCreds("", Type.GMAIL, "", undefined);
-    } catch (err: any) {
-      error.value = err.toString();
-    }
+    form.value.password?.length > 0,
+);
+
+const submit = async () => {
+  try {
+    await tiki!.capture.login(form.value);
+    error.value = "";
+    form.value = new AccountCreds("", Type.GMAIL, "", undefined);
+  } catch (err: any) {
+    error.value = err.toString();
   }
 };
 </script>
@@ -39,5 +45,9 @@ const submit = async () => {
     :error="error"
     :account-type="form.type"
   />
-  <text-button text="Connect Gmail" @click="submit" />
+  <text-button
+    text="Connect Gmail"
+    @click="submit"
+    :state="canSubmit ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
+  />
 </template>
