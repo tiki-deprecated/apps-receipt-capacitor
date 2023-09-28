@@ -47,6 +47,19 @@ android {
 }
 ```
 
+It's necessary to install and setup the local notifications API from Capacitor to be able to send notifications to the user
+
+```
+npm install @capacitor/local-notifications
+npx cap sync
+```
+
+After installs the API its you need to add the uses-permission in the `AndroidManifest.xml`
+
+```
+<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+```
+
 ## Getting Started
 
 1. Register the plugin with your Vue app
