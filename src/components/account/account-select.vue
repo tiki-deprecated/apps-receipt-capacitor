@@ -4,7 +4,6 @@
   -->
 
 <script setup lang="ts">
-import * as Type from "@/components/account/account-type";
 import { type PropType, ref } from "vue";
 import * as AccountTypes from "@/components/account/account-type";
 
