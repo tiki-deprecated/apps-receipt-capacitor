@@ -14,7 +14,7 @@ import type { TikiService } from "../src/service/tiki-service";
 import type { Program } from "@/config";
 import type { TitleRecord } from "@mytiki/tiki-sdk-capacitor";
 import type { LicenseRecord } from "@mytiki/tiki-sdk-capacitor";
-import type { Receipt } from "@mytiki/tiki-capture-receipt-capacitor";
+import type { Receipt } from "@mytiki/capture-receipt-capacitor";
 
 /**
  * A service class for interacting with the Tiki SDK plugin.

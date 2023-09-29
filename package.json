@@ -36,7 +36,7 @@
     "receipt"
   ],
   "dependencies": {
-    "@mytiki/tiki-capture-receipt-capacitor": "file:../../../capture/receipt/capacitor",
+    "@mytiki/capture-receipt-capacitor": "file:../../../capture/receipt/capacitor",
     "@mytiki/tiki-sdk-capacitor": "^0.3.1",
     "hammerjs": "^2.0.8",
     "vue": "^3.3.4",
@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@babel/types": "^7.22.5",
+    "@capacitor/cli": "^5.4.1",
     "@rushstack/eslint-patch": "^1.3.2",
     "@tsconfig/node18": "^18.2.0",
     "@types/hammerjs": "^2.0.41",
@@ -70,7 +71,7 @@
     "@capacitor/android": "^5.2.2",
     "@capacitor/core": "^5.2.2",
     "@capacitor/ios": "^5.2.2",
-    "@mytiki/tiki-capture-receipt-capacitor": "file:../../../capture/receipt/capacitor",
+    "@mytiki/capture-receipt-capacitor": "file:../../../capture/receipt/capacitor",
     "@mytiki/tiki-sdk-capacitor": "^0.3.1"
   }
 }

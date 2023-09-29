@@ -7,23 +7,26 @@
 import HeaderBack from "@/components/header/header-back.vue";
 import ButtonText from "@/components/button/button-text.vue";
 import AccountList from "@/components/account/account-list.vue";
-import { AccountCreds } from "@/components/account/account-creds";
-import * as AccountTypes from "@/components/account/account-type";
+import {
+  type Account,
+  ALBERTSONS,
+  CVS,
+} from "@mytiki/capture-receipt-capacitor";
 
 defineEmits(["back", "close", "link"]);
 const props = defineProps({
   accounts: {
-    type: Array<AccountCreds>,
+    type: Array<Account>,
     required: false,
     default: [
       {
         username: "mike@mytiki.com",
-        type: AccountTypes.ALBERTSONS,
+        type: ALBERTSONS,
         isVerified: true,
       },
       {
         username: "mike@mytiki.com",
-        type: AccountTypes.CVS,
+        type: CVS,
         isVerified: false,
       },
     ],

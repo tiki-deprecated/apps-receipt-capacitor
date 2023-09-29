@@ -7,16 +7,15 @@
 import AccountForm from "../account/account-form.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import TextButton from "@/components/button/button-text.vue";
-import { AccountCreds } from "@/components/account/account-creds";
-import * as Type from "@/components/account/account-type";
+import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
 import { computed, ref, inject } from "vue";
 import { TikiService } from "@/service/tiki-service";
 import { ButtonTextState } from "@/components/button/button-text-state";
 
-defineEmits(["close", "back"]);
+const emit = defineEmits(["close", "back"]);
 const tiki: TikiService | undefined = inject("Tiki");
 
-const form = ref<AccountCreds>(new AccountCreds("", Type.GMAIL, ""));
+const form = ref<Account>({ username: "", password: "", type: GMAIL });
 const error = ref<string>();
 
 const canSubmit = computed(
@@ -31,7 +30,8 @@ const submit = async () => {
   try {
     await tiki!.capture.login(form.value);
     error.value = "";
-    form.value = new AccountCreds("", Type.GMAIL, "", undefined);
+    form.value = { username: "", password: "", type: GMAIL };
+    emit("back");
   } catch (err: any) {
     error.value = err.toString();
   }
