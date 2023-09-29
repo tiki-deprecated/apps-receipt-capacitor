@@ -13,8 +13,36 @@ import * as Type from "@/components/account/account-type";
 import { ref } from "vue";
 
 defineEmits(["close", "back"]);
-const form = ref<AccountCreds>(new AccountCreds("", Type.AMAZON, ""));
+const index = ref<Map<string, Type.AccountType>>(new Map(Type.index))
 const error = ref<string>();
+index.value.delete('GMAIL')
+
+const accounts = {
+    default: [
+      {
+        username: "mike@mytiki.com",
+        type: Type.ALBERTSONS,
+        isVerified: true,
+      },
+      {
+        username: "mike@mytiki.com",
+        type: Type.CVS,
+        isVerified: false,
+      },
+      {
+        username: "mike@mytiki.com",
+        type: Type.AMAZON,
+        isVerified: false,
+      },
+    ],
+  }
+
+accounts.default.forEach(account => {
+  index.value.delete(account.type.key)
+});
+const options = index.value.values()
+
+const form = ref<AccountCreds>(new AccountCreds("", options.next().value, ""));
 
 const submit = async () => {
   if (
@@ -25,7 +53,7 @@ const submit = async () => {
   ) {
     try {
       error.value = "";
-      form.value = new AccountCreds("", Type.AMAZON, "", undefined);
+      form.value = new AccountCreds("", options.next().value, "", undefined);
     } catch (err: any) {
       error.value = err.toString();
     }
@@ -39,7 +67,7 @@ const submit = async () => {
     @back="$emit('back')"
     @close="$emit('close')"
   />
-  <account-select v-model:account-type="form.type" />
+  <account-select v-model:account-type="form.type" :options="index"/>
   <account-form
     v-model:account="form"
     :error="error"

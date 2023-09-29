@@ -14,6 +14,10 @@ defineProps({
     type: Object as PropType<AccountTypes.AccountType>,
     required: false,
   },
+  options: {
+    type: Map<String, AccountTypes.AccountType>,
+    required: true
+  }
 });
 const account = ref<HTMLSelectElement>();
 const update = () => {
@@ -30,7 +34,7 @@ const update = () => {
   <label for="accounts">Choose Account</label>
   <select id="accounts" required @change="update" ref="account">
     <option
-      v-for="account of Type.index"
+      v-for="account of options"
       :value="account[0]"
       :label="account[1].name"
     ></option>
