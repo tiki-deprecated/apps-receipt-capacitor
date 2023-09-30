@@ -18,7 +18,7 @@ tiki!.capture.load();
 const filter = (accounts: Account[]): Account[] =>
   accounts.filter((account) => account.type.id === GMAIL.id);
 const accounts = ref<Account[]>(filter(tiki?.capture.accounts ?? []));
-//if (accounts.value.length == 0) emit("skip");
+if (accounts.value.length == 0) emit("skip");
 
 tiki?.capture.onAccount("SheetGmail", (_, __) => {
   accounts.value = filter(tiki?.capture.accounts ?? []);

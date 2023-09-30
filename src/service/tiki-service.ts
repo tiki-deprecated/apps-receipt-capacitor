@@ -67,7 +67,7 @@ export class TikiService {
       this.config.key.intelKey,
     );
     this._isInitialized = true;
-    //this.capture.load();
+    this.capture.load();
   }
 
   /**

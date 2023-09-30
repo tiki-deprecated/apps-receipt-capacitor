@@ -41,17 +41,13 @@ export class CaptureService {
     this._onAccountListeners.set(id, listener);
   }
 
-  async load(): Promise<Account[]> {
-    return new Promise<Account[]>(async (resolve, reject) => {
+  async load(): Promise<void> {
+    return new Promise<void>(async (resolve, reject) => {
       await this.plugin.accounts(
-        (payload): void => {
-          console.log("in callback!");
-          this.addAccount(payload as Account);
-        },
-        (_): void => resolve(this.accounts),
-        (payload): void => {
-          const error = payload as CallbackError;
-          console.error(error);
+        (account): void => this.addAccount(account),
+        (): void => resolve(),
+        (error): void => {
+          console.error(error.toString());
           reject(error);
         },
       );
