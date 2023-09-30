@@ -7,35 +7,27 @@
 import HeaderBack from "@/components/header/header-back.vue";
 import ButtonText from "@/components/button/button-text.vue";
 import AccountList from "@/components/account/account-list.vue";
-import {
-  type Account,
-  ALBERTSONS,
-  CVS,
-} from "@mytiki/capture-receipt-capacitor";
+import { TikiService } from "@/service/tiki-service";
+import { inject, ref } from "vue";
+import type { Account } from "@mytiki/capture-receipt-capacitor";
 
-defineEmits(["back", "close", "link"]);
-const props = defineProps({
-  accounts: {
-    type: Array<Account>,
-    required: false,
-    default: [
-      {
-        username: "mike@mytiki.com",
-        type: ALBERTSONS,
-        isVerified: true,
-      },
-      {
-        username: "mike@mytiki.com",
-        type: CVS,
-        isVerified: false,
-      },
-    ],
-  },
+const emit = defineEmits(["back", "close", "link", "skip"]);
+const tiki: TikiService | undefined = inject("Tiki");
+tiki!.capture.load();
+
+const filter = (accounts: Account[]): Account[] =>
+  accounts.filter((account) => account.type.type === "RETAILER");
+const accounts = ref<Account[]>(filter(tiki?.capture.accounts ?? []));
+if (accounts.value.length == 0) emit("skip");
+
+tiki?.capture.onAccount("SheetRetailer", (_, __) => {
+  accounts.value = filter(tiki?.capture.accounts ?? []);
 });
 
-const filtered = props.accounts?.filter(
-  (account) => account.type.type === "RETAILER",
-);
+const remove = async (account: Account) => {
+  //show warn.
+  await tiki?.capture.logout(account);
+};
 </script>
 
 <template>
@@ -44,7 +36,7 @@ const filtered = props.accounts?.filter(
     @back="$emit('back')"
     @close="$emit('close')"
   />
-  <account-list :accounts="filtered" class="list" />
+  <account-list :accounts="accounts" class="list" @delete="remove" />
   <button-text text="Add Account" @click="$emit('link')" />
 </template>
 

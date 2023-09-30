@@ -24,9 +24,9 @@ tiki?.capture.onAccount("SheetGmail", (_, __) => {
   accounts.value = filter(tiki?.capture.accounts ?? []);
 });
 
-const remove = (account: Account) => {
+const remove = async (account: Account) => {
   //show warn.
-  tiki?.capture.logout(account);
+  await tiki?.capture.logout(account);
 };
 </script>
 
