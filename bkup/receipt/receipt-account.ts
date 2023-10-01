@@ -3,7 +3,7 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import type { Account } from "@mytiki/tiki-capture-receipt-capacitor";
+import type { Account } from "@mytiki/capture-receipt-capacitor";
 import type { AccountType } from "./receipt-account-type";
 import { AccountTypeCommom } from "./receipt-account-type";
 

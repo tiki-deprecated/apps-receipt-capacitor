@@ -4,15 +4,14 @@
   -->
 
 <script setup lang="ts">
-import { AccountCreds } from "@/components/account/account-creds";
-import * as AccountTypes from "@/components/account/account-type";
+import type { Account, AccountType } from "@mytiki/capture-receipt-capacitor";
 import { ref, watch } from "vue";
 import type { PropType } from "vue";
 
 const emit = defineEmits(["update:account"]);
 const props = defineProps({
   account: {
-    type: Object as PropType<AccountCreds>,
+    type: Object as PropType<Account>,
     required: true,
   },
   error: {
@@ -20,7 +19,7 @@ const props = defineProps({
     required: false,
   },
   accountType: {
-    type: Object as PropType<AccountTypes.AccountType>,
+    type: Object as PropType<AccountType>,
     required: true,
   },
 });
@@ -29,15 +28,13 @@ const username = ref<HTMLInputElement>();
 const password = ref<HTMLInputElement>();
 
 const update = () => {
-  emit(
-    "update:account",
-    new AccountCreds(
-      username.value?.value ?? "",
-      props.accountType!,
-      password.value?.value,
-      true,
-    ),
-  );
+  const account: Account = {
+    username: username.value?.value ?? "",
+    type: props.accountType!,
+    password: password.value?.value,
+    isVerified: true,
+  };
+  emit("update:account", account);
 };
 
 watch(
@@ -64,7 +61,7 @@ watch(
       id="username"
       ref="username"
       required
-      @change="update"
+      @input="update"
     />
     <label id="password">Password</label>
     <input
@@ -73,7 +70,7 @@ watch(
       id="password"
       ref="password"
       required
-      @change="update"
+      @input="update"
     />
     <div class="error">
       <p class="error-message" v-if="error">{{ error }}</p>

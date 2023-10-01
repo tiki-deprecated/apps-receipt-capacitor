@@ -3,7 +3,7 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import { TikiService } from "@/service/tiki-service";
+import type { TikiService } from "@/service/tiki-service";
 import { ref, type Ref } from "vue";
 
 export enum Sheets {

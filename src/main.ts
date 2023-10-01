@@ -26,7 +26,7 @@ export default {
    * @param app - The Vue app instance.
    * @param config - The configuration settings.
    */
-  install: (app: App, options: Options) => {
+  install: (app: App, options: Options): void => {
     app.component("TikiReceipt", TikiReceipt);
     app.provide("Tiki", new TikiService(options));
     app.use(Vue3TouchEvents as Plugin);

@@ -50,7 +50,7 @@ export interface Theme {
   secondaryBackgroundColor?: string;
 }
 
-export const apply = (document: Document, theme?: Theme) => {
+export const apply = (document: Document, theme?: Theme): void => {
   setProperty(document, "--tiki-font-family", theme?.fontFamily);
   setProperty(document, "--tiki-primary-text-color", theme?.primaryTextColor);
   setProperty(

@@ -5,6 +5,7 @@
 
 import { Config } from "@/config/config";
 import type { Options } from "@/config/options";
+import { ServiceCapture } from "@/service/capture";
 
 /**
  * The primary service class for the Library.
@@ -15,10 +16,10 @@ export class TikiService {
    */
   readonly config: Config;
 
-  // /**
-  //  * The {@link ReceiptService} instance. Call receipt-level operations.
-  //  */
-  // readonly receipt: ReceiptService;
+  /**
+   * The {@link CaptureService} instance. Call capture-level operations.
+   */
+  readonly capture: ServiceCapture;
 
   // /**
   //  * The {@link HistoryService} instance. Call methods related to a
@@ -44,9 +45,7 @@ export class TikiService {
    */
   constructor(options: Options) {
     this.config = new Config(options);
-    // this.receipt = new ReceiptService(this);
-    // this.history = new HistoryService(this);
-    // this.sdk = new SdkService(this);
+    this.capture = new ServiceCapture();
   }
 
   /**
@@ -62,12 +61,13 @@ export class TikiService {
    * @param id - The user's unique identifier.
    * @returns A Promise that resolves when the initialization is complete.
    */
-  async initialize(id: string): Promise<void> {
-    // await this.sdk.initialize(id);
-    // await this.receipt.initialize(this.config.key.scanKey, this.config.key.intelKey);
+  async initialize(): Promise<void> {
+    await this.capture.initialize(
+      this.config.key.scanKey,
+      this.config.key.intelKey,
+    );
     this._isInitialized = true;
-    // this.history.load();
-    // this.receipt.accounts();
+    this.capture.load();
   }
 
   /**
@@ -76,7 +76,7 @@ export class TikiService {
    * @returns A Promise that resolves when the logout is complete.
    */
   async logout(): Promise<void> {
-    // await this.receipt.logout();
+    await this.capture.logout();
     // this.history.clear();
   }
 }
