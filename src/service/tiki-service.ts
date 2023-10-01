@@ -61,7 +61,7 @@ export class TikiService {
    * @param id - The user's unique identifier.
    * @returns A Promise that resolves when the initialization is complete.
    */
-  async initialize(id: string): Promise<void> {
+  async initialize(): Promise<void> {
     await this.capture.initialize(
       this.config.key.scanKey,
       this.config.key.intelKey,

@@ -27,7 +27,11 @@
   "scripts": {
     "build": "rimraf dist && vue-tsc --declaration --emitDeclarationOnly; vite build",
     "example:android": "npm run build && cd example && npm run build-only && npx cap sync android && npx cap run android",
-    "example:ios": "npm run build && cd example && npm run build-only && npx cap sync ios && npx cap run ios"
+    "example:ios": "npm run build && cd example && npm run build-only && npx cap sync ios && npx cap run ios",
+    "lint": "npm run eslint && npm run prettier -- --check",
+    "fmt": "npm run eslint -- --fix && npm run prettier -- --write",
+    "eslint": "eslint \"src/**/*.{ts,js}\"",
+    "prettier": "prettier \"src/**/*.{css,html,ts,js,java}\""
   },
   "keywords": [
     "tiki",

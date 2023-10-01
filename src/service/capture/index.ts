@@ -44,8 +44,8 @@ export class ServiceCapture {
   }
 
   async load(): Promise<void> {
-    return new Promise<void>(async (resolve, reject) => {
-      await this.plugin.accounts(
+    return new Promise<void>((resolve, reject) => {
+      this.plugin.accounts(
         (account: Account): void => this.addAccount(account),
         (): void => resolve(),
         (error: CallbackError): void => {
@@ -57,8 +57,8 @@ export class ServiceCapture {
   }
 
   async login(account: Account): Promise<Account> {
-    const rsp = await this.plugin.login(account);
-    this.addAccount(account);
+    const rsp: Account = await this.plugin.login(account);
+    this.addAccount(rsp);
     return account;
   }
 
@@ -73,8 +73,8 @@ export class ServiceCapture {
   }
 
   async scan(): Promise<void> {
-    return new Promise<void>(async (resolve, reject) => {
-      await this.plugin.scan(
+    return new Promise<void>((resolve, reject) => {
+      this.plugin.scan(
         (receipt: Receipt) => {
           this._onReceiptListeners.forEach((listener) => listener(receipt));
         },
