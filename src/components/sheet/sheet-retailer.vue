@@ -11,7 +11,7 @@ import { TikiService } from "@/service/tiki-service";
 import { inject, ref } from "vue";
 import type { Account } from "@mytiki/capture-receipt-capacitor";
 
-const emit = defineEmits(["back", "close", "link", "skip"]);
+const emit = defineEmits(["back", "close", "add", "skip"]);
 const tiki: TikiService | undefined = inject("Tiki");
 tiki!.capture.load();
 
@@ -37,7 +37,7 @@ const remove = async (account: Account) => {
     @close="$emit('close')"
   />
   <account-list :accounts="accounts" class="list" @delete="remove" />
-  <button-text text="Add Account" @click="$emit('link')" />
+  <button-text text="Add Account" @click="$emit('add')" />
 </template>
 
 <style scoped>
