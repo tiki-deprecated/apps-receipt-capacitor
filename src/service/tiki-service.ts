@@ -5,7 +5,7 @@
 
 import { Config } from "@/config/config";
 import type { Options } from "@/config/options";
-import { CaptureService } from "@/service/capture-service";
+import { ServiceCapture } from "@/service/capture";
 
 /**
  * The primary service class for the Library.
@@ -19,7 +19,7 @@ export class TikiService {
   /**
    * The {@link CaptureService} instance. Call capture-level operations.
    */
-  readonly capture: CaptureService;
+  readonly capture: ServiceCapture;
 
   // /**
   //  * The {@link HistoryService} instance. Call methods related to a
@@ -45,7 +45,7 @@ export class TikiService {
    */
   constructor(options: Options) {
     this.config = new Config(options);
-    this.capture = new CaptureService();
+    this.capture = new ServiceCapture();
   }
 
   /**

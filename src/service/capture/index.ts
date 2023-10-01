@@ -3,26 +3,23 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import * as TikiCaptureReceipt from "@mytiki/capture-receipt-capacitor";
 import type {
   Account,
   CaptureReceipt,
-  CallbackError,
+  Receipt,
 } from "@mytiki/capture-receipt-capacitor";
+import * as TikiCaptureReceipt from "@mytiki/capture-receipt-capacitor";
+import { AccountStatus } from "./account-status";
 
-export enum AccountStatus {
-  ADDED = "ADDED",
-  UPDATED = "UPDATED",
-  REMOVED = "DELETED",
-}
-
-export class CaptureService {
+export class ServiceCapture {
   readonly plugin: CaptureReceipt = TikiCaptureReceipt.instance;
   private _accounts: Map<string, Account> = new Map();
   private _onAccountListeners: Map<
     string,
     (account: Account, event: AccountStatus) => void
   > = new Map();
+  private _onReceiptListeners: Map<string, (receipt: Receipt) => void> =
+    new Map();
 
   async initialize(scanKey: string, intelKey: string): Promise<void> {
     await this.plugin.initialize(scanKey, intelKey).catch((error) => {
@@ -39,6 +36,10 @@ export class CaptureService {
     listener: (account: Account, event: AccountStatus) => void,
   ): void {
     this._onAccountListeners.set(id, listener);
+  }
+
+  onReceipt(id: string, listener: (receipt: Receipt) => void): void {
+    this._onReceiptListeners.set(id, listener);
   }
 
   async load(): Promise<void> {
@@ -70,6 +71,22 @@ export class CaptureService {
     }
   }
 
+  async scan(): Promise<void> {
+    return new Promise<void>(async (resolve, reject) => {
+      await this.plugin.scan(
+        (receipt: Receipt) => {
+          this._onReceiptListeners.forEach((listener) => listener(receipt));
+        },
+        7,
+        (): void => resolve(),
+        (error): void => {
+          console.error(error.toString());
+          reject(error);
+        },
+      );
+    });
+  }
+
   private addAccount(account: Account): void {
     const key = this.accountKey(account);
     const status = this._accounts.has(key)
@@ -89,3 +106,5 @@ export class CaptureService {
   private accountKey = (account: Account): string =>
     account.type.id + ":" + account.username;
 }
+
+export type * from "./account-status";
