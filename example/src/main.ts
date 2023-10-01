@@ -9,10 +9,8 @@ import { createApp } from "vue";
 import App from "@/app.vue";
 import Tiki from "@mytiki/tiki-receipt-capacitor";
 import Vue3TouchEvents from "vue3-touch-events";
-import { createPinia } from "pinia";
 
 createApp(App)
-  .use(createPinia())
   .use(Vue3TouchEvents)
   .use(Tiki, {
     key: {

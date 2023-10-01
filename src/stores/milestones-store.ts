@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) TIKI Inc.
+ * MIT license. See LICENSE file in root directory.
+ */
+
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { getWeekNumberFromISOString } from "@/utils/getWeek";

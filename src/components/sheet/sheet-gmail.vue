@@ -7,7 +7,7 @@
 import HeaderBack from "@/components/header/header-back.vue";
 import ButtonText from "@/components/button/button-text.vue";
 import AccountList from "@/components/account/account-list.vue";
-import type { TikiService } from "@/service/tiki-service";
+import type { TikiService } from "@/service";
 import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
 import { inject, ref } from "vue";
 

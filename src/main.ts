@@ -12,11 +12,12 @@
 import type { App } from "vue";
 import "@/assets/styles/main.css";
 import TikiReceipt from "./tiki-receipt.vue";
-import { TikiService } from "@/service/tiki-service";
+import { TikiService } from "@/service";
 import type { Options } from "@/config/options";
 import type { Key } from "@/config/key";
 import type { Offer } from "@/config/offer";
 import type { Theme } from "@/config/theme";
+import Vue3TouchEvents from "vue3-touch-events";
 
 export default {
   /**
@@ -27,6 +28,7 @@ export default {
   install: (app: App, options: Options): void => {
     app.component("TikiReceipt", TikiReceipt);
     app.provide("Tiki", new TikiService(options));
+    app.use(Vue3TouchEvents);
   },
 };
 

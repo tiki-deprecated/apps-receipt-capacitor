@@ -9,7 +9,7 @@ import HeaderBack from "@/components/header/header-back.vue";
 import TextButton from "@/components/button/button-text.vue";
 import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
 import { computed, ref, inject } from "vue";
-import { TikiService } from "@/service/tiki-service";
+import type { TikiService } from "@/service";
 import { ButtonTextState } from "@/components/button/button-text-state";
 
 const emit = defineEmits(["close", "back"]);
@@ -47,7 +47,7 @@ const submit = async () => {
   />
   <text-button
     text="Connect Gmail"
-    @click="submit"
     :state="canSubmit ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
+    @click="submit"
   />
 </template>

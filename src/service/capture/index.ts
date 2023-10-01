@@ -108,4 +108,4 @@ export class ServiceCapture {
     account.type.id + ":" + account.username;
 }
 
-export type * from "./account-status";
+export * from "./account-status";

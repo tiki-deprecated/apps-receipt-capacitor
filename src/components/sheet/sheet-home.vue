@@ -5,14 +5,16 @@
 
 <script setup lang="ts">
 import HeaderTitle from "@/components/header/header-title.vue";
-import ButtonIcon from "@/components/button/button-icon.vue";
 import ButtonText from "@/components/button/button-text.vue";
 import ButtonSquare from "@/components/button/button-square.vue";
 import BulletList from "@/components/bullet/bullet-list.vue";
 import { ButtonTextState } from "@/components/button/button-text-state";
 import { BulletState } from "@/components/bullet/bullet-state";
+import type { TikiService } from "@/service";
+import { inject } from "vue";
 
 defineEmits(["close", "learn", "retailer", "gmail", "withdraw"]);
+const tiki: TikiService | undefined = inject("Tiki");
 </script>
 
 <template>
@@ -26,21 +28,21 @@ defineEmits(["close", "learn", "retailer", "gmail", "withdraw"]);
       <button-square
         text="Gmail"
         class="button"
+        :state="tiki!.store.gmail.value"
         @click="$emit('gmail')"
-        :state="BulletState.SYNC"
       />
       <button-square
         text="Retailer"
         class="button"
-        @click="$emit('retailer')"
         :state="BulletState.NULL"
+        @click="$emit('retailer')"
       />
     </div>
     <bullet-list
       :bullets="[
         {
           text: 'Connect Gmail Account',
-          state: BulletState.P0,
+          state: tiki!.store.gmail.value,
         },
         {
           text: 'Connect Retailer Account',

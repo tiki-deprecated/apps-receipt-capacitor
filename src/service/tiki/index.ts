@@ -6,6 +6,9 @@
 import { Config } from "@/config/config";
 import type { Options } from "@/config/options";
 import { ServiceCapture } from "@/service/capture";
+import { ServiceStore } from "@/service/store";
+import { InternalHandler } from "@/service/tiki/internal-handler";
+import { BulletState } from "@/components/bullet/bullet-state";
 
 /**
  * The primary service class for the Library.
@@ -20,6 +23,9 @@ export class TikiService {
    * The {@link CaptureService} instance. Call capture-level operations.
    */
   readonly capture: ServiceCapture;
+
+  readonly store: ServiceStore;
+  readonly internalHandlers: InternalHandler;
 
   // /**
   //  * The {@link HistoryService} instance. Call methods related to a
@@ -46,6 +52,8 @@ export class TikiService {
   constructor(options: Options) {
     this.config = new Config(options);
     this.capture = new ServiceCapture();
+    this.store = new ServiceStore();
+    this.internalHandlers = new InternalHandler(this.store, this.capture);
   }
 
   /**
@@ -62,12 +70,18 @@ export class TikiService {
    * @returns A Promise that resolves when the initialization is complete.
    */
   async initialize(): Promise<void> {
+    await this.store.initialize();
     await this.capture.initialize(
       this.config.key.scanKey,
       this.config.key.intelKey,
     );
     this._isInitialized = true;
-    this.capture.load();
+    this.capture
+      .load()
+      .catch((_) => {
+        this.store.setGmail(BulletState.ERROR);
+      })
+      .then(() => {});
   }
 
   /**

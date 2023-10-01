@@ -26,8 +26,8 @@
   },
   "scripts": {
     "build": "rimraf dist && vue-tsc --declaration --emitDeclarationOnly; vite build",
-    "example:android": "npm run build && cd example && npm run build-only && npx cap sync android && npx cap run android",
-    "example:ios": "npm run build && cd example && npm run build-only && npx cap sync ios && npx cap run ios",
+    "example:android": "npm run build && cd example && npm run build && npx cap sync android && npx cap run android",
+    "example:ios": "npm run build && cd example && npm run build && npx cap sync ios && npx cap run ios",
     "lint": "npm run eslint && npm run prettier -- --check",
     "fmt": "npm run eslint -- --fix && npm run prettier -- --write",
     "eslint": "eslint \"src/**/*.{ts,js}\"",
@@ -40,9 +40,9 @@
     "receipt"
   ],
   "dependencies": {
+    "@capacitor/preferences": "^5.0.6",
     "@mytiki/capture-receipt-capacitor": "file:../../../capture/receipt/capacitor",
     "@mytiki/tiki-sdk-capacitor": "^0.3.1",
-    "pinia": "^2.1.6",
     "vue": "^3.3.4",
     "vue-markdown-render": "^2.0.1",
     "vue3-touch-events": "^4.1.3"
@@ -52,7 +52,6 @@
     "@capacitor/cli": "^5.4.1",
     "@rushstack/eslint-patch": "^1.3.2",
     "@tsconfig/node18": "^18.2.0",
-    "@types/hammerjs": "^2.0.41",
     "@types/markdown-it": "^13.0.0",
     "@types/node": "^20.5.0",
     "@vitejs/plugin-vue": "^4.2.3",
@@ -75,9 +74,9 @@
     "@capacitor/android": "^5.4.1",
     "@capacitor/core": "^5.4.1",
     "@capacitor/ios": "^5.4.1",
+    "@capacitor/preferences": "^5.0.6",
     "@mytiki/capture-receipt-capacitor": "file:../../../capture/receipt/capacitor",
     "@mytiki/tiki-sdk-capacitor": "^0.3.1",
-    "pinia": "^2.1.6",
     "vue": "^3.3.4",
     "vue3-touch-events": "^4.1.3"
   }
