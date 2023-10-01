@@ -8,8 +8,12 @@ import "./assets/main.css";
 import { createApp } from "vue";
 import App from "@/app.vue";
 import Tiki from "@mytiki/tiki-receipt-capacitor";
+import Vue3TouchEvents from "vue3-touch-events";
+import { createPinia } from "pinia";
 
 createApp(App)
+  .use(createPinia())
+  .use(Vue3TouchEvents)
   .use(Tiki, {
     key: {
       publishingId: "be19730a-00d5-45f5-b18e-2e19eb25f311",
