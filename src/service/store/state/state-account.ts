@@ -7,8 +7,7 @@ import type { Ref } from "vue";
 import { ref } from "vue";
 import { BulletState, toBulletState } from "@/components/bullet/bullet-state";
 import type { Repository } from "@/service/store/repository";
-import type { Account } from "../../../../../../../capture/receipt/capacitor";
-import { GMAIL } from "../../../../../../../capture/receipt/capacitor";
+import type { Account } from "@mytiki/capture-receipt-capacitor";
 
 export class StateAccount {
   private readonly repository: Repository;
