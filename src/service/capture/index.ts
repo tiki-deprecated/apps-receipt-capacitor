@@ -7,6 +7,7 @@ import type {
   Account,
   CaptureReceipt,
   Receipt,
+  CallbackError,
 } from "@mytiki/capture-receipt-capacitor";
 import * as TikiCaptureReceipt from "@mytiki/capture-receipt-capacitor";
 import { AccountStatus } from "./account-status";
@@ -22,7 +23,7 @@ export class ServiceCapture {
     new Map();
 
   async initialize(scanKey: string, intelKey: string): Promise<void> {
-    await this.plugin.initialize(scanKey, intelKey).catch((error) => {
+    await this.plugin.initialize(scanKey, intelKey).catch((error: any) => {
       throw Error(`Could not initialize; Error: ${error}`);
     });
   }
@@ -45,9 +46,9 @@ export class ServiceCapture {
   async load(): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
       await this.plugin.accounts(
-        (account): void => this.addAccount(account),
+        (account: Account): void => this.addAccount(account),
         (): void => resolve(),
-        (error): void => {
+        (error: CallbackError): void => {
           console.error(error.toString());
           reject(error);
         },
@@ -64,7 +65,7 @@ export class ServiceCapture {
   async logout(account: Account | undefined = undefined): Promise<void> {
     if (!account) {
       await this.plugin.logout();
-      this._accounts.forEach((account) => this.removeAccount(account));
+      this._accounts.forEach((account: Account) => this.removeAccount(account));
     } else {
       await this.plugin.logout(account);
       this.removeAccount(account!);
@@ -79,7 +80,7 @@ export class ServiceCapture {
         },
         7,
         (): void => resolve(),
-        (error): void => {
+        (error: CallbackError): void => {
           console.error(error.toString());
           reject(error);
         },
