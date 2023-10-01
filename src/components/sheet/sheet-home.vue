@@ -28,13 +28,13 @@ const tiki: TikiService | undefined = inject("Tiki");
       <button-square
         text="Gmail"
         class="button"
-        :state="tiki!.store.gmail.value"
+        :state="tiki!.store.gmail.get().value"
         @click="$emit('gmail')"
       />
       <button-square
         text="Retailer"
         class="button"
-        :state="BulletState.NULL"
+        :state="tiki!.store.retailer.get().value"
         @click="$emit('retailer')"
       />
     </div>
@@ -42,11 +42,17 @@ const tiki: TikiService | undefined = inject("Tiki");
       :bullets="[
         {
           text: 'Connect Gmail Account',
-          state: tiki!.store.gmail.value,
+          state:
+            tiki!.store.gmail.get().value === BulletState.NULL
+              ? BulletState.P0
+              : tiki!.store.gmail.get().value,
         },
         {
           text: 'Connect Retailer Account',
-          state: BulletState.P25,
+          state:
+            tiki!.store.retailer.get().value === BulletState.NULL
+              ? BulletState.P0
+              : tiki!.store.retailer.get().value,
         },
         {
           text: 'Use app weekly',

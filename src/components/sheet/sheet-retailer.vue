@@ -13,8 +13,6 @@ import type { Account } from "@mytiki/capture-receipt-capacitor";
 
 const emit = defineEmits(["back", "close", "link", "skip"]);
 const tiki: TikiService | undefined = inject("Tiki");
-tiki!.capture.load();
-
 const filter = (accounts: Account[]): Account[] =>
   accounts.filter((account) => account.type.type === "RETAILER");
 const accounts = ref<Account[]>(filter(tiki?.capture.accounts ?? []));

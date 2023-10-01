@@ -3,52 +3,29 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import type { Ref } from "vue";
-import { ref } from "vue";
-import { BulletState, toBulletState } from "@/components/bullet/bullet-state";
-import { Persist } from "@/service/store/persist";
+import { Repository } from "@/service/store/repository";
+import { StateGmail, StateRetailer } from "@/service/store/state/";
 
 export class ServiceStore {
-  private readonly persist: Persist = new Persist("tiki_receipt");
+  private readonly repository: Repository;
+  readonly gmail: StateGmail;
+  readonly retailer: StateRetailer;
 
-  private readonly KEY_GMAIL: string = "gmail";
-
-  private _gmail: Ref<
-    BulletState.NULL | BulletState.P100 | BulletState.SYNC | BulletState.ERROR
-  > = ref(BulletState.NULL);
+  constructor() {
+    this.repository = new Repository("tiki_receipt");
+    this.gmail = new StateGmail(this.repository);
+    this.retailer = new StateRetailer(this.repository);
+  }
 
   async initialize(): Promise<void> {
-    await this.initGmail();
+    await this.gmail.load();
+    await this.retailer.load();
   }
 
-  get gmail(): Ref<
-    BulletState.NULL | BulletState.P100 | BulletState.SYNC | BulletState.ERROR
-  > {
-    return this._gmail;
-  }
+  clear = async (): Promise<void> => this.repository.clear();
 
-  async setGmail(
-    state:
-      | BulletState.NULL
-      | BulletState.P100
-      | BulletState.SYNC
-      | BulletState.ERROR,
-  ): Promise<void> {
-    await this.persist.write(this.KEY_GMAIL, state.valueOf());
-    this._gmail.value = state;
-  }
-
-  private async initGmail(): Promise<void> {
-    const saved = await this.persist.read(this.KEY_GMAIL);
-    if (!saved) return;
-    const state: BulletState | undefined = toBulletState(saved);
-    if (
-      state != BulletState.NULL &&
-      state != BulletState.P100 &&
-      state != BulletState.SYNC &&
-      state != BulletState.ERROR
-    )
-      return;
-    this._gmail.value = state;
+  async reset(): Promise<void> {
+    await this.gmail.reset();
+    await this.retailer.reset();
   }
 }

@@ -5,7 +5,7 @@
 
 import { Preferences } from "@capacitor/preferences";
 
-export class Persist {
+export class Repository {
   readonly prefix: string;
 
   constructor(prefix: string = "tiki") {

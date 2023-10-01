@@ -5,7 +5,7 @@
 
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
-import { getWeekNumberFromISOString } from "@/utils/getWeek";
+import { getWeekNumberFromISOString } from "../../src/utils/getWeek";
 
 export const useMilestoneStore = defineStore("milestone", () => {
   /**

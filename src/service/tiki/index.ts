@@ -7,7 +7,7 @@ import { Config } from "@/config/config";
 import type { Options } from "@/config/options";
 import { ServiceCapture } from "@/service/capture";
 import { ServiceStore } from "@/service/store";
-import { InternalHandler } from "@/service/tiki/internal-handler";
+import { InternalHandlers } from "@/service/tiki/internal-handlers";
 import { BulletState } from "@/components/bullet/bullet-state";
 
 /**
@@ -25,7 +25,7 @@ export class TikiService {
   readonly capture: ServiceCapture;
 
   readonly store: ServiceStore;
-  readonly internalHandlers: InternalHandler;
+  readonly internalHandlers: InternalHandlers;
 
   // /**
   //  * The {@link HistoryService} instance. Call methods related to a
@@ -53,7 +53,7 @@ export class TikiService {
     this.config = new Config(options);
     this.capture = new ServiceCapture();
     this.store = new ServiceStore();
-    this.internalHandlers = new InternalHandler(this.store, this.capture);
+    this.internalHandlers = new InternalHandlers(this.store, this.capture);
   }
 
   /**
@@ -76,12 +76,9 @@ export class TikiService {
       this.config.key.intelKey,
     );
     this._isInitialized = true;
-    this.capture
-      .load()
-      .catch((_) => {
-        this.store.setGmail(BulletState.ERROR);
-      })
-      .then(() => {});
+    this.capture.load().then((accounts) => {
+      this.store.gmail.update(accounts);
+    });
   }
 
   /**
@@ -91,6 +88,6 @@ export class TikiService {
    */
   async logout(): Promise<void> {
     await this.capture.logout();
-    // this.history.clear();
+    await this.store.clear();
   }
 }

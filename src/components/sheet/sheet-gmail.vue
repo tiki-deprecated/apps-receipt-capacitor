@@ -13,7 +13,6 @@ import { inject, ref } from "vue";
 
 const emit = defineEmits(["back", "close", "add", "skip"]);
 const tiki: TikiService | undefined = inject("Tiki");
-tiki!.capture.load();
 
 const filter = (accounts: Account[]): Account[] =>
   accounts.filter((account) => account.type.id === GMAIL.id);

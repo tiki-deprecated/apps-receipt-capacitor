@@ -43,11 +43,13 @@ export class ServiceCapture {
     this._onReceiptListeners.set(id, listener);
   }
 
-  async load(): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
+  async load(): Promise<Account[]> {
+    return new Promise<Account[]>((resolve, reject) => {
       this.plugin.accounts(
         (account: Account): void => this.addAccount(account),
-        (): void => resolve(),
+        (): void => {
+          setTimeout(() => resolve(this.accounts), 100);
+        },
         (error: CallbackError): void => {
           console.error(error.toString());
           reject(error);
@@ -68,7 +70,7 @@ export class ServiceCapture {
       this._accounts.forEach((account: Account) => this.removeAccount(account));
     } else {
       await this.plugin.logout(account);
-      this.removeAccount(account!);
+      this.removeAccount(account);
     }
   }
 
