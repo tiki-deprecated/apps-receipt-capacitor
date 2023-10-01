@@ -27,7 +27,11 @@
   "scripts": {
     "build": "rimraf dist && vue-tsc --declaration --emitDeclarationOnly; vite build",
     "example:android": "npm run build && cd example && npm run build-only && npx cap sync android && npx cap run android",
-    "example:ios": "npm run build && cd example && npm run build-only && npx cap sync ios && npx cap run ios"
+    "example:ios": "npm run build && cd example && npm run build-only && npx cap sync ios && npx cap run ios",
+    "lint": "npm run eslint && npm run prettier -- --check",
+    "fmt": "npm run eslint -- --fix && npm run prettier -- --write",
+    "eslint": "eslint \"src/**/*.{ts,js}\"",
+    "prettier": "prettier \"src/**/*.{css,html,ts,js,java}\""
   },
   "keywords": [
     "tiki",
@@ -36,7 +40,7 @@
     "receipt"
   ],
   "dependencies": {
-    "@mytiki/tiki-capture-receipt-capacitor": "^0.5.0",
+    "@mytiki/capture-receipt-capacitor": "file:../../../capture/receipt/capacitor",
     "@mytiki/tiki-sdk-capacitor": "^0.3.1",
     "hammerjs": "^2.0.8",
     "pinia": "^2.1.6",
@@ -46,6 +50,7 @@
   },
   "devDependencies": {
     "@babel/types": "^7.22.5",
+    "@capacitor/cli": "^5.4.1",
     "@rushstack/eslint-patch": "^1.3.2",
     "@tsconfig/node18": "^18.2.0",
     "@types/hammerjs": "^2.0.41",
@@ -53,7 +58,7 @@
     "@types/node": "^20.5.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-prettier": "^8.0.0",
-    "@vue/eslint-config-typescript": "^11.0.3",
+    "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/tsconfig": "^0.4.0",
     "eslint": "^8.47.0",
     "eslint-plugin-vue": "^9.16.0",
@@ -68,10 +73,10 @@
     "vue-tsc": "^1.8.8"
   },
   "peerDependencies": {
-    "@capacitor/android": "^5.2.2",
-    "@capacitor/core": "^5.2.2",
-    "@capacitor/ios": "^5.2.2",
-    "@mytiki/tiki-capture-receipt-capacitor": "^0.5.0",
+    "@capacitor/android": "^5.4.1",
+    "@capacitor/core": "^5.4.1",
+    "@capacitor/ios": "^5.4.1",
+    "@mytiki/capture-receipt-capacitor": "file:../../../capture/receipt/capacitor",
     "@mytiki/tiki-sdk-capacitor": "^0.3.1"
   }
 }

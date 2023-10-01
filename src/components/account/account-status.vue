@@ -7,12 +7,12 @@
 import IconMinus from "@/assets/icons/minus.svg?component";
 import type { PropType } from "vue";
 import { watch, ref } from "vue";
-import type { AccountCreds } from "@/components/account/account-creds";
+import type { Account } from "@mytiki/capture-receipt-capacitor";
 
 defineEmits(["delete"]);
 const props = defineProps({
   account: {
-    type: Object as PropType<AccountCreds>,
+    type: Object as PropType<Account>,
     required: true,
   },
 });

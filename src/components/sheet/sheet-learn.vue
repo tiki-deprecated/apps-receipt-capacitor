@@ -7,7 +7,7 @@
 import VueMarkdown from "vue-markdown-render";
 import HeaderBack from "@/components/header/header-back.vue";
 
-defineEmits(["back"]);
+defineEmits(["back", "close"]);
 defineProps({
   markdown: {
     type: String,

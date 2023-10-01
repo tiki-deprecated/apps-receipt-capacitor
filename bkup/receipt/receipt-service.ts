@@ -3,8 +3,8 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import type { ReceiptCapture } from "@mytiki/tiki-capture-receipt-capacitor";
-import * as TikiReceiptCapture from "@mytiki/tiki-capture-receipt-capacitor";
+import type { ReceiptCapture } from "@mytiki/capture-receipt-capacitor";
+import * as TikiReceiptCapture from "@mytiki/capture-receipt-capacitor";
 import { TikiService } from "../../src/service/tiki-service";
 import { ReceiptAccount } from "./receipt-account";
 import { ReceiptEvent } from "./receipt-event";

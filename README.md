@@ -19,7 +19,7 @@ _Microblink is a closed-source, licensed SDK. For new customers, we offer a **fr
 
 ## Installation
 ```shell
-npm i @mytiki/tiki-receipt-capacitor @mytiki/tiki-sdk-capacitor @mytiki/tiki-capture-receipt-capacitor
+npm i @mytiki/tiki-receipt-capacitor @mytiki/tiki-sdk-capacitor @mytiki/capture-receipt-capacitor
 
 npx cap sync
 ```
@@ -299,7 +299,7 @@ _Note, if you press start before the initialization is complete, a warning will 
 [📚 TSDoc](https://tiki-sdk-capacitor.mytiki.com)  
 
 #### @mytiki/tiki-sdk-capacitor
-[🤖 NPM](https://www.npmjs.com/package/@mytiki/tiki-capture-receipt-capacitor)  
+[🤖 NPM](https://www.npmjs.com/package/@mytiki/capture-receipt-capacitor)  
 [👀 Source](https://github.com/tiki/tiki-capture-receipt-capacitor)  
 [📚 TSDoc](https://tiki-capture-receipt-capacitor.mytiki.com)
 

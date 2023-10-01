@@ -14,7 +14,7 @@ import "@/assets/styles/main.css";
 import TikiReceipt from "./tiki-receipt.vue";
 import { TikiService } from "@/service/tiki-service";
 import Vue3TouchEvents from "vue3-touch-events";
-import { createPinia } from 'pinia'
+import { createPinia } from "pinia";
 import type { Options } from "@/config/options";
 import type { Key } from "@/config/key";
 import type { Offer } from "@/config/offer";
@@ -26,12 +26,12 @@ export default {
    * @param app - The Vue app instance.
    * @param config - The configuration settings.
    */
-  install: (app: App, options: Options) => {
-    const pinia = createPinia()
+  install: (app: App, options: Options): void => {
+    const pinia = createPinia();
     app.component("TikiReceipt", TikiReceipt);
     app.provide("Tiki", new TikiService(options));
     app.use(Vue3TouchEvents as Plugin);
-    app.use(pinia)
+    app.use(pinia);
   },
 };
 

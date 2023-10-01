@@ -5,7 +5,7 @@
 
 /**
  * License keys for the underlying plugins
- * (@mytiki/tiki-sdk-capacitor and @mytiki/tiki-capture-receipt-capacitor).
+ * (@mytiki/tiki-sdk-capacitor and @mytiki/capture-receipt-capacitor).
  */
 export interface Key {
   /**

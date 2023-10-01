@@ -11,7 +11,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const tiki: TikiService | undefined = inject("Tiki");
 const id: string = uuidv4();
-tiki?.initialize(id).then(() => tiki?.logout());
+tiki?.initialize().then(() => console.log("ok. lets go"));
+//.then(() => tiki?.logout());
 const present = ref(false);
 </script>
 
