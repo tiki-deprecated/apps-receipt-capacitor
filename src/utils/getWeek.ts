@@ -8,7 +8,7 @@ export function getWeekNumberFromISOString(date: string): number {
         newYear.getTime() -
         (new Date(date).getTimezoneOffset() - newYear.getTimezoneOffset()) *
           60000) /
-        86400000
+        86400000,
     ) + 1;
   let weekNumber: number;
 
@@ -18,7 +18,6 @@ export function getWeekNumberFromISOString(date: string): number {
       const nYear = new Date(new Date(date).getFullYear() + 1, 0, 1);
       let nday = nYear.getDay() - 1;
       nday = nday >= 0 ? nday : nday + 7;
-
 
       weekNumber = nday < 4 ? 1 : 53;
     }

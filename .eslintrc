@@ -5,15 +5,18 @@
   },
   "extends": [
     "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:vue/vue3-recommended",
     "plugin:prettier/recommended"
   ],
-  "parser": "@typescript-eslint/parser",
+  "parser": "vue-eslint-parser",
   "plugins": [ "@typescript-eslint" ],
   "parserOptions": {
+    "parser": "@typescript-eslint/parser",
     "sourceType": "module",
     "ecmaVersion": "latest",
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.json",
+    "extraFileExtensions": [ ".vue" ]
   },
   "rules": {
     // https://eslint.org/docs/rules/

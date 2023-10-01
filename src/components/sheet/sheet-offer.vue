@@ -5,9 +5,7 @@
 
 <script setup lang="ts">
 import ButtonText from "@/components/button/button-text.vue";
-import ButtonIcon from "@/components/button/button-icon.vue";
-import IconCrossMark from "@/assets/icons/crossmark-outline.svg?component";
-import Card from "@/components/card.vue";
+import CardOffer from "@/components/card/card-offer.vue";
 import HeaderTitle from "@/components/header/header-title.vue";
 import BulletList from "@/components/bullet/bullet-list.vue";
 import { BulletState } from "@/components/bullet/bullet-state";
@@ -24,11 +22,11 @@ const props = defineProps({
     required: true,
   },
   bullets: {
-    type: Array<String>,
+    type: Array<string>,
     required: true,
   },
 });
-const bulletList = props.bullets.map((bullet) => {
+const bullets = props.bullets.map((bullet) => {
   return { text: bullet, state: BulletState.P0 };
 });
 </script>
@@ -39,8 +37,8 @@ const bulletList = props.bullets.map((bullet) => {
     subtitle="Share data. Earn rewards."
     @close="$emit('close')"
   />
-  <card :image="image" :description="description" />
-  <bullet-list :bullets="bulletList" class="how" @learn="$emit('learn')" />
+  <card-offer :image="image" :description="description" />
+  <bullet-list :bullets="bullets" class="how" @learn="$emit('learn')" />
   <div class="footer">
     <button-text
       text="Back off"

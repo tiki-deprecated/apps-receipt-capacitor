@@ -28,7 +28,7 @@ export class Navigate {
   }
 
   async initialize(tiki?: TikiService): Promise<void> {
-    const isInitialized: Boolean = tiki?.isInitialized ?? false;
+    const isInitialized: boolean = tiki?.isInitialized ?? false;
     if (isInitialized) {
       // const id: string = tiki!.sdk.id;
       // const license: LicenseRecord | undefined = await tiki!.sdk.getLicense();

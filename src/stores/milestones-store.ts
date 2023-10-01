@@ -5,11 +5,11 @@ import { getWeekNumberFromISOString } from "@/utils/getWeek";
 export const useMilestoneStore = defineStore("milestone", () => {
   /**
    * @receipts - a Map with the receipt register id and the date that it was sync
-   * @syncDates - A Set with all the sync dates 
-   */ 
+   * @syncDates - A Set with all the sync dates
+   */
   const receipts = ref<Map<string, Date>>(new Map());
   const syncDates = ref<Set<Date>>(new Set());
-  
+
   /**
    * Adds a new date into the Set
    */
@@ -38,9 +38,9 @@ export const useMilestoneStore = defineStore("milestone", () => {
   /**
    * returns a callback function that will get the receipts
    * @param initialDate - The init of the date range
-   * @param finalDate - The end of the date range 
+   * @param finalDate - The end of the date range
    * if the range it was not passed, the action will return all receipts stored
-   * 
+   *
    */
   const getReceipts = computed(() => {
     return (initialDate?: Date, finalDate?: Date) => {

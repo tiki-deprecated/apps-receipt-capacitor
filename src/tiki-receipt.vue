@@ -61,21 +61,21 @@ const swipe = (direction: string, element: RendererElement) => {
 </script>
 
 <template>
-  <Transition appear name="fade" v-touch:swipe="swipe">
+  <Transition v-touch:swipe="swipe" appear name="fade">
     <sheet-bottom
       v-if="present"
-      @dismiss="$emit('update:present', false)"
       :show="navigate.ref.value !== Sheets.Hidden"
+      @dismiss="$emit('update:present', false)"
     >
       <div class="body">
         <sheet-offer
           v-if="navigate.ref.value === Sheets.Offer"
-          @learn="navigate.to(Sheets.Learn)"
-          @accept="navigate.to(Sheets.Terms)"
-          @close="navigate.clear()"
           :description="tiki!.config.offer.description!"
           :image="tiki!.config.offer.image!"
           :bullets="tiki!.config.offer.bullets!"
+          @learn="navigate.to(Sheets.Learn)"
+          @accept="navigate.to(Sheets.Terms)"
+          @close="navigate.clear()"
         />
         <sheet-terms
           v-if="navigate.ref.value === Sheets.Terms"
