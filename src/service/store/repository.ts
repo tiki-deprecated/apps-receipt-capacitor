@@ -30,8 +30,11 @@ export class Repository {
 
   async clear(): Promise<void> {
     const { keys } = await Preferences.keys();
+    console.log(`KEYS: ${keys}`);
     const filtered = keys.filter((key) => key.startsWith(this.prefix));
-    for (const key in filtered) {
+    console.log(`FILTERED KEYS: ${keys}`);
+    for (const key of filtered) {
+      console.log(`REMOVING KEY: ${key}`);
       await Preferences.remove({ key: key });
     }
   }

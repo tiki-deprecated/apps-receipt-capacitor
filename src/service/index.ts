@@ -6,3 +6,4 @@
 export * from "./tiki";
 export * from "./store";
 export * from "./capture";
+export * from "./publish";
