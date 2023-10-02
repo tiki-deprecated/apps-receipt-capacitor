@@ -57,14 +57,9 @@ export class StateAccount {
   async update(accounts: Account[]): Promise<void> {
     if (accounts.length > 0) {
       for (const account of accounts) {
-        if (account.isVerified === true) {
-          await this.set(BulletState.P100);
-          return;
-        }
+        if (account.isVerified === true) return this.set(BulletState.P100);
       }
-      await this.set(BulletState.ERROR);
-    } else {
-      await this.set(BulletState.NULL);
-    }
+      return this.set(BulletState.ERROR);
+    } else return this.set(BulletState.NULL);
   }
 }
