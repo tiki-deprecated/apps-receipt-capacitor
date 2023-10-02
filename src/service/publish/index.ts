@@ -3,53 +3,30 @@
  * MIT license. See LICENSE file in root directory.
  */
 
+import * as TikiSdkLicensing from "@mytiki/tiki-sdk-capacitor";
 import type {
-  Jwt,
+  LicenseRecord,
+  TikiSdk,
+  TitleRecord,
   PayableRecord,
   ReceiptRecord,
-  TikiSdk,
 } from "@mytiki/tiki-sdk-capacitor";
-import * as TikiSdkLicensing from "@mytiki/tiki-sdk-capacitor";
-import type { TikiService } from "../src/service/tiki-service";
-import type { Program } from "@/config";
-import type { TitleRecord } from "@mytiki/tiki-sdk-capacitor";
-import type { LicenseRecord } from "@mytiki/tiki-sdk-capacitor";
+
+import type { Config } from "@/config/config";
 import type { Receipt } from "@mytiki/capture-receipt-capacitor";
+import type { Jwt } from "@mytiki/tiki-sdk-capacitor";
 
 /**
- * A service class for interacting with the Tiki SDK plugin.
+ * A service class for interacting with the TIKI publish plugin.
  */
-export class SdkService {
-  /**
-   * The type for all payables: pt (aka reward points).
-   */
-  static readonly PAYABLE_TYPE = "pt";
-  /**
-   * The raw plugin instance. Use to call TikiSdk directly.
-   */
+export class ServicePublish {
   readonly plugin: TikiSdk = TikiSdkLicensing.instance;
-
-  private readonly tiki: TikiService;
-  private _license?: LicenseRecord;
+  private readonly config: Config;
   private _id?: string;
+  private _license?: LicenseRecord;
 
-  /**
-   * Creates an instance of the SdkService class.
-   * Do not construct directly. Call from {@link TikiService}.
-   * @param tiki - The parent service instance.
-   */
-  constructor(tiki: TikiService) {
-    this.tiki = tiki;
-  }
-
-  /**
-   * Gets the user's identifier for the instance.
-   * @throws Error if Tiki is not initialized. First call `.initialize()`.
-   * @returns The user's identifier for the instance.
-   */
-  get id(): string {
-    if (this._id != undefined) return this._id;
-    else throw Error("Tiki is not initialized. First call .initialize()");
+  constructor(config: Config) {
+    this.config = config;
   }
 
   /**
@@ -59,32 +36,19 @@ export class SdkService {
    * @returns A Promise that resolves when the initialization is complete.
    */
   async initialize(id: string): Promise<void> {
-    await this.plugin.initialize(id, this.tiki.config.key.publishingId);
+    await this.plugin.initialize(id, this.config.key.publishingId);
     this._id = id;
   }
 
   /**
-   * Creates a new license for the SDK service using the program {@link Config}.
-   * @returns A Promise that resolves when the license creation is complete.
+   * Gets the user's identifier for the instance.
+   * @throws Error if Tiki is not initialized. First call `.initialize()`.
+   * @returns The user's identifier for the instance.
    */
-  async createLicense(): Promise<void> {
-    const program: Program = this.tiki.config.program;
-    const titleRecord: TitleRecord = await this.plugin.createTitle(
-      this.id,
-      program.tags ?? [],
-    );
-    const rsp = await this.plugin.createLicense(
-      titleRecord.id,
-      [
-        {
-          usecases: program.usecases,
-          destinations: program.destinations,
-        },
-      ],
-      program.terms,
-      undefined,
-      program.description,
-    );
+  get id(): string {
+    if (!this._id)
+      throw Error("Tiki is not initialized. First call .initialize()");
+    return this._id;
   }
 
   /**
@@ -97,13 +61,30 @@ export class SdkService {
       const title = await this.plugin.getTitle(this.id);
       if (title != undefined) {
         const licenses = await this.plugin.getLicenses(title.id);
-        if (licenses.length > 0)
-          this._license = licenses.at(licenses.length - 1);
+        if (licenses.length > 0) this._license = licenses.slice(-1)[0];
         return this._license;
       } else {
         return undefined;
       }
     }
+  }
+
+  /**
+   * Creates a new license for the SDK service using the {@link Config}.
+   * @returns A Promise that resolves when the license creation is complete.
+   */
+  async createLicense(): Promise<void> {
+    const titleRecord: TitleRecord = await this.plugin.createTitle(
+      this.id,
+      this.config.tags,
+    );
+    await this.plugin.createLicense(
+      titleRecord.id,
+      this.config.uses,
+      this.config.terms,
+      undefined,
+      this.config.offer.description,
+    );
   }
 
   /**
@@ -118,13 +99,13 @@ export class SdkService {
   /**
    * Creates a new payable record for the current license.
    * @param amount - The total amount owed.
-   * @param description - A description of the payable event.
+   * @param description - An optional description of the payable event.
    * @param reference - An optional reference for the payable.
    * @returns A Promise that resolves with the created payable record or undefined.
    */
   async createPayable(
     amount: number,
-    description: string,
+    description: string | undefined = this.config.offer.description,
     reference?: string,
   ): Promise<PayableRecord | undefined> {
     const license: LicenseRecord | undefined = await this.getLicense();
@@ -132,7 +113,7 @@ export class SdkService {
       return this.plugin.createPayable(
         license?.id,
         amount.toString(),
-        SdkService.PAYABLE_TYPE,
+        this.config.payableType,
         undefined,
         description,
         reference,
@@ -143,15 +124,15 @@ export class SdkService {
   /**
    * Creates a new receipt record for the latest payable.
    * @param amount - The amount paid/redeemed.
-   * @param description - A description of the payout event.
+   * @param description - An optional description of the payout event.
    * @returns A Promise that resolves with the created receipt record or undefined.
    */
   async createReceipt(
     amount: number,
-    description: string,
+    description?: string,
   ): Promise<ReceiptRecord | undefined> {
     const payables: PayableRecord[] = await this.getPayables();
-    const latest = payables.at(-1);
+    const latest: PayableRecord = payables.slice(-1)[0];
     if (latest != undefined) {
       return this.plugin.createReceipt(
         latest.id,
@@ -161,7 +142,10 @@ export class SdkService {
     }
   }
 
-  async ingest(receipt: Receipt): Promise<void> {
+  async publish(receipt: Receipt): Promise<void> {
+    const license = await this.getLicense();
+    if (!license) throw Error("Publish requires a valid data license.");
+
     const jwt: Jwt = await this.plugin.token();
     const rsp = await fetch(
       "https://ingest.mytiki.com/api/latest/microblink-receipt",
@@ -170,12 +154,17 @@ export class SdkService {
         headers: {
           Authorization: `Bearer ${jwt.accessToken}`,
         },
-        body: JSON.stringify(receipt), //TODO FIX THIS.
+        body: JSON.stringify(receipt),
       },
     );
     if (!rsp.ok) {
       const body = await rsp.text();
-      throw Error(`Receipt ingestion failed: ${body}`);
+      console.debug(`Unsupported receipt. Skipping. ${body}`);
     }
+  }
+
+  logout(): void {
+    this._id = undefined;
+    this._license = undefined;
   }
 }

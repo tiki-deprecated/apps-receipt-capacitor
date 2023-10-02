@@ -5,6 +5,7 @@
 
 import type { Repository } from "@/service/store/repository";
 import { getWeek } from "@/utils/week";
+import { BulletState } from "@/components/bullet/bullet-state";
 
 export class StateReceipt {
   private readonly repository: Repository;
@@ -19,7 +20,7 @@ export class StateReceipt {
 
   async load(): Promise<void> {
     const saved: string | undefined = await this.repository.read(this.key);
-    if (!saved) return;
+    if (!saved) return this.reset();
     const list: [string, number][] = JSON.parse(saved);
     this.state = new Map(
       list.map((i: [string, number]): [string, Date] => [i[0], new Date(i[1])]),
@@ -59,4 +60,25 @@ export class StateReceipt {
         ],
       ),
     );
+
+  status(week: number = getWeek()): BulletState {
+    const count = this.count({
+      startWeek: week - 4,
+      endWeek: week + 1,
+    });
+    switch (count) {
+      case 0:
+        return BulletState.P0;
+      case 1:
+        return BulletState.P20;
+      case 2:
+        return BulletState.P40;
+      case 3:
+        return BulletState.P60;
+      case 4:
+        return BulletState.P80;
+      default:
+        return BulletState.P100;
+    }
+  }
 }

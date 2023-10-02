@@ -10,7 +10,7 @@ import type {
   CallbackError,
 } from "@mytiki/capture-receipt-capacitor";
 import * as TikiCaptureReceipt from "@mytiki/capture-receipt-capacitor";
-import { AccountStatus } from "./account-status";
+import { AccountStatus } from "@/service";
 
 export class ServiceCapture {
   readonly plugin: CaptureReceipt = TikiCaptureReceipt.instance;
@@ -50,10 +50,7 @@ export class ServiceCapture {
         (): void => {
           setTimeout(() => resolve(this.accounts), 100);
         },
-        (error: CallbackError): void => {
-          console.error(error.toString());
-          reject(error);
-        },
+        (error: CallbackError): void => reject(error),
       );
     });
   }
@@ -82,10 +79,7 @@ export class ServiceCapture {
         },
         7,
         (): void => resolve(),
-        (error: CallbackError): void => {
-          console.error(error.toString());
-          reject(error);
-        },
+        (error: CallbackError): void => reject(error),
       );
     });
   }

@@ -4,16 +4,44 @@
   -->
 
 <script setup lang="ts">
+import { Preferences } from "@capacitor/preferences";
 import { inject, ref } from "vue";
-import { TikiReceipt } from "@mytiki/tiki-receipt-capacitor";
-import type { TikiService } from "@mytiki/tiki-receipt-capacitor";
+import { TikiReceipt } from "@mytiki/receipt-capacitor";
+import type { TikiService } from "@mytiki/receipt-capacitor";
 import { v4 as uuidv4 } from "uuid";
 
+const userKey = "tiki-receipt-capacitor-example.id";
 const tiki: TikiService | undefined = inject("Tiki");
-const id: string = uuidv4();
-tiki?.initialize().then(() => console.log("ok. lets go"));
-//.then(() => tiki?.logout());
+
+const loadUser = async (): Promise<string> => {
+  const { value } = await Preferences.get({ key: userKey });
+  if (!value) {
+    const id = uuidv4();
+    await Preferences.set({ key: userKey, value: id });
+    return id;
+  } else {
+    return value;
+  }
+};
+
+const id = ref<string>("");
+loadUser().then((user) => {
+  id.value = user;
+  tiki
+    ?.initialize(id.value)
+    .then(() => console.log("Initialization complete."));
+});
 const present = ref(false);
+
+const cycle = async () => {
+  await tiki!.logout().then(async () => {
+    await Preferences.remove({ key: userKey });
+    id.value = await loadUser();
+    tiki
+      ?.initialize(id.value)
+      .then(() => console.log("Initialization complete."));
+  });
+};
 </script>
 
 <template>
@@ -30,10 +58,13 @@ const present = ref(false);
   <main>
     <div class="greetings">
       <h1>Oh, Hi!</h1>
-      <p><b>ID: </b>{{ id }}</p>
       <h3>Just click &ldquo;start&rdquo; to well...</h3>
     </div>
     <button class="start" @click="present = !present">start</button>
+    <div class="cycle">
+      <p><b>ID: </b>{{ id }}</p>
+      <button class="newUser" @click="cycle">new user</button>
+    </div>
     <tiki-receipt v-model:present="present" />
   </main>
 </template>
@@ -49,8 +80,11 @@ header {
 }
 
 .start {
-  width: fit-content;
   margin: 2em auto;
+}
+
+button {
+  width: fit-content;
   display: block;
   padding: 0.5em 2em;
   border: #00b272 solid 1px;
@@ -82,5 +116,17 @@ header {
 .greetings h3,
 .greetings p {
   text-align: center;
+}
+
+.cycle {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.newUser {
+  margin: auto;
 }
 </style>

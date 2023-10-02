@@ -29,6 +29,7 @@ const canSubmit = computed(
 const submit = async () => {
   try {
     await tiki!.capture.login(form.value);
+    tiki!.capture.scan().catch((error) => console.error(error.toString()));
     error.value = "";
     form.value = { username: "", password: "", type: GMAIL };
     emit("back");
