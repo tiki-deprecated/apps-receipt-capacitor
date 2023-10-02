@@ -8,6 +8,7 @@ import type { Options } from "@/config/options";
 import { ServiceCapture } from "@/service/capture";
 import { ServiceStore } from "@/service/store";
 import { InternalHandlers } from "@/service/tiki/internal-handlers";
+import { ServicePublish } from "@/service";
 
 /**
  * The primary service class for the Library.
@@ -26,16 +27,10 @@ export class TikiService {
   readonly store: ServiceStore;
   readonly internalHandlers: InternalHandlers;
 
-  // /**
-  //  * The {@link HistoryService} instance. Call methods related to a
-  //  * user's reward balance and historical event trail.
-  //  */
-  // readonly history: HistoryService;
-
-  // /**
-  //  * The SdkService instance. Operations for managing the underlying license records.
-  //  */
-  // readonly sdk: SdkService;
+  /**
+   * The SdkService instance. Operations for managing the underlying license records.
+   */
+  readonly publish: ServicePublish;
 
   /**
    * Indicates whether the service has been initialized.
@@ -52,6 +47,7 @@ export class TikiService {
     this.config = new Config(options);
     this.capture = new ServiceCapture();
     this.store = new ServiceStore();
+    this.publish = new ServicePublish();
     this.internalHandlers = new InternalHandlers(this.store, this.capture);
   }
 
@@ -68,8 +64,9 @@ export class TikiService {
    * @param id - The user's unique identifier.
    * @returns A Promise that resolves when the initialization is complete.
    */
-  async initialize(): Promise<void> {
+  async initialize(id: string): Promise<void> {
     await this.store.initialize();
+    await this.publish.initialize(id, this.config.key.publishingId);
     await this.capture.initialize(
       this.config.key.scanKey,
       this.config.key.intelKey,
