@@ -11,14 +11,21 @@ import {
   GMAIL,
   type Receipt,
 } from "@mytiki/capture-receipt-capacitor";
+import type { ServicePublish } from "@/service";
 
 export class InternalHandlers {
   private readonly capture: ServiceCapture;
   private readonly store: ServiceStore;
+  private readonly publish: ServicePublish;
 
-  constructor(store: ServiceStore, capture: ServiceCapture) {
+  constructor(
+    store: ServiceStore,
+    capture: ServiceCapture,
+    publish: ServicePublish,
+  ) {
     this.capture = capture;
     this.store = store;
+    this.publish = publish;
     this.capture.onAccount(
       "InternalHandler",
       (account: Account, event: AccountStatus): void => {
@@ -51,9 +58,10 @@ export class InternalHandlers {
     if (!receipt.blinkReceiptId) {
       console.warn(`Receipt missing ID. Skipping: ${JSON.stringify(receipt)}`);
     } else {
-      this.store.receipt.add(receipt.blinkReceiptId).catch((error) => {
+      this.store.receipt.add(receipt.blinkReceiptId).catch((error): void => {
         console.error(`Failed to update receipt state. Error: ${error}`);
       });
+      this.publish.publish(receipt).catch((error) => console.error(error));
     }
   }
 }

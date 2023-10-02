@@ -16,50 +16,15 @@ import { getWeek } from "@/utils/week";
 
 defineEmits(["close", "learn", "retailer", "gmail", "withdraw"]);
 const tiki: TikiService | undefined = inject("Tiki");
-const syncState = (): BulletState => {
-  if (
-    (tiki!.store.retailer.get().value === BulletState.P100 ||
-      tiki!.store.retailer.get().value === BulletState.SYNC) &&
-    (tiki!.store.gmail.get().value === BulletState.P100 ||
-      tiki!.store.gmail.get().value === BulletState.SYNC)
-  ) {
-    const count: number = tiki!.store.sync.countWeeks();
-    switch (count) {
-      case 0:
-        return BulletState.P0;
-      case 1:
-        return BulletState.P25;
-      case 2:
-        return BulletState.P50;
-      case 3:
-        return BulletState.P75;
-      default:
-        return BulletState.P100;
-    }
-  } else return BulletState.P0;
-};
+const syncState = (): BulletState =>
+  (tiki!.store.retailer.get().value === BulletState.P100 ||
+    tiki!.store.retailer.get().value === BulletState.SYNC) &&
+  (tiki!.store.gmail.get().value === BulletState.P100 ||
+    tiki!.store.gmail.get().value === BulletState.SYNC)
+    ? tiki!.store.sync.status()
+    : BulletState.P0;
 
-const receiptState = (): BulletState => {
-  const cur = getWeek();
-  const count = tiki!.store.receipt.count({
-    startWeek: cur - 4,
-    endWeek: cur + 1,
-  });
-  switch (count) {
-    case 0:
-      return BulletState.P0;
-    case 1:
-      return BulletState.P20;
-    case 2:
-      return BulletState.P40;
-    case 3:
-      return BulletState.P60;
-    case 4:
-      return BulletState.P80;
-    default:
-      return BulletState.P100;
-  }
-};
+const receiptState = (): BulletState => tiki!.store.receipt.status();
 </script>
 
 <template>
