@@ -11,7 +11,6 @@ Reward users with points for scanning physical receipts, linking their inbox, or
 - Single Vue Component (TikiReceipt) to launch a configurable pre-built UI.
 - TypeScript Service Class (TikiService) to interact directly with headless functionality or to build a custom UI.
 - [TIKI's](https://mytiki.com) data licensing SDK (tiki-sdk-capacitor) to create and utilize immutable zero-party data license records.
-- Receipt parsing (OCR and scraping) powered by our partners at [Microblink](https://microblink.com). 
 
 _Microblink is a closed-source, licensed SDK. For new customers, we offer a **free Microblink license**. Schedule a meeting at [mytiki.com](https://mytiki.com) to get your license keys._
 
@@ -47,6 +46,21 @@ android {
 }
 ```
 
+#### Notifications
+
+It's necessary to install and setup the local notifications API from Capacitor to be able to send notifications to the user:
+
+```shell
+npm install @capacitor/local-notifications
+npx cap sync
+```
+
+You also need to update the `AndroidManifest.xml` to enable the appropriate permissions:
+
+```
+<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+```
+
 ## Getting Started
 
 1. Register the plugin with your Vue app
@@ -67,148 +81,6 @@ _This registers the Vue Component as `TikiReceipt` and provides Typescript servi
 2. If you're going to use the pre-built UI, add the stylesheet to your main stylesheet (e.g. `main.css`)
 ```css
 @import "@mytiki/tiki-receipt-capacitor/dist/tiki-receipt-capacitor.css";
-```
-
-### Configuration
-You use the options property of the plugin registration to configure the library for your specific use case.
-
-[Config interface reference →](https://tiki-receipt-capacitor.mytiki.com/interfaces/Config.html)
-
-```ts
-createApp(App)
-    .use(Tiki, {
-        //.. your app's configuration
-    }) 
-```
-
-| Field | Description                                                                                                                                                                      |
-|-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| key   | License keys required for use of the library                                                                                                                                     |
-| key.publishingId | The publishing ID for your application                                                                                                                                           |
-| key.scanKey | Your application's BlinkReceipt License Key                                                                                                                                      |
-| key.intelKey | Your applications' Product Intelligence Key                                                                                                                                      |
-| program | The description and legal terms of the user's participation in the Data Reward Program.                                                                                          |
-| program.image | The image src (300x86) to help explain the program and grab the user's attention.                                                                                                |
-| program.description | A short description explaining the program.                                                                                                                                      |
-| program.terms | The legal terms and conditions of the program in Markdown format. You can use the `example/src/assets/terms.md` as a vetted template.                                            |
-| program.learn | The learn page content in Markdown format. Shown when a user clicks the ? button. You can use the `example/src/assets/learn-mored.md` as a template/starting point.              |
-| program.bullets | An array (maximum 3) of bullet points explaining how a user's data will be used (true) or not used (false).                                                                      |
-| program.bullet.text | The individual bullet's text to display                                                                                                                                          |
-| program.bullet.isUsed | True if this bullet describes how the user's data will be used, False if it's a use case explicitly disallowed                                                                   |
-| program.usecases | An array of all approved data [Usecases](https://tiki-sdk-capacitor.mytiki.com/classes/Usecase.html). These should all fall under one or more of the more user friendly bullets. |
-| program.destinations | An optional array of approved data processors (e.g. 'mytiki.com')                                                                                                                |
-| program.tags | An optional array of metadata [Tags](https://tiki-sdk-capacitor.mytiki.com/classes/Tag.html) describing the data assets that make up the program.                                |
-| reward | An array of Reward offers available to Program participants.                                                                                                                     |
-| reward.image | The image src (300x86) to help explain the offer and grab the user's attention.                                                                                                  |
-| reward.description | A short description explaining the reward offer.                                                                                                                                 |
-| reward.issuer | The issuer function to calculate if a user's action fulfills the offer criteria. Called once per every ReceiptEvent.                                                             |
-| theme | UI style settings and overrides.                                                                                                                                                 |
-| theme.fontFamily | The font family to use. Defaults to `"Space Grotesk", sans-serif`                                                                                                                |
-| theme.primaryTextColor | The primary text color to use. Defaults to `rgb(28 0 0)`.                                                                                                                        |
-| theme.secondaryTextColor | The secondary text color to use. Defaults to `rgb(28 0 0 / 60%)`.                                                                                                                |
-| theme.accentColor | The accent color to use. Defaults to `rgb(0 178 114)`.                                                                                                                           |
-| theme.primaryBackgroundColor | The primary background color to use. Defaults to `rgb(255 255 255)`.                                                                                                             |
-| theme.secondaryBackgroundColor | The secondary background color to use. Defaults to `rgb(246 246 246)`.                                                                                                           |
-| theme.redeem | A function to execute when a user presses the Redeem Points button.                                                                                                              |
-
-Example (`example/src/main.ts`)
-```ts
-import "./assets/main.css";
-
-import { createApp } from "vue";
-import App from "@/app.vue";
-
-import Program from "@/assets/program.png";
-import LinkReward from "@/assets/link-reward.png";
-import ScanReward from "@/assets/scan-reward.png";
-import MoreReward from "@/assets/more-reward.png";
-import LearnMore from "@/assets/learn-more.md?raw";
-import Terms from "@/assets/terms.md?raw";
-
-import Tiki, {
-  CommonTags,
-  CommonUsecases,
-  Tag,
-  Usecase,
-  ReceiptEvent,
-} from "@mytiki/tiki-receipt-capacitor";
-import type { Receipt, ReceiptAccount } from "@mytiki/tiki-receipt-capacitor";
-
-createApp(App)
-  .use(Tiki, {
-    key: {
-      publishingId: "be19730a-00d5-45f5-b18e-2e19eb25f311",
-      scanKey:
-        "sRwAAAAoY29tLm15dGlraS5zZGsuY2FwdHVyZS5yZWNlaXB0LmNhcGFjaXRvcgY6SQlVDCCrMOCc/jLI1A3BmOhqNvtZLzShMcb3/OLQLiqgWjuHuFiqGfg4fnAiPtRcc5uRJ6bCBRkg8EsKabMQkEsMOuVjvEOejVD497WkMgobMbk/X+bdfhPPGdcAHWn5Vnz86SmGdHX5xs6RgYe5jmJCSLiPmB7cjWmxY5ihkCG12Q==",
-      intelKey:
-        "wSNX3mu+YGc/2I1DDd0NmrYHS6zS1BQt2geMUH7DDowER43JGeJRUErOHVwU2tz6xHDXia8BuvXQI3j37I0uYw==",
-    },
-    program: {
-      image: Program,
-      description:
-        "You can now trade YOUR data for cash! Just scan a receipt or link an account.",
-      terms: Terms,
-      learn: LearnMore,
-      bullets: [
-        { text: "Creepy targeted ads", isUsed: false },
-        { text: "Spot purchasing trends", isUsed: true },
-        { text: "Create aggregate insights", isUsed: true },
-      ],
-      usecases: [
-        Usecase.common(CommonUsecases.DISTRIBUTION),
-        Usecase.common(CommonUsecases.ANALYTICS),
-        Usecase.common(CommonUsecases.AI_TRAINING),
-        Usecase.common(CommonUsecases.ATTRIBUTION),
-      ],
-      destinations: ["mytiki.com"],
-      tags: [
-        Tag.common(CommonTags.USER_ID),
-        Tag.common(CommonTags.PURCHASE_HISTORY),
-      ],
-    },
-    theme: {
-      accentColor: "#783F10",
-    },
-    rewards: [
-      {
-        image: ScanReward,
-        description:
-          "Earn 10 points for every receipt you scan or in your linked accounts.",
-        issuer: (
-          event: ReceiptEvent,
-          details: { receipt?: Receipt; account?: ReceiptAccount },
-        ): number | undefined => {
-          if (event == ReceiptEvent.SCAN) return 10;
-        },
-      },
-      {
-        image: LinkReward,
-        description:
-          "Earn 100 points for every account you link. We only check it for receipts.",
-        issuer: (
-          event: ReceiptEvent,
-          details: { receipt?: Receipt; account?: ReceiptAccount },
-        ): number | undefined => {
-          if (event == ReceiptEvent.LINK) return 100;
-          else if (event == ReceiptEvent.UNLINK) return -100;
-        },
-      },
-      {
-        image: MoreReward,
-        description:
-          "Check back for special offers and more ways to earn cash for your data.",
-        issuer: (
-          event: ReceiptEvent,
-          details: { receipt?: Receipt; account?: ReceiptAccount },
-        ): number | undefined => {
-          return undefined;
-        },
-      },
-    ],
-    redeem: (total: number): number | undefined =>
-      total > 0 ? total : undefined,
-  })
-  .mount("#app");
 ```
 
 #### Android
@@ -318,11 +190,7 @@ _Note, if you press start before the initialization is complete, a warning will 
 You can find active issues here in GitHub under [Issues](https://github.com/tiki/tiki-receipt-capacitor/issues). If you run into a bug or have a question, just create a new Issue or reach out to a team member on 👾 [Discord](https://discord.gg/tiki).
 
 ### Key open issues to take note of:
-1. iOS is not functional (yet) — our team is still working through a handful of critical bugs/issues. Estimated by: 8/23.
-2. OAuth is not yet functional (required for Outlook), optional for Gmail.
-3. Not every retailer account is fully tested (yet), there may still be issues with specific implementations.
-4. There are a handful of smaller UX-polish related bugs, such as scrolling on the history screen does not yet work. Next release scheduled for 8/25.
-
+1. OAuth is not yet functional (required for Outlook). Gmail is using IMAP.
 # Contributing
 
 - Use [GitHub Issues](https://github.com/tiki/tiki-receipt-capacitor/issues) to report any bugs you find or to request enhancements.
