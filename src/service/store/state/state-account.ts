@@ -21,11 +21,9 @@ export class StateAccount {
     this.key = key;
   }
 
-  get(): Ref<
+  get = (): Ref<
     BulletState.NULL | BulletState.P100 | BulletState.SYNC | BulletState.ERROR
-  > {
-    return this.state;
-  }
+  > => this.state;
 
   async set(
     state:
