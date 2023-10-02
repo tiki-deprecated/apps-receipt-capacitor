@@ -24,7 +24,7 @@ module.exports = defineConfig({
       fileName: (format) => `tiki-receipt-capacitor.${format}.js`,
     },
     rollupOptions: {
-      external: ["vue"],
+      external: ["vue", "vue3-touch-events"],
       output: {
         assetFileNames: (assetInfo): string => {
           if (assetInfo.name === "style.css")
@@ -34,6 +34,7 @@ module.exports = defineConfig({
         exports: "named",
         globals: {
           vue: "Vue",
+          "vue3-touch-events": "Vue3TouchEvents",
         },
       },
     },
