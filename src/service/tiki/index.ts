@@ -48,7 +48,11 @@ export class TikiService {
     this.capture = new ServiceCapture();
     this.store = new ServiceStore();
     this.publish = new ServicePublish(this.config);
-    this.internalHandlers = new InternalHandlers(this.store, this.capture);
+    this.internalHandlers = new InternalHandlers(
+      this.store,
+      this.capture,
+      this.publish,
+    );
   }
 
   /**

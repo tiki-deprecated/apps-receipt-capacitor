@@ -61,8 +61,7 @@ export class ServicePublish {
       const title = await this.plugin.getTitle(this.id);
       if (title != undefined) {
         const licenses = await this.plugin.getLicenses(title.id);
-        if (licenses.length > 0)
-          this._license = licenses.at(licenses.length - 1);
+        if (licenses.length > 0) this._license = licenses.slice(-1)[0];
         return this._license;
       } else {
         return undefined;
@@ -133,7 +132,7 @@ export class ServicePublish {
     description?: string,
   ): Promise<ReceiptRecord | undefined> {
     const payables: PayableRecord[] = await this.getPayables();
-    const latest = payables.at(-1);
+    const latest: PayableRecord = payables.slice(-1)[0];
     if (latest != undefined) {
       return this.plugin.createReceipt(
         latest.id,
