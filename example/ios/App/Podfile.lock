@@ -13,7 +13,7 @@ DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
-  - MytikiCaptureReceiptCapacitor (from `../../../../../../capture/receipt/capacitor`)
+  - "MytikiCaptureReceiptCapacitor (from `../../node_modules/@mytiki/capture-receipt-capacitor`)"
   - "MytikiTikiSdkCapacitor (from `../../node_modules/@mytiki/tiki-sdk-capacitor`)"
 
 EXTERNAL SOURCES:
@@ -24,7 +24,7 @@ EXTERNAL SOURCES:
   CapacitorPreferences:
     :path: "../../node_modules/@capacitor/preferences"
   MytikiCaptureReceiptCapacitor:
-    :path: "../../../../../../capture/receipt/capacitor"
+    :path: "../../node_modules/@mytiki/capture-receipt-capacitor"
   MytikiTikiSdkCapacitor:
     :path: "../../node_modules/@mytiki/tiki-sdk-capacitor"
 
@@ -35,6 +35,6 @@ SPEC CHECKSUMS:
   MytikiCaptureReceiptCapacitor: 1cdd272536280411e36d3c6e42d0c1cd7a5cff44
   MytikiTikiSdkCapacitor: 7fb71c6099dd3bba5c75ee7ec1dd30bd90c78c9c
 
-PODFILE CHECKSUM: aec53d34b0dcb58f22411771e10f7b873fcfb6d0
+PODFILE CHECKSUM: f1577cba99d1d91b705cb25d5cc74e6dbaef78e1
 
 COCOAPODS: 1.12.1
