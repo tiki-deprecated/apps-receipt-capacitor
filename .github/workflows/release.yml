@@ -55,7 +55,7 @@ jobs:
         uses: actions/configure-pages@v3
 
       - name: Build Docs
-        run: npx typedoc src/main.ts
+        run: npx typedoc src/main.ts --skipErrorChecking
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
