@@ -33,7 +33,7 @@ export class Navigate {
     if (isInitialized) {
       const license: LicenseRecord | undefined =
         await tiki!.publish.getLicense();
-      if (license != undefined) this.to(Sheets.Offer);
+      if (!license) this.to(Sheets.Offer);
       else this.to(Sheets.Home);
     } else {
       throw Error("TIKI SDK is not yet initialized");

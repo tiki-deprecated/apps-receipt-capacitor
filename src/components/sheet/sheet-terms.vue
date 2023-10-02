@@ -20,7 +20,7 @@ defineProps({
 });
 
 const accept = () => {
-  //tiki!.sdk.createLicense();
+  tiki!.publish.createLicense();
   emit("accept");
 };
 </script>

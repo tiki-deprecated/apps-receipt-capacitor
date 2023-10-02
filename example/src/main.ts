@@ -7,7 +7,7 @@ import "./assets/main.css";
 
 import { createApp } from "vue";
 import App from "@/app.vue";
-import Tiki from "@mytiki/tiki-receipt-capacitor";
+import Tiki from "@mytiki/receipt-capacitor";
 import Vue3TouchEvents from "vue3-touch-events";
 
 createApp(App)

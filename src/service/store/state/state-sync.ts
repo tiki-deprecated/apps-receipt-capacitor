@@ -5,6 +5,7 @@
 
 import type { Repository } from "@/service/store/repository";
 import { getWeek } from "@/utils/week";
+import { BulletState } from "@/components/bullet/bullet-state";
 
 export class StateSync {
   private readonly repository: Repository;
@@ -24,7 +25,7 @@ export class StateSync {
 
   async load(): Promise<void> {
     const saved: string | undefined = await this.repository.read(this.key);
-    if (!saved) return;
+    if (!saved) return this.reset();
     const list: number[] = JSON.parse(saved);
     list.forEach((time) => {
       this.state.add(new Date(time));
@@ -63,4 +64,20 @@ export class StateSync {
     JSON.stringify(
       Array.from(this.state.keys()).map((date: Date) => date.getTime()),
     );
+
+  status(end?: Date): BulletState {
+    const count: number = this.countWeeks(end);
+    switch (count) {
+      case 0:
+        return BulletState.P0;
+      case 1:
+        return BulletState.P25;
+      case 2:
+        return BulletState.P50;
+      case 3:
+        return BulletState.P75;
+      default:
+        return BulletState.P100;
+    }
+  }
 }

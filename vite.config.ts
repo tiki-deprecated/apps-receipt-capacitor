@@ -20,15 +20,14 @@ module.exports = defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/main.ts"),
-      name: "tiki-receipt-capacitor",
-      fileName: (format) => `tiki-receipt-capacitor.${format}.js`,
+      name: "receipt-capacitor",
+      fileName: (format) => `receipt-capacitor.${format}.js`,
     },
     rollupOptions: {
       external: ["vue", "vue3-touch-events"],
       output: {
         assetFileNames: (assetInfo): string => {
-          if (assetInfo.name === "style.css")
-            return "tiki-receipt-capacitor.css";
+          if (assetInfo.name === "style.css") return "receipt-capacitor.css";
           return assetInfo.name!;
         },
         exports: "named",
