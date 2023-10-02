@@ -10,29 +10,32 @@ import HeaderBack from "@/components/header/header-back.vue";
 import TextButton from "@/components/button/button-text.vue";
 import { type Account, AMAZON } from "@mytiki/capture-receipt-capacitor";
 import type { TikiService } from "@/service";
-import { ref, inject } from "vue";
+import { ref, inject, computed } from "vue";
+import { ButtonTextState } from "@/components/button/button-text-state";
 
-defineEmits(["close", "back"]);
-
+const emit = defineEmits(["close", "back"]);
 const tiki: TikiService | undefined = inject("Tiki");
 
 const form = ref<Account>({ username: "", password: "", type: AMAZON });
 const error = ref<string>();
 
-const submit = async () => {
-  if (
+const canSubmit = computed(
+  () =>
     form.value.username != undefined &&
     form.value.password != undefined &&
     form.value.username?.length > 0 &&
-    form.value.password?.length > 0
-  ) {
-    try {
-      error.value = "";
-      await tiki!.capture.login(form.value);
-      form.value = { username: "", password: "", type: AMAZON };
-    } catch (err: any) {
-      error.value = err.toString();
-    }
+    form.value.password?.length > 0,
+);
+
+const submit = async () => {
+  try {
+    await tiki!.capture.login(form.value);
+    tiki!.capture.scan().catch((error) => console.error(error.toString()));
+    error.value = "";
+    form.value = { username: "", password: "", type: AMAZON };
+    emit("back");
+  } catch (err: any) {
+    error.value = err.toString();
   }
 };
 </script>
@@ -49,5 +52,9 @@ const submit = async () => {
     :error="error"
     :account-type="form.type"
   />
-  <text-button text="Connect Retailer" @click="submit" />
+  <text-button
+    text="Connect Retailer"
+    :state="canSubmit ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
+    @click="submit"
+  />
 </template>
