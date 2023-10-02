@@ -6,7 +6,11 @@
 import type { ServiceCapture } from "@/service/capture";
 import type { AccountStatus } from "@/service/capture";
 import type { ServiceStore } from "@/service/store";
-import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
+import {
+  type Account,
+  GMAIL,
+  type Receipt,
+} from "@mytiki/capture-receipt-capacitor";
 
 export class InternalHandlers {
   private readonly capture: ServiceCapture;
@@ -22,6 +26,9 @@ export class InternalHandlers {
         if (account.type.type === "RETAILER") this.onRetailer(account, event);
       },
     );
+    this.capture.onReceipt("InternalHandler", (receipt): void =>
+      this.onReceipt(receipt),
+    );
   }
 
   private onGmail(_account: Account, _event: AccountStatus): void {
@@ -36,7 +43,17 @@ export class InternalHandlers {
     this.store.retailer
       .update(this.capture.accounts)
       .catch((error) =>
-        console.error(`Failed to update gmail state. Error: ${error}`),
+        console.error(`Failed to update retailer state. Error: ${error}`),
       );
+  }
+
+  private onReceipt(receipt: Receipt): void {
+    if (!receipt.blinkReceiptId) {
+      console.warn(`Receipt missing ID. Skipping: ${JSON.stringify(receipt)}`);
+    } else {
+      this.store.receipt.add(receipt.blinkReceiptId).catch((error) => {
+        console.error(`Failed to update receipt state. Error: ${error}`);
+      });
+    }
   }
 }

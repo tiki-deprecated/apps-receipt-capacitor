@@ -8,7 +8,6 @@ import type { Options } from "@/config/options";
 import { ServiceCapture } from "@/service/capture";
 import { ServiceStore } from "@/service/store";
 import { InternalHandlers } from "@/service/tiki/internal-handlers";
-import { BulletState } from "@/components/bullet/bullet-state";
 
 /**
  * The primary service class for the Library.
@@ -78,7 +77,10 @@ export class TikiService {
     this._isInitialized = true;
     this.capture.load().then((accounts) => {
       this.store.gmail.update(accounts);
+      this.store.retailer.update(accounts);
+      this.capture.scan();
     });
+    await this.store.sync.add();
   }
 
   /**
