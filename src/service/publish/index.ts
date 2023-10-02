@@ -142,6 +142,18 @@ export class ServicePublish {
     }
   }
 
+  async getReceipts(payables?: PayableRecord[]): Promise<ReceiptRecord[]> {
+    const receipts: ReceiptRecord[] = [];
+    if (!payables) payables = await this.getPayables();
+    for (const payable of payables) {
+      const records: ReceiptRecord[] = await this.plugin.getReceipts(
+        payable.id,
+      );
+      receipts.push(...records);
+    }
+    return receipts;
+  }
+
   async publish(receipt: Receipt): Promise<void> {
     const license = await this.getLicense();
     if (!license) throw Error("Publish requires a valid data license.");
@@ -161,6 +173,23 @@ export class ServicePublish {
       const body = await rsp.text();
       console.debug(`Unsupported receipt. Skipping. ${body}`);
     }
+  }
+
+  async balance(): Promise<number> {
+    let balance: number = 0;
+    const payables: PayableRecord[] = (await this.getPayables()).filter(
+      (payable) => payable.type === this.config.payableType,
+    );
+    payables.forEach((payable) => (balance += Number(payable.amount)));
+    if (payables.length > 0) {
+      const receipts: ReceiptRecord[] = await this.getReceipts(payables);
+      receipts.forEach((receipt) => {
+        const amount: number = Number(receipt.amount);
+        if (balance - amount > 0) balance -= amount;
+        else balance = 0;
+      });
+    }
+    return balance;
   }
 
   logout(): void {

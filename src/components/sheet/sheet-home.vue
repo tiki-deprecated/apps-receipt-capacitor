@@ -11,8 +11,7 @@ import BulletList from "@/components/bullet/bullet-list.vue";
 import { ButtonTextState } from "@/components/button/button-text-state";
 import { BulletState } from "@/components/bullet/bullet-state";
 import type { TikiService } from "@/service";
-import { inject } from "vue";
-import { getWeek } from "@/utils/week";
+import { inject, ref } from "vue";
 
 defineEmits(["close", "learn", "retailer", "gmail", "withdraw"]);
 const tiki: TikiService | undefined = inject("Tiki");
@@ -25,6 +24,8 @@ const syncState = (): BulletState =>
     : BulletState.P0;
 
 const receiptState = (): BulletState => tiki!.store.receipt.status();
+const balance = ref<number>(0);
+tiki?.publish.balance().then((amount) => (balance.value = amount));
 </script>
 
 <template>
@@ -78,9 +79,9 @@ const receiptState = (): BulletState => tiki!.store.receipt.status();
     />
   </div>
   <button-text
-    text="$1 Cash Out"
+    :text="balance > 0 ? `$${balance} Cash Out` : 'No Balance, Yet'"
     class="cash"
-    :state="ButtonTextState.DISABLED"
+    :state="balance > 0 ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
     @click="$emit('withdraw')"
   />
 </template>
