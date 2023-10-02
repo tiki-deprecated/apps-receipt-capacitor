@@ -13,7 +13,11 @@ defineProps({
     type: String,
     required: true,
   },
-  subtitle: String,
+  subtitle: {
+    type: String,
+    required: false,
+    default: "",
+  },
 });
 </script>
 

@@ -29,3 +29,12 @@ export enum BulletState {
   SYNC = "SYNC",
   ERROR = "ERROR",
 }
+
+export const toBulletState = (value: string): BulletState | undefined => {
+  const key = Object.keys(BulletState).find(
+    (key) => BulletState[key as keyof typeof BulletState] === value,
+  );
+  return key !== undefined
+    ? BulletState[key as keyof typeof BulletState]
+    : undefined;
+};

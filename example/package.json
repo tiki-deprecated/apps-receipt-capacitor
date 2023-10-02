@@ -19,8 +19,10 @@
     "@mytiki/capture-receipt-capacitor": "file:../../../../capture/receipt/capacitor",
     "@mytiki/tiki-receipt-capacitor": "file:../",
     "@mytiki/tiki-sdk-capacitor": "^0.3.1",
+    "@capacitor/preferences": "^5.0.6",
     "uuid": "^9.0.0",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "vue3-touch-events": "^4.1.6"
   },
   "devDependencies": {
     "@capacitor/cli": "5.4.1",

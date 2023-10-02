@@ -3,7 +3,7 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import type { TikiService } from "@/service/tiki-service";
+import type { TikiService } from "@/service";
 import { ref, type Ref } from "vue";
 
 export enum Sheets {
@@ -28,7 +28,7 @@ export class Navigate {
   }
 
   async initialize(tiki?: TikiService): Promise<void> {
-    const isInitialized: Boolean = tiki?.isInitialized ?? false;
+    const isInitialized: boolean = tiki?.isInitialized ?? false;
     if (isInitialized) {
       // const id: string = tiki!.sdk.id;
       // const license: LicenseRecord | undefined = await tiki!.sdk.getLicense();

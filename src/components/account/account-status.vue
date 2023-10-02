@@ -27,7 +27,7 @@ watch(
   <div class="container">
     <div class="account">
       <div class="img">
-        <div class="overlay" v-if="isError" />
+        <div v-if="isError" class="overlay" />
         <img :alt="account.type.name" :src="account.type.icon" />
       </div>
       <div class="text" :class="{ error: isError }">
@@ -39,7 +39,7 @@ watch(
         </div>
       </div>
     </div>
-    <button @click="$emit('delete')" class="delete">
+    <button class="delete" @click="$emit('delete')">
       <icon-minus class="ico" />
     </button>
   </div>

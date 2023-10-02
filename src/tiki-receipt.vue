@@ -10,7 +10,7 @@ import SheetOffer from "@/components/sheet/sheet-offer.vue";
 import SheetTerms from "@/components/sheet/sheet-terms.vue";
 import SheetLearn from "@/components/sheet/sheet-learn.vue";
 import SheetHome from "@/components/sheet/sheet-home.vue";
-import type { TikiService } from "@/service/tiki-service";
+import type { TikiService } from "@/service";
 import * as Swipe from "@/utils/swipe";
 import * as Theme from "@/config/theme";
 import { Navigate, Sheets } from "@/utils/navigate";
@@ -37,7 +37,6 @@ const props = defineProps({
     default: false,
   },
 });
-
 const navigate = new Navigate();
 watch(
   () => props.present,
@@ -61,21 +60,21 @@ const swipe = (direction: string, element: RendererElement) => {
 </script>
 
 <template>
-  <Transition appear name="fade" v-touch:swipe="swipe">
+  <Transition v-touch:swipe="swipe" appear name="fade">
     <sheet-bottom
       v-if="present"
-      @dismiss="$emit('update:present', false)"
       :show="navigate.ref.value !== Sheets.Hidden"
+      @dismiss="$emit('update:present', false)"
     >
       <div class="body">
         <sheet-offer
           v-if="navigate.ref.value === Sheets.Offer"
-          @learn="navigate.to(Sheets.Learn)"
-          @accept="navigate.to(Sheets.Terms)"
-          @close="navigate.clear()"
           :description="tiki!.config.offer.description!"
           :image="tiki!.config.offer.image!"
           :bullets="tiki!.config.offer.bullets!"
+          @learn="navigate.to(Sheets.Learn)"
+          @accept="navigate.to(Sheets.Terms)"
+          @close="navigate.clear()"
         />
         <sheet-terms
           v-if="navigate.ref.value === Sheets.Terms"

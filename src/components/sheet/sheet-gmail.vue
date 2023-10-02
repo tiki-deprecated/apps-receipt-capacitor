@@ -7,13 +7,12 @@
 import HeaderBack from "@/components/header/header-back.vue";
 import ButtonText from "@/components/button/button-text.vue";
 import AccountList from "@/components/account/account-list.vue";
-import type { TikiService } from "@/service/tiki-service";
+import type { TikiService } from "@/service";
 import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
 import { inject, ref } from "vue";
 
 const emit = defineEmits(["back", "close", "add", "skip"]);
 const tiki: TikiService | undefined = inject("Tiki");
-tiki!.capture.load();
 
 const filter = (accounts: Account[]): Account[] =>
   accounts.filter((account) => account.type.id === GMAIL.id);
