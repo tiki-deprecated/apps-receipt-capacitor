@@ -10,7 +10,7 @@ Reward users with points for scanning physical receipts, linking their inbox, or
 ## Includes
 - Single Vue Component (TikiReceipt) to launch a configurable pre-built UI.
 - TypeScript Service Class (TikiService) to interact directly with headless functionality or to build a custom UI.
-- [TIKI's](https://mytiki.com) data licensing SDK (tiki-sdk-capacitor) to create and utilize immutable zero-party data license records. 
+- [TIKI's](https://mytiki.com) data licensing SDK (tiki-sdk-capacitor) to create and utilize immutable zero-party data license records.
 
 _Microblink is a closed-source, licensed SDK. For new customers, we offer a **free Microblink license**. Schedule a meeting at [mytiki.com](https://mytiki.com) to get your license keys._
 
@@ -46,15 +46,16 @@ android {
 }
 ```
 
+#### Notifications
 
-It's necessary to install and setup the local notifications API from Capacitor to be able to send notifications to the user
+It's necessary to install and setup the local notifications API from Capacitor to be able to send notifications to the user:
 
-```
+```shell
 npm install @capacitor/local-notifications
 npx cap sync
 ```
 
-After installs the API its you need to add the uses-permission in the `AndroidManifest.xml`
+You also need to update the `AndroidManifest.xml` to enable the appropriate permissions:
 
 ```
 <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
