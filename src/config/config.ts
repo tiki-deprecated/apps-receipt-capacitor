@@ -10,7 +10,12 @@ import type { Theme } from "@/config/theme";
 import type { Key } from "@/config/key";
 import type { Offer } from "@/config/offer";
 import type { Options } from "@/config/options";
-import type { Usecase } from "@mytiki/tiki-sdk-capacitor";
+import {
+  CommonTags,
+  CommonUsecases,
+  Tag,
+  Usecase,
+} from "@mytiki/tiki-sdk-capacitor";
 
 export class Config {
   readonly theme?: Theme;
@@ -18,9 +23,6 @@ export class Config {
   readonly terms: string = Terms;
   readonly learn: string = LearnMore;
   readonly callback: (total: number) => number | undefined;
-  readonly tags: string[] = [""];
-  readonly uses: Usecase[] = [];
-  readonly payableType: string = "cash";
   readonly offer: Offer = {
     image: ProgramImage,
     description:
@@ -32,6 +34,20 @@ export class Config {
       "Share 5 new receipts",
     ],
   };
+  readonly tags: Tag[] = [
+    Tag.common(CommonTags.USER_ID),
+    Tag.common(CommonTags.PURCHASE_HISTORY),
+  ];
+  readonly uses: {
+    usecases: Usecase[];
+    destinations: string[];
+  }[] = [
+    {
+      usecases: [Usecase.common(CommonUsecases.DISTRIBUTION)],
+      destinations: ["mytiki.com"],
+    },
+  ];
+  readonly payableType: string = "cash";
 
   constructor(options: Options) {
     this.key = options.key;

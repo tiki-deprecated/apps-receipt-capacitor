@@ -106,7 +106,7 @@ export class ServicePublish {
    */
   async createPayable(
     amount: number,
-    description?: string = this.config.offer.description,
+    description: string | undefined = this.config.offer.description,
     reference?: string,
   ): Promise<PayableRecord | undefined> {
     const license: LicenseRecord | undefined = await this.getLicense();

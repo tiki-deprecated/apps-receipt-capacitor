@@ -47,7 +47,7 @@ export class TikiService {
     this.config = new Config(options);
     this.capture = new ServiceCapture();
     this.store = new ServiceStore();
-    this.publish = new ServicePublish();
+    this.publish = new ServicePublish(this.config);
     this.internalHandlers = new InternalHandlers(this.store, this.capture);
   }
 
@@ -66,7 +66,7 @@ export class TikiService {
    */
   async initialize(id: string): Promise<void> {
     await this.store.initialize();
-    await this.publish.initialize(id, this.config.key.publishingId);
+    await this.publish.initialize(id);
     await this.capture.initialize(
       this.config.key.scanKey,
       this.config.key.intelKey,
