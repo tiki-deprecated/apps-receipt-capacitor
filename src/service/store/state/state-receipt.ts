@@ -38,7 +38,6 @@ export class StateReceipt {
     let count = 0;
     if (!filter) count = this.state.size;
     else {
-      console.log(`NUM RECEIPTS: ${this.state.size}`);
       this.state.forEach((date, _receiptId) => {
         const week = getWeek(date);
         if (week >= filter.startWeek && week < filter.endWeek) count += 1;

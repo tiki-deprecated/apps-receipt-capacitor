@@ -92,5 +92,7 @@ export class TikiService {
   async logout(): Promise<void> {
     await this.capture.logout();
     await this.store.clear();
+    this._isInitialized = false;
+    this.publish.logout();
   }
 }

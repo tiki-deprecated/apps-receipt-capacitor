@@ -162,4 +162,9 @@ export class ServicePublish {
       console.debug(`Unsupported receipt. Skipping. ${body}`);
     }
   }
+
+  logout(): void {
+    this._id = undefined;
+    this._license = undefined;
+  }
 }
