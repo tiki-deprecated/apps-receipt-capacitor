@@ -12,6 +12,8 @@ import type { Theme } from "@/config/theme";
  *
  * @example
  * ```
+ * import { createApp } from "vue";
+ * import App from "@/app.vue";
  * import Tiki from "@mytiki/receipt-capacitor";
  * import ProgramImage from "@/assets/images/program.png";
  * import LearnMore from "@/assets/md/learn-more.md?raw";
@@ -45,6 +47,7 @@ import type { Theme } from "@/config/theme";
  *    learn: LearnMore,
  *    callback: (_total: number): number | undefined => undefined,
  *  })
+ *  .mount("#app");
  * ```
  */
 export interface Options {

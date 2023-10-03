@@ -12,6 +12,8 @@
  * @example
  * Register with application:
  * ```
+ * import { createApp } from "vue";
+ * import App from "@/app.vue";
  * import Tiki from "@mytiki/receipt-capacitor";
  *
  * createApp(App)
@@ -23,10 +25,17 @@
  *    },
  *    callback: (_total: number): number | undefined => undefined,
  *  })
+ *  .mount("#app");
  * ```
  *
- * Once the {@link TikiService} is initialized, to display the UI by set the html
- * boolean property `present` (e.g. `:present="true"`).
+ * Next, add the stylesheet for the component to your primary stylesheet (e.g. `main.css`)
+ * Example:
+ * ```
+ * @import "@mytiki/receipt-capacitor/dist/receipt-capacitor.css";
+ * ```
+ *
+ * Once the {@link TikiService} is initialized, set the html boolean property `present`
+ * to display the UI  (e.g. `:present="true"`).
  *
  * `present` implements a [two-way binding](https://vuejs.org/guide/components/v-model.html)
  * and for most use cases we recommend using `v-model` instead of a standard property binding.
