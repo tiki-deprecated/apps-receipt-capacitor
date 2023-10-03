@@ -82,6 +82,7 @@ export class TikiService {
       this.capture.scan();
     });
     await this.store.sync.add();
+    await this.internalHandlers.checkPayout();
   }
 
   /**

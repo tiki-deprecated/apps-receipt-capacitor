@@ -93,7 +93,7 @@ const swipe = (direction: string, element: RendererElement) => {
           v-if="navigate.ref.value === Sheets.Home"
           @close="navigate.clear()"
           @learn="navigate.to(Sheets.Learn)"
-          @withdraw="tiki!.config.callback"
+          @withdraw="navigate.clear()"
           @gmail="navigate.to(Sheets.Google)"
           @retailer="navigate.to(Sheets.Retailer)"
         />
