@@ -41,7 +41,7 @@
   ],
   "dependencies": {
     "@capacitor/preferences": "^5.0.6",
-    "@mytiki/capture-receipt-capacitor": "^0.6.0",
+    "@mytiki/capture-receipt-capacitor": "^0.6.1",
     "@mytiki/tiki-sdk-capacitor": "^0.3.1",
     "vue": "^3.3.4",
     "vue-markdown-render": "^2.0.1",
@@ -75,7 +75,7 @@
     "@capacitor/core": "^5.4.1",
     "@capacitor/ios": "^5.4.1",
     "@capacitor/preferences": "^5.0.6",
-    "@mytiki/capture-receipt-capacitor": "^0.6.0",
+    "@mytiki/capture-receipt-capacitor": "^0.6.1",
     "@mytiki/tiki-sdk-capacitor": "^0.3.1",
     "vue": "^3.3.4",
     "vue3-touch-events": "^4.1.3"
