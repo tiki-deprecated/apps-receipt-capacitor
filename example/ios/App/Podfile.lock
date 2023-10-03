@@ -4,7 +4,7 @@ PODS:
   - CapacitorCordova (5.4.1)
   - CapacitorPreferences (5.0.6):
     - Capacitor
-  - MytikiCaptureReceiptCapacitor (0.6.1):
+  - MytikiCaptureReceiptCapacitor (0.6.2):
     - Capacitor
   - MytikiTikiSdkCapacitor (0.3.1):
     - Capacitor
@@ -32,7 +32,7 @@ SPEC CHECKSUMS:
   Capacitor: 4c0681b47eebeba1f902093d24149cf2f518393e
   CapacitorCordova: 1222fdd78bfd0d323cc22bf254eed1484fe6c92a
   CapacitorPreferences: f03954bcb0ff09c792909e46bff88e3183c16b10
-  MytikiCaptureReceiptCapacitor: 0c12303ca0416b7d3247ad89bfdc8c73cf8e0da0
+  MytikiCaptureReceiptCapacitor: aa1e9da282a17da9a47243037fafc640713fafac
   MytikiTikiSdkCapacitor: 7fb71c6099dd3bba5c75ee7ec1dd30bd90c78c9c
 
 PODFILE CHECKSUM: f1577cba99d1d91b705cb25d5cc74e6dbaef78e1
