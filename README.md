@@ -147,6 +147,8 @@ await tiki?.logout();
 
 _Don't worry, license records and rewards issued are backed up to TIKI's immutable, hosted storage for free. After the user logs back in, call `.initialize` and the library will rebuild their balance for you._
 
+### [Reference Docs ⇢](https://capture-receipt-capacitor.mytiki.com)
+
 ## Example
 
 While this README is helpful, it's always easier to just see it in action. In `/example` there is simple demo app. On launch, it generates a new random user id, with a button called start. 
@@ -156,9 +158,6 @@ _Note, if you press start before the initialization is complete, a warning will 
 - See `example/README.md` on how to build and run the example
 - Check out `example/src/main.ts` to view an example configuration of the library.
 - In `example/src/app.vue` you'll find Vue template showcasing initialization, logout, and using a button to open the pre-built UI.
-
-## [Reference Docs ➜](https://capture-receipt-capacitor.mytiki.com)
-
 
 ## Open Issues
 You can find active issues here in GitHub under [Issues](https://github.com/tiki/tiki-receipt-capacitor/issues). If you run into a bug or have a question, just create a new Issue or reach out to a team member on 👾 [Discord](https://discord.gg/tiki).
