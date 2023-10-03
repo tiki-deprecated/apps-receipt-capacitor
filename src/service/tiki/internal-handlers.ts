@@ -3,22 +3,29 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import type { ServiceCapture } from "@/service/capture";
-import type { AccountStatus } from "@/service/capture";
+import type { AccountStatus, ServiceCapture } from "@/service/capture";
 import type { ServiceStore } from "@/service/store";
 import {
   type Account,
   GMAIL,
   type Receipt,
 } from "@mytiki/capture-receipt-capacitor";
+import type { ServicePublish } from "@/service";
+import { BulletState } from "@/components/bullet/bullet-state";
 
 export class InternalHandlers {
   private readonly capture: ServiceCapture;
   private readonly store: ServiceStore;
+  private readonly publish: ServicePublish;
 
-  constructor(store: ServiceStore, capture: ServiceCapture) {
+  constructor(
+    store: ServiceStore,
+    capture: ServiceCapture,
+    publish: ServicePublish,
+  ) {
     this.capture = capture;
     this.store = store;
+    this.publish = publish;
     this.capture.onAccount(
       "InternalHandler",
       (account: Account, event: AccountStatus): void => {
@@ -51,9 +58,26 @@ export class InternalHandlers {
     if (!receipt.blinkReceiptId) {
       console.warn(`Receipt missing ID. Skipping: ${JSON.stringify(receipt)}`);
     } else {
-      this.store.receipt.add(receipt.blinkReceiptId).catch((error) => {
+      this.store.receipt.add(receipt.blinkReceiptId).catch((error): void => {
         console.error(`Failed to update receipt state. Error: ${error}`);
       });
+      this.publish.publish(receipt).catch((error) => console.error(error));
+    }
+  }
+
+  async checkPayout(): Promise<void> {
+    const gmail = this.store.gmail.get();
+    const retailer = this.store.retailer.get();
+    const sync = this.store.sync.countWeeks();
+    const receipts = this.store.receipt.count();
+    if (
+      gmail.value === BulletState.P100 &&
+      retailer.value === BulletState.P100 &&
+      sync >= 4 &&
+      receipts >= 5
+    ) {
+      await this.publish.createPayable(1);
+      await this.store.reset();
     }
   }
 }

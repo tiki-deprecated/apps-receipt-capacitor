@@ -38,7 +38,7 @@ export class StateAccount {
 
   async load(): Promise<void> {
     const saved: string | undefined = await this.repository.read(this.key);
-    if (!saved) return;
+    if (!saved) return this.reset();
     const state: BulletState | undefined = toBulletState(saved);
     if (
       state != BulletState.NULL &&

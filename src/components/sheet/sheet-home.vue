@@ -11,53 +11,31 @@ import BulletList from "@/components/bullet/bullet-list.vue";
 import { ButtonTextState } from "@/components/button/button-text-state";
 import { BulletState } from "@/components/bullet/bullet-state";
 import type { TikiService } from "@/service";
-import { inject } from "vue";
-import { getWeek } from "@/utils/week";
+import { inject, ref } from "vue";
 
-defineEmits(["close", "learn", "retailer", "gmail", "withdraw"]);
+const emit = defineEmits(["close", "learn", "retailer", "gmail", "withdraw"]);
 const tiki: TikiService | undefined = inject("Tiki");
-const syncState = (): BulletState => {
-  if (
-    (tiki!.store.retailer.get().value === BulletState.P100 ||
-      tiki!.store.retailer.get().value === BulletState.SYNC) &&
-    (tiki!.store.gmail.get().value === BulletState.P100 ||
-      tiki!.store.gmail.get().value === BulletState.SYNC)
-  ) {
-    const count: number = tiki!.store.sync.countWeeks();
-    switch (count) {
-      case 0:
-        return BulletState.P0;
-      case 1:
-        return BulletState.P25;
-      case 2:
-        return BulletState.P50;
-      case 3:
-        return BulletState.P75;
-      default:
-        return BulletState.P100;
-    }
-  } else return BulletState.P0;
-};
+const syncState = (): BulletState =>
+  (tiki!.store.retailer.get().value === BulletState.P100 ||
+    tiki!.store.retailer.get().value === BulletState.SYNC) &&
+  (tiki!.store.gmail.get().value === BulletState.P100 ||
+    tiki!.store.gmail.get().value === BulletState.SYNC)
+    ? tiki!.store.sync.status()
+    : BulletState.P0;
 
-const receiptState = (): BulletState => {
-  const cur = getWeek();
-  const count = tiki!.store.receipt.count({
-    startWeek: cur - 4,
-    endWeek: cur + 1,
-  });
-  switch (count) {
-    case 0:
-      return BulletState.P0;
-    case 1:
-      return BulletState.P20;
-    case 2:
-      return BulletState.P40;
-    case 3:
-      return BulletState.P60;
-    case 4:
-      return BulletState.P80;
-    default:
-      return BulletState.P100;
+const receiptState = (): BulletState => tiki!.store.receipt.status();
+const balance = ref<number>(0);
+tiki?.publish.balance().then((amount) => (balance.value = amount));
+
+const withdraw = () => {
+  emit("withdraw");
+  const res: number | undefined = tiki?.config.callback(balance.value);
+  if (res != undefined) {
+    tiki?.publish
+      .createReceipt(res)
+      .catch((error) =>
+        console.log(`Failed to create withdrawl receipt: ${error}`),
+      );
   }
 };
 </script>
@@ -113,10 +91,10 @@ const receiptState = (): BulletState => {
     />
   </div>
   <button-text
-    text="$1 Cash Out"
+    :text="balance > 0 ? `$${balance} Cash Out` : 'No Balance, Yet'"
     class="cash"
-    :state="ButtonTextState.DISABLED"
-    @click="$emit('withdraw')"
+    :state="balance > 0 ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
+    @click="withdraw"
   />
 </template>
 

@@ -5,58 +5,64 @@
 
 import { Config } from "@/config/config";
 import type { Options } from "@/config/options";
-import { ServiceCapture } from "@/service/capture";
-import { ServiceStore } from "@/service/store";
+import { ServiceCapture, ServiceStore, ServicePublish } from "@/service";
 import { InternalHandlers } from "@/service/tiki/internal-handlers";
 
 /**
- * The primary service class for the Library.
+ * The main entry point for interacting with service-level (non-UI) functionality.
+ * Access the service methods using [Vue3 injection](https://vuejs.org/guide/components/provide-inject.html)
+ * with the key `"Tiki"`
+ *
+ * @example
+ * ```
+ * <script setup lang="ts">
+ * const tiki: TikiService | undefined = inject("Tiki");
+ * </script>
+ * ```
  */
 export class TikiService {
   /**
-   * The configuration settings for the instance.
+   * @ignore
    */
   readonly config: Config;
-
   /**
-   * The {@link CaptureService} instance. Call capture-level operations.
+   * @ignore
    */
   readonly capture: ServiceCapture;
-
-  readonly store: ServiceStore;
-  readonly internalHandlers: InternalHandlers;
-
-  // /**
-  //  * The {@link HistoryService} instance. Call methods related to a
-  //  * user's reward balance and historical event trail.
-  //  */
-  // readonly history: HistoryService;
-
-  // /**
-  //  * The SdkService instance. Operations for managing the underlying license records.
-  //  */
-  // readonly sdk: SdkService;
-
   /**
-   * Indicates whether the service has been initialized.
-   * @private
+   * @ignore
+   */
+  readonly store: ServiceStore;
+  /**
+   * @ignore
+   */
+  readonly internalHandlers: InternalHandlers;
+  /**
+   * @ignore
+   */
+  readonly publish: ServicePublish;
+  /**
+   * @ignore
    */
   private _isInitialized: boolean = false;
 
   /**
-   * Creates an instance of the TikiService class.
-   * Do not construct directly. Use as a Vue Plugin.
-   * @param config - The configuration settings for the service.
+   * @ignore
    */
   constructor(options: Options) {
     this.config = new Config(options);
     this.capture = new ServiceCapture();
     this.store = new ServiceStore();
-    this.internalHandlers = new InternalHandlers(this.store, this.capture);
+    this.publish = new ServicePublish(this.config);
+    this.internalHandlers = new InternalHandlers(
+      this.store,
+      this.capture,
+      this.publish,
+    );
   }
 
   /**
-   * Gets the initialization status of the service.
+   * Get the initialization status of the service.
    * @returns `true` if the service is initialized, `false` otherwise.
    */
   get isInitialized(): boolean {
@@ -64,12 +70,13 @@ export class TikiService {
   }
 
   /**
-   * Initializes the service.
+   * Initialize the service for a specified user.
    * @param id - The user's unique identifier.
    * @returns A Promise that resolves when the initialization is complete.
    */
-  async initialize(): Promise<void> {
+  async initialize(id: string): Promise<void> {
     await this.store.initialize();
+    await this.publish.initialize(id);
     await this.capture.initialize(
       this.config.key.scanKey,
       this.config.key.intelKey,
@@ -81,15 +88,18 @@ export class TikiService {
       this.capture.scan();
     });
     await this.store.sync.add();
+    await this.internalHandlers.checkPayout();
   }
 
   /**
-   * Logs the user out of all linked accounts and removes credentials
-   * from the local cache.
+   * Log the user out of all linked accounts, remove all credentials,
+   * clear stored preferences, and in-memory service cache.
    * @returns A Promise that resolves when the logout is complete.
    */
   async logout(): Promise<void> {
     await this.capture.logout();
     await this.store.clear();
+    this._isInitialized = false;
+    this.publish.logout();
   }
 }

@@ -4,13 +4,18 @@
  */
 
 /**
- * Represents a Data Reward offer
+ * Data Reward offer configuration. We've pre-configured reasonable defaults for all
+ * properties —override as-needed.
+ *
+ * ![Offer Config Guide](https://cdn.mytiki.com/assets/receipt-offer-config.png)
  */
 export interface Offer {
   /**
-   * The image src (300x86) to help explain the program and grab the user's attention.
+   * The image src (320x92) to help explain the program and grab the user's attention.
    *
-   * Overrides default found under `assets/images/program.png`
+   * Overrides the
+   * [default image](https://github.com/tiki/apps-receipt-capacitor/blob/main/src/assets/images/program.png)
+   * found under `src/assets/images/program.png`
    */
   image?: string;
 
@@ -22,7 +27,11 @@ export interface Offer {
 
   /**
    * A list of bullets explaining the criteria for participating in the program.
-   * Overrides default copy of `["Link a Gmail account", "Link a supported retailer account", "Open and use the app each week", "Share 5 new receipts"]`
+   * Overrides the default copy of
+   * * Link a Gmail account
+   * * Link a supported retailer account
+   * * Open and use the app each week
+   * * Share 5 new receipts
    */
   bullets?: string[];
 }

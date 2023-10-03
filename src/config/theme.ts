@@ -4,7 +4,12 @@
  */
 
 /**
- * UI style customization. Alternatively set the following CSS variables:
+ * UI style customization.
+ *
+ * ![UI Config Guide](https://cdn.mytiki.com/assets/receipt-ui-config.png)
+ *
+ *
+ * Alternatively set the following CSS variables:
  * *  --tiki-font-family
  * *  --tiki-primary-text-color
  * *  --tiki-secondary-text-color
@@ -35,7 +40,7 @@ export interface Theme {
   successColor?: string;
 
   /**
-   * The accent color to use. Defaults to `rgb(199, 48, 0)`.
+   * The error color to use. Defaults to `rgb(199, 48, 0)`.
    */
   errorColor?: string;
 
