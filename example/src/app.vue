@@ -6,8 +6,7 @@
 <script setup lang="ts">
 import { Preferences } from "@capacitor/preferences";
 import { inject, ref } from "vue";
-import { TikiReceipt } from "@mytiki/receipt-capacitor";
-import type { TikiService } from "@mytiki/receipt-capacitor";
+import { TikiReceipt, type TikiService } from "@mytiki/receipt-capacitor";
 import { v4 as uuidv4 } from "uuid";
 
 const userKey = "tiki-receipt-capacitor-example.id";
