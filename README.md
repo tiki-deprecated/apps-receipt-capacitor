@@ -1,6 +1,6 @@
 # TIKI Receipt (Capacitor + Vue.js)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<a href="https://capture-receipt-capacitor.mytiki.com" alt="Reference Docs"><img src="https://img.shields.io/static/v1?logo=readme&label=&message=reference%20docs&color=018EF5&logoColor=white&style=flat-square"></a>
+<a href="https://receipt-capacitor.mytiki.com" alt="Reference Docs"><img src="https://img.shields.io/static/v1?logo=readme&label=&message=reference%20docs&color=018EF5&logoColor=white&style=flat-square"></a>
 [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
@@ -147,7 +147,7 @@ await tiki?.logout();
 
 _Don't worry, license records and rewards issued are backed up to TIKI's immutable, hosted storage for free. After the user logs back in, call `.initialize` and the library will rebuild their balance for you._
 
-### [Reference Docs ⇢](https://capture-receipt-capacitor.mytiki.com)
+### [Reference Docs ⇢](https://receipt-capacitor.mytiki.com)
 
 ## Example
 
