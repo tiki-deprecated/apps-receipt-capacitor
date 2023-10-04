@@ -78,8 +78,9 @@ export class TikiService {
     await this.store.initialize();
     await this.publish.initialize(id);
     await this.capture.initialize(
-      this.config.key.scanKey,
-      this.config.key.intelKey,
+      this.config.key.product,
+      this.config.key.ios,
+      this.config.key.android,
     );
     this._isInitialized = true;
     this.capture.load().then((accounts) => {

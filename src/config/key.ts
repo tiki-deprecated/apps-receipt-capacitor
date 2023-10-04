@@ -23,12 +23,17 @@ export interface Key {
   publishingId: string;
 
   /**
-   * Your application's Microblink License Key. Contact TIKI to get yours.
+   * Your iOS application's Microblink License Key. Contact TIKI to get yours.
    */
-  scanKey: string;
+  ios?: string;
+
+  /**
+   * Your Android application's Microblink License Key. Contact TIKI to get yours.
+   */
+  android?: string;
 
   /**
    * Your application's Microblink Product Intelligence Key. Contact TIKI to get yours.
    */
-  intelKey: string;
+  product: string;
 }
