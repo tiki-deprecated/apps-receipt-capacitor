@@ -75,7 +75,9 @@ export class ServiceCapture {
     return new Promise<void>((resolve, reject) => {
       this.plugin.scan(
         (receipt: Receipt) => {
-          this._onReceiptListeners.forEach((listener) => listener(receipt));
+          this._onReceiptListeners.forEach((listener) => {
+            if (this.guardReceipt(receipt)) listener(receipt);
+          });
         },
         7,
         (): void => resolve(),
@@ -102,6 +104,40 @@ export class ServiceCapture {
 
   private accountKey = (account: Account): string =>
     account.type.id + ":" + account.username;
+
+  private guardReceipt(receipt: Receipt): boolean {
+    if (receipt.blinkReceiptId == undefined) {
+      console.debug(`Invalid receipt: No blinkReceiptId.`);
+      return false;
+    }
+    if (
+      receipt.retailerId.id == undefined ||
+      receipt.retailerId.bannerId == undefined
+    ) {
+      console.debug(
+        `Invalid receipt: Invalid retailerId: ${JSON.stringify(
+          receipt.retailerId,
+        )}`,
+      );
+      return false;
+    }
+    if (receipt.total == undefined) {
+      console.debug(`Invalid receipt: No total.`);
+      return false;
+    }
+    if (
+      receipt.receiptDateTime == undefined ||
+      receipt.receiptDate?.value == undefined
+    ) {
+      console.debug(
+        `Invalid receipt: No receipt date — receiptDateTime: ${JSON.stringify(
+          receipt.receiptDateTime,
+        )} receiptDate: ${JSON.stringify(receipt.receiptDate)}`,
+      );
+      return false;
+    }
+    return true;
+  }
 }
 
 export * from "./account-status";

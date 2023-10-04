@@ -154,24 +154,24 @@ export class ServicePublish {
     return receipts;
   }
 
-  async publish(_receipt: Receipt): Promise<void> {
+  async publish(receipt: Receipt): Promise<void> {
     const license = await this.getLicense();
     if (!license) throw Error("Publish requires a valid data license.");
-    const _jwt: Jwt = await this.plugin.token();
-    // const rsp = await fetch(
-    //   "https://ingest.mytiki.com/api/latest/microblink-receipt",
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       Authorization: `Bearer ${jwt.accessToken}`,
-    //     },
-    //     body: JSON.stringify(receipt),
-    //   },
-    // );
-    // if (!rsp.ok) {
-    //   const body = await rsp.text();
-    //   console.debug(`Unsupported receipt. Skipping. ${body}`);
-    // }
+    const jwt: Jwt = await this.plugin.token();
+    const rsp = await fetch(
+      "https://ingest.mytiki.com/api/latest/microblink-receipt",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${jwt.accessToken}`,
+        },
+        body: JSON.stringify(receipt),
+      },
+    );
+    if (!rsp.ok) {
+      const body = await rsp.text();
+      console.warn(`Failed to upload receipt. Skipping. ${body}`);
+    }
   }
 
   async balance(): Promise<number> {
