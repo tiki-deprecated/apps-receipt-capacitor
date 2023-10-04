@@ -11,7 +11,7 @@ describe("User misses a weekly login", () => {
     const gmail = store.gmail as StateAccount;
 
     expect(connectGmail(gmail)).toBe("P100");
-    //add a retailer account
+
     const retailer = store.retailer as StateAccount;
     expect(connectRetailer(retailer)).toBe("P100");
 

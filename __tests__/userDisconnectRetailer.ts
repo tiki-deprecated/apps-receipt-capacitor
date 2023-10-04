@@ -7,8 +7,6 @@ import fiveReceipts from "./__fixtures__/fiveReceipts";
 import fourWeeks from "./__fixtures__/fourWeeks";
 import mockCheckPayout from "./__mocks__/mockCheckPayout";
 
-
-
 describe('User disconnect Gmail', ()=>{
    test("test suite", async ()=>{
     const store = new ServiceStore()

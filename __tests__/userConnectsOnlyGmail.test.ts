@@ -18,7 +18,6 @@ describe("User connects Gmail but not Retailer Account", () => {
 
     expect(fiveReceipts(store.receipt)).toBe(5);
 
-    //mock checkPayout
     expect(
       mockCheckPayout(
         store.sync.countWeeks(new Date("09/27/2023")),

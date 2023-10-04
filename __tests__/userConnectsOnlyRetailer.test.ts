@@ -1,6 +1,5 @@
 import { StateAccount } from "../src/service/store/state/state-account";
 import { ServiceStore } from "../src/service/store";
-import connectGmail from "./__fixtures__/connectGmail";
 import fourWeeks from "./__fixtures__/fourWeeks";
 import fiveReceipts from "./__fixtures__/fiveReceipts";
 import mockCheckPayout from "./__mocks__/mockCheckPayout";
@@ -21,7 +20,6 @@ describe("User Connects Only a Retailer Account", () => {
 
     expect(fiveReceipts(store.receipt)).toBe(5);
 
-    //mock checkPayout
     expect(
       mockCheckPayout(
         store.sync.countWeeks(new Date("09/27/2023")),

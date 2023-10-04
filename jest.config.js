@@ -12,4 +12,5 @@ module.exports = {
       getRandomValues: (arr) => require("crypto").randomBytes(arr.length),
     },
   },
+  modulePathIgnorePatterns: ["<rootDir>/__tests__/__mocks__/*", "<rootDir>/__tests__/__fixtures__/*"]
 }
