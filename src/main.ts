@@ -20,8 +20,9 @@
  *  .use(Tiki, {
  *    key: {
  *       publishingId: "YOUR TIKI PUBLISHING ID",
- *       scanKey: "YOUR MICROBLINK LICENSE KEY",
- *       intelKey: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
+ *       ios: "YOUR MICROBLINK IOS LICENSE KEY",
+ *       android: "YOUR MICROBLINK ANDROID LICENSE KEY",
+ *       product: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
  *    },
  *    callback: (_total: number): number | undefined => undefined,
  *  })
