@@ -26,8 +26,8 @@
   },
   "scripts": {
     "build": "rimraf dist && vue-tsc --declaration --emitDeclarationOnly; vite build",
-    "example:android": "npm run build && cd example && npm run build && npx cap sync android && npx cap run android",
-    "example:ios": "npm run build && cd example && npm run build && npx cap sync ios && npx cap run ios",
+    "example:vue3:android": "npm run build && cd example/vue3 && npm run build && npx cap sync android && npx cap run android",
+    "example:vue3:ios": "npm run build && cd example/vue3 && npm run build && npx cap sync ios && npx cap run ios",
     "lint": "npm run eslint && npm run prettier -- --check",
     "fmt": "npm run eslint -- --fix && npm run prettier -- --write",
     "eslint": "eslint \"src/**/*.{ts,js}\"",
