@@ -113,7 +113,7 @@ To initialize just inject the `TikiService` and pass in your systems unique iden
 </script>
 ```
 
-_We recommend initializing as early as possible in your application, you'll want to initialize the library. We scrape accounts (which can take a few seconds) in the background. If you initialize early, by the time the user launches the UI, all of their receipt data will be up-to-date. No worries if not, the UI will just update as data comes in._
+_We recommend initializing as early as possible in your application. We scrape accounts (which can take a few seconds) in the background. If you initialize early, by the time the user launches the UI, all of their receipt data will be up-to-date. No worries if not, the UI will just update as data comes in._
 
 ### Open UI
 Add the `TikiReceipt` component to your template and a boolean Ref
