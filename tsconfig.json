@@ -1,12 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-  ],
-  "exclude": ["src/**/__tests__/*"],
+  "exclude": ["./src/**/__tests__/*"],
   "compilerOptions": {
     "target": "ESNext",
     "sourceMap": true,
@@ -25,16 +19,14 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "declaration": true,
-    "outDir": "dist",
     "emitDeclarationOnly": true,
-    "declarationDir": "./dist/types",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
     "types": [
       "vite/client",
       "vite-svg-loader"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+    }
   }
 }

@@ -1,5 +1,0 @@
-build
-dist
-vite.config.ts
-capacitor.config.ts
-.eslintrc

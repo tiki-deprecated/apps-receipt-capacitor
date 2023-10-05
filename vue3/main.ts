@@ -67,10 +67,9 @@
 
 import type { App } from "vue";
 import "@/assets/styles/main.css";
-import TikiReceipt from "./tiki-receipt.vue";
-import { TikiService } from "@/service/tiki";
-import type * as Config from "@/config/index";
-import Vue3TouchEvents from "vue3-touch-events";
+import TikiReceipt from "../src/tiki-receipt.vue";
+import { TikiService } from "../src/service";
+import type * as Config from "../src/config";
 
 /**
  * @ignore
@@ -79,7 +78,6 @@ export default {
   install: (app: App, options: Config.Options): void => {
     app.component("TikiReceipt", TikiReceipt);
     app.provide("Tiki", new TikiService(options));
-    app.use(Vue3TouchEvents);
   },
 };
 

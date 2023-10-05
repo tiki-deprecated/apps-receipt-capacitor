@@ -19,12 +19,12 @@ module.exports = defineConfig({
   ],
   build: {
     lib: {
-      entry: path.resolve(__dirname, "src/main.ts"),
+      entry: path.resolve(__dirname, "main.ts"),
       name: "receipt-capacitor",
       fileName: (format) => `receipt-capacitor.${format}.js`,
     },
     rollupOptions: {
-      external: ["vue", "vue3-touch-events"],
+      external: ["vue"],
       output: {
         assetFileNames: (assetInfo): string => {
           if (assetInfo.name === "style.css") return "receipt-capacitor.css";
@@ -33,7 +33,6 @@ module.exports = defineConfig({
         exports: "named",
         globals: {
           vue: "Vue",
-          "vue3-touch-events": "Vue3TouchEvents",
         },
       },
     },
