@@ -3,9 +3,16 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import type { Key } from "@/config/key";
-import type { Offer } from "@/config/offer";
-import type { Theme } from "@/config/theme";
+/**
+ * Interfaces for configuration of this library.
+ *
+ * Define during app registration. Start with the top-level interface: {@link Config.Options}
+ * @module
+ */
+
+import type { Key } from "./key";
+import type { Offer } from "./offer";
+import type { Theme } from "./theme";
 
 /**
  * The top-level configuration object for this library. Define during app registration.
@@ -88,3 +95,7 @@ export interface Options {
    */
   learn?: string;
 }
+
+export * from "./key";
+export * from "./theme";
+export * from "./offer";

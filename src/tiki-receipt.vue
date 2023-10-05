@@ -6,17 +6,17 @@
 <script setup lang="ts">
 import { inject, watch } from "vue";
 import SheetBottom from "@/components/sheet/sheet-bottom.vue";
-// import SheetOffer from "@/components/sheet/sheet-offer.vue";
-// import SheetTerms from "@/components/sheet/sheet-terms.vue";
-// import SheetLearn from "@/components/sheet/sheet-learn.vue";
-// import SheetHome from "@/components/sheet/sheet-home.vue";
+import SheetOffer from "@/components/sheet/sheet-offer.vue";
+import SheetTerms from "@/components/sheet/sheet-terms.vue";
+import SheetLearn from "@/components/sheet/sheet-learn.vue";
+import SheetHome from "@/components/sheet/sheet-home.vue";
 import type { TikiService } from "@/service";
 import * as Theme from "@/config/theme";
 import { Navigate, Sheets } from "@/utils/navigate";
-// import SheetGmail from "@/components/sheet/sheet-gmail.vue";
-// import SheetRetailer from "@/components/sheet/sheet-retailer.vue";
-// import SheetAddGmail from "@/components/sheet/sheet-add-gmail.vue";
-// import SheetAddRetailer from "@/components/sheet/sheet-add-retailer.vue";
+import SheetGmail from "@/components/sheet/sheet-gmail.vue";
+import SheetRetailer from "@/components/sheet/sheet-retailer.vue";
+import SheetAddGmail from "@/components/sheet/sheet-add-gmail.vue";
+import SheetAddRetailer from "@/components/sheet/sheet-add-retailer.vue";
 
 const emit = defineEmits([
   /**
@@ -51,8 +51,8 @@ watch(
   },
 );
 
-const tiki: TikiService | undefined = inject("Tiki");
-Theme.apply(document, tiki?.config.theme);
+const tiki: TikiService = inject("Tiki")!;
+tiki.config.theme.apply(document);
 </script>
 
 <template>
@@ -63,67 +63,67 @@ Theme.apply(document, tiki?.config.theme);
       @dismiss="$emit('update:present', false)"
     >
       <div class="body">
-        <div v-if="navigate.ref.value === Sheets.Offer">hello</div>
-        <!--        <sheet-offer-->
-        <!--          v-if="navigate.ref.value === Sheets.Offer"-->
-        <!--          :description="tiki!.config.offer.description!"-->
-        <!--          :image="tiki!.config.offer.image!"-->
-        <!--          :bullets="tiki!.config.offer.bullets!"-->
-        <!--          @learn="navigate.to(Sheets.Learn)"-->
-        <!--          @accept="navigate.to(Sheets.Terms)"-->
-        <!--          @close="navigate.clear()"-->
-        <!--        />-->
-        <!--        <sheet-terms-->
-        <!--          v-if="navigate.ref.value === Sheets.Terms"-->
-        <!--          :markdown="tiki!.config.terms"-->
-        <!--          @back="navigate.pop()"-->
-        <!--          @accept="navigate.to(Sheets.Home)"-->
-        <!--          @close="navigate.clear()"-->
-        <!--        />-->
-        <!--        <sheet-learn-->
-        <!--          v-if="navigate.ref.value === Sheets.Learn"-->
-        <!--          :markdown="tiki!.config.learn"-->
-        <!--          @back="navigate.pop()"-->
-        <!--          @close="navigate.clear()"-->
-        <!--        />-->
-        <!--        <sheet-home-->
-        <!--          v-if="navigate.ref.value === Sheets.Home"-->
-        <!--          @close="navigate.clear()"-->
-        <!--          @learn="navigate.to(Sheets.Learn)"-->
-        <!--          @withdraw="navigate.clear()"-->
-        <!--          @gmail="navigate.to(Sheets.Google)"-->
-        <!--          @retailer="navigate.to(Sheets.Retailer)"-->
-        <!--        />-->
-        <!--        <sheet-gmail-->
-        <!--          v-if="navigate.ref.value === Sheets.Google"-->
-        <!--          @back="navigate.pop()"-->
-        <!--          @close="navigate.clear()"-->
-        <!--          @skip="-->
-        <!--            navigate.pop();-->
-        <!--            navigate.to(Sheets.AddGoogle);-->
-        <!--          "-->
-        <!--          @add="navigate.to(Sheets.AddGoogle)"-->
-        <!--        />-->
-        <!--        <sheet-retailer-->
-        <!--          v-if="navigate.ref.value === Sheets.Retailer"-->
-        <!--          @back="navigate.pop()"-->
-        <!--          @close="navigate.clear()"-->
-        <!--          @add="navigate.to(Sheets.AddRetailer)"-->
-        <!--          @skip="-->
-        <!--            navigate.pop();-->
-        <!--            navigate.to(Sheets.AddRetailer);-->
-        <!--          "-->
-        <!--        />-->
-        <!--        <sheet-add-retailer-->
-        <!--          v-if="navigate.ref.value === Sheets.AddRetailer"-->
-        <!--          @back="navigate.pop()"-->
-        <!--          @close="navigate.clear()"-->
-        <!--        />-->
-        <!--        <sheet-add-gmail-->
-        <!--          v-if="navigate.ref.value === Sheets.AddGoogle"-->
-        <!--          @back="navigate.pop()"-->
-        <!--          @close="navigate.clear()"-->
-        <!--        />-->
+        <!--        <div v-if="navigate.ref.value === Sheets.Offer">hello</div>-->
+        <sheet-offer
+          v-if="navigate.ref.value === Sheets.Offer"
+          :description="tiki.config.offer.description"
+          :image="tiki.config.offer.image"
+          :bullets="tiki.config.offer.bullets"
+          @learn="navigate.to(Sheets.Learn)"
+          @accept="navigate.to(Sheets.Terms)"
+          @close="navigate.clear()"
+        />
+        <sheet-terms
+          v-if="navigate.ref.value === Sheets.Terms"
+          :markdown="tiki.config.terms"
+          @back="navigate.pop()"
+          @accept="navigate.to(Sheets.Home)"
+          @close="navigate.clear()"
+        />
+        <sheet-learn
+          v-if="navigate.ref.value === Sheets.Learn"
+          :markdown="tiki.config.learn"
+          @back="navigate.pop()"
+          @close="navigate.clear()"
+        />
+        <sheet-home
+          v-if="navigate.ref.value === Sheets.Home"
+          @close="navigate.clear()"
+          @learn="navigate.to(Sheets.Learn)"
+          @withdraw="navigate.clear()"
+          @gmail="navigate.to(Sheets.Google)"
+          @retailer="navigate.to(Sheets.Retailer)"
+        />
+        <sheet-gmail
+          v-if="navigate.ref.value === Sheets.Google"
+          @back="navigate.pop()"
+          @close="navigate.clear()"
+          @skip="
+            navigate.pop();
+            navigate.to(Sheets.AddGoogle);
+          "
+          @add="navigate.to(Sheets.AddGoogle)"
+        />
+        <sheet-retailer
+          v-if="navigate.ref.value === Sheets.Retailer"
+          @back="navigate.pop()"
+          @close="navigate.clear()"
+          @add="navigate.to(Sheets.AddRetailer)"
+          @skip="
+            navigate.pop();
+            navigate.to(Sheets.AddRetailer);
+          "
+        />
+        <sheet-add-retailer
+          v-if="navigate.ref.value === Sheets.AddRetailer"
+          @back="navigate.pop()"
+          @close="navigate.clear()"
+        />
+        <sheet-add-gmail
+          v-if="navigate.ref.value === Sheets.AddGoogle"
+          @back="navigate.pop()"
+          @close="navigate.clear()"
+        />
       </div>
     </sheet-bottom>
   </Transition>

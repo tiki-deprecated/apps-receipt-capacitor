@@ -69,7 +69,7 @@ import type Vue from "vue";
 import "@/assets/styles/main.css";
 import TikiReceipt from "@/tiki-receipt.vue";
 import { TikiService } from "@/service";
-import type * as Config from "@/config";
+import type * as TikiOptions from "@/options";
 
 /**
  * @ignore
@@ -86,4 +86,4 @@ export default {
 };
 
 export { TikiReceipt };
-export type { TikiService, Config };
+export type { TikiService, TikiOptions };
