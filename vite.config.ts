@@ -5,9 +5,9 @@
 
 import { defineConfig } from "vite";
 import * as path from "path";
-import vue from "@vitejs/plugin-vue";
+import vue from "@vitejs/plugin-vue2";
 import Markdown from "vite-plugin-vue-markdown";
-import svgLoader from "vite-svg-loader";
+import { createSvgPlugin } from "vite-plugin-vue2-svg";
 
 module.exports = defineConfig({
   plugins: [
@@ -15,7 +15,7 @@ module.exports = defineConfig({
       include: [/\.vue$/, /\.md$/],
     }),
     Markdown(),
-    svgLoader(),
+    createSvgPlugin(),
   ],
   build: {
     lib: {

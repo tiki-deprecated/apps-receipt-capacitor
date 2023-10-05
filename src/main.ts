@@ -65,19 +65,23 @@
  * @module tiki-receipt-capacitor
  */
 
-import type { App } from "vue";
-import "../src/assets/styles/main.css";
-import TikiReceipt from "../src/tiki-receipt.vue";
-import { TikiService } from "../src/service";
-import type * as Config from "../src/config";
+import type Vue from "vue";
+import "@/assets/styles/main.css";
+import TikiReceipt from "@/tiki-receipt.vue";
+import { TikiService } from "@/service";
+import type * as Config from "@/config";
 
 /**
  * @ignore
  */
 export default {
-  install: (app: App, options: Config.Options): void => {
+  install: (app: typeof Vue, options: Config.Options): void => {
     app.component("TikiReceipt", TikiReceipt);
-    app.provide("Tiki", new TikiService(options));
+    app.mixin({
+      provide: {
+        Tiki: new TikiService(options),
+      },
+    });
   },
 };
 

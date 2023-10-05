@@ -3,7 +3,7 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-@import "@mytiki/receipt-capacitor/dist/receipt-capacitor.css";
+@import "@mytiki/receipt-capacitor-vue2/dist/receipt-capacitor.css";
 
 #app {
   margin: 0 auto;
