@@ -12,10 +12,10 @@
     "url": "https://github.com/tiki/tiki-receipt-capacitor/issues"
   },
   "files": [
-    "dist"
+    "../dist"
   ],
-  "module": "./dist/receipt-capacitor.es.js",
-  "main": "./dist/receipt-capacitor.umd.js",
+  "module": "../dist/receipt-capacitor.es.js",
+  "main": "../dist/receipt-capacitor.umd.js",
   "typings": "./dist/types/main.d.ts",
   "exports": {
     ".": {
@@ -25,13 +25,13 @@
     "./dist/receipt-capacitor.css": "./dist/receipt-capacitor.css"
   },
   "scripts": {
-    "build": "rimraf dist && vue-tsc --declaration --emitDeclarationOnly; vite build",
-    "example:vue3:android": "npm run build && cd example/vue3 && npm run build && npx cap sync android && npx cap run android",
-    "example:vue3:ios": "npm run build && cd example/vue3 && npm run build && npx cap sync ios && npx cap run ios",
+    "build": "../node_modules/.bin/rimraf dist && vue-tsc --declaration --emitDeclarationOnly; vite build",
+    "example:vue3:android": "npm run build && cd ../example/vue3 && npm run build && npx cap sync android && npx cap run android",
+    "example:vue3:ios": "npm run build && cd ../example/vue3 && npm run build && npx cap sync ios && npx cap run ios",
     "lint": "npm run eslint && npm run prettier -- --check",
     "fmt": "npm run eslint -- --fix && npm run prettier -- --write",
-    "eslint": "eslint \"src/**/*.{ts,js}\"",
-    "prettier": "prettier \"src/**/*.{css,html,ts,js,java}\""
+    "eslint": "../node_modules/.bin/eslint \\\"src/**/*.{ts,js}\\\"",
+    "prettier": "../node_modules/.bin/prettier \\\"src/**/*.{css,html,ts,js,java}\\\""
   },
   "keywords": [
     "tiki",
