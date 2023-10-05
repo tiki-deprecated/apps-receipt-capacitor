@@ -14,7 +14,7 @@ export class StateAccount {
   private readonly key: string;
   private state: Ref<
     BulletState.NULL | BulletState.P100 | BulletState.SYNC | BulletState.ERROR
-  > = ref(BulletState.NULL);
+  > = ref(BulletState.P100);
 
   constructor(repository: Repository, key: string) {
     this.repository = repository;

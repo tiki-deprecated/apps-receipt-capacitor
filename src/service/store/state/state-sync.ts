@@ -3,9 +3,9 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import type { Repository } from "@/service/store/repository";
-import { getWeek } from "@/utils/week";
-import { BulletState } from "@/components/bullet/bullet-state";
+import type { Repository } from "../repository";
+import { getWeek } from "../../../utils/week";
+import { BulletState } from "../../../components/bullet/bullet-state";
 
 export class StateSync {
   private readonly repository: Repository;
