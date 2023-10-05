@@ -67,9 +67,9 @@
 
 import type { App } from "vue";
 import "@/assets/styles/main.css";
-import TikiReceipt from "../src/tiki-receipt.vue";
-import { TikiService } from "../src/service";
-import type * as Config from "../src/config";
+import TikiReceipt from "@/tiki-receipt.vue";
+import { TikiService } from "@/service";
+import type * as Config from "@/config";
 
 /**
  * @ignore

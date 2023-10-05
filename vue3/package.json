@@ -1,7 +1,7 @@
 {
   "name": "@mytiki/receipt-capacitor",
   "version": "0.4.0",
-  "description": "The TIKI Receipt library adds to your Vue.js + Capacitor mobile app a Data Reward program for your users to share their receipts in-exchange for loyalty points.",
+  "description": "The TIKI Receipt library adds to your Vue.js + Capacitor **mobile app** a Data Reward program for your users to share their receipts in-exchange for **cash from Tiki inc**. \n",
   "author": "Tiki inc.",
   "license": "MIT",
   "repository": {
@@ -16,15 +16,16 @@
   ],
   "module": "./dist/receipt-capacitor.es.js",
   "main": "./dist/receipt-capacitor.umd.js",
-  "typings": "./dist/types/vue3/main.d.ts",
+  "typings": "./dist/types/main.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/main.d.ts",
+      "import": "./dist/receipt-capacitor.es.js"
+    },
+    "./dist/receipt-capacitor.css": "./dist/receipt-capacitor.css"
+  },
   "scripts": {
-    "build": "rimraf dist && vue-tsc --declaration --emitDeclarationOnly; vite build",
-    "example:android": "npm run build && cd example/ && npm run build && npx cap sync android && npx cap run android",
-    "example:ios": "npm run build && cd example/ && npm run build && npx cap sync ios && npx cap run ios",
-    "lint": "npm run eslint && npm run prettier -- --check",
-    "fmt": "npm run eslint -- --fix && npm run prettier -- --write",
-    "eslint": "eslint \"../src/**/*.{ts,js}\"",
-    "prettier": "prettier \"../src/**/*.{css,html,ts,js,java}\""
+    "build": "vue-tsc --declaration --emitDeclarationOnly; vite build"
   },
   "keywords": [
     "tiki",

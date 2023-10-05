@@ -1,7 +1,7 @@
 {
   "name": "@mytiki/receipt-capacitor-vue2",
   "version": "0.4.0",
-  "description": "The TIKI Receipt library adds to your Vue.js + Capacitor mobile app a Data Reward program for your users to share their receipts in-exchange for loyalty points.",
+  "description": "The TIKI Receipt library adds to your Vue.js + Capacitor **mobile app** a Data Reward program for your users to share their receipts in-exchange for **cash from Tiki inc**. \n",
   "author": "Tiki inc.",
   "license": "MIT",
   "repository": {
@@ -12,7 +12,7 @@
     "url": "https://github.com/tiki/tiki-receipt-capacitor/issues"
   },
   "files": [
-    "dist"
+    "./dist"
   ],
   "module": "./dist/receipt-capacitor.es.js",
   "main": "./dist/receipt-capacitor.umd.js",
@@ -25,15 +25,7 @@
     "./dist/receipt-capacitor.css": "./dist/receipt-capacitor.css"
   },
   "scripts": {
-    "build": "rimraf dist && vue-tsc --declaration --emitDeclarationOnly; vite build",
-    "example:vue3:android": "npm run build && cd example/vue3 && npm run build && npx cap sync android && npx cap run android",
-    "example:vue3:ios": "npm run build && cd example/vue3 && npm run build && npx cap sync ios && npx cap run ios",
-    "example:vue2:android": "npm run build && cd example/vue2 && npm run build && npx cap sync android && npx cap run android",
-    "example:vue2:ios": "npm run build && cd example/vue2 && npm run build && npx cap sync ios && npx cap run ios",
-    "lint": "npm run eslint && npm run prettier -- --check",
-    "fmt": "npm run eslint -- --fix && npm run prettier -- --write",
-    "eslint": "eslint \"src/**/*.{ts,js}\"",
-    "prettier": "prettier \"src/**/*.{css,html,ts,js,java}\""
+    "build": "vue-tsc --declaration --emitDeclarationOnly; vite build"
   },
   "keywords": [
     "tiki",
@@ -42,11 +34,11 @@
     "receipt"
   ],
   "dependencies": {
-    "vue-markdown-render": "^1.1.3",
-    "vue": "^2.7.14",
+    "@capacitor/preferences": "^5.0.6",
     "@mytiki/capture-receipt-capacitor": "^0.6.2",
     "@mytiki/tiki-sdk-capacitor": "^0.3.1",
-    "@capacitor/preferences": "^5.0.6"
+    "vue": "2.7.14",
+    "vue-markdown-render": "^1.1.3"
   },
   "devDependencies": {
     "@babel/types": "^7.22.5",
@@ -69,16 +61,15 @@
     "vite-plugin-dts": "^3.5.2",
     "vite-plugin-vue-markdown": "^0.23.8",
     "vite-plugin-vue2-svg": "^0.4.0",
-    "vite-svg-loader": "^4.0.0",
     "vue-tsc": "^1.8.8"
   },
   "peerDependencies": {
     "@capacitor/android": "^5.4.1",
     "@capacitor/core": "^5.4.1",
     "@capacitor/ios": "^5.4.1",
-    "vue": "^2.7.14",
+    "@capacitor/preferences": "^5.0.6",
     "@mytiki/capture-receipt-capacitor": "^0.6.2",
     "@mytiki/tiki-sdk-capacitor": "^0.3.1",
-    "@capacitor/preferences": "^5.0.6"
+    "vue": "^3.3.0"
   }
 }

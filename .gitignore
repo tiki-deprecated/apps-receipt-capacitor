@@ -1,8 +1,16 @@
+# Dev garbage
 .idea/
 node_modules/
 .vscode/
 *.map
 .DS_Store
 .sourcemaps
+
+# Generated outputs
 dist/
 docs
+
+# Generated build files
+./package.json
+./package-lock.json
+./src/main.ts

@@ -19,7 +19,7 @@ module.exports = defineConfig({
   ],
   build: {
     lib: {
-      entry: path.resolve(__dirname, "main.ts"),
+      entry: path.resolve(__dirname, "src/main.ts"),
       name: "receipt-capacitor",
       fileName: (format) => `receipt-capacitor.${format}.js`,
     },
