@@ -8,7 +8,7 @@
     "build": "run-p type-check build-only; npx cap sync",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
+    "type-check": "vue-tsc --declaration --emitDeclarationOnly",
     "lint": "eslint .. --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write ../src"
   },
@@ -25,6 +25,7 @@
     "vue": "^2.7.14"
   },
   "devDependencies": {
+    "@babel/types": "^7.22.5",
     "@capacitor/cli": "5.4.2",
     "@rushstack/eslint-patch": "^1.5.1",
     "@tsconfig/node18": "^18.2.2",

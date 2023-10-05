@@ -9,12 +9,9 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue({
-      isProduction: true,
-    }),
-  ],
+  plugins: [vue()],
   resolve: {
+    dedupe: ["vue"],
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
