@@ -3,8 +3,8 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import { Config } from "@/config/config";
-import type { Options } from "@/config/options";
+import { Config } from "@/config";
+import type { Options } from "@/options";
 import { ServiceCapture, ServiceStore, ServicePublish } from "@/service";
 import { InternalHandlers } from "@/service/tiki/internal-handlers";
 
@@ -78,8 +78,8 @@ export class TikiService {
     await this.store.initialize();
     await this.publish.initialize(id);
     await this.capture.initialize(
-      this.config.key.scanKey,
-      this.config.key.intelKey,
+      this.config.key.android,
+      this.config.key.product,
     );
     this._isInitialized = true;
     this.capture.load().then((accounts) => {

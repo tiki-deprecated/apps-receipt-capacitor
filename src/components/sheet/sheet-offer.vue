@@ -32,21 +32,23 @@ const bullets = props.bullets.map((bullet) => {
 </script>
 
 <template>
-  <header-title
-    title="Rewards"
-    subtitle="Share data. Earn rewards."
-    @close="$emit('close')"
-  />
-  <card-offer :image="image" :description="description" />
-  <bullet-list :bullets="bullets" class="how" @learn="$emit('learn')" />
-  <div class="footer">
-    <button-text
-      text="Back off"
-      :state="ButtonTextState.BORING"
-      class="back-off"
-      @click="$emit('close')"
+  <div>
+    <header-title
+      title="Rewards"
+      subtitle="Share data. Earn rewards."
+      @close="$emit('close')"
     />
-    <button-text text="I'm in" @click="$emit('accept')" />
+    <card-offer :image="image" :description="description" />
+    <bullet-list :bullets="bullets" class="how" @learn="$emit('learn')" />
+    <div class="footer">
+      <button-text
+        text="Back off"
+        :state="ButtonTextState.BORING"
+        class="back-off"
+        @click="$emit('close')"
+      />
+      <button-text text="I'm in" @click="$emit('accept')" />
+    </div>
   </div>
 </template>
 

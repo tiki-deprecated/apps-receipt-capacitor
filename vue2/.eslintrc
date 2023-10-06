@@ -1,0 +1,14 @@
+{
+  "root": true,
+  "extends": [
+    "../.eslintrc",
+    "plugin:vue/recommended"
+  ],
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module",
+    "ecmaVersion": "latest",
+    "project": ["./tsconfig.json"],
+    "extraFileExtensions": [ ".vue" ]
+  }
+}
