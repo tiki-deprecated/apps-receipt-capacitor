@@ -3,9 +3,7 @@
   - MIT license. See LICENSE file in root directory.
   -->
 <script setup lang="ts">
-import CrossMarkIconOutline from "@/assets/icons/crossmark-outline.svg?component";
 import HeaderBack from "@/components/header/header-back.vue";
-import ButtonIcon from "@/components/button/button-icon.vue";
 import ButtonText from "@/components/button/button-text.vue";
 import { ButtonTextState } from "@/components/button/button-text-state";
 
@@ -13,24 +11,28 @@ defineEmits(["remove", "close", "back"]);
 </script>
 
 <template>
-  <header-back
-    text="Remove Account"
-    @back="$emit('back')"
-    @close="$emit('close')"
-  />
-  <div class="alert-text">
-    <p class="alert-text-bold">
-      Warning! Removing this account may disqualify you from payout.
-    </p>
-    <p>To swap accounts, first connect the other one. Then remove this one.</p>
-    <p>Are you sure you want to proceed?</p>
+  <div>
+    <header-back
+      text="Remove Account"
+      @back="$emit('back')"
+      @close="$emit('close')"
+    />
+    <div class="alert-text">
+      <p class="alert-text-bold">
+        Warning! Removing this account may disqualify you from payout.
+      </p>
+      <p>
+        To swap accounts, first connect the other one. Then remove this one.
+      </p>
+      <p>Are you sure you want to proceed?</p>
+    </div>
+    <button-text
+      text="Remove Account"
+      class="warning-button"
+      :state="ButtonTextState.ALERT"
+      @click="$emit('remove')"
+    />
   </div>
-  <button-text
-    text="Remove Account"
-    @click="$emit('remove')"
-    class="warning-button"
-    :state="ButtonTextState.ALERT"
-  />
 </template>
 
 <style>

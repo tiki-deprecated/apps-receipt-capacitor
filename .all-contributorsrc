@@ -66,6 +66,15 @@
         "contributions": [
             "projectManagement"
         ]
+    },
+    {
+        "login": "sfaria27",
+        "name": "Shane",
+        "avatar_url": "https://avatars.githubusercontent.com/u/81697281?v=4",
+        "profile": "https://github.com/sfaria27",
+        "contributions": [
+            "doc"
+        ]
     }
   ],
   "contributorsPerLine": 7,

@@ -3,76 +3,64 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-/**
- * UI style customization. Alternatively set the following CSS variables:
- * *  --tiki-font-family
- * *  --tiki-primary-text-color
- * *  --tiki-secondary-text-color
- * *  --tiki-primary-background-color
- * *  --tiki-secondary-background-color
- * *  --tiki-success-color
- * *  --tiki-error-color
- */
-export interface Theme {
-  /**
-   * The font family to use. Defaults to `"Space Grotesk", sans-serif`
-   */
-  fontFamily?: string;
+import type * as Options from "@/options/theme";
 
-  /**
-   * The primary text color to use. Defaults to `rgb(28 0 0)`.
-   */
-  primaryTextColor?: string;
+export class Theme {
+  readonly fontFamily?: string;
+  readonly primaryTextColor?: string;
+  readonly secondaryTextColor?: string;
+  readonly successColor?: string;
+  readonly errorColor?: string;
+  readonly primaryBackgroundColor?: string;
+  readonly secondaryBackgroundColor?: string;
 
-  /**
-   * The secondary text color to use. Defaults to `rgb(28 0 0 / 60%)`.
-   */
-  secondaryTextColor?: string;
+  constructor(theme?: Options.Theme) {
+    if (theme?.fontFamily != undefined) this.fontFamily = theme.fontFamily;
+    if (theme?.primaryTextColor != undefined)
+      this.primaryTextColor = theme.primaryTextColor;
+    if (theme?.secondaryTextColor != undefined)
+      this.secondaryTextColor = theme.secondaryTextColor;
+    if (theme?.successColor != undefined)
+      this.successColor = theme.successColor;
+    if (theme?.errorColor != undefined) this.errorColor = theme.errorColor;
+    if (theme?.primaryBackgroundColor != undefined)
+      this.primaryBackgroundColor = theme.primaryBackgroundColor;
+    if (theme?.secondaryBackgroundColor != undefined)
+      this.secondaryBackgroundColor = theme.secondaryBackgroundColor;
+  }
 
-  /**
-   * The success color to use. Defaults to `rgb(0 178 114)`.
-   */
-  successColor?: string;
+  apply(document: Document): void {
+    this.setProperty(document, "--tiki-font-family", this.fontFamily);
+    this.setProperty(
+      document,
+      "--tiki-primary-text-color",
+      this.primaryTextColor,
+    );
+    this.setProperty(
+      document,
+      "--tiki-secondary-text-color",
+      this.secondaryTextColor,
+    );
+    this.setProperty(
+      document,
+      "--tiki-primary-background-color",
+      this.primaryBackgroundColor,
+    );
+    this.setProperty(
+      document,
+      "--tiki-secondary-background-color",
+      this.secondaryBackgroundColor,
+    );
+    this.setProperty(document, "--tiki-success-color", this.successColor);
+    this.setProperty(document, "--tiki-success-color", this.errorColor);
+  }
 
-  /**
-   * The accent color to use. Defaults to `rgb(199, 48, 0)`.
-   */
-  errorColor?: string;
-
-  /**
-   * The primary background color to use. Defaults to `rgb(255 255 255)`.
-   */
-  primaryBackgroundColor?: string;
-
-  /**
-   * The secondary background color to use. Defaults to `rgb(246 246 246)`.
-   */
-  secondaryBackgroundColor?: string;
+  private setProperty(
+    document: Document,
+    property: string,
+    value?: string,
+  ): void {
+    if (value != undefined)
+      document.documentElement.style.setProperty(property, value);
+  }
 }
-
-export const apply = (document: Document, theme?: Theme) => {
-  setProperty(document, "--tiki-font-family", theme?.fontFamily);
-  setProperty(document, "--tiki-primary-text-color", theme?.primaryTextColor);
-  setProperty(
-    document,
-    "--tiki-secondary-text-color",
-    theme?.secondaryTextColor,
-  );
-  setProperty(
-    document,
-    "--tiki-primary-background-color",
-    theme?.primaryBackgroundColor,
-  );
-  setProperty(
-    document,
-    "--tiki-secondary-background-color",
-    theme?.secondaryBackgroundColor,
-  );
-  setProperty(document, "--tiki-success-color", theme?.successColor);
-  setProperty(document, "--tiki-success-color", theme?.errorColor);
-};
-
-const setProperty = (document: Document, property: string, value?: string) => {
-  if (value != undefined)
-    document.documentElement.style.setProperty(property, value);
-};

@@ -3,23 +3,24 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-/**
- * License keys for the underlying plugins
- * (@mytiki/tiki-sdk-capacitor and @mytiki/tiki-capture-receipt-capacitor).
- */
-export interface Key {
-  /**
-   * The publishing ID for your application. Get a free publishingID at [console.mytiki.com](https://mytiki.com)
-   */
-  publishingId: string;
+import type * as Options from "@/options/key";
 
-  /**
-   * Your application's Microblink License Key. Request one from your TIKI account manager.
-   */
-  scanKey: string;
+export class Key {
+  readonly publishingId: string;
+  readonly ios: string = "";
+  readonly android: string = "";
+  readonly product: string;
 
-  /**
-   * Your application's Microblink Product Intelligence Key. Request one from your TIKI account manager.
-   */
-  intelKey: string;
+  constructor(key?: Options.Key) {
+    if (key?.publishingId != undefined) this.publishingId = key.publishingId;
+    else throw new Error("Missing required key: Publishing ID");
+
+    if (key?.ios != undefined) this.ios = key.ios;
+    if (key?.android != undefined) this.android = key.android;
+    if (key?.ios == undefined && key?.android == undefined)
+      throw new Error("Missing required key: One of Android or iOS");
+
+    if (key?.product != undefined) this.product = key.product;
+    else throw new Error("Missing required key: Product");
+  }
 }

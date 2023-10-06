@@ -4,15 +4,13 @@
   -->
 
 <script setup lang="ts">
-import { inject, type RendererElement, watch } from "vue";
+import { inject, watch } from "vue";
 import SheetBottom from "@/components/sheet/sheet-bottom.vue";
 import SheetOffer from "@/components/sheet/sheet-offer.vue";
 import SheetTerms from "@/components/sheet/sheet-terms.vue";
 import SheetLearn from "@/components/sheet/sheet-learn.vue";
 import SheetHome from "@/components/sheet/sheet-home.vue";
-import type { TikiService } from "@/service/tiki-service";
-import * as Swipe from "@/utils/swipe";
-import * as Theme from "@/config/theme";
+import type { TikiService } from "@/service";
 import { Navigate, Sheets } from "@/utils/navigate";
 import SheetGmail from "@/components/sheet/sheet-gmail.vue";
 import SheetRetailer from "@/components/sheet/sheet-retailer.vue";
@@ -37,7 +35,6 @@ const props = defineProps({
     default: false,
   },
 });
-
 const navigate = new Navigate();
 watch(
   () => props.present,
@@ -53,40 +50,37 @@ watch(
   },
 );
 
-const tiki: TikiService | undefined = inject("Tiki");
-Theme.apply(document, tiki?.config.theme);
-const swipe = (direction: string, element: RendererElement) => {
-  if (Swipe.close(direction, element)) navigate.clear();
-};
+const tiki: TikiService = inject("Tiki")!;
+tiki.config.theme.apply(document);
 </script>
 
 <template>
-  <Transition appear name="fade" v-touch:swipe="swipe">
+  <Transition appear name="fade">
     <sheet-bottom
       v-if="present"
-      @dismiss="$emit('update:present', false)"
       :show="navigate.ref.value !== Sheets.Hidden"
+      @dismiss="$emit('update:present', false)"
     >
       <div class="body">
         <sheet-offer
           v-if="navigate.ref.value === Sheets.Offer"
+          :description="tiki.config.offer.description"
+          :image="tiki.config.offer.image"
+          :bullets="tiki.config.offer.bullets"
           @learn="navigate.to(Sheets.Learn)"
           @accept="navigate.to(Sheets.Terms)"
           @close="navigate.clear()"
-          :description="tiki!.config.offer.description!"
-          :image="tiki!.config.offer.image!"
-          :bullets="tiki!.config.offer.bullets!"
         />
         <sheet-terms
           v-if="navigate.ref.value === Sheets.Terms"
-          :markdown="tiki!.config.terms"
+          :markdown="tiki.config.terms"
           @back="navigate.pop()"
           @accept="navigate.to(Sheets.Home)"
           @close="navigate.clear()"
         />
         <sheet-learn
           v-if="navigate.ref.value === Sheets.Learn"
-          :markdown="tiki!.config.learn"
+          :markdown="tiki.config.learn"
           @back="navigate.pop()"
           @close="navigate.clear()"
         />
@@ -94,7 +88,7 @@ const swipe = (direction: string, element: RendererElement) => {
           v-if="navigate.ref.value === Sheets.Home"
           @close="navigate.clear()"
           @learn="navigate.to(Sheets.Learn)"
-          @withdraw="tiki!.config.callback"
+          @withdraw="navigate.clear()"
           @gmail="navigate.to(Sheets.Google)"
           @retailer="navigate.to(Sheets.Retailer)"
         />
@@ -102,13 +96,21 @@ const swipe = (direction: string, element: RendererElement) => {
           v-if="navigate.ref.value === Sheets.Google"
           @back="navigate.pop()"
           @close="navigate.clear()"
-          @link="navigate.to(Sheets.AddGoogle)"
+          @skip="
+            navigate.pop();
+            navigate.to(Sheets.AddGoogle);
+          "
+          @add="navigate.to(Sheets.AddGoogle)"
         />
         <sheet-retailer
           v-if="navigate.ref.value === Sheets.Retailer"
           @back="navigate.pop()"
           @close="navigate.clear()"
-          @link="navigate.to(Sheets.AddRetailer)"
+          @add="navigate.to(Sheets.AddRetailer)"
+          @skip="
+            navigate.pop();
+            navigate.to(Sheets.AddRetailer);
+          "
         />
         <sheet-add-retailer
           v-if="navigate.ref.value === Sheets.AddRetailer"

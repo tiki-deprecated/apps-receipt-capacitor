@@ -5,12 +5,12 @@
 
 <script setup lang="ts">
 import AccountStatus from "./account-status.vue";
-import type { AccountCreds } from "@/components/account/account-creds";
+import type { Account } from "@mytiki/capture-receipt-capacitor";
 
 defineEmits(["delete"]);
 defineProps({
   accounts: {
-    type: Array<AccountCreds>,
+    type: Array<Account>,
     required: true,
   },
 });
@@ -19,8 +19,9 @@ defineProps({
 <template>
   <div class="list">
     <account-status
+      v-for="(account, index) in accounts"
+      :key="index"
       :account="account"
-      v-for="account in accounts"
       class="status"
       @delete="$emit('delete', account)"
     />

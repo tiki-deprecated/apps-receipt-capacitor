@@ -7,42 +7,38 @@
 import HeaderBack from "@/components/header/header-back.vue";
 import ButtonText from "@/components/button/button-text.vue";
 import AccountList from "@/components/account/account-list.vue";
-import { AccountCreds } from "@/components/account/account-creds";
-import * as AccountTypes from "@/components/account/account-type";
+import type { TikiService } from "@/service";
+import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
+import { inject, ref } from "vue";
 
-defineEmits(["back", "close", "link"]);
-const props = defineProps({
-  accounts: {
-    type: Array<AccountCreds>,
-    required: false,
-    default: [
-      {
-        username: "mike@mytiki.com",
-        type: AccountTypes.GMAIL,
-        isVerified: true,
-      },
-      {
-        username: "mike@mytiki.com",
-        type: AccountTypes.GMAIL,
-        isVerified: false,
-      },
-    ],
-  },
+const emit = defineEmits(["back", "close", "add", "skip"]);
+const tiki: TikiService = inject("Tiki")!;
+
+const filter = (accounts: Account[]): Account[] =>
+  accounts.filter((account) => account.type.id === GMAIL.id);
+const accounts = ref<Account[]>(filter(tiki.capture.accounts ?? []));
+if (accounts.value.length == 0) emit("skip");
+
+tiki.capture.onAccount("SheetGmail", (_, __) => {
+  accounts.value = filter(tiki.capture.accounts ?? []);
 });
 
-const filtered = props.accounts?.filter(
-  (account) => account.type.key === AccountTypes.GMAIL.key,
-);
+const remove = async (account: Account) => {
+  //show warn.
+  await tiki.capture.logout(account);
+};
 </script>
 
 <template>
-  <header-back
-    text="Gmail Accounts"
-    @back="$emit('back')"
-    @close="$emit('close')"
-  />
-  <account-list :accounts="filtered" class="list" />
-  <button-text text="Add Account" @click="$emit('link')" />
+  <div>
+    <header-back
+      text="Gmail Accounts"
+      @back="$emit('back')"
+      @close="$emit('close')"
+    />
+    <account-list :accounts="accounts" class="list" @delete="remove" />
+    <button-text text="Add Account" @click="$emit('add')" />
+  </div>
 </template>
 
 <style scoped>
