@@ -4,21 +4,22 @@
   -->
 
 <script setup lang="ts">
-import VueMarkdown from "vue-markdown-render";
 import ButtonText from "@/components/button/button-text.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import { inject } from "vue";
 import type { TikiService } from "@/service";
+import Showdown from "showdown";
 
 const tiki: TikiService = inject("Tiki")!;
 const emit = defineEmits(["back", "accept", "close"]);
-defineProps({
+const props = defineProps({
   markdown: {
     type: String,
     required: true,
   },
 });
 
+const terms = new Showdown.Converter().makeHtml(props.markdown);
 const accept = () => {
   tiki.publish.createLicense();
   emit("accept");
@@ -32,7 +33,7 @@ const accept = () => {
       @back="$emit('back')"
       @close="$emit('close')"
     />
-    <vue-markdown :source="markdown" class="terms" />
+    <div class="terms" v-html="terms" />
     <button-text text="I agree" class="agree" @click="accept" />
   </div>
 </template>

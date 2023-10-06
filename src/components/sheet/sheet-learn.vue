@@ -4,24 +4,18 @@
   -->
 
 <script setup lang="ts">
-import VueMarkdown, { type Options } from "vue-markdown-render";
 import HeaderBack from "@/components/header/header-back.vue";
+import Showdown from "showdown";
 
 defineEmits(["back", "close"]);
-defineProps({
+const props = defineProps({
   markdown: {
     type: String,
     required: true,
   },
 });
 
-const options: Options = {
-  html: true,
-  xhtmlOut: true,
-  breaks: true,
-  linkify: false,
-  typographer: true,
-};
+const learn = new Showdown.Converter().makeHtml(props.markdown);
 </script>
 
 <template>
@@ -31,7 +25,7 @@ const options: Options = {
       @back="$emit('back')"
       @close="$emit('close')"
     />
-    <vue-markdown :source="markdown" :options="options" class="learn-more" />
+    <div class="learn-more" v-html="learn" />
   </div>
 </template>
 
