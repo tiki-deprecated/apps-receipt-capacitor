@@ -4,7 +4,7 @@ android {
     namespace "com.mytiki.receipt.capacitor"
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.mytiki.receipt.capacitor"
+        applicationId "com.mytiki.sdk.capture.receipt.capacitor"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

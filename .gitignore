@@ -14,3 +14,4 @@ docs
 /package.json
 /package-lock.json
 /src/main.ts
+/vite.config.ts
