@@ -32,31 +32,31 @@
   }
 }
 
-@media (min-height: 640px){
+@media (min-height: 640px) {
   :root {
     --tiki-font-size-base: 12px;
   }
 }
 
-@media (min-height: 667px){
+@media (min-height: 667px) {
   :root {
     --tiki-font-size-base: 13px;
   }
 }
 
-@media (min-height: 740px){
+@media (min-height: 740px) {
   :root {
     --tiki-font-size-base: 14px;
   }
 }
 
-@media (min-height: 780px){
+@media (min-height: 780px) {
   :root {
     --tiki-font-size-base: 15px;
   }
 }
 
-@media (min-height: 812px){
+@media (min-height: 812px) {
   :root {
     --tiki-font-size-base: 16px;
   }

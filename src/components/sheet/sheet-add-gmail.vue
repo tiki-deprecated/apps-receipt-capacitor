@@ -7,37 +7,55 @@
 import AccountForm from "../account/account-form.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import TextButton from "@/components/button/button-text.vue";
-import { AccountCreds } from "@/components/account/account-creds";
-import * as Type from "@/components/account/account-type";
-import { ref } from "vue";
+import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
+import { computed, ref, inject } from "vue";
+import type { TikiService } from "@/service";
+import { ButtonTextState } from "@/components/button/button-text-state";
 
-defineEmits(["close", "back"]);
-const form = ref<AccountCreds>(new AccountCreds("", Type.GMAIL, ""));
+const emit = defineEmits(["close", "back"]);
+const tiki: TikiService = inject("Tiki")!;
+
+const form = ref<Account>({ username: "", password: "", type: GMAIL });
 const error = ref<string>();
 
-const submit = async () => {
-  if (
+const canSubmit = computed(
+  () =>
     form.value.username != undefined &&
     form.value.password != undefined &&
     form.value.username?.length > 0 &&
-    form.value.password?.length > 0
-  ) {
-    try {
-      error.value = "";
-      form.value = new AccountCreds("", Type.GMAIL, "", undefined);
-    } catch (err: any) {
-      error.value = err.toString();
-    }
+    form.value.password?.length > 0,
+);
+
+const submit = async () => {
+  try {
+    await tiki.capture.login(form.value);
+    tiki.capture.scan().catch((error) => console.error(error.toString()));
+    error.value = "";
+    form.value = { username: "", password: "", type: GMAIL };
+    emit("back");
+  } catch (err: any) {
+    error.value = err.toString();
   }
 };
 </script>
 
 <template>
-  <header-back text="Add Gmail" @back="$emit('back')" @close="$emit('close')" />
-  <account-form
-    v-model:account="form"
-    :error="error"
-    :account-type="form.type"
-  />
-  <text-button text="Connect Gmail" @click="submit" />
+  <div>
+    <header-back
+      text="Add Gmail"
+      @back="$emit('back')"
+      @close="$emit('close')"
+    />
+    <account-form
+      :account="form"
+      :error="error"
+      :account-type="form.type"
+      @update:account="(val) => (form = val)"
+    />
+    <text-button
+      text="Connect Gmail"
+      :state="canSubmit ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
+      @click="submit"
+    />
+  </div>
 </template>

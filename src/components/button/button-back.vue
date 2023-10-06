@@ -7,7 +7,11 @@
 import ArrowIcon from "@/assets/icons/arrow.svg?component";
 
 defineProps({
-  text: String,
+  text: {
+    type: String,
+    required: false,
+    default: "",
+  },
 });
 defineEmits(["click"]);
 </script>

@@ -4,16 +4,24 @@
   -->
 
 <script setup lang="ts">
-import VueMarkdown from "vue-markdown-render";
+import VueMarkdown, { type Options } from "vue-markdown-render";
 import HeaderBack from "@/components/header/header-back.vue";
 
-defineEmits(["back"]);
+defineEmits(["back", "close"]);
 defineProps({
   markdown: {
     type: String,
     required: true,
   },
 });
+
+const options: Options = {
+  html: true,
+  xhtmlOut: true,
+  breaks: true,
+  linkify: false,
+  typographer: true,
+};
 </script>
 
 <template>
@@ -23,7 +31,7 @@ defineProps({
       @back="$emit('back')"
       @close="$emit('close')"
     />
-    <vue-markdown :source="markdown" class="learn-more" />
+    <vue-markdown :source="markdown" :options="options" class="learn-more" />
   </div>
 </template>
 
@@ -36,7 +44,7 @@ defineProps({
 
 .learn-more {
   overflow-y: scroll;
-  overflow-x: clip;
+  overflow-x: scroll;
   flex: 1 1 auto;
   border-bottom: 1px solid var(--tiki-success-color);
 }
@@ -94,5 +102,15 @@ defineProps({
 
 .learn-more :deep(img) {
   max-width: 100%;
+}
+
+.learn-more :deep(.icon-x-scroll-wrapper) {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.learn-more :deep(.icon-x-scroll) {
+  display: inline-block;
 }
 </style>

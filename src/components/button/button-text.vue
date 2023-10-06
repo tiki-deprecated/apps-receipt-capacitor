@@ -19,7 +19,6 @@ const props = defineProps({
     default: "STANDARD",
   },
 });
-
 const click = () => {
   if (props.state != ButtonTextState.DISABLED) emit("click");
 };

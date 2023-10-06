@@ -4,22 +4,26 @@
   -->
 
 <script setup lang="ts">
-import * as Type from "@/components/account/account-type";
+import {
+  accountTypes,
+  type AccountType,
+  AMAZON,
+} from "@mytiki/capture-receipt-capacitor";
 import { type PropType, ref } from "vue";
-import * as AccountTypes from "@/components/account/account-type";
 
 const emit = defineEmits(["update:accountType"]);
 defineProps({
   accountType: {
-    type: Object as PropType<AccountTypes.AccountType>,
+    type: Object as PropType<AccountType>,
     required: false,
+    default: undefined,
   },
 });
 const account = ref<HTMLSelectElement>();
 const update = () => {
   const value = account.value?.value;
   if (value != undefined) {
-    const type = AccountTypes.findByKey(value);
+    const type: AccountType | undefined = accountTypes.from(value);
     if (type === undefined) throw new Error("Unsupported account type");
     else emit("update:accountType", type);
   }
@@ -27,14 +31,17 @@ const update = () => {
 </script>
 
 <template>
-  <label for="accounts">Choose Account</label>
-  <select id="accounts" required @change="update" ref="account">
-    <option
-      v-for="account of Type.index"
-      :value="account[0]"
-      :label="account[1].name"
-    ></option>
-  </select>
+  <div>
+    <label for="accounts">Choose Account</label>
+    <select id="accounts" ref="account" required @change="update">
+      <option
+        v-for="(typ, index) of accountTypes.index"
+        :key="index"
+        :value="typ[0]"
+        :label="typ[1].name"
+      ></option>
+    </select>
+  </div>
 </template>
 
 <style>

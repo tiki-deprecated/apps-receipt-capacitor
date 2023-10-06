@@ -3,26 +3,23 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-/**
- * Represents a Data Reward offer
- */
-export interface Offer {
-  /**
-   * The image src (300x86) to help explain the program and grab the user's attention.
-   *
-   * Overrides default found under `assets/images/program.png`
-   */
-  image?: string;
+import type * as Options from "@/options/offer";
+import ProgramImage from "@/assets/images/program.png";
 
-  /**
-   * A short description explaining the program. Overrides default copy of
-   * "Connect your accounts to turn your receipts into real cash each month!"
-   */
-  description?: string;
+export class Offer {
+  readonly image: string = ProgramImage;
+  readonly description: string =
+    "Connect your accounts to turn your receipts into real cash each month!";
+  readonly bullets: string[] = [
+    "Link a Gmail account",
+    "Link a supported retailer account",
+    "Open and use the app each week",
+    "Share 5 new receipts",
+  ];
 
-  /**
-   * A list of bullets explaining the criteria for participating in the program.
-   * Overrides default copy of `["Link a Gmail account", "Link a supported retailer account", "Open and use the app each week", "Share 5 new receipts"]`
-   */
-  bullets?: string[];
+  constructor(offer?: Options.Offer) {
+    if (offer?.description != null) this.description = offer.description;
+    if (offer?.image != null) this.image = offer.image;
+    if (offer?.bullets != null) this.bullets = offer.bullets;
+  }
 }
