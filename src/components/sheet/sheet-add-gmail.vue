@@ -7,7 +7,11 @@
 import AccountForm from "../account/account-form.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import TextButton from "@/components/button/button-text.vue";
-import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
+import {
+  type Account,
+  AccountType,
+  GMAIL,
+} from "@mytiki/capture-receipt-capacitor";
 import { computed, ref, inject } from "vue";
 import type { TikiService } from "@/service";
 import { ButtonTextState } from "@/components/button/button-text-state";
@@ -37,6 +41,8 @@ const submit = async () => {
     error.value = err.toString();
   }
 };
+
+const updateAccount = (account: Account) => (form.value = account);
 </script>
 
 <template>
@@ -50,7 +56,7 @@ const submit = async () => {
       :account="form"
       :error="error"
       :account-type="form.type"
-      @update:account="(val) => (form = val)"
+      @update:account="updateAccount"
     />
     <text-button
       text="Connect Gmail"
