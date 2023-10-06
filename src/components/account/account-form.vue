@@ -73,7 +73,7 @@ watch(
       @input="update"
     />
     <div class="error">
-      <p v-if="error" class="error-message">{{ error }}</p>
+      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </div>
   </form>
 </template>
@@ -109,7 +109,6 @@ input {
 
 .error-message {
   margin: 0;
-  line-height: 0;
 }
 
 input:focus {
