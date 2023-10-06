@@ -18,6 +18,11 @@ const props = defineProps({
     required: false,
     default: "STANDARD",
   },
+  isLoading: {
+    type: Boolean,
+    required: false,
+    default: false
+  }
 });
 const click = () => {
   if (props.state != ButtonTextState.DISABLED) emit("click");
@@ -31,15 +36,34 @@ const click = () => {
       standard: state === ButtonTextState.STANDARD,
       boring: state === ButtonTextState.BORING,
       alert: state === ButtonTextState.ALERT,
-      disable: state === ButtonTextState.DISABLED,
+      disable: state === ButtonTextState.DISABLED
     }"
     @click.stop.prevent="click"
   >
-    {{ text }}
+  <div id="loading" v-if="isLoading"/>{{ text }}
   </button>
 </template>
 
 <style scoped>
+
+#loading {
+  display: inline-block;
+  width: 1.4em;
+  height: 1.4em;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  margin-right: 0.7em;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+} 
 .textButton {
   width: 100%;
   height: 2.7em;

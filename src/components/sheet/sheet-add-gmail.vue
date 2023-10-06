@@ -26,16 +26,20 @@ const canSubmit = computed(
     form.value.password?.length > 0,
 );
 
+const isLoading = ref<boolean>(false)
+
 const submit = async () => {
+  isLoading.value = true
+  error.value = "";
   try {
     await tiki.capture.login(form.value);
-    tiki.capture.scan().catch((error) => console.error(error.toString()));
-    error.value = "";
     form.value = { username: "", password: "", type: GMAIL };
+    tiki.capture.scan().catch((error) => console.error(error.toString()));
     emit("back");
   } catch (err: any) {
     error.value = err.toString();
   }
+  isLoading.value = false
 };
 </script>
 
@@ -54,8 +58,9 @@ const submit = async () => {
     />
     <text-button
       text="Connect Gmail"
-      :state="canSubmit ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
+      :state="canSubmit && !isLoading ? ButtonTextState.STANDARD  : ButtonTextState.DISABLED"
       @click="submit"
+      :isLoading="isLoading"
     />
   </div>
 </template>
