@@ -6,7 +6,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
   ],
-  "exclude": ["src/**/__tests__/*"],
+  "exclude": ["**/*.test.*", "**/__mocks__/*", "**/__tests__/*"],
   "compilerOptions": {
     "target": "ESNext",
     "sourceMap": true,
@@ -25,7 +25,7 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "declaration": true,
-    "outDir": "dist",
+    "outDir": "./dist",
     "emitDeclarationOnly": true,
     "declarationDir": "./dist/types",
     "baseUrl": ".",
@@ -34,7 +34,10 @@
     },
     "types": [
       "vite/client",
-      "vite-svg-loader"
-    ]
+      "vite-svg-loader",
+      "jest",
+      "node"
+    ],
+    "verbatimModuleSyntax": false
   }
 }

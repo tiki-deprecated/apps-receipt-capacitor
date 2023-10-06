@@ -17,7 +17,7 @@ defineProps({
     default: "How to earn $1 / Month",
   },
   bullets: {
-    type: Array<{ text: String; state?: BulletState }>,
+    type: Array<{ text: string; state?: BulletState }>,
     required: false,
     default: [],
   },
@@ -28,9 +28,9 @@ defineProps({
   <div>
     <div class="title">
       <div>{{ title }}</div>
-      <button-icon :icon="IconQuestion" @click="$emit('learn')" class="btn" />
+      <button-icon :icon="IconQuestion" class="btn" @click="$emit('learn')" />
     </div>
-    <div v-for="bullet in bullets" class="bullet">
+    <div v-for="(bullet, index) in bullets" :key="index" class="bullet">
       <bullet-point class="icon" :state="bullet.state" />
       {{ bullet.text }}
     </div>

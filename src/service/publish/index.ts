@@ -12,7 +12,7 @@ import type {
   ReceiptRecord,
 } from "@mytiki/tiki-sdk-capacitor";
 
-import type { Config } from "@/config/config";
+import type { Config } from "@/config";
 import type { Receipt } from "@mytiki/capture-receipt-capacitor";
 import type { Jwt } from "@mytiki/tiki-sdk-capacitor";
 

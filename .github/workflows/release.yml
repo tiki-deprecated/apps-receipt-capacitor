@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  release:
+  vue3:
     if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'release/')
     environment: Production
     runs-on: ubuntu-latest
@@ -36,11 +36,8 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@mytiki'
 
-      - name: Install JS dependencies
-        run: npm ci
-
-      - name: Build Dist
-        run: npm run build
+      - name: Build for Vue 3
+        run: make vue3
 
       - name: Get version
         id: version
@@ -70,3 +67,34 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.version.outputs.current }}
+
+  vue2:
+    if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'release/')
+    environment: Production
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@mytiki'
+
+      - name: Build for Vue 2
+        run: make vue2
+
+      - name: Get version
+        id: version
+        run: echo "current=$(npm pkg get version | tr -d '"')" >> $GITHUB_OUTPUT
+
+      - name: Publish
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

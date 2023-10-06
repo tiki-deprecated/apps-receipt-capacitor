@@ -12,31 +12,33 @@ import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
 import { inject, ref } from "vue";
 
 const emit = defineEmits(["back", "close", "add", "skip"]);
-const tiki: TikiService | undefined = inject("Tiki");
+const tiki: TikiService = inject("Tiki")!;
 
 const filter = (accounts: Account[]): Account[] =>
   accounts.filter((account) => account.type.id === GMAIL.id);
-const accounts = ref<Account[]>(filter(tiki?.capture.accounts ?? []));
+const accounts = ref<Account[]>(filter(tiki.capture.accounts ?? []));
 if (accounts.value.length == 0) emit("skip");
 
-tiki?.capture.onAccount("SheetGmail", (_, __) => {
-  accounts.value = filter(tiki?.capture.accounts ?? []);
+tiki.capture.onAccount("SheetGmail", (_, __) => {
+  accounts.value = filter(tiki.capture.accounts ?? []);
 });
 
 const remove = async (account: Account) => {
   //show warn.
-  await tiki?.capture.logout(account);
+  await tiki.capture.logout(account);
 };
 </script>
 
 <template>
-  <header-back
-    text="Gmail Accounts"
-    @back="$emit('back')"
-    @close="$emit('close')"
-  />
-  <account-list :accounts="accounts" class="list" @delete="remove" />
-  <button-text text="Add Account" @click="$emit('add')" />
+  <div>
+    <header-back
+      text="Gmail Accounts"
+      @back="$emit('back')"
+      @close="$emit('close')"
+    />
+    <account-list :accounts="accounts" class="list" @delete="remove" />
+    <button-text text="Add Account" @click="$emit('add')" />
+  </div>
 </template>
 
 <style scoped>
