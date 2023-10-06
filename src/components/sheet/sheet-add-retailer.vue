@@ -7,7 +7,12 @@ import AccountSelect from "../account/account-select.vue";
 import AccountForm from "../account/account-form.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import TextButton from "@/components/button/button-text.vue";
-import { type Account, ACME_MARKETS } from "@mytiki/capture-receipt-capacitor";
+import type { AccountType } from "@mytiki/capture-receipt-capacitor";
+import {
+  type Account,
+  accountTypes,
+  GMAIL,
+} from "@mytiki/capture-receipt-capacitor";
 import type { TikiService } from "@/service";
 import { ref, inject, computed } from "vue";
 import { ButtonTextState } from "@/components/button/button-text-state";
@@ -15,7 +20,15 @@ import { ButtonTextState } from "@/components/button/button-text-state";
 const emit = defineEmits(["close", "back"]);
 const tiki: TikiService = inject("Tiki")!;
 
-const form = ref<Account>({ username: "", password: "", type: ACME_MARKETS });
+const filtered = accountTypes.index;
+tiki.capture.accounts.forEach((account) => filtered.delete(account.type.id));
+filtered.delete(GMAIL.id);
+
+const form = ref<Account>({
+  username: "",
+  password: "",
+  type: filtered.values().next().value,
+});
 const error = ref<string>();
 
 const canSubmit = computed(
@@ -31,12 +44,19 @@ const submit = async () => {
     await tiki.capture.login(form.value);
     tiki.capture.scan().catch((error) => console.error(error.toString()));
     error.value = "";
-    form.value = { username: "", password: "", type: ACME_MARKETS };
+    form.value = {
+      username: "",
+      password: "",
+      type: filtered.values().next().value,
+    };
     emit("back");
   } catch (err: any) {
     error.value = err.toString();
   }
 };
+
+const updateAccount = (account: Account) => (form.value = account);
+const updateType = (typ: AccountType) => (form.value.type = typ);
 </script>
 
 <template>
@@ -48,13 +68,14 @@ const submit = async () => {
     />
     <account-select
       :account-type="form.type"
-      @update:accountType="(val) => (form.type = val)"
+      :options="filtered"
+      @update:account-type="updateType"
     />
     <account-form
-      v-model:account="form"
+      :account="form"
       :error="error"
       :account-type="form.type"
-      @update:account="(val) => (form = val)"
+      @update:account="updateAccount"
     />
     <text-button
       text="Connect Retailer"
