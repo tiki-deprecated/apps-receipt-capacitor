@@ -94,7 +94,11 @@ const withdraw = () => {
     <button-text
       :text="balance > 0 ? `$${balance} Cash Out` : 'No Balance, Yet'"
       class="cash"
-      :state="balance > 0 ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
+      :state="
+        balance > 0
+          ? ButtonTextState.STANDARD
+          : ButtonTextState.STANDARD_DISABLED
+      "
       @click="withdraw"
     />
   </div>

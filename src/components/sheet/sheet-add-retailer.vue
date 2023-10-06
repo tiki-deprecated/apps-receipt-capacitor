@@ -6,7 +6,7 @@
 import AccountSelect from "../account/account-select.vue";
 import AccountForm from "../account/account-form.vue";
 import HeaderBack from "@/components/header/header-back.vue";
-import TextButton from "@/components/button/button-text.vue";
+import ButtonText from "@/components/button/button-text.vue";
 import type { AccountType } from "@mytiki/capture-receipt-capacitor";
 import {
   type Account,
@@ -39,7 +39,11 @@ const canSubmit = computed(
     form.value.password?.length > 0,
 );
 
+const isLoading = ref<boolean>(false);
+
 const submit = async () => {
+  isLoading.value = true;
+  error.value = "";
   try {
     await tiki.capture.login(form.value);
     tiki.capture.scan().catch((error) => console.error(error.toString()));
@@ -53,6 +57,7 @@ const submit = async () => {
   } catch (err: any) {
     error.value = err.toString();
   }
+  isLoading.value = false;
 };
 
 const updateAccount = (account: Account) => (form.value = account);
@@ -77,9 +82,15 @@ const updateType = (typ: AccountType) => (form.value.type = typ);
       :account-type="form.type"
       @update:account="updateAccount"
     />
-    <text-button
+    <button-text
       text="Connect Retailer"
-      :state="canSubmit ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
+      :state="
+        isLoading
+          ? ButtonTextState.STANDARD_LOADING
+          : canSubmit
+          ? ButtonTextState.STANDARD
+          : ButtonTextState.STANDARD_DISABLED
+      "
       @click="submit"
     />
   </div>
