@@ -41,11 +41,6 @@ const cycle = async () => {
       .then(() => console.log("Initialization complete."));
   });
 };
-
-const toggle = () => {
-  console.log("toggling");
-  present.value = !present.value;
-};
 </script>
 
 <template>
@@ -61,12 +56,15 @@ const toggle = () => {
       <h1>Oh, Hi!</h1>
       <h3>Just click &ldquo;start&rdquo; to well...</h3>
     </div>
-    <button class="start" @click="toggle">start</button>
+    <button class="start" @click="present = !present">start</button>
     <div class="cycle">
       <p><b>ID: </b>{{ id }}</p>
       <button class="newUser" @click="cycle">new user</button>
     </div>
-    <tiki-receipt v-model:present="present" />
+    <tiki-receipt
+      :present="present"
+      @update:present="(val) => (present = val)"
+    />
   </main>
 </template>
 

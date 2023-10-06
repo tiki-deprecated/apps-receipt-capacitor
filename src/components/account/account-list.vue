@@ -19,8 +19,9 @@ defineProps({
 <template>
   <div class="list">
     <account-status
+      v-for="(account, index) in accounts"
+      :key="index"
       :account="account"
-      v-for="account in accounts"
       class="status"
       @delete="$emit('delete', account)"
     />

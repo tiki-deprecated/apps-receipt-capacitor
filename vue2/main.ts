@@ -75,7 +75,7 @@ import type * as TikiOptions from "@/options";
  * @ignore
  */
 export default {
-  install: (app: typeof Vue, options: Config.Options): void => {
+  install: (app: typeof Vue, options: TikiOptions.Options): void => {
     app.component("TikiReceipt", TikiReceipt);
     app.mixin({
       provide: {

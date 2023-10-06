@@ -17,6 +17,7 @@ const props = defineProps({
   error: {
     type: String,
     required: false,
+    default: undefined,
   },
   accountType: {
     type: Object as PropType<AccountType>,
@@ -26,7 +27,6 @@ const props = defineProps({
 
 const username = ref<HTMLInputElement>();
 const password = ref<HTMLInputElement>();
-
 const update = () => {
   const account: Account = {
     username: username.value?.value ?? "",
@@ -56,24 +56,24 @@ watch(
   <form>
     <label id="username">Username</label>
     <input
-      type="text"
-      autocomplete="false"
       id="username"
       ref="username"
+      type="text"
+      autocomplete="false"
       required
       @input="update"
     />
     <label id="password">Password</label>
     <input
-      type="password"
-      autocomplete="false"
       id="password"
       ref="password"
+      type="password"
+      autocomplete="false"
       required
       @input="update"
     />
     <div class="error">
-      <p class="error-message" v-if="error">{{ error }}</p>
+      <p v-if="error" class="error-message">{{ error }}</p>
     </div>
   </form>
 </template>

@@ -14,7 +14,7 @@ import { ref, inject, computed } from "vue";
 import { ButtonTextState } from "@/components/button/button-text-state";
 
 const emit = defineEmits(["close", "back"]);
-const tiki: TikiService | undefined = inject("Tiki");
+const tiki: TikiService = inject("Tiki")!;
 
 const form = ref<Account>({ username: "", password: "", type: AMAZON });
 const error = ref<string>();
@@ -29,8 +29,8 @@ const canSubmit = computed(
 
 const submit = async () => {
   try {
-    await tiki!.capture.login(form.value);
-    tiki!.capture.scan().catch((error) => console.error(error.toString()));
+    await tiki.capture.login(form.value);
+    tiki.capture.scan().catch((error) => console.error(error.toString()));
     error.value = "";
     form.value = { username: "", password: "", type: AMAZON };
     emit("back");
@@ -41,20 +41,23 @@ const submit = async () => {
 </script>
 
 <template>
-  <header-back
-    text="Add Retailer"
-    @back="$emit('back')"
-    @close="$emit('close')"
-  />
-  <account-select v-model:account-type="form.type" />
-  <account-form
-    v-model:account="form"
-    :error="error"
-    :account-type="form.type"
-  />
-  <text-button
-    text="Connect Retailer"
-    :state="canSubmit ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
-    @click="submit"
-  />
+  <div>
+    <header-back
+      text="Add Retailer"
+      @back="$emit('back')"
+      @close="$emit('close')"
+    />
+    <account-select v-model:account-type="form.type" />
+    <account-form
+      v-model:account="form"
+      :error="error"
+      :account-type="form.type"
+      @update:account="(val) => (form = val)"
+    />
+    <text-button
+      text="Connect Retailer"
+      :state="canSubmit ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
+      @click="submit"
+    />
+  </div>
 </template>

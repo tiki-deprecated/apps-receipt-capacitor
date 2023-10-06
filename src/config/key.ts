@@ -21,6 +21,6 @@ export class Key {
       throw new Error("Missing required key: One of Android or iOS");
 
     if (key?.product != undefined) this.product = key.product;
-    else throw new Error("Missing required key: Publishing ID");
+    else throw new Error("Missing required key: Product");
   }
 }

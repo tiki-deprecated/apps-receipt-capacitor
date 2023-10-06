@@ -11,7 +11,6 @@ import SheetTerms from "@/components/sheet/sheet-terms.vue";
 import SheetLearn from "@/components/sheet/sheet-learn.vue";
 import SheetHome from "@/components/sheet/sheet-home.vue";
 import type { TikiService } from "@/service";
-import * as Theme from "@/config/theme";
 import { Navigate, Sheets } from "@/utils/navigate";
 import SheetGmail from "@/components/sheet/sheet-gmail.vue";
 import SheetRetailer from "@/components/sheet/sheet-retailer.vue";
@@ -63,7 +62,6 @@ tiki.config.theme.apply(document);
       @dismiss="$emit('update:present', false)"
     >
       <div class="body">
-        <!--        <div v-if="navigate.ref.value === Sheets.Offer">hello</div>-->
         <sheet-offer
           v-if="navigate.ref.value === Sheets.Offer"
           :description="tiki.config.offer.description"

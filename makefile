@@ -6,7 +6,7 @@ lint:
 fmt:
 	npx prettier "./src/**/*.{css,html,ts,js,java}" --write
 
-vue3:
+vue3: clean
 	cp -f ./vue3/main.ts ./src/main.ts
 	cp -f ./vue3/package.json ./package.json
 	cp -f ./vue3/vite.config.ts ./vite.config.ts
@@ -24,7 +24,7 @@ vue3-example-android: vue3-example
 vue3-example-ios: vue3-example
 	cd example/vue3 && npx cap run ios
 
-vue2:
+vue2: clean
 	cp -f ./vue2/main.ts ./src/main.ts
 	cp -f ./vue2/package.json ./package.json
 	cp -f ./vue2/vite.config.ts ./vite.config.ts
@@ -44,5 +44,6 @@ vue2-example-ios: vue2-example
 
 clean:
 	rm -f ./src/main.ts vite.config.ts package.json package-lock.json
-	rm -rf node_modules/
-	rm -rf dist/
+	rm -rf node_modules/ dist/
+	rm -rf example/vue2/dist/ example/vue2/node_modules/
+	rm -rf example/vue3/dist/ example/vue3/node_modules/
