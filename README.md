@@ -18,7 +18,7 @@ Receipt parsing is handled on-device (secure, privacy-centric, and App Store/Pla
 
 ## Installation
 
-### Required Dependencies
+#### Required Dependencies
 - [@mytiki/capture-receipt-capacitor](https://www.npmjs.com/package/@mytiki/capture-receipt-capacitor) - Receipt parsing library and Capacitor wrapper for Microblink.
 - [@mytiki/tiki-sdk-capacitor](https://www.npmjs.com/package/@mytiki/capture-receipt-capacitor) - Tiki's zero-party data licensing library
 - [@capacitor/preferences](https://www.npmjs.com/package/@capacitor/preferences) - Persist user state across app sessions.
@@ -27,21 +27,19 @@ Receipt parsing is handled on-device (secure, privacy-centric, and App Store/Pla
 npm i @mytiki/tiki-sdk-capacitor @mytiki/capture-receipt-capacitor @capacitor/preferences
 ```
 
-### With Vue >=3.0.0
+#### With Vue >=3.0.0
 ```shell
 npm i @mytiki/receipt-capacitor
 ```
 
-### With Vue 2.7.14
+#### With Vue 2.7.14
 ```shell
 npm i @mytiki/receipt-capacitor-vue2
 ```
 
 Next, if you don't already have a `publishingId` from TIKI, **create a free account** and make a project at [console.mytiki.com](https://console.mytiki.com).
 
-
-
-### Android
+#### Android
 Microblink is closed source, and subsequently it's AARs are hosted by Microblink's Maven repository, not Maven Central. You need to add the maven endpoint to your `android/build.gradle` file in your project's android folder.
 
 ```groovy
@@ -62,11 +60,36 @@ android {
 }
 ```
 
+#### iOS
+To build for iOS using Cocoapods, add the Tiki and Microblink PodspecRepos to your `ios/App/Podfile`. Then include the dependencies.
+
+1. Add the TikiSdk and BlinkReceipt repositories at the top of the Podfile.
+
+```
+source 'https://github.com/tiki/PodspecRepo.git'
+source 'https://github.com/BlinkReceipt/PodSpecRepo.git'
+source 'https://cdn.cocoapods.org/'
+```
+
+2. Add the TikiSdk and BlinkReceipt dependencies in the target pods:
+
+```
+target <TARGET> do
+  # ... current pods
+
+  pod 'BlinkReceipt', '~> 1.39'
+  pod 'BlinkEReceipt', '~> 2.31'
+  pod 'TikiSdk', '~> 2.1.0'
+end
+```
+
+NOTE: If Cocoapods fails to locate the dependencies automatically, run `pod install --repo-update`.
+
 ## Getting Started
 
 1. Register the plugin with your Vue app
 
-### With Vue >=3.0.0
+#### With Vue >=3.0.0
 
 ```ts
 import { createApp } from "vue";
@@ -87,7 +110,7 @@ createApp(App)
     .mount("#app");
 ```
 
-### With Vue 2.7.14
+#### With Vue 2.7.14
 
 ```ts
 import Vue from "vue";
@@ -112,13 +135,13 @@ _This registers the Vue Component as `TikiReceipt` and provides the service `Tik
 
 2. Add the stylesheet for the component to your primary stylesheet (e.g. `main.css`)
 
-### With Vue >=3.0.0
+#### With Vue >=3.0.0
 
 ```css
 @import "@mytiki/receipt-capacitor/dist/receipt-capacitor.css";
 ```
 
-### With Vue 2.7.14
+#### With Vue 2.7.14
 
 ```css
 @import "@mytiki/receipt-capacitor-vue2/dist/receipt-capacitor.css";
@@ -142,34 +165,12 @@ For IMAP email account linking, the authorization UI uses the material bottom sh
 
 ```
 
-### iOS
-
-1. Add TikiSdk and BlinkReceipt repositories in the top of the Podfile.
-```
-source 'https://github.com/tiki/PodspecRepo.git'
-source 'https://github.com/BlinkReceipt/PodSpecRepo.git'
-source 'https://cdn.cocoapods.org/'
-```
-
-2. Add TikiSdk and BlinkReceipt dependencies in the target pods:  
-```
-target <TARGET> do
-  # ... current pods
-
-  pod 'BlinkReceipt', '~> 1.39'
-  pod 'BlinkEReceipt', '~> 2.31'
-  pod 'TikiSdk', '~> 2.1.0'
-end
-```
-
-If Cocoapods can't find TikiSdk automatically, run `pod install --repo-update`.
-
 ### Initialization
 To initialize just inject the `TikiService` and pass in your systems unique identifier for the user. If you use emails (you shouldn't 😝), we recommend hashing it first.
 
 [Initialize function reference →](https://receipt-capacitor.mytiki.com/classes/TikiService.html#initialize)
 
-### With Vue >=3.0.0
+#### With Vue >=3.0.0
 
 ```vue
 <script setup lang="ts">
@@ -181,7 +182,7 @@ To initialize just inject the `TikiService` and pass in your systems unique iden
 </script>
 ```
 
-### With Vue 2.7.14
+#### With Vue 2.7.14
 
 ```vue
 <script setup lang="ts">
@@ -198,7 +199,7 @@ _We recommend initializing as early as possible in your application. We scrape a
 ### Open UI
 Add the `TikiReceipt` component to your template and a boolean Ref (e.g. present). Now just set `present.value = true` to open the UI.
 
-### With Vue >=3.0.0
+#### With Vue >=3.0.0
 
 ```vue
 <script setup lang="ts">
@@ -215,7 +216,7 @@ Add the `TikiReceipt` component to your template and a boolean Ref (e.g. present
 </template>
 ```
 
-### With Vue 2.7.14
+#### With Vue 2.7.14
 
 ```vue
 <script setup lang="ts">
@@ -236,7 +237,7 @@ Add the `TikiReceipt` component to your template and a boolean Ref (e.g. present
 When a user logs out of your application, you'll want to unlink connected accounts, delete cached credentials, and other user state
 data.
 
-### With Vue >=3.0.0
+#### With Vue >=3.0.0
 
 ```ts
 import { inject, ref } from "vue";
@@ -246,7 +247,7 @@ const tiki: TikiService | undefined = inject("Tiki");
 await tiki?.logout();
 ```
 
-### With Vue 2.7.14
+#### With Vue 2.7.14
 
 ```ts
 import { inject, ref } from "vue";
