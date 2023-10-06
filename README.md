@@ -258,8 +258,8 @@ You can find active issues here in GitHub under [Issues](https://github.com/tiki
   - `/config`: The configuration interface(s)
   - `/utils`: Reusable helper functions
 - `/example`: A simple example project using the plugin
-  - `/vue2`: The example project in a vue2 configuration
-  - `/vue3`: The example project in a vue3 configuration
+  - `/vue2`: The example project in a Vue 2.7 configuration
+  - `/vue3`: The example project in a Vue 3.0 configuration
 - `vue2`: Build files for vue2 configuration
 - `vue3`: Build files for vue3 configuration
 
