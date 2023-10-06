@@ -39,11 +39,8 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install JS dependencies
-        run: npm ci
-
-      - name: Run Build
-        run: npm run build
+      - name: Build Vue2
+        run: make vue2
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
