@@ -18,14 +18,17 @@ const props = defineProps({
     required: false,
     default: "STANDARD",
   },
-  isLoading: {
-    type: Boolean,
-    required: false,
-    default: false
-  }
 });
 const click = () => {
-  if (props.state != ButtonTextState.DISABLED) emit("click");
+  if (
+    props.state != ButtonTextState.STANDARD_DISABLED &&
+    props.state != ButtonTextState.BORING_DISABLED &&
+    props.state != ButtonTextState.ALERT_DISABLED &&
+    props.state != ButtonTextState.STANDARD_LOADING &&
+    props.state != ButtonTextState.BORING_LOADING &&
+    props.state != ButtonTextState.ALERT_LOADING
+  )
+    emit("click");
 };
 </script>
 
@@ -33,27 +36,46 @@ const click = () => {
   <button
     class="textButton"
     :class="{
-      standard: state === ButtonTextState.STANDARD,
-      boring: state === ButtonTextState.BORING,
-      alert: state === ButtonTextState.ALERT,
-      disable: state === ButtonTextState.DISABLED
+      standard:
+        state === ButtonTextState.STANDARD ||
+        state === ButtonTextState.STANDARD_LOADING ||
+        state === ButtonTextState.STANDARD_DISABLED,
+      boring:
+        state === ButtonTextState.BORING ||
+        state === ButtonTextState.BORING_LOADING ||
+        state === ButtonTextState.BORING_DISABLED,
+      alert:
+        state === ButtonTextState.ALERT ||
+        state === ButtonTextState.ALERT_LOADING ||
+        state === ButtonTextState.ALERT_DISABLED,
+      disable:
+        state === ButtonTextState.STANDARD_DISABLED ||
+        state === ButtonTextState.BORING_DISABLED ||
+        state === ButtonTextState.ALERT_DISABLED ||
+        state === ButtonTextState.STANDARD_LOADING ||
+        state === ButtonTextState.ALERT_LOADING ||
+        state === ButtonTextState.BORING_LOADING,
     }"
     @click.stop.prevent="click"
   >
-  <div id="loading" v-if="isLoading"/>
-  <span v-else>
-    {{ text }}
-  </span>
+    <span
+      v-if="
+        state === ButtonTextState.STANDARD_LOADING ||
+        state === ButtonTextState.BORING_LOADING ||
+        state === ButtonTextState.ALERT_LOADING
+      "
+      id="loading"
+    />
+    <span v-else>{{ text }}</span>
   </button>
 </template>
 
 <style scoped>
-
 #loading {
   display: inline-block;
   width: 1.2em;
   height: 1.2em;
-  border: 3px solid rgba(255,255,255,.3);
+  border: 3px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   border-top-color: #fff;
   animation: spin 1s ease-in-out infinite;
@@ -61,11 +83,15 @@ const click = () => {
 }
 
 @keyframes spin {
-  to { -webkit-transform: rotate(360deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
 }
 @-webkit-keyframes spin {
-  to { -webkit-transform: rotate(360deg); }
-} 
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
 .textButton {
   width: 100%;
   height: 2.7em;
@@ -103,8 +129,5 @@ const click = () => {
 
 .disable {
   opacity: 50%;
-  border-color: var(--tiki-success-color);
-  background-color: var(--tiki-success-color);
-  color: var(--tiki-primary-background-color);
 }
 </style>

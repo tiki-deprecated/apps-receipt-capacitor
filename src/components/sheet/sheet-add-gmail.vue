@@ -6,9 +6,9 @@
 <script setup lang="ts">
 import AccountForm from "../account/account-form.vue";
 import HeaderBack from "@/components/header/header-back.vue";
-import TextButton from "@/components/button/button-text.vue";
+import ButtonText from "@/components/button/button-text.vue";
 import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
-import { computed, ref, inject } from "vue";
+import { computed, inject, ref } from "vue";
 import type { TikiService } from "@/service";
 import { ButtonTextState } from "@/components/button/button-text-state";
 
@@ -58,12 +58,14 @@ const updateAccount = (account: Account) => (form.value = account);
       :account-type="form.type"
       @update:account="updateAccount"
     />
-    <text-button
+    <button-text
       text="Connect Gmail"
       :state="
-        canSubmit && !isLoading
+        isLoading
+          ? ButtonTextState.STANDARD_LOADING
+          : canSubmit
           ? ButtonTextState.STANDARD
-          : ButtonTextState.DISABLED
+          : ButtonTextState.STANDARD_DISABLED
       "
       :is-loading="isLoading"
       @click="submit"
