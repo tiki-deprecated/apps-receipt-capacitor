@@ -40,7 +40,10 @@ const click = () => {
     }"
     @click.stop.prevent="click"
   >
-  <div id="loading" v-if="isLoading"/>{{ text }}
+  <div id="loading" v-if="isLoading"/>
+  <span v-else>
+    {{ text }}
+  </span>
   </button>
 </template>
 
@@ -48,11 +51,10 @@ const click = () => {
 
 #loading {
   display: inline-block;
-  width: 1.4em;
-  height: 1.4em;
+  width: 1.2em;
+  height: 1.2em;
   border: 3px solid rgba(255,255,255,.3);
   border-radius: 50%;
-  margin-right: 0.7em;
   border-top-color: #fff;
   animation: spin 1s ease-in-out infinite;
   -webkit-animation: spin 1s ease-in-out infinite;
