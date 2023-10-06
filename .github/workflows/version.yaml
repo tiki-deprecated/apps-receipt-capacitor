@@ -56,7 +56,7 @@ jobs:
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GH Action"
-          git add package.json
-          git add package-lock.json
+          git add vue2/package.json
+          git add vue3/package.json
           git commit -m 'version bump'
           git push
