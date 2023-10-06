@@ -7,11 +7,7 @@ import AccountSelect from "../account/account-select.vue";
 import AccountForm from "../account/account-form.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import TextButton from "@/components/button/button-text.vue";
-import {
-  type Account,
-  ACME_MARKETS,
-  AccountType
-} from "@mytiki/capture-receipt-capacitor";
+import { type Account, ACME_MARKETS } from "@mytiki/capture-receipt-capacitor";
 import type { TikiService } from "@/service";
 import { ref, inject, computed } from "vue";
 import { ButtonTextState } from "@/components/button/button-text-state";
@@ -27,7 +23,7 @@ const canSubmit = computed(
     form.value.username != undefined &&
     form.value.password != undefined &&
     form.value.username?.length > 0 &&
-    form.value.password?.length > 0
+    form.value.password?.length > 0,
 );
 
 const submit = async () => {
@@ -52,7 +48,7 @@ const submit = async () => {
     />
     <account-select
       :account-type="form.type"
-      @update:accountType="(val)=>(form.type=val)"
+      @update:accountType="(val) => (form.type = val)"
     />
     <account-form
       v-model:account="form"
