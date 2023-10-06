@@ -1,0 +1,134 @@
+[
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/drawable-port-hdpi_splash.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/drawable-port-hdpi/splash.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/drawable-port-xxhdpi_splash.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/drawable-port-xxhdpi/splash.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/drawable_splash.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/drawable/splash.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/drawable-land-xxhdpi_splash.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/drawable-land-xxhdpi/splash.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/layout_activity_main.xml.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/xml_file_paths.xml.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/xml/file_paths.xml"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/drawable-land-xhdpi_splash.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/drawable-land-xhdpi/splash.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.mytiki.receipt.capacitor.app-pngs-66:/drawable-anydpi-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/xml_config.xml.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/xml/config.xml"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/drawable-land-hdpi_splash.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/drawable-land-hdpi/splash.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/drawable-land-mdpi_splash.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/drawable-land-mdpi/splash.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/drawable-port-mdpi_splash.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/drawable-port-mdpi/splash.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/drawable-land-xxxhdpi_splash.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/drawable-land-xxxhdpi/splash.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/drawable-port-xhdpi_splash.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/drawable-port-xhdpi/splash.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/drawable-port-xxxhdpi_splash.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/drawable-port-xxxhdpi/splash.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.mytiki.receipt.capacitor.app-merged_res-70:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.mytiki.receipt.capacitor.app-main-72:/mipmap-xxxhdpi/ic_launcher_round.png"
+    }
+]
