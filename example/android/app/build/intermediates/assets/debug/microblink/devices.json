@@ -1,0 +1,102 @@
+{
+  "HWFRD::FRD-L09,HWFRD::FRD-AL00,HWFRD::FRD-AL10,HWFRD::FRD-DL00,HWFRD::FRD-L04,HWFRD::FRD-L14,HWFRD::FRD-L19,HWFRD::FRD-TL00": {
+    "description": "Huawei Honor8",
+    "meteringNotWorking": "*"
+  },
+  "glass-1::Glass 1": {
+    "description": "Google glass",
+    "displayOrientationNotWorking": "*"
+  },
+  "golfc::HTC Desire C,golfu::HTC Desire C": {
+    "description": "HTC Desire C",
+    "backFacingPreviewSize": [640, 480]
+  },
+  "htc_m8::HTC M8w,htc_m8::HTC One_M8,htc_m8::HTC_0P6B,htc_m8::HTC_0P6B6,htc_m8::HTC_M8x,htc_m8dug::HTC M8e,htc_m8dug::HTC One_M8 dual sim,htc_m8dwg::HTC M8d,htc_m8whl::831C,htc_m8wl::HTC One_M8,htc_m8wl::HTC6525LVW": {
+    "description": "HTC One (M8)",
+    "focusUntrusty": "[5.0.0,*>"
+  },
+  "SCL23::SCL23,k3g::SM-G900H,klte::SM-G900F,klte::SM-G900FQ,klte::SM-G900I,klte::SM-G900M,klte::SM-G900MD,klteMetroPCS::SM-G900T1,klteacg::SM-G900R7,klteatt::SAMSUNG-SM-G900A,kltecan::SM-G900W8,kltektt::SM-G900K,kltelgt::SM-G900L,kltelra::SM-G900R6,klteskt::SM-G900S,kltespr::SM-G900P,kltetmo::SM-G900T,klteusc::SM-G900R4,kltevzw::SM-G900V,kwifi::SM-G900X,lentisltektt::SM-G906K,lentisltelgt::SM-G906L,lentislteskt::SM-G906S": {
+    "description": "Galaxy S5",
+    "meteringNotWorking": "*"
+  },
+  "primods::HTC Desire V": {
+    "description": "HTC Desire V",
+    "backFacingPreviewSize": [640, 480]
+  },
+  "primou::HTC One V": {
+    "description": "HTC One V",
+    "focusUntrusty": "*"
+  },
+  "saga::HTC Desire S": {
+    "description": "HTC Desire S",
+    "backFacingPreviewSize": [640, 480]
+  },
+  "OnePlus3::ONEPLUS A3003": {
+    "description": "One Plus 3",
+    "meteringNotWorking": "*"
+  },
+  "OnePlus3T::ONEPLUS A3003": {
+    "description": "One Plus 3T",
+    "meteringNotWorking": "*"
+  },
+  "shamu::Nexus 6": {
+    "description": "Nexus 6",
+    "minZoomLevel": 0.01
+  },
+  "v72c::V72C": {
+    "description": "ZTE v72C tablet (a.k.a. Sprint Optik 2)",
+    "naturalOrientationIsLandscapeLeft": "*"
+  },
+  "chagalllte::SM-T805": {
+    "description": "Samsung Galaxy Tab S",
+    "displayOrientationNotWorking": "*"
+  },
+  "manta::Nexus 10": {
+    "description": "Nexus 10",
+    "backFacingPreviewSize": [1280, 720]
+  },
+  "zeroflte::SM-G920F": {
+    "description": "Samsung Galaxy S6",
+    "phaseAutoFocusSupported": "*"
+  },
+  "herolte::SM-G930F,hero2lte::SM-G935F": {
+    "description": "Samsung Galaxy S7",
+    "phaseAutoFocusSupported": "*"
+  },
+  "HWANE::ANE-LX1,HWANE::ANE-LX2,HWANE::ANE-LX3,HWANE::ANE-LX2J,HWANE::HWV32": {
+    "description": "Huawei P20 Lite",
+    "meteringNotWorking": "*"
+  },
+  "HWEML::EML-AL00,HWEML::EML-L09,HWEML::EML-L29,HWEML::EML-TL00": {
+    "description": "Huawei P20",
+    "meteringNotWorking": "*"
+  },
+  "HW-01K ::HW-01K,HWCLT::CLT-AL00,HWCLT::CLT-AL00l,HWCLT::CLT-AL01,HWCLT::CLT-L04,HWCLT::CLT-L09,HWCLT::CLT-L29,HWCLT::EML-CLT-TL00,HWCLT::CLT-TL01": {
+    "description": "Huawei P20 Pro",
+    "meteringNotWorking": "*"
+  },
+  "HWALP::ALP-AL00,HWALP::ALP-L09,HWALP::ALP-L29,HWALP::ALP-TL00": {
+    "description": "Huawei Mate 10",
+    "preferTextureView": "*"
+  },
+  "HWBLA::BLA-A09,HWBLA::BLA-AL00,HWBLA::BLA-L09,HWBLA::BLA-L29,HWBLA::BLA-TL00": {
+    "description": "Huawei Mate 10 Pro",
+    "preferTextureView": "*"
+  },
+  "HWRNE::RNE-L01,HWRNE::RNE-L03,HWRNE::RNE-L21,HWRNE::RNE-L23": {
+    "description": "Huawei Mate 10 Lite",
+    "preferTextureView": "*"
+  },
+  "j75ltektt::SM-J700K,j7duolte::SM-J720F,j7duolte::SM-J720M,j7e3g::SM-J700H,j7elte::SM-J700F,j7elte::SM-J700M,j7eltemtr::SM-J700T1,j7eltetmo::SM-J700T,j7ltechn::SM-J7008,j7ltespr::SM-J700P,j7popelteaio::SAMSUNG-SM-J727AZ,j7popelteatt::SAMSUNG-SM-J727A,j7popeltemtr::SM-J727T1,j7popelteskt::SM-J727S,j7popeltetfntmo::SM-S737TL,j7popeltetmo::SM-J727T,j7popelteue::SM-J727U,j7popltespr::SM-J727P,j7poplteusc::SM-J727R4,j7popltevzw::SM-J727VPP,j7popltevzw::SM-J727V,j7popqltetfnvzw::SM-S727VL,j7topeltespr::SM-J737P,j7topeltetfnvzw::SM-S767VL,j7topelteusc::SM-J737R4,j7topeltevzw::SM-J737VPP,j7topeltevzw::SM-J737V,j7toplteatt::SM-J737A,j7topltemtr::SM-J737T1,j7toplteskt::SM-J737S,j7topltetfntmo::SM-S757BL,j7topltetmo::SM-J737T,j7toplteue::SM-J737U,j7velte::SM-J701F,j7velte::SM-J701M,j7velte::SM-J701MT,j7xelte::SM-J710F,j7xelte::SM-J710FQ,j7xelte::SM-J710GN,j7xelte::SM-J710MN,j7xeltektt::SM-J710K": {
+    "description": "Samsung J7",
+    "backFacingPreviewSize": [1280, 720]
+  },
+  "on7xreflte::SM-G611F, gtaxlwifi::SM-T580, gtaxlwifichn::SM-T580, on5xelte::SM-G570F, on5xelteins::SM-G570F, on7xelte::SM-G610F, j4lte::SM-J400M, j4lte::SM-J400F, j6lte::SM-J600F, j6lte::SM-J600G, on5xelte::SM-G570Y, j2corelte::SM-J260F, j2corelte::SM-J260M, j2corelte::SM-J260MU": {
+    "description": "Samsung devices with broken aspect ratio",
+    "forceUseLegacyCamera": "*"
+  },
+  "WP8_Pro::WP8 Pro": {
+    "description": "Oukitel WP8 Pro front camera problem",
+    "forceUseLegacyCamera": "*"
+  }
+}

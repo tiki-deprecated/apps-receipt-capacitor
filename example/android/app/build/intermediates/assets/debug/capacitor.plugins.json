@@ -1,0 +1,14 @@
+[
+	{
+		"pkg": "@mytiki/capture-receipt-capacitor",
+		"classpath": "com.mytiki.sdk.capture.receipt.capacitor.plugin.CaptureReceiptPlugin"
+	},
+	{
+		"pkg": "@mytiki/tiki-sdk-capacitor",
+		"classpath": "com.mytiki.sdk.capacitor.TikiSdkPlugin"
+	},
+	{
+		"pkg": "@capacitor/preferences",
+		"classpath": "com.capacitorjs.plugins.preferences.PreferencesPlugin"
+	}
+]

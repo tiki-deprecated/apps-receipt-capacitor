@@ -1,0 +1,6 @@
+framework module MytikiTikiSdkCapacitor {
+  umbrella header "MytikiTikiSdkCapacitor-umbrella.h"
+
+  export *
+  module * { export * }
+}
