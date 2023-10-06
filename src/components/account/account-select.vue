@@ -7,6 +7,7 @@
 import {
   accountTypes,
   type AccountType,
+  AMAZON,
 } from "@mytiki/capture-receipt-capacitor";
 import { type PropType, ref } from "vue";
 
@@ -15,6 +16,7 @@ defineProps({
   accountType: {
     type: Object as PropType<AccountType>,
     required: false,
+    default: undefined,
   },
 });
 const account = ref<HTMLSelectElement>();
@@ -29,14 +31,17 @@ const update = () => {
 </script>
 
 <template>
-  <label for="accounts">Choose Account</label>
-  <select id="accounts" required @change="update" ref="account">
-    <option
-      v-for="account of accountTypes.index"
-      :value="account[0]"
-      :label="account[1].name"
-    ></option>
-  </select>
+  <div>
+    <label for="accounts">Choose Account</label>
+    <select id="accounts" ref="account" required @change="update">
+      <option
+        v-for="(typ, index) of accountTypes.index"
+        :key="index"
+        :value="typ[0]"
+        :label="typ[1].name"
+      ></option>
+    </select>
+  </div>
 </template>
 
 <style>

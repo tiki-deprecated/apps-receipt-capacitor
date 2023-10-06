@@ -22,8 +22,12 @@ export class ServiceCapture {
   private _onReceiptListeners: Map<string, (receipt: Receipt) => void> =
     new Map();
 
-  async initialize(scanKey: string, intelKey: string): Promise<void> {
-    await this.plugin.initialize(scanKey, intelKey).catch((error: any) => {
+  async initialize(
+    product: string,
+    ios: string | undefined = undefined,
+    android: string | undefined = undefined,
+  ): Promise<void> {
+    await this.plugin.initialize(product, ios, android).catch((error: any) => {
       throw Error(`Could not initialize; Error: ${error}`);
     });
   }

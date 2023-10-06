@@ -14,88 +14,90 @@ import type { TikiService } from "@/service";
 import { inject, ref } from "vue";
 
 const emit = defineEmits(["close", "learn", "retailer", "gmail", "withdraw"]);
-const tiki: TikiService | undefined = inject("Tiki");
+const tiki: TikiService = inject("Tiki")!;
 const syncState = (): BulletState =>
-  (tiki!.store.retailer.get().value === BulletState.P100 ||
-    tiki!.store.retailer.get().value === BulletState.SYNC) &&
-  (tiki!.store.gmail.get().value === BulletState.P100 ||
-    tiki!.store.gmail.get().value === BulletState.SYNC)
-    ? tiki!.store.sync.status()
+  (tiki.store.retailer.get().value === BulletState.P100 ||
+    tiki.store.retailer.get().value === BulletState.SYNC) &&
+  (tiki.store.gmail.get().value === BulletState.P100 ||
+    tiki.store.gmail.get().value === BulletState.SYNC)
+    ? tiki.store.sync.status()
     : BulletState.P0;
 
-const receiptState = (): BulletState => tiki!.store.receipt.status();
+const receiptState = (): BulletState => tiki.store.receipt.status();
 const balance = ref<number>(0);
-tiki?.publish.balance().then((amount) => (balance.value = amount));
+tiki.publish.balance().then((amount) => (balance.value = amount));
 
 const withdraw = () => {
   emit("withdraw");
-  const res: number | undefined = tiki?.config.callback(balance.value);
+  const res: number | undefined = tiki.config.callback(balance.value);
   if (res != undefined) {
-    tiki?.publish
+    tiki.publish
       .createReceipt(res)
       .catch((error) =>
-        console.log(`Failed to create withdrawl receipt: ${error}`),
+        console.log(`Failed to create withdrawal receipt: ${error}`),
       );
   }
 };
 </script>
 
 <template>
-  <header-title
-    title="Rewards"
-    subtitle="Share data. Earn rewards."
-    @close="$emit('close')"
-  />
-  <div class="body">
-    <div class="accounts">
-      <button-square
-        text="Gmail"
-        class="button"
-        :state="tiki!.store.gmail.get().value"
-        @click="$emit('gmail')"
-      />
-      <button-square
-        text="Retailer"
-        class="button"
-        :state="tiki!.store.retailer.get().value"
-        @click="$emit('retailer')"
+  <div>
+    <header-title
+      title="Rewards"
+      subtitle="Share data. Earn rewards."
+      @close="$emit('close')"
+    />
+    <div class="body">
+      <div class="accounts">
+        <button-square
+          text="Gmail"
+          class="button"
+          :state="tiki.store.gmail.get().value"
+          @click="$emit('gmail')"
+        />
+        <button-square
+          text="Retailer"
+          class="button"
+          :state="tiki.store.retailer.get().value"
+          @click="$emit('retailer')"
+        />
+      </div>
+      <bullet-list
+        :bullets="[
+          {
+            text: 'Connect Gmail Account',
+            state:
+              tiki.store.gmail.get().value === BulletState.NULL
+                ? BulletState.P0
+                : tiki.store.gmail.get().value,
+          },
+          {
+            text: 'Connect Retailer Account',
+            state:
+              tiki.store.retailer.get().value === BulletState.NULL
+                ? BulletState.P0
+                : tiki.store.retailer.get().value,
+          },
+          {
+            text: 'Use app weekly',
+            state: syncState(),
+          },
+          {
+            text: 'Share 5 New Receipts',
+            state: receiptState(),
+          },
+        ]"
+        class="bullets"
+        @learn="$emit('learn')"
       />
     </div>
-    <bullet-list
-      :bullets="[
-        {
-          text: 'Connect Gmail Account',
-          state:
-            tiki!.store.gmail.get().value === BulletState.NULL
-              ? BulletState.P0
-              : tiki!.store.gmail.get().value,
-        },
-        {
-          text: 'Connect Retailer Account',
-          state:
-            tiki!.store.retailer.get().value === BulletState.NULL
-              ? BulletState.P0
-              : tiki!.store.retailer.get().value,
-        },
-        {
-          text: 'Use app weekly',
-          state: syncState(),
-        },
-        {
-          text: 'Share 5 New Receipts',
-          state: receiptState(),
-        },
-      ]"
-      class="bullets"
-      @learn="$emit('learn')"
+    <button-text
+      :text="balance > 0 ? `$${balance} Cash Out` : 'No Balance, Yet'"
+      class="cash"
+      :state="balance > 0 ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
+      @click="withdraw"
     />
   </div>
-  <button-text
-    :text="balance > 0 ? `$${balance} Cash Out` : 'No Balance, Yet'"
-    class="cash"
-    :state="balance > 0 ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
-    @click="withdraw"
-  />
 </template>
 
 <style scoped>

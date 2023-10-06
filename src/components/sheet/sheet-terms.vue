@@ -10,7 +10,7 @@ import HeaderBack from "@/components/header/header-back.vue";
 import { inject } from "vue";
 import type { TikiService } from "@/service";
 
-const tiki: TikiService | undefined = inject("Tiki");
+const tiki: TikiService = inject("Tiki")!;
 const emit = defineEmits(["back", "accept", "close"]);
 defineProps({
   markdown: {
@@ -20,7 +20,7 @@ defineProps({
 });
 
 const accept = () => {
-  tiki!.publish.createLicense();
+  tiki.publish.createLicense();
   emit("accept");
 };
 </script>
