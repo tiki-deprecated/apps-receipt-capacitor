@@ -6,7 +6,7 @@
 import { defineConfig } from "vite";
 import * as path from "path";
 import vue from "@vitejs/plugin-vue2";
-import Markdown from "vite-plugin-vue-markdown";
+import Markdown from "unplugin-vue-markdown/vite";
 import { createSvgPlugin } from "vite-plugin-vue2-svg";
 
 module.exports = defineConfig({
@@ -14,7 +14,7 @@ module.exports = defineConfig({
     vue({
       include: [/\.vue$/, /\.md$/],
     }),
-    Markdown(),
+    Markdown({}),
     createSvgPlugin(),
   ],
   build: {

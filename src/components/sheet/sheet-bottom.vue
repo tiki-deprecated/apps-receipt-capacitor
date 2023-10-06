@@ -24,7 +24,7 @@ watch(
 <template>
   <div class="overlay" @click.stop.prevent="isShow = false">
     <Transition appear name="slide" @leave="$emit('dismiss')">
-      <div v-if="isShow" class="bottom-sheet" @click.stop.prevent>
+      <div v-if="isShow" class="bottom-sheet" @click.stop>
         <slot />
       </div>
     </Transition>
