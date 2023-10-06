@@ -111,8 +111,17 @@ new Vue({ render: (h) => h(App) }).$mount("#app");
 _This registers the Vue Component as `TikiReceipt` and provides the service `TikiService` as an injectable object name `Tiki`._
 
 2. Add the stylesheet for the component to your primary stylesheet (e.g. `main.css`)
+
+### With Vue >=3.0.0
+
 ```css
 @import "@mytiki/receipt-capacitor/dist/receipt-capacitor.css";
+```
+
+### With Vue 2.7.14
+
+```css
+@import "@mytiki/receipt-capacitor-vue2/dist/receipt-capacitor.css";
 ```
 
 #### Android

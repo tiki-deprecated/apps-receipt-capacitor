@@ -6,7 +6,7 @@
 /**
  * Interfaces for configuration of this library.
  *
- * Define during app registration. Start with the top-level interface: {@link Config.Options}
+ * Define during app registration. Start with the top-level interface: {@link Options}
  * @module
  */
 
@@ -18,6 +18,7 @@ import type { Theme } from "./theme";
  * The top-level configuration object for this library. Define during app registration.
  *
  * @example
+ * For Vue >=3.0.0
  * ```
  * import { createApp } from "vue";
  * import App from "@/app.vue";
@@ -28,9 +29,10 @@ import type { Theme } from "./theme";
  * createApp(App)
  *  .use(Tiki, {
  *    key: {
- *       publishingId: "YOUR TIKI PUBLISHING ID",
- *       scanKey: "YOUR MICROBLINK LICENSE KEY",
- *       intelKey: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
+ *      publishingId: "YOUR TIKI PUBLISHING ID",
+ *      android: "YOUR MICROBLINK ANDROID LICENSE KEY",
+ *      ios: "YOUR MICROBLINK IOS LICENSE KEY",
+ *      product: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
  *    },
  *    offer: {
  *      image: ProgramImage,
@@ -55,6 +57,47 @@ import type { Theme } from "./theme";
  *    callback: (_total: number): number | undefined => undefined,
  *  })
  *  .mount("#app");
+ * ```
+ * @example
+ * For Vue 2.7.14
+ * ```
+ * import { createApp } from "vue";
+ * import Vue from "vue";
+ * import Tiki from "@mytiki/receipt-capacitor-vue2";
+ * import ProgramImage from "@/assets/images/program.png";
+ * import LearnMore from "@/assets/md/learn-more.md?raw";
+ *
+ * Vue.use(Tiki, {
+ *    key: {
+ *      publishingId: "YOUR TIKI PUBLISHING ID",
+ *      android: "YOUR MICROBLINK ANDROID LICENSE KEY",
+ *      ios: "YOUR MICROBLINK IOS LICENSE KEY",
+ *      product: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
+ *    },
+ *    offer: {
+ *      image: ProgramImage,
+ *      description: "Connect your accounts to turn your receipts into real cash each month!",
+ *      bullets: [
+ *       "Link a Gmail account",
+ *       "Link a supported retailer account",
+ *       "Open and use the app each week",
+ *       "Share 5 new receipts",
+ *      ],
+ *    },
+ *    theme: {
+ *      fontFamily: "'Space Grotesk', sans-serif",
+ *      primaryTextColor: "rgb(28 0 0)",
+ *      secondaryTextColor: "rgb(28 0 0 / 60%)",
+ *      successColor: "rgb(0 178 114)",
+ *      errorColor: "rgb(199, 48, 0)",
+ *      primaryBackgroundColor: "rgb(255 255 255)",
+ *      secondaryBackgroundColor: "rgb(246 246 246)",
+ *    },
+ *    learn: LearnMore,
+ *    callback: (_total: number): number | undefined => undefined,
+ *  });
+ *
+ * new Vue({ render: (h) => h(App) }).$mount("#app");
  * ```
  */
 export interface Options {

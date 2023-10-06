@@ -44,4 +44,4 @@ vue2-example-ios: vue2-example
 
 clean:
 	rm -f ./src/main.ts vite.config.ts package.json package-lock.json
-	rm -rf node_modules/ dist/ example/vue2/dist/ example/vue3/dist/
+	rm -rf node_modules/ dist/ docs/ example/vue2/dist/ example/vue3/dist/

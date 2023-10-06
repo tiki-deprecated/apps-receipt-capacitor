@@ -54,30 +54,3 @@ export interface Theme {
    */
   secondaryBackgroundColor?: string;
 }
-
-export const apply = (document: Document, theme?: Theme): void => {
-  setProperty(document, "--tiki-font-family", theme?.fontFamily);
-  setProperty(document, "--tiki-primary-text-color", theme?.primaryTextColor);
-  setProperty(
-    document,
-    "--tiki-secondary-text-color",
-    theme?.secondaryTextColor,
-  );
-  setProperty(
-    document,
-    "--tiki-primary-background-color",
-    theme?.primaryBackgroundColor,
-  );
-  setProperty(
-    document,
-    "--tiki-secondary-background-color",
-    theme?.secondaryBackgroundColor,
-  );
-  setProperty(document, "--tiki-success-color", theme?.successColor);
-  setProperty(document, "--tiki-success-color", theme?.errorColor);
-};
-
-const setProperty = (document: Document, property: string, value?: string) => {
-  if (value != undefined)
-    document.documentElement.style.setProperty(property, value);
-};

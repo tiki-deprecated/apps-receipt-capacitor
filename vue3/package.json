@@ -4,6 +4,7 @@
   "description": "The TIKI Receipt library adds to your Vue.js + Capacitor **mobile app** a Data Reward program for your users to share their receipts in-exchange for **cash from Tiki inc**. \n",
   "author": "Tiki inc.",
   "license": "MIT",
+  "homepage": "https://receipt-capacitor.mytiki.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/tiki/tiki-receipt-capacitor.git"
