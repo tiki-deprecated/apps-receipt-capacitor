@@ -26,10 +26,10 @@ const canSubmit = computed(
     form.value.password?.length > 0,
 );
 
-const isLoading = ref<boolean>(false)
+const isLoading = ref<boolean>(false);
 
 const submit = async () => {
-  isLoading.value = true
+  isLoading.value = true;
   error.value = "";
   try {
     await tiki.capture.login(form.value);
@@ -39,8 +39,10 @@ const submit = async () => {
   } catch (err: any) {
     error.value = err.toString();
   }
-  isLoading.value = false
+  isLoading.value = false;
 };
+
+const updateAccount = (account: Account) => (form.value = account);
 </script>
 
 <template>
@@ -54,13 +56,17 @@ const submit = async () => {
       :account="form"
       :error="error"
       :account-type="form.type"
-      @update:account="(val) => (form = val)"
+      @update:account="updateAccount"
     />
     <text-button
       text="Connect Gmail"
-      :state="canSubmit && !isLoading ? ButtonTextState.STANDARD  : ButtonTextState.DISABLED"
+      :state="
+        canSubmit && !isLoading
+          ? ButtonTextState.STANDARD
+          : ButtonTextState.DISABLED
+      "
+      :is-loading="isLoading"
       @click="submit"
-      :isLoading="isLoading"
     />
   </div>
 </template>
