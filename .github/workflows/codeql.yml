@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   vue2:
-    name: Analyze
+    name: Analyze Vue 2
     runs-on: ubuntu-22.04
     permissions:
       actions: read
@@ -46,7 +46,7 @@ jobs:
         uses: github/codeql-action/analyze@v2
 
   vue3:
-    name: Analyze
+    name: Analyze Vue 3
     runs-on: ubuntu-22.04
     permissions:
       actions: read
