@@ -1,3 +1,7 @@
+source 'https://github.com/tiki/PodspecRepo.git'
+source 'https://github.com/BlinkReceipt/PodSpecRepo.git'
+source 'https://cdn.cocoapods.org/'
+
 require_relative '../../node_modules/@capacitor/ios/scripts/pods_helpers'
 
 platform :ios, '13.0'
@@ -18,7 +22,10 @@ end
 
 target 'App' do
   capacitor_pods
-  # Add your Pods here
+    
+  pod 'BlinkReceipt', '~> 1.39'
+  pod 'BlinkEReceipt', '~> 2.31'
+  pod 'TikiSdk', '~> 2.1.0'
 end
 
 post_install do |installer|
