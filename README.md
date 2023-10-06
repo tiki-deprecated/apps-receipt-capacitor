@@ -142,6 +142,28 @@ For IMAP email account linking, the authorization UI uses the material bottom sh
 
 ```
 
+### iOS
+
+1. Add TikiSdk and BlinkReceipt repositories in the top of the Podfile.
+```
+source 'https://github.com/tiki/PodspecRepo.git'
+source 'https://github.com/BlinkReceipt/PodSpecRepo.git'
+source 'https://cdn.cocoapods.org/'
+```
+
+2. Add TikiSdk and BlinkReceipt dependencies in the target pods:  
+```
+target <TARGET> do
+  # ... current pods
+
+  pod 'BlinkReceipt', '~> 1.39'
+  pod 'BlinkEReceipt', '~> 2.31'
+  pod 'TikiSdk', '~> 2.1.0'
+end
+```
+
+If Cocoapods can't find TikiSdk automatically, run `pod install --repo-update`.
+
 ### Initialization
 To initialize just inject the `TikiService` and pass in your systems unique identifier for the user. If you use emails (you shouldn't 😝), we recommend hashing it first.
 
