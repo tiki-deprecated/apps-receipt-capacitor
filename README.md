@@ -17,19 +17,29 @@ Receipt parsing is handled on-device (secure, privacy-centric, and App Store/Pla
 
 
 ## Installation
-```shell
-npm i @mytiki/receipt-capacitor @mytiki/tiki-sdk-capacitor @mytiki/capture-receipt-capacitor @capacitor/preferences vue3-touch-events
-
-npx cap sync
-```
-
-Next, if you don't already have a `publishingId` from TIKI, **create a free account** and make a project at [console.mytiki.com](https://console.mytiki.com).
 
 ### Required Dependencies
 - [@mytiki/capture-receipt-capacitor](https://www.npmjs.com/package/@mytiki/capture-receipt-capacitor) - Receipt parsing library and Capacitor wrapper for Microblink.
 - [@mytiki/tiki-sdk-capacitor](https://www.npmjs.com/package/@mytiki/capture-receipt-capacitor) - Tiki's zero-party data licensing library
 - [@capacitor/preferences](https://www.npmjs.com/package/@capacitor/preferences) - Persist user state across app sessions.
-- [vue3-touch-events](https://www.npmjs.com/package/vue3-touch-events) - Close the bottomsheet with common mobile swipe gestures
+
+```shell
+npm i @mytiki/tiki-sdk-capacitor @mytiki/capture-receipt-capacitor @capacitor/preferences
+```
+
+### With Vue >=3.0.0
+```shell
+npm i @mytiki/receipt-capacitor
+```
+
+### With Vue 2.7.14
+```shell
+npm i @mytiki/receipt-capacitor-vue2
+```
+
+Next, if you don't already have a `publishingId` from TIKI, **create a free account** and make a project at [console.mytiki.com](https://console.mytiki.com).
+
+
 
 ### Android
 Microblink is closed source, and subsequently it's AARs are hosted by Microblink's Maven repository, not Maven Central. You need to add the maven endpoint to your `android/build.gradle` file in your project's android folder.
@@ -56,6 +66,8 @@ android {
 
 1. Register the plugin with your Vue app
 
+### With Vue >=3.0.0
+
 ```ts
 import { createApp } from "vue";
 import App from "@/app.vue";
@@ -66,8 +78,8 @@ createApp(App)
     .use(Tiki, {
       key: {
         publishingId: "YOUR TIKI PUBLISHING ID",
-        ios: "YOUR MICROBLINK IOS LICENSE KEY",
         android: "YOUR MICROBLINK ANDROID LICENSE KEY",
+        ios: "YOUR MICROBLINK IOS LICENSE KEY",
         product: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
       },
       callback: (_total: number): number | undefined => undefined,
@@ -75,11 +87,41 @@ createApp(App)
     .mount("#app");
 ```
 
+### With Vue 2.7.14
+
+```ts
+import Vue from "vue";
+import App from "./app.vue";
+
+import Tiki from "@mytiki/receipt-capacitor-vue2";
+
+Vue.use(Tiki, {
+  key: {
+    publishingId: "YOUR TIKI PUBLISHING ID",
+    android: "YOUR MICROBLINK ANDROID LICENSE KEY",
+    ios: "YOUR MICROBLINK IOS LICENSE KEY",
+    product: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
+  },
+  callback: (_total: number): number | undefined => undefined,
+});
+
+new Vue({ render: (h) => h(App) }).$mount("#app");
+```
+
 _This registers the Vue Component as `TikiReceipt` and provides the service `TikiService` as an injectable object name `Tiki`._
 
 2. Add the stylesheet for the component to your primary stylesheet (e.g. `main.css`)
+
+### With Vue >=3.0.0
+
 ```css
 @import "@mytiki/receipt-capacitor/dist/receipt-capacitor.css";
+```
+
+### With Vue 2.7.14
+
+```css
+@import "@mytiki/receipt-capacitor-vue2/dist/receipt-capacitor.css";
 ```
 
 #### Android
@@ -105,10 +147,25 @@ To initialize just inject the `TikiService` and pass in your systems unique iden
 
 [Initialize function reference →](https://receipt-capacitor.mytiki.com/classes/TikiService.html#initialize)
 
+### With Vue >=3.0.0
+
 ```vue
 <script setup lang="ts">
   import { inject } from "vue";
   import { type TikiService } from "@mytiki/tiki-receipt-capacitor";
+  
+  const tiki: TikiService | undefined = inject("Tiki");
+  tiki?.initialize(id).then(() => console.log("Tiki Initialized"));
+</script>
+```
+
+### With Vue 2.7.14
+
+```vue
+<script setup lang="ts">
+  import { inject } from "vue";
+  import { type TikiService } from "@mytiki/tiki-receipt-capacitor-vue2";
+  
   const tiki: TikiService | undefined = inject("Tiki");
   tiki?.initialize(id).then(() => console.log("Tiki Initialized"));
 </script>
@@ -117,12 +174,15 @@ To initialize just inject the `TikiService` and pass in your systems unique iden
 _We recommend initializing as early as possible in your application. We scrape accounts (which can take a few seconds) in the background. If you initialize early, by the time the user launches the UI, all of their receipt data will be up-to-date. No worries if not, the UI will just update as data comes in._
 
 ### Open UI
-Add the `TikiReceipt` component to your template and a boolean Ref
+Add the `TikiReceipt` component to your template and a boolean Ref (e.g. present). Now just set `present.value = true` to open the UI.
+
+### With Vue >=3.0.0
 
 ```vue
 <script setup lang="ts">
   import { inject, ref } from "vue";
   import { type TikiService } from "@mytiki/receipt-capacitor";
+  
   const tiki: TikiService | undefined = inject("Tiki");
   tiki?.initialize(id).then(() => console.log("Tiki Initialized"));
   const present = ref(false);
@@ -133,15 +193,43 @@ Add the `TikiReceipt` component to your template and a boolean Ref
 </template>
 ```
 
-Now just set `present.value = true` to open the UI.
+### With Vue 2.7.14
+
+```vue
+<script setup lang="ts">
+  import { inject, ref } from "vue";
+  import { type TikiService } from "@mytiki/receipt-capacitor-vue2";
+  
+  const tiki: TikiService | undefined = inject("Tiki");
+  tiki?.initialize(id).then(() => console.log("Tiki Initialized"));
+  const present = ref(false);
+</script>
+
+<template>
+  <tiki-receipt :present="present" @update:present="(val) => (present = val)"/>
+</template>
+```
 
 ### Logout
 When a user logs out of your application, you'll want to unlink connected accounts, delete cached credentials, and other user state
 data.
 
+### With Vue >=3.0.0
+
 ```ts
 import { inject, ref } from "vue";
 import { type TikiService } from "@mytiki/receipt-capacitor";
+
+const tiki: TikiService | undefined = inject("Tiki");
+await tiki?.logout();
+```
+
+### With Vue 2.7.14
+
+```ts
+import { inject, ref } from "vue";
+import { type TikiService } from "@mytiki/receipt-capacitor-vue2";
+
 const tiki: TikiService | undefined = inject("Tiki");
 await tiki?.logout();
 ```
@@ -156,14 +244,14 @@ While this README is helpful, it's always easier to just see it in action. In `/
 
 _Note, if you press start before the initialization is complete, a warning will hit your console logs._
 
-- See `example/README.md` on how to build and run the example
 - Check out `example/src/main.ts` to view an example configuration of the library.
 - In `example/src/app.vue` you'll find Vue template showcasing initialization, logout, and using a button to open the pre-built UI.
+- To run the example app call `make vue[2,3]-example-[ios,android].` e.g. `make vue3-example-android`
 
 ## Open Issues
 You can find active issues here in GitHub under [Issues](https://github.com/tiki/tiki-receipt-capacitor/issues). If you run into a bug or have a question, just create a new Issue or reach out to a team member on 👾 [Discord](https://discord.gg/tiki).
 
-### Next Release: [0.4.1](https://github.com/tiki/apps/issues/9)
+### Next Release: [0.4.2](https://github.com/tiki/apps/issues/11)
 
 # Contributing
 
@@ -179,6 +267,10 @@ You can find active issues here in GitHub under [Issues](https://github.com/tiki
   - `/config`: The configuration interface(s)
   - `/utils`: Reusable helper functions
 - `/example`: A simple example project using the plugin
+  - `/vue2`: The example project in a Vue 2.7 configuration
+  - `/vue3`: The example project in a Vue 3.0 configuration
+- `vue2`: Build files for vue2 configuration
+- `vue3`: Build files for vue3 configuration
 
 ## Contributors ✨
 

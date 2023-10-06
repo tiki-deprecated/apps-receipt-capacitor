@@ -21,7 +21,7 @@ const options: Options = {
   breaks: true,
   linkify: false,
   typographer: true,
-}
+};
 </script>
 
 <template>

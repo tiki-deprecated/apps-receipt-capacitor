@@ -3,13 +3,13 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import { Repository } from "@/service/store/repository";
+import { Repository } from "./repository";
 import {
   StateGmail,
   StateReceipt,
   StateRetailer,
   StateSync,
-} from "@/service/store/state/";
+} from "./state";
 
 export class ServiceStore {
   private readonly repository: Repository;

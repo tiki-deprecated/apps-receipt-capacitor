@@ -3,8 +3,8 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import { Config } from "@/config/config";
-import type { Options } from "@/config/options";
+import { Config } from "@/config";
+import type { Options } from "@/options";
 import { ServiceCapture, ServiceStore, ServicePublish } from "@/service";
 import { InternalHandlers } from "@/service/tiki/internal-handlers";
 
