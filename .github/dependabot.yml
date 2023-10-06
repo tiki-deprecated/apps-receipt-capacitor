@@ -1,22 +1,62 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/"
+    directory: "/vue3"
     schedule:
       interval: "weekly"
     commit-message:
       prefix: "npm"
     labels:
       - "chore"
+    groups:
+      minor:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
   - package-ecosystem: "npm"
-    directory: "/example"
+    directory: "/vue2"
     schedule:
       interval: "weekly"
     commit-message:
       prefix: "npm"
     labels:
       - "chore"
+    groups:
+      minor:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "npm"
+    directory: "/example/vue3"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "npm"
+    labels:
+      - "chore"
+    groups:
+      all:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "npm"
+    directory: "/example/vue2"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "npm"
+    labels:
+      - "chore"
+    groups:
+      all:
+        patterns:
+          - "*"
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -26,3 +66,7 @@ updates:
       prefix: "gh-action"
     labels:
       - "chore"
+    groups:
+      all:
+        patterns:
+          - "*"

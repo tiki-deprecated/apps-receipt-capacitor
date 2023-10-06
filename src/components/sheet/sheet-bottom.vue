@@ -7,15 +7,13 @@
 import { ref, watch } from "vue";
 
 const props = defineProps({
-  color: String,
-  height: String,
   show: {
     type: Boolean,
     required: false,
     default: true,
   },
 });
-const emit = defineEmits(["dismiss"]);
+defineEmits(["dismiss"]);
 const isShow = ref(props.show);
 watch(
   () => props.show,
@@ -43,12 +41,6 @@ watch(
   height: 100vh;
   z-index: 998;
   position: fixed;
-}
-
-@media (prefers-color-scheme: dark) {
-  .overlay {
-    //background-color: rgba(0, 0, 0, 70%);
-  }
 }
 
 .bottom-sheet {

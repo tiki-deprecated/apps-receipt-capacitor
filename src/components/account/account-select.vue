@@ -1,29 +1,47 @@
+<!--
+  - Copyright (c) TIKI Inc.
+  - MIT license. See LICENSE file in root directory.
+  -->
+
 <script setup lang="ts">
-import * as Type from "@/components/account/account-type";
-import { onMounted, ref, type PropType } from "vue";
+import {
+  accountTypes,
+  type AccountType,
+  AMAZON,
+} from "@mytiki/capture-receipt-capacitor";
+import { type PropType, ref } from "vue";
 
-
-
-defineEmits(['update'])
-const props = defineProps({
-  account: {
-    type: String,
-    required: false
+const emit = defineEmits(["update:accountType"]);
+defineProps({
+  accountType: {
+    type: Object as PropType<AccountType>,
+    required: false,
+    default: undefined,
+  },
+});
+const account = ref<HTMLSelectElement>();
+const update = () => {
+  const value = account.value?.value;
+  if (value != undefined) {
+    const type: AccountType | undefined = accountTypes.from(value);
+    if (type === undefined) throw new Error("Unsupported account type");
+    else emit("update:accountType", type);
   }
-})
-const account = ref<HTMLSelectElement>()
-onMounted(()=>{
-    account.value!.value = props.account!;
-})
-
+};
 </script>
 
 <template>
+  <div>
     <label for="accounts">Choose Account</label>
-    <select id="accounts" required @change="$emit('update', account)" ref="account">
-      <option v-for="account of Type.index" :value="account[0]" :label="account[1].name">
-      </option>
+    <select id="accounts" ref="account" required @change="update">
+      <option
+        v-for="(typ, index) of accountTypes.index"
+        :key="index"
+        :value="typ[0]"
+        :label="typ[1].name"
+      ></option>
     </select>
+  </div>
 </template>
 
 <style>

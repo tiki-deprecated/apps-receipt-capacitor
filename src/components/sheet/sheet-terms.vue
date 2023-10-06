@@ -8,9 +8,9 @@ import VueMarkdown from "vue-markdown-render";
 import ButtonText from "@/components/button/button-text.vue";
 import HeaderBack from "@/components/header/header-back.vue";
 import { inject } from "vue";
-import type { TikiService } from "@/service/tiki-service";
+import type { TikiService } from "@/service";
 
-const tiki: TikiService | undefined = inject("Tiki");
+const tiki: TikiService = inject("Tiki")!;
 const emit = defineEmits(["back", "accept", "close"]);
 defineProps({
   markdown: {
@@ -20,7 +20,7 @@ defineProps({
 });
 
 const accept = () => {
-  //tiki!.sdk.createLicense();
+  tiki.publish.createLicense();
   emit("accept");
 };
 </script>
