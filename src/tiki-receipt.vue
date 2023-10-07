@@ -16,6 +16,8 @@ import SheetGmail from "@/components/sheet/sheet-gmail.vue";
 import SheetRetailer from "@/components/sheet/sheet-retailer.vue";
 import SheetAddGmail from "@/components/sheet/sheet-add-gmail.vue";
 import SheetAddRetailer from "@/components/sheet/sheet-add-retailer.vue";
+import SheetWarn from "@/components/sheet/sheet-warn.vue";
+import type { Account } from "@mytiki/capture-receipt-capacitor";
 
 const emit = defineEmits([
   /**
@@ -52,6 +54,9 @@ watch(
 
 const tiki: TikiService = inject("Tiki")!;
 tiki.config.theme.apply(document);
+
+const warn = (account: Account) =>
+  navigate.to(Sheets.Warn, new Map([["account", account]]));
 </script>
 
 <template>
@@ -96,17 +101,19 @@ tiki.config.theme.apply(document);
           v-if="navigate.ref.value === Sheets.Google"
           @back="navigate.pop()"
           @close="navigate.clear()"
+          @add="navigate.to(Sheets.AddGoogle)"
+          @warn="warn"
           @skip="
             navigate.pop();
             navigate.to(Sheets.AddGoogle);
           "
-          @add="navigate.to(Sheets.AddGoogle)"
         />
         <sheet-retailer
           v-if="navigate.ref.value === Sheets.Retailer"
           @back="navigate.pop()"
           @close="navigate.clear()"
           @add="navigate.to(Sheets.AddRetailer)"
+          @warn="warn"
           @skip="
             navigate.pop();
             navigate.to(Sheets.AddRetailer);
@@ -119,6 +126,12 @@ tiki.config.theme.apply(document);
         />
         <sheet-add-gmail
           v-if="navigate.ref.value === Sheets.AddGoogle"
+          @back="navigate.pop()"
+          @close="navigate.clear()"
+        />
+        <sheet-warn
+          v-if="navigate.ref.value === Sheets.Warn"
+          :account="navigate.params.get('account')"
           @back="navigate.pop()"
           @close="navigate.clear()"
         />

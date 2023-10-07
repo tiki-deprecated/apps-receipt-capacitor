@@ -6,8 +6,24 @@
 import HeaderBack from "@/components/header/header-back.vue";
 import ButtonText from "@/components/button/button-text.vue";
 import { ButtonTextState } from "@/components/button/button-text-state";
+import type { PropType } from "vue";
+import type { Account } from "@mytiki/capture-receipt-capacitor";
+import type { TikiService } from "@/service";
+import { inject } from "vue";
 
-defineEmits(["remove", "close", "back"]);
+const emit = defineEmits(["remove", "close", "back"]);
+const props = defineProps({
+  account: {
+    type: Object as PropType<Account | undefined>,
+    required: true,
+  },
+});
+
+if (props.account === undefined) emit("back");
+const tiki: TikiService = inject("Tiki")!;
+const remove = async () => {
+  await tiki.capture.logout(props.account);
+};
 </script>
 
 <template>
@@ -30,7 +46,7 @@ defineEmits(["remove", "close", "back"]);
       text="Remove Account"
       class="warning-button"
       :state="ButtonTextState.ALERT"
-      @click="$emit('remove')"
+      @click="remove"
     />
   </div>
 </template>

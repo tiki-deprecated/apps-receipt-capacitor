@@ -18,9 +18,11 @@ export enum Sheets {
   Google,
   AddRetailer,
   AddGoogle,
+  Warn,
 }
 
 export class Navigate {
+  private _params: Map<string, any> = new Map();
   private stack: Sheets[] = [];
   readonly ref: Ref<Sheets>;
 
@@ -40,10 +42,12 @@ export class Navigate {
     }
   }
 
-  to(to: Sheets): void {
+  to(to: Sheets, params: Map<string, any> | undefined = undefined): void {
     if (to === Sheets.Hidden) this.clear();
     else {
       this.stack.push(to);
+      if (!params) this._params.clear();
+      else this._params = params;
       this.ref.value = to;
     }
   }
@@ -51,6 +55,7 @@ export class Navigate {
   pop(): void {
     if (this.stack.length > 1) {
       this.stack.pop();
+      this._params.clear();
       this.ref.value = this.stack.slice(-1)[0];
     } else this.clear();
   }
@@ -58,5 +63,10 @@ export class Navigate {
   clear(): void {
     this.stack = [];
     this.ref.value = Sheets.Hidden;
+    this._params.clear();
+  }
+
+  get params(): Map<string, any> {
+    return this._params;
   }
 }

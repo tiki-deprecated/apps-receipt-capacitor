@@ -11,7 +11,7 @@ import type { TikiService } from "@/service";
 import { inject, ref } from "vue";
 import type { Account } from "@mytiki/capture-receipt-capacitor";
 
-const emit = defineEmits(["back", "close", "add", "skip"]);
+const emit = defineEmits(["back", "close", "add", "skip", "warn"]);
 const tiki: TikiService = inject("Tiki")!;
 const filter = (accounts: Account[]): Account[] =>
   accounts.filter((account) => account.type.type === "RETAILER");
@@ -23,8 +23,8 @@ tiki.capture.onAccount("SheetRetailer", (_, __) => {
 });
 
 const remove = async (account: Account) => {
-  //show warn.
-  await tiki.capture.logout(account);
+  if (accounts.value.length > 1) await tiki.capture.logout(account);
+  else emit("warn", account);
 };
 </script>
 

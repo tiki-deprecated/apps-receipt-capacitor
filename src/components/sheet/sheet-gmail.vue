@@ -11,7 +11,7 @@ import type { TikiService } from "@/service";
 import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
 import { inject, ref } from "vue";
 
-const emit = defineEmits(["back", "close", "add", "skip"]);
+const emit = defineEmits(["back", "close", "add", "skip", "warn"]);
 const tiki: TikiService = inject("Tiki")!;
 
 const filter = (accounts: Account[]): Account[] =>
@@ -24,8 +24,8 @@ tiki.capture.onAccount("SheetGmail", (_, __) => {
 });
 
 const remove = async (account: Account) => {
-  //show warn.
-  await tiki.capture.logout(account);
+  if (accounts.value.length > 1) await tiki.capture.logout(account);
+  else emit("warn", account);
 };
 </script>
 
