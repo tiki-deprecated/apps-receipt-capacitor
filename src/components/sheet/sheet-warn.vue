@@ -7,9 +7,9 @@ import HeaderBack from "@/components/header/header-back.vue";
 import ButtonText from "@/components/button/button-text.vue";
 import { ButtonTextState } from "@/components/button/button-text-state";
 import type { PropType } from "vue";
+import { inject, ref } from "vue";
 import type { Account } from "@mytiki/capture-receipt-capacitor";
 import type { TikiService } from "@/service";
-import { inject } from "vue";
 
 const emit = defineEmits(["remove", "close", "back"]);
 const props = defineProps({
@@ -21,8 +21,12 @@ const props = defineProps({
 
 if (props.account === undefined) emit("back");
 const tiki: TikiService = inject("Tiki")!;
+const isLoading = ref<boolean>(false);
 const remove = async () => {
+  isLoading.value = true;
   await tiki.capture.logout(props.account);
+  isLoading.value = false;
+  emit("back");
 };
 </script>
 
@@ -45,7 +49,7 @@ const remove = async () => {
     <button-text
       text="Remove Account"
       class="warning-button"
-      :state="ButtonTextState.ALERT"
+      :state="isLoading ? ButtonTextState.ALERT_LOADING : ButtonTextState.ALERT"
       @click="remove"
     />
   </div>
@@ -58,7 +62,7 @@ const remove = async () => {
   font-size: var(--tiki-font-size);
   line-height: var(--tiki-line-height);
   color: var(--tiki-secondary-text-color);
-  margin: 0 0 1.5em 0;
+  margin-bottom: 2em;
 }
 
 .alert-text-bold {

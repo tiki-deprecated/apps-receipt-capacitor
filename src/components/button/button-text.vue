@@ -124,7 +124,7 @@ const click = () => {
 .alert {
   border-color: var(--tiki-error-color);
   background-color: var(--tiki-error-color);
-  color: var(--tiki-primary-text-color);
+  color: var(--tiki-primary-background-color);
 }
 
 .disable {
