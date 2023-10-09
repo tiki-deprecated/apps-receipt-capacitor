@@ -45,5 +45,4 @@ export class Navigate {
   }
 }
 
-export { NavView };
-export * from "./defs/index";
+export { NavView, NavDef };

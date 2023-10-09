@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import HeaderBack from "@/components/header/header-back.vue";
+import { HeaderBack } from "@/components";
 import Showdown from "showdown";
 
 defineEmits(["back", "close"]);

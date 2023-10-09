@@ -5,9 +5,9 @@
 
 <script setup lang="ts">
 import { inject } from "vue";
-import * as Keys from "@/utils/inject-key";
+import { Keys } from "@/utils";
 import { type Navigate } from "@/nav";
-import SheetAddRetailer from "@/components/sheet/sheet-add-retailer.vue";
+import { SheetAddRetailer } from "@/components";
 const navigate: Navigate = inject(Keys.navigate)!;
 </script>
 

@@ -4,14 +4,13 @@
   -->
 
 <script setup lang="ts">
-import ButtonText from "@/components/button/button-text.vue";
-import HeaderBack from "@/components/header/header-back.vue";
+import { ButtonText, HeaderBack, ButtonTextState } from "@/components";
 import { inject, ref } from "vue";
-import type { TikiService } from "@/service";
+import type { Publish } from "@/service";
 import Showdown from "showdown";
-import { ButtonTextState } from "@/components/button/button-text-state";
+import { Keys } from "@/utils";
 
-const tiki: TikiService = inject("Tiki")!;
+const publish: Publish = inject(Keys.publish)!;
 const emit = defineEmits(["back", "accept", "close"]);
 const props = defineProps({
   markdown: {
@@ -24,7 +23,7 @@ const terms = new Showdown.Converter().makeHtml(props.markdown);
 const isLoading = ref<boolean>(false);
 const accept = async () => {
   isLoading.value = true;
-  await tiki.publish.createLicense();
+  await publish.createLicense();
   isLoading.value = false;
   emit("accept");
 };

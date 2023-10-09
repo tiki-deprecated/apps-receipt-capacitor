@@ -4,9 +4,9 @@
   -->
 
 <script setup lang="ts">
-import SheetWarn from "@/components/sheet/sheet-warn.vue";
+import { SheetWarn } from "@/components";
 import { inject } from "vue";
-import * as Keys from "@/utils/inject-key";
+import { Keys } from "@/utils";
 const navigate = inject(Keys.navigate)!;
 </script>
 

@@ -3,11 +3,10 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import LearnMore from "@/assets/md/learn-more.md?raw";
-import Terms from "@/assets/md/terms.md?raw";
-import { Theme } from "@/config/theme";
-import { Key } from "@/config/key";
-import { Offer } from "@/config/offer";
+import { LearnMore, Terms } from "@/assets/md";
+import { Theme } from "./theme";
+import { Key } from "./key";
+import { Offer } from "./offer";
 import type { Options } from "@/options";
 import {
   CommonTags,

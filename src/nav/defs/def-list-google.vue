@@ -5,9 +5,9 @@
 
 <script setup lang="ts">
 import { inject } from "vue";
-import * as Keys from "@/utils/inject-key";
+import { Keys } from "@/utils";
 import { type Navigate, NavDef } from "@/nav";
-import SheetGmail from "@/components/sheet/sheet-gmail.vue";
+import { SheetGmail } from "@/components";
 import type { Account } from "@mytiki/capture-receipt-capacitor";
 const navigate: Navigate = inject(Keys.navigate)!;
 const warn = (account: Account) =>

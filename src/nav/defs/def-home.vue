@@ -5,9 +5,9 @@
 
 <script setup lang="ts">
 import { inject } from "vue";
-import * as Keys from "@/utils/inject-key";
+import { Keys } from "@/utils";
 import { type Navigate, NavDef } from "@/nav";
-import SheetHome from "@/components/sheet/sheet-home.vue";
+import { SheetHome } from "@/components";
 const navigate: Navigate = inject(Keys.navigate)!;
 </script>
 

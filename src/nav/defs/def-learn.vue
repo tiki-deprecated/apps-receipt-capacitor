@@ -5,17 +5,17 @@
 
 <script setup lang="ts">
 import { inject } from "vue";
-import * as Keys from "@/utils/inject-key";
+import { Keys } from "@/utils";
 import { type Navigate } from "@/nav";
-import SheetLearn from "@/components/sheet/sheet-learn.vue";
-import type { TikiService } from "@/service";
+import { SheetLearn } from "@/components";
+import type { Config } from "@/config";
 const navigate: Navigate = inject(Keys.navigate)!;
-const tiki: TikiService = inject(Keys.tiki)!;
+const config: Config = inject(Keys.config)!;
 </script>
 
 <template>
   <sheet-learn
-    :markdown="tiki.config.learn"
+    :markdown="config.learn"
     @back="navigate.pop()"
     @close="navigate.clear()"
   />

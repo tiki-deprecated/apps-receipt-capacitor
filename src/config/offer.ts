@@ -4,7 +4,7 @@
  */
 
 import type * as Options from "@/options/offer";
-import ProgramImage from "@/assets/images/program.png";
+import { ProgramImage } from "@/assets/images";
 
 export class Offer {
   readonly image: string = ProgramImage;

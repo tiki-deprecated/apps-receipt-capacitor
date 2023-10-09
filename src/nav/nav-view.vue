@@ -4,40 +4,48 @@
   -->
 
 <script setup lang="ts">
-import {
-  AddGoogle,
-  AddRetailer,
-  Home,
-  Learn,
-  ListGoogle,
-  ListRetailer,
-  Offer,
-  Terms,
-  WarnAccount,
-  NavDef,
-} from "./defs";
-import { inject, type Ref } from "vue";
-import * as Keys from "@/utils/inject-key";
-const state: Ref<NavDef> = inject(Keys.navigate)!.ref;
+import { type Navigate, NavDef } from "@/nav";
+import NavDefs from "./nav-defs.vue";
+import { SheetBottom } from "@/components";
+import { inject, watch } from "vue";
+import type { LicenseRecord } from "@mytiki/tiki-sdk-capacitor";
+import { Keys } from "@/utils";
+import type { Publish } from "@/service";
+import type { Config } from "@/config";
+
+const navigate: Navigate = inject(Keys.navigate)!;
+const publish: Publish = inject(Keys.publish)!;
+const config: Config = inject(Keys.config)!;
+defineEmits(["update:show"]);
+const props = defineProps({
+  show: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+config.theme.apply(document);
+
+watch(
+  () => props.show,
+  async (show) => {
+    if (show) {
+      const license: LicenseRecord | undefined = await publish.getLicense();
+      if (!license) navigate.to(NavDef.Offer);
+      else navigate.to(NavDef.Home);
+    } else navigate.clear();
+  },
+);
 </script>
 
 <template>
-  <div class="body">
-    <add-google v-if="state === NavDef.AddGoogle" />
-    <add-retailer v-if="state === NavDef.AddRetailer" />
-    <home v-if="state === NavDef.Home" />
-    <learn v-if="state === NavDef.Learn" />
-    <list-google v-if="state === NavDef.ListGoogle" />
-    <list-retailer v-if="state === NavDef.ListRetailer" />
-    <offer v-if="state === NavDef.Offer" />
-    <terms v-if="state === NavDef.Terms" />
-    <warn-account v-if="state === NavDef.WarnAccount" />
-  </div>
+  <sheet-bottom
+    v-if="show"
+    :show="navigate.ref.value !== NavDef.None"
+    @dismiss="$emit('update:show', false)"
+  >
+    <nav-defs />
+  </sheet-bottom>
 </template>
 
-<style>
-.body {
-  padding: 1.25em 1em 2.5em 1em;
-  box-sizing: border-box;
-}
-</style>
+<style scoped></style>

@@ -4,12 +4,10 @@
   -->
 
 <script setup lang="ts">
-import { inject, provide, watch } from "vue";
-import SheetBottom from "@/components/sheet/sheet-bottom.vue";
-import type { TikiService } from "@/service";
-import { Navigate, NavView, NavDef } from "@/nav";
+import { inject, provide, watch, ref } from "vue";
+import type { TikiService } from "@/service/tiki-service";
+import { Navigate, NavView } from "@/nav";
 import * as Keys from "@/utils/inject-key";
-import type { LicenseRecord } from "@mytiki/tiki-sdk-capacitor";
 
 const emit = defineEmits([
   /**
@@ -30,41 +28,32 @@ const props = defineProps({
   },
 });
 
-const tiki: TikiService = inject(Keys.tiki)!;
-tiki.config.theme.apply(document);
-
 const navigate = new Navigate();
 provide(Keys.navigate, navigate);
+const tiki: TikiService = inject(Keys.tiki)!;
+tiki.inject(provide);
+const update = (show: boolean) => emit("update:present", show);
+const show = ref<boolean>(false);
 
 watch(
   () => props.present,
   async (present) => {
     if (present) {
       const isInitialized: boolean = tiki?.isInitialized ?? false;
-      if (isInitialized) {
-        const license: LicenseRecord | undefined =
-          await tiki!.publish.getLicense();
-        console.log(`license: ${JSON.stringify(license)}`);
-        if (!license) navigate.to(NavDef.Offer);
-        else navigate.to(NavDef.Home);
-      } else {
+      if (!isInitialized) {
+        show.value = false;
         emit("update:present", false);
         throw Error("TIKI SDK is not yet initialized");
       }
-    } else navigate.clear();
+    }
+    show.value = present;
   },
 );
 </script>
 
 <template>
   <Transition appear name="fade">
-    <sheet-bottom
-      v-if="present"
-      :show="navigate.ref.value !== NavDef.None"
-      @dismiss="$emit('update:present', false)"
-    >
-      <nav-view />
-    </sheet-bottom>
+    <nav-view :show="present" @update:show="update" />
   </Transition>
 </template>
 

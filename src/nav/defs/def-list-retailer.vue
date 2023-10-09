@@ -5,8 +5,8 @@
 
 <script setup lang="ts">
 import { inject } from "vue";
-import * as Keys from "@/utils/inject-key";
-import SheetRetailer from "@/components/sheet/sheet-retailer.vue";
+import { Keys } from "@/utils";
+import { SheetRetailer } from "@/components";
 import { type Navigate, NavDef } from "@/nav";
 import type { Account } from "@mytiki/capture-receipt-capacitor";
 const navigate: Navigate = inject(Keys.navigate)!;
