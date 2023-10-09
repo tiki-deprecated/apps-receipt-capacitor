@@ -6,9 +6,10 @@
 <script setup lang="ts">
 import ButtonText from "@/components/button/button-text.vue";
 import HeaderBack from "@/components/header/header-back.vue";
-import { inject } from "vue";
+import { inject, ref } from "vue";
 import type { TikiService } from "@/service";
 import Showdown from "showdown";
+import { ButtonTextState } from "@/components/button/button-text-state";
 
 const tiki: TikiService = inject("Tiki")!;
 const emit = defineEmits(["back", "accept", "close"]);
@@ -20,8 +21,11 @@ const props = defineProps({
 });
 
 const terms = new Showdown.Converter().makeHtml(props.markdown);
-const accept = () => {
-  tiki.publish.createLicense();
+const isLoading = ref<boolean>(false);
+const accept = async () => {
+  isLoading.value = true;
+  await tiki.publish.createLicense();
+  isLoading.value = false;
   emit("accept");
 };
 </script>
@@ -34,7 +38,14 @@ const accept = () => {
       @close="$emit('close')"
     />
     <div class="terms" v-html="terms" />
-    <button-text text="I agree" class="agree" @click="accept" />
+    <button-text
+      text="I agree"
+      class="agree"
+      :state="
+        isLoading ? ButtonTextState.STANDARD_LOADING : ButtonTextState.STANDARD
+      "
+      @click="accept"
+    />
   </div>
 </template>
 
