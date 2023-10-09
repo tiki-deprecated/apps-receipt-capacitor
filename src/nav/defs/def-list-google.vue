@@ -7,7 +7,7 @@
 import { inject } from "vue";
 import { InjectKey } from "@/utils";
 import { type Navigate, NavDef } from "@/nav";
-import { SheetGmail } from "@/components";
+import { SheetListGmail } from "@/components";
 import type { Account } from "@mytiki/capture-receipt-capacitor";
 const navigate: Navigate = inject(InjectKey.navigate)!;
 const warn = (account: Account) =>
@@ -15,7 +15,7 @@ const warn = (account: Account) =>
 </script>
 
 <template>
-  <sheet-gmail
+  <sheet-list-gmail
     @back="navigate.pop()"
     @close="navigate.clear()"
     @add="navigate.to(NavDef.AddGoogle)"

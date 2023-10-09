@@ -4,14 +4,14 @@
   -->
 
 <script setup lang="ts">
-import { SheetWarn } from "@/components";
+import { SheetWarnAccount } from "@/components";
 import { inject } from "vue";
 import { InjectKey } from "@/utils";
 const navigate = inject(InjectKey.navigate)!;
 </script>
 
 <template>
-  <sheet-warn
+  <sheet-warn-account
     :account="navigate.params.get('account')"
     @back="navigate.pop()"
     @close="navigate.clear()"
