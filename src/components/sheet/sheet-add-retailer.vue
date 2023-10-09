@@ -19,7 +19,7 @@ import {
   YAHOO,
   OUTLOOK
 } from "@mytiki/capture-receipt-capacitor";
-import { ref, inject, computed } from "vue";
+import { ref, inject, computed, onMounted } from "vue";
 import { type Capture } from "@/service";
 import { InjectKey } from "@/utils";
 
@@ -27,11 +27,13 @@ const emit = defineEmits(["close", "back"]);
 const capture: Capture = inject(InjectKey.capture)!;
 
 const filtered = accountTypes.index;
-capture.accounts.forEach((account) => filtered.delete(account.type.id));
 filtered.delete(GMAIL.id);
 filtered.delete(AOL.id);
 filtered.delete(YAHOO.id);
 filtered.delete(OUTLOOK.id);
+onMounted(() =>
+  capture.accounts.forEach((account) => filtered.delete(account.type.id))
+);
 
 const form = ref<Account>({
   username: "",
