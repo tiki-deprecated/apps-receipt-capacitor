@@ -5,6 +5,8 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
+import { close } from "@/utils/swipe";
+
 
 const props = defineProps({
   show: {
@@ -20,13 +22,13 @@ watch(
   (show) => (isShow.value = show),
 );
 
-const handleTouch = (evt: any) =>{
-  console.log('teste', evt)
+const handleTouch = (element: any) =>{
+  if(close(element)) isShow.value = false
 }
 </script>
 
 <template>
-  <div class="overlay" @click.stop.prevent="isShow = false" @touchstart="handleTouch" @touchend="handleTouch">
+  <div class="overlay" @click.stop.prevent="isShow = false" @touchend="handleTouch">
     <Transition appear name="slide" @leave="$emit('dismiss')">
       <div v-if="isShow" class="bottom-sheet" @click.stop>
         <slot />
