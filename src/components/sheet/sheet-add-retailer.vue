@@ -3,25 +3,28 @@
   - MIT license. See LICENSE file in root directory.
   -->
 <script setup lang="ts">
-import AccountSelect from "../account/account-select.vue";
-import AccountForm from "../account/account-form.vue";
-import HeaderBack from "@/components/header/header-back.vue";
-import ButtonText from "@/components/button/button-text.vue";
-import type { AccountType } from "@mytiki/capture-receipt-capacitor";
+import {
+  AccountSelect,
+  AccountForm,
+  HeaderBack,
+  ButtonText,
+  ButtonTextState,
+} from "@/components";
 import {
   type Account,
+  type AccountType,
   accountTypes,
   GMAIL,
 } from "@mytiki/capture-receipt-capacitor";
-import type { TikiService } from "@/service";
 import { ref, inject, computed } from "vue";
-import { ButtonTextState } from "@/components/button/button-text-state";
+import { type Capture } from "@/service";
+import { InjectKey } from "@/utils";
 
 const emit = defineEmits(["close", "back"]);
-const tiki: TikiService = inject("Tiki")!;
+const capture: Capture = inject(InjectKey.capture)!;
 
 const filtered = accountTypes.index;
-tiki.capture.accounts.forEach((account) => filtered.delete(account.type.id));
+capture.accounts.forEach((account) => filtered.delete(account.type.id));
 filtered.delete(GMAIL.id);
 
 const form = ref<Account>({
@@ -45,8 +48,8 @@ const submit = async () => {
   isLoading.value = true;
   error.value = "";
   try {
-    await tiki.capture.login(form.value);
-    tiki.capture.scan().catch((error) => console.error(error.toString()));
+    await capture.login(form.value);
+    capture.scan().catch((error) => console.error(error.toString()));
     error.value = "";
     form.value = {
       username: "",

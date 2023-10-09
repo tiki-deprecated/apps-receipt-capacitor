@@ -3,13 +3,11 @@
   - MIT license. See LICENSE file in root directory.
   -->
 <script setup lang="ts">
-import HeaderBack from "@/components/header/header-back.vue";
-import ButtonText from "@/components/button/button-text.vue";
-import { ButtonTextState } from "@/components/button/button-text-state";
-import type { PropType } from "vue";
-import { inject, ref } from "vue";
+import { HeaderBack, ButtonText, ButtonTextState } from "@/components";
+import { inject, ref, type PropType } from "vue";
 import type { Account } from "@mytiki/capture-receipt-capacitor";
-import type { TikiService } from "@/service";
+import type { Capture } from "@/service";
+import { InjectKey } from "@/utils";
 
 const emit = defineEmits(["remove", "close", "back"]);
 const props = defineProps({
@@ -20,11 +18,11 @@ const props = defineProps({
 });
 
 if (props.account === undefined) emit("back");
-const tiki: TikiService = inject("Tiki")!;
+const capture: Capture = inject(InjectKey.capture)!;
 const isLoading = ref<boolean>(false);
 const remove = async () => {
   isLoading.value = true;
-  await tiki.capture.logout(props.account);
+  await capture.logout(props.account);
   isLoading.value = false;
   emit("back");
 };

@@ -4,10 +4,8 @@
   -->
 
 <script setup lang="ts">
-import ButtonIcon from "@/components/button/button-icon.vue";
-import BulletPoint from "@/components/bullet/bullet-point.vue";
-import IconQuestion from "@/assets/icons/question.svg?component";
-import type { BulletState } from "@/components/bullet/bullet-state";
+import { ButtonIcon, BulletPoint, type BulletState } from "@/components";
+import { IconQuestion } from "@/assets";
 
 defineEmits(["learn"]);
 defineProps({

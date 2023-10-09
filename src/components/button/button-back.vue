@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import ArrowIcon from "@/assets/icons/arrow.svg?component";
+import { IconArrow } from "@/assets";
 
 defineProps({
   text: {
@@ -18,7 +18,7 @@ defineEmits(["click"]);
 
 <template>
   <button class="back" @click="$emit('click')">
-    <arrow-icon class="icon" />
+    <icon-arrow class="icon" />
     {{ text }}
   </button>
 </template>

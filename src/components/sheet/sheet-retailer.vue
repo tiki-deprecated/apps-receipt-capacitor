@@ -4,26 +4,25 @@
   -->
 
 <script setup lang="ts">
-import HeaderBack from "@/components/header/header-back.vue";
-import ButtonText from "@/components/button/button-text.vue";
-import AccountList from "@/components/account/account-list.vue";
-import type { TikiService } from "@/service";
+import { HeaderBack, ButtonText, AccountList } from "@/components";
+import type { Capture } from "@/service";
 import { inject, ref } from "vue";
 import type { Account } from "@mytiki/capture-receipt-capacitor";
+import { InjectKey } from "@/utils";
 
 const emit = defineEmits(["back", "close", "add", "skip", "warn"]);
-const tiki: TikiService = inject("Tiki")!;
+const capture: Capture = inject(InjectKey.capture)!;
 const filter = (accounts: Account[]): Account[] =>
   accounts.filter((account) => account.type.type === "RETAILER");
-const accounts = ref<Account[]>(filter(tiki.capture.accounts ?? []));
+const accounts = ref<Account[]>(filter(capture.accounts ?? []));
 if (accounts.value.length == 0) emit("skip");
 
-tiki.capture.onAccount("SheetRetailer", (_, __) => {
-  accounts.value = filter(tiki.capture.accounts ?? []);
+capture.onAccount("SheetRetailer", (_, __) => {
+  accounts.value = filter(capture.accounts ?? []);
 });
 
 const remove = async (account: Account) => {
-  if (accounts.value.length > 1) await tiki.capture.logout(account);
+  if (accounts.value.length > 1) await capture.logout(account);
   else emit("warn", account);
 };
 </script>

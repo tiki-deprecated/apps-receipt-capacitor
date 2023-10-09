@@ -4,16 +4,19 @@
   -->
 
 <script setup lang="ts">
-import AccountForm from "../account/account-form.vue";
-import HeaderBack from "@/components/header/header-back.vue";
-import ButtonText from "@/components/button/button-text.vue";
+import {
+  AccountForm,
+  HeaderBack,
+  ButtonText,
+  ButtonTextState,
+} from "@/components";
 import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
 import { computed, inject, ref } from "vue";
-import type { TikiService } from "@/service";
-import { ButtonTextState } from "@/components/button/button-text-state";
+import { type Capture } from "@/service";
+import { InjectKey } from "@/utils";
 
 const emit = defineEmits(["close", "back"]);
-const tiki: TikiService = inject("Tiki")!;
+const capture: Capture = inject(InjectKey.capture)!;
 
 const form = ref<Account>({ username: "", password: "", type: GMAIL });
 const error = ref<string>();
@@ -32,9 +35,9 @@ const submit = async () => {
   isLoading.value = true;
   error.value = "";
   try {
-    await tiki.capture.login(form.value);
+    await capture.login(form.value);
     form.value = { username: "", password: "", type: GMAIL };
-    tiki.capture.scan().catch((error) => console.error(error.toString()));
+    capture.scan().catch((error) => console.error(error.toString()));
     emit("back");
   } catch (err: any) {
     error.value = err.toString();

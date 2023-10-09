@@ -19,7 +19,7 @@ import type { Jwt } from "@mytiki/tiki-sdk-capacitor";
 /**
  * A service class for interacting with the TIKI publish plugin.
  */
-export class ServicePublish {
+export class Publish {
   readonly plugin: TikiSdk = TikiSdkLicensing.instance;
   private readonly config: Config;
   private _id?: string;

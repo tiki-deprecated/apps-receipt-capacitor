@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import type { PropType } from "vue";
-import { ButtonTextState } from "@/components/button/button-text-state";
+import { ButtonTextState } from "@/components";
 
 const emit = defineEmits(["click"]);
 const props = defineProps({

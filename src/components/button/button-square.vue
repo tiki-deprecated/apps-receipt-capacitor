@@ -4,9 +4,8 @@
   -->
 
 <script setup lang="ts">
-import BulletPoint from "@/components/bullet/bullet-point.vue";
 import type { PropType } from "vue";
-import type { BulletState } from "@/components/bullet/bullet-state";
+import { type BulletState, BulletPoint } from "@/components";
 
 defineProps({
   state: {
