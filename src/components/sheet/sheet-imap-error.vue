@@ -6,10 +6,11 @@
   <script setup lang="ts">
   import HeaderBack from "@/components/header/header-back.vue";
   
-  defineEmits(["remove", "close", "back"]);
+  defineEmits(["close", "back"]);
   </script>
   
   <template>
+    <div>
     <header-back
       text="Gmail Scan Error"
       @back="$emit('back')"
@@ -30,6 +31,7 @@
         <li>Click <b>save changes</b></li>
       </ol>
     </div>
+  </div>
   </template>
   
 <style>
