@@ -13,20 +13,20 @@ defineEmits(["close", "back"]);
 <template>
   <div>
     <header-back
-      text="Scanning Emails"
+      text="Heads up"
       @back="$emit('back')"
       @close="$emit('close')"
     />
     <div class="alert-text">
-      <p class="alert-text-bold">
-        Scanning may take up to a minute to complete. Please keep the app open
-        in the background. We will notify you when complete.
+      <b>Please keep the app open in the background.</b>
+      <p>
+        Email syncing can take up to a minute. We will notify you when complete.
       </p>
     </div>
     <button-text
-      text="Okay, Got it!"
-      @click="$emit('back')"
+      text="Okay, got it!"
       :state="ButtonTextState.STANDARD"
+      @click="$emit('back')"
     />
   </div>
 </template>
@@ -35,10 +35,9 @@ defineEmits(["close", "back"]);
 .alert-text {
   text-align: center;
   font-family: var(--tiki-font-family);
-  font-size: var(--tiki-font-size);
-  line-height: var(--tiki-line-height);
+  font-size: var(--tiki-font-size-lg);
+  line-height: var(--tiki-line-height-lg);
   color: var(--tiki-secondary-text-color);
-  margin: 0 1em 1.5em 1em;
-  font-weight: bold;
+  margin-bottom: 2em;
 }
 </style>
