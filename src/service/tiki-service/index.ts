@@ -9,8 +9,8 @@ import { InternalHandlers } from "@/service/tiki-service/internal-handlers";
 import { Capture } from "@/service/capture";
 import { Store } from "@/service/store";
 import { Publish } from "@/service/publish";
-import type { InjectionKey } from "vue/types/v3-generated";
-import * as Keys from "@/utils/inject-key";
+import type { InjectionKey } from "vue";
+import { InjectKey } from "@/utils";
 
 /**
  * The main entry point for interacting with service-level (non-UI) functionality.
@@ -103,9 +103,9 @@ export class TikiService {
       value: unknown,
     ) => void,
   ): void {
-    provide(Keys.config, this.config);
-    provide(Keys.capture, this.capture);
-    provide(Keys.publish, this.publish);
-    provide(Keys.store, this.store);
+    provide(InjectKey.config, this.config);
+    provide(InjectKey.capture, this.capture);
+    provide(InjectKey.publish, this.publish);
+    provide(InjectKey.store, this.store);
   }
 }
