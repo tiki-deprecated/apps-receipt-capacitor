@@ -4,12 +4,14 @@
   -->
 
 <script setup lang="ts">
-import ButtonText from "@/components/button/button-text.vue";
-import CardOffer from "@/components/card/card-offer.vue";
-import HeaderTitle from "@/components/header/header-title.vue";
-import BulletList from "@/components/bullet/bullet-list.vue";
-import { BulletState } from "@/components/bullet/bullet-state";
-import { ButtonTextState } from "@/components/button/button-text-state";
+import {
+  ButtonText,
+  CardOffer,
+  HeaderTitle,
+  BulletList,
+  BulletState,
+  ButtonTextState,
+} from "@/components";
 
 defineEmits(["close", "learn", "accept"]);
 const props = defineProps({

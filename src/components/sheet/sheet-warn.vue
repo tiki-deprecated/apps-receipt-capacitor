@@ -3,11 +3,29 @@
   - MIT license. See LICENSE file in root directory.
   -->
 <script setup lang="ts">
-import HeaderBack from "@/components/header/header-back.vue";
-import ButtonText from "@/components/button/button-text.vue";
-import { ButtonTextState } from "@/components/button/button-text-state";
+import { HeaderBack, ButtonText, ButtonTextState } from "@/components";
+import { inject, ref, type PropType } from "vue";
+import type { Account } from "@mytiki/capture-receipt-capacitor";
+import type { Capture } from "@/service";
+import { InjectKey } from "@/utils";
 
-defineEmits(["remove", "close", "back"]);
+const emit = defineEmits(["remove", "close", "back"]);
+const props = defineProps({
+  account: {
+    type: Object as PropType<Account | undefined>,
+    required: true,
+  },
+});
+
+if (props.account === undefined) emit("back");
+const capture: Capture = inject(InjectKey.capture)!;
+const isLoading = ref<boolean>(false);
+const remove = async () => {
+  isLoading.value = true;
+  await capture.logout(props.account);
+  isLoading.value = false;
+  emit("back");
+};
 </script>
 
 <template>
@@ -29,8 +47,8 @@ defineEmits(["remove", "close", "back"]);
     <button-text
       text="Remove Account"
       class="warning-button"
-      :state="ButtonTextState.ALERT"
-      @click="$emit('remove')"
+      :state="isLoading ? ButtonTextState.ALERT_LOADING : ButtonTextState.ALERT"
+      @click="remove"
     />
   </div>
 </template>
@@ -42,7 +60,7 @@ defineEmits(["remove", "close", "back"]);
   font-size: var(--tiki-font-size);
   line-height: var(--tiki-line-height);
   color: var(--tiki-secondary-text-color);
-  margin: 0 0 1.5em 0;
+  margin-bottom: 2em;
 }
 
 .alert-text-bold {

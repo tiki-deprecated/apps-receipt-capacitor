@@ -4,23 +4,27 @@
   -->
 
 <script setup lang="ts">
-import VueMarkdown from "vue-markdown-render";
-import ButtonText from "@/components/button/button-text.vue";
-import HeaderBack from "@/components/header/header-back.vue";
-import { inject } from "vue";
-import type { TikiService } from "@/service";
+import { ButtonText, HeaderBack, ButtonTextState } from "@/components";
+import { inject, ref } from "vue";
+import type { Publish } from "@/service";
+import Showdown from "showdown";
+import { InjectKey } from "@/utils";
 
-const tiki: TikiService = inject("Tiki")!;
+const publish: Publish = inject(InjectKey.publish)!;
 const emit = defineEmits(["back", "accept", "close"]);
-defineProps({
+const props = defineProps({
   markdown: {
     type: String,
     required: true,
   },
 });
 
-const accept = () => {
-  tiki.publish.createLicense();
+const terms = new Showdown.Converter().makeHtml(props.markdown);
+const isLoading = ref<boolean>(false);
+const accept = async () => {
+  isLoading.value = true;
+  await publish.createLicense();
+  isLoading.value = false;
   emit("accept");
 };
 </script>
@@ -32,8 +36,15 @@ const accept = () => {
       @back="$emit('back')"
       @close="$emit('close')"
     />
-    <vue-markdown :source="markdown" class="terms" />
-    <button-text text="I agree" class="agree" @click="accept" />
+    <div class="terms" v-html="terms" />
+    <button-text
+      text="I agree"
+      class="agree"
+      :state="
+        isLoading ? ButtonTextState.STANDARD_LOADING : ButtonTextState.STANDARD
+      "
+      @click="accept"
+    />
   </div>
 </template>
 

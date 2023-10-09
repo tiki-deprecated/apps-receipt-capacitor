@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import IconMinus from "@/assets/icons/minus.svg?component";
+import { IconMinus } from "@/assets";
 import type { PropType } from "vue";
 import { watch, ref } from "vue";
 import type { Account } from "@mytiki/capture-receipt-capacitor";

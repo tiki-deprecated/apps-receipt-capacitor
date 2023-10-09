@@ -12,7 +12,7 @@ import type {
 import * as TikiCaptureReceipt from "@mytiki/capture-receipt-capacitor";
 import { AccountStatus } from "@/service";
 
-export class ServiceCapture {
+export class Capture {
   readonly plugin: CaptureReceipt = TikiCaptureReceipt.instance;
   private _accounts: Map<string, Account> = new Map();
   private _onAccountListeners: Map<
