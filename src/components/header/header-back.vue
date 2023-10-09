@@ -4,9 +4,8 @@
   -->
 
 <script setup lang="ts">
-import IconCrossMark from "@/assets/icons/crossmark-outline.svg?component";
-import ButtonBack from "@/components/button/button-back.vue";
-import ButtonIcon from "@/components/button/button-icon.vue";
+import { IconCrossMark } from "@/assets";
+import { ButtonBack, ButtonIcon } from "@/components";
 
 defineEmits(["back", "close"]);
 defineProps({

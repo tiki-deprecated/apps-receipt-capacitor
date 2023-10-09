@@ -4,16 +4,19 @@
   -->
 
 <script setup lang="ts">
-import AccountForm from "../account/account-form.vue";
-import HeaderBack from "@/components/header/header-back.vue";
-import TextButton from "@/components/button/button-text.vue";
+import {
+  AccountForm,
+  HeaderBack,
+  ButtonText,
+  ButtonTextState,
+} from "@/components";
 import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
-import { computed, ref, inject } from "vue";
-import type { TikiService } from "@/service";
-import { ButtonTextState } from "@/components/button/button-text-state";
+import { computed, inject, ref } from "vue";
+import { type Capture } from "@/service";
+import { InjectKey } from "@/utils";
 
 const emit = defineEmits(["close", "back"]);
-const tiki: TikiService = inject("Tiki")!;
+const capture: Capture = inject(InjectKey.capture)!;
 
 const form = ref<Account>({ username: "", password: "", type: GMAIL });
 const error = ref<string>();
@@ -26,17 +29,23 @@ const canSubmit = computed(
     form.value.password?.length > 0,
 );
 
+const isLoading = ref<boolean>(false);
+
 const submit = async () => {
+  isLoading.value = true;
+  error.value = "";
   try {
-    await tiki.capture.login(form.value);
-    tiki.capture.scan().catch((error) => console.error(error.toString()));
-    error.value = "";
+    await capture.login(form.value);
     form.value = { username: "", password: "", type: GMAIL };
+    capture.scan().catch((error) => console.error(error.toString()));
     emit("back");
   } catch (err: any) {
     error.value = err.toString();
   }
+  isLoading.value = false;
 };
+
+const updateAccount = (account: Account) => (form.value = account);
 </script>
 
 <template>
@@ -50,11 +59,18 @@ const submit = async () => {
       :account="form"
       :error="error"
       :account-type="form.type"
-      @update:account="(val) => (form = val)"
+      @update:account="updateAccount"
     />
-    <text-button
+    <button-text
       text="Connect Gmail"
-      :state="canSubmit ? ButtonTextState.STANDARD : ButtonTextState.DISABLED"
+      :state="
+        isLoading
+          ? ButtonTextState.STANDARD_LOADING
+          : canSubmit
+          ? ButtonTextState.STANDARD
+          : ButtonTextState.STANDARD_DISABLED
+      "
+      :is-loading="isLoading"
       @click="submit"
     />
   </div>

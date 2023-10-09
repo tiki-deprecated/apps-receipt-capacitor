@@ -7,16 +7,19 @@
 import {
   accountTypes,
   type AccountType,
-  AMAZON,
 } from "@mytiki/capture-receipt-capacitor";
 import { type PropType, ref } from "vue";
 
-const emit = defineEmits(["update:accountType"]);
+const emit = defineEmits(["update:account-type"]);
 defineProps({
   accountType: {
     type: Object as PropType<AccountType>,
     required: false,
     default: undefined,
+  },
+  options: {
+    type: Map<string, AccountType>,
+    required: true,
   },
 });
 const account = ref<HTMLSelectElement>();
@@ -25,7 +28,7 @@ const update = () => {
   if (value != undefined) {
     const type: AccountType | undefined = accountTypes.from(value);
     if (type === undefined) throw new Error("Unsupported account type");
-    else emit("update:accountType", type);
+    else emit("update:account-type", type);
   }
 };
 </script>
@@ -35,10 +38,10 @@ const update = () => {
     <label for="accounts">Choose Account</label>
     <select id="accounts" ref="account" required @change="update">
       <option
-        v-for="(typ, index) of accountTypes.index"
+        v-for="(acc, index) of options"
         :key="index"
-        :value="typ[0]"
-        :label="typ[1].name"
+        :value="acc[0]"
+        :label="acc[1].name"
       ></option>
     </select>
   </div>

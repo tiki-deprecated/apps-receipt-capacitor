@@ -4,14 +4,9 @@
  */
 
 import { Repository } from "./repository";
-import {
-  StateGmail,
-  StateReceipt,
-  StateRetailer,
-  StateSync,
-} from "./state";
+import { StateGmail, StateReceipt, StateRetailer, StateSync } from "./state";
 
-export class ServiceStore {
+export class Store {
   private readonly repository: Repository;
   readonly gmail: StateGmail;
   readonly retailer: StateRetailer;
