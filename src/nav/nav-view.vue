@@ -9,13 +9,13 @@ import NavDefs from "./nav-defs.vue";
 import { SheetBottom } from "@/components";
 import { inject, watch } from "vue";
 import type { LicenseRecord } from "@mytiki/tiki-sdk-capacitor";
-import { Keys } from "@/utils";
+import { InjectKey } from "@/utils";
 import type { Publish } from "@/service";
 import type { Config } from "@/config";
 
-const navigate: Navigate = inject(Keys.navigate)!;
-const publish: Publish = inject(Keys.publish)!;
-const config: Config = inject(Keys.config)!;
+const navigate: Navigate = inject(InjectKey.navigate)!;
+const publish: Publish = inject(InjectKey.publish)!;
+const config: Config = inject(InjectKey.config)!;
 defineEmits(["update:show"]);
 const props = defineProps({
   show: {

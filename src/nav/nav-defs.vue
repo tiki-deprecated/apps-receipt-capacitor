@@ -17,8 +17,8 @@ import {
   NavDef,
 } from "./defs";
 import { inject, type Ref } from "vue";
-import { Keys } from "@/utils";
-const state: Ref<NavDef> = inject(Keys.navigate)!.ref;
+import { InjectKey } from "@/utils";
+const state: Ref<NavDef> = inject(InjectKey.navigate)!.ref;
 </script>
 
 <template>

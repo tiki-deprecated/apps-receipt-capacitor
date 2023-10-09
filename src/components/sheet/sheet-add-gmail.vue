@@ -13,10 +13,10 @@ import {
 import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
 import { computed, inject, ref } from "vue";
 import { type Capture } from "@/service";
-import { Keys } from "@/utils";
+import { InjectKey } from "@/utils";
 
 const emit = defineEmits(["close", "back"]);
-const capture: Capture = inject(Keys.capture)!;
+const capture: Capture = inject(InjectKey.capture)!;
 
 const form = ref<Account>({ username: "", password: "", type: GMAIL });
 const error = ref<string>();

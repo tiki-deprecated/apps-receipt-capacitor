@@ -6,8 +6,8 @@
 <script setup lang="ts">
 import { SheetWarn } from "@/components";
 import { inject } from "vue";
-import { Keys } from "@/utils";
-const navigate = inject(Keys.navigate)!;
+import { InjectKey } from "@/utils";
+const navigate = inject(InjectKey.navigate)!;
 </script>
 
 <template>

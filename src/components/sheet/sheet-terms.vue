@@ -8,9 +8,9 @@ import { ButtonText, HeaderBack, ButtonTextState } from "@/components";
 import { inject, ref } from "vue";
 import type { Publish } from "@/service";
 import Showdown from "showdown";
-import { Keys } from "@/utils";
+import { InjectKey } from "@/utils";
 
-const publish: Publish = inject(Keys.publish)!;
+const publish: Publish = inject(InjectKey.publish)!;
 const emit = defineEmits(["back", "accept", "close"]);
 const props = defineProps({
   markdown: {

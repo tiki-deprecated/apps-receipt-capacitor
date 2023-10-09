@@ -7,7 +7,7 @@ import { HeaderBack, ButtonText, ButtonTextState } from "@/components";
 import { inject, ref, type PropType } from "vue";
 import type { Account } from "@mytiki/capture-receipt-capacitor";
 import type { Capture } from "@/service";
-import { Keys } from "@/utils";
+import { InjectKey } from "@/utils";
 
 const emit = defineEmits(["remove", "close", "back"]);
 const props = defineProps({
@@ -18,7 +18,7 @@ const props = defineProps({
 });
 
 if (props.account === undefined) emit("back");
-const capture: Capture = inject(Keys.capture)!;
+const capture: Capture = inject(InjectKey.capture)!;
 const isLoading = ref<boolean>(false);
 const remove = async () => {
   isLoading.value = true;

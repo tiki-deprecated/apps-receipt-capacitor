@@ -8,10 +8,10 @@ import { HeaderBack, ButtonText, AccountList } from "@/components";
 import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
 import { inject, ref } from "vue";
 import type { Capture } from "@/service";
-import { Keys } from "@/utils";
+import { InjectKey } from "@/utils";
 
 const emit = defineEmits(["back", "close", "add", "skip", "warn"]);
-const capture: Capture = inject(Keys.capture)!;
+const capture: Capture = inject(InjectKey.capture)!;
 
 const filter = (accounts: Account[]): Account[] =>
   accounts.filter((account) => account.type.id === GMAIL.id);

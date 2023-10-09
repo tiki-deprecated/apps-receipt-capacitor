@@ -3,7 +3,7 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import * as Keys from "./inject-key";
+import * as InjectKey from "./inject-key";
 
 export * from "./week";
-export { Keys };
+export { InjectKey };

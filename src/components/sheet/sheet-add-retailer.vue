@@ -18,10 +18,10 @@ import {
 } from "@mytiki/capture-receipt-capacitor";
 import { ref, inject, computed } from "vue";
 import { type Capture } from "@/service";
-import { Keys } from "@/utils";
+import { InjectKey } from "@/utils";
 
 const emit = defineEmits(["close", "back"]);
-const capture: Capture = inject(Keys.capture)!;
+const capture: Capture = inject(InjectKey.capture)!;
 
 const filtered = accountTypes.index;
 capture.accounts.forEach((account) => filtered.delete(account.type.id));

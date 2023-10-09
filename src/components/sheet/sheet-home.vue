@@ -13,14 +13,14 @@ import {
   BulletState,
 } from "@/components";
 import { inject, ref } from "vue";
-import { Keys } from "@/utils";
+import { InjectKey } from "@/utils";
 import type { Store, Publish } from "@/service";
 import type { Config } from "@/config";
 
 const emit = defineEmits(["close", "learn", "retailer", "gmail", "withdraw"]);
-const publish: Publish = inject(Keys.publish)!;
-const store: Store = inject(Keys.store)!;
-const config: Config = inject(Keys.config)!;
+const publish: Publish = inject(InjectKey.publish)!;
+const store: Store = inject(InjectKey.store)!;
+const config: Config = inject(InjectKey.config)!;
 const syncState = (): BulletState =>
   (store.retailer.get().value === BulletState.P100 ||
     store.retailer.get().value === BulletState.SYNC) &&

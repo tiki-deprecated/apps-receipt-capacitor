@@ -5,10 +5,10 @@
 
 <script setup lang="ts">
 import { inject } from "vue";
-import { Keys } from "@/utils";
+import { InjectKey } from "@/utils";
 import { type Navigate, NavDef } from "@/nav";
 import { SheetHome } from "@/components";
-const navigate: Navigate = inject(Keys.navigate)!;
+const navigate: Navigate = inject(InjectKey.navigate)!;
 </script>
 
 <template>
