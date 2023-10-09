@@ -19,10 +19,14 @@ watch(
   () => props.show,
   (show) => (isShow.value = show),
 );
+
+const handleTouch = (evt: any) =>{
+  console.log('teste', evt)
+}
 </script>
 
 <template>
-  <div class="overlay" @click.stop.prevent="isShow = false">
+  <div class="overlay" @click.stop.prevent="isShow = false" @touchstart="handleTouch" @touchend="handleTouch">
     <Transition appear name="slide" @leave="$emit('dismiss')">
       <div v-if="isShow" class="bottom-sheet" @click.stop>
         <slot />
