@@ -2,66 +2,51 @@
   - Copyright (c) TIKI Inc.
   - MIT license. See LICENSE file in root directory.
   -->
-  
-  <script setup lang="ts">
-  import HeaderBack from "@/components/header/header-back.vue";
-  
-  defineEmits(["close", "back"]);
-  </script>
-  
-  <template>
-    <div>
+
+<script setup lang="ts">
+import HeaderBack from "@/components/header/header-back.vue";
+import { ButtonText, ButtonTextState } from "@/components";
+
+defineEmits(["close", "back"]);
+</script>
+
+<template>
+  <div>
     <header-back
-      text="Gmail Scan Error"
+      text="Gmail Error"
       @back="$emit('back')"
       @close="$emit('close')"
     />
     <div class="error-text">
-      <p class="alert-text-bold">
-        To Allow us to scan emails, you must enable IMAP on your Gmail Account
-      </p>
-      <div class="title">
-      <div>How to Enable Imap</div>
-      </div>
-      <ol class="instructions">
-        <li>In your computer, <b>open Gmail</b></li>
-        <li>In the top right, click settings > <b>See all settings</b></li>
-        <li>Click the <b>Forwading and POP/IMAP</b> tab</li>
-        <li>In the ”Imap Acess” section, select <b>Enable Imap</b></li>
-        <li>Click <b>save changes</b></li>
+      <p class="alert-text-bold">Enable IMAP to proceed.</p>
+      <ol>
+        <li class="instruction">Open Gmail in a desktop browser.</li>
+        <li class="instruction">Open Settings</li>
+        <li class="instruction">Select Forwarding and POP/IMAP</li>
+        <li class="instruction">Select <b>Enable Imap</b> under Imap Access</li>
+        <li class="instruction">Save changes</li>
       </ol>
     </div>
+    <button-text text="Okay, done!" @click="$emit('back')" />
   </div>
-  </template>
-  
+</template>
+
 <style>
 .error-text {
-    font-family: var(--tiki-font-family);
-    font-size: var(--tiki-font-size);
-    line-height: var(--tiki-line-height);
-    color: var(--tiki-secondary-text-color);
-    margin: 0 1em 1.5em 1em;
-  }
-  
-.alert-text-bold {
-    font-weight: bold;
-    text-align: center;
-  }
-
-.instructions {
-  margin: 0.75em 0;
-  font-weight: 500;
+  font-family: var(--tiki-font-family);
+  font-size: var(--tiki-font-size-lg);
+  line-height: var(--tiki-line-height-lg);
+  color: var(--tiki-secondary-text-color);
+  margin-bottom: 2em;
 }
 
-
-.title {
-  text-transform: uppercase;
-  text-align: center;
-  font-family: var(--tiki-font-family);
-  font-size: var(--tiki-font-size);
-  line-height: var(--tiki-line-height);
-  color: var(--tiki-primary-text-color);
+.alert-text-bold {
   font-weight: bold;
+  text-align: center;
+  color: var(--tiki-error-color);
+}
+
+.instruction {
+  margin: 0.5em 0;
 }
 </style>
-  
