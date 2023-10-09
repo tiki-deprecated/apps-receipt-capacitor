@@ -6,7 +6,7 @@
 import type Vue from "vue";
 import "@/assets/styles/main.css";
 import TikiReceipt from "@/tiki-receipt.vue";
-import { TikiService } from "@/service/tiki-service";
+import { TikiService } from "@/service";
 import type * as TikiOptions from "@/options";
 
 export default {
