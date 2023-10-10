@@ -78,7 +78,7 @@ target <TARGET> do
 
   pod 'BlinkReceipt', '~> 1.39'
   pod 'BlinkEReceipt', '~> 2.31'
-  pod 'TikiSdk', '~> 2.1.7'
+  pod 'TikiSdk', '~> 2.1.8'
 end
 ```
 
