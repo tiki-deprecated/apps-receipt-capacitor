@@ -63,10 +63,9 @@ android {
 #### iOS
 To build for iOS using Cocoapods, add the Tiki and Microblink PodspecRepos to your `ios/App/Podfile`. Then include the dependencies.
 
-1. Add the TikiSdk and BlinkReceipt repositories at the top of the Podfile.
+1. Add the BlinkReceipt repository at the top of the Podfile.
 
 ```
-source 'https://github.com/tiki/PodspecRepo.git'
 source 'https://github.com/BlinkReceipt/PodSpecRepo.git'
 source 'https://cdn.cocoapods.org/'
 ```
@@ -79,7 +78,7 @@ target <TARGET> do
 
   pod 'BlinkReceipt', '~> 1.39'
   pod 'BlinkEReceipt', '~> 2.31'
-  pod 'TikiSdk', '~> 2.1.0'
+  pod 'TikiSdk', '~> 2.1.7'
 end
 ```
 
