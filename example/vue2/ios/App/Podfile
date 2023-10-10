@@ -1,4 +1,3 @@
-source 'https://github.com/tiki/PodspecRepo.git'
 source 'https://github.com/BlinkReceipt/PodSpecRepo.git'
 source 'https://cdn.cocoapods.org/'
 
@@ -25,7 +24,7 @@ target 'App' do
     
   pod 'BlinkReceipt', '~> 1.39'
   pod 'BlinkEReceipt', '~> 2.31'
-  pod 'TikiSdk', '~> 2.1.1'
+  pod 'TikiSdk', '~> 2.1.8'
 end
 
 post_install do |installer|
