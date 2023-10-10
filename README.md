@@ -40,10 +40,20 @@ npm i @mytiki/receipt-capacitor-vue2
 Next, if you don't already have a `publishingId` from TIKI, **create a free account** and make a project at [console.mytiki.com](https://console.mytiki.com).
 
 #### Android
+
+**Requires:**
+ - `compileSdkVersion` >= 33 
+ - `targetSdkVersion` >=  33
+
 Microblink is closed source, and subsequently it's AARs are hosted by Microblink's Maven repository, not Maven Central. You need to add the maven endpoint to your `android/build.gradle` file in your project's android folder.
 
 ```groovy
-maven { url  "https://maven.microblink.com" }
+allprojects {
+  repositories {
+    // other repositories
+    maven { url  "https://maven.microblink.com" }
+  }
+}
 ```
 
 Depending on your project's configuration you may also need to add the following `packagingOptions` to your `android/app/build.gradle` file.
@@ -61,12 +71,11 @@ android {
 ```
 
 #### iOS
-To build for iOS using Cocoapods, add the Tiki and Microblink PodspecRepos to your `ios/App/Podfile`. Then include the dependencies.
+To build for iOS using Cocoapods, add the closed source Microblink PodspecRepo to your `ios/App/Podfile`. Then include the Tiki and Microblink dependencies.
 
-1. Add the TikiSdk and BlinkReceipt repositories at the top of the Podfile.
+1. Add the BlinkReceipt repository at the top of the Podfile.
 
 ```
-source 'https://github.com/tiki/PodspecRepo.git'
 source 'https://github.com/BlinkReceipt/PodSpecRepo.git'
 source 'https://cdn.cocoapods.org/'
 ```
@@ -79,7 +88,7 @@ target <TARGET> do
 
   pod 'BlinkReceipt', '~> 1.39'
   pod 'BlinkEReceipt', '~> 2.31'
-  pod 'TikiSdk', '~> 2.1.0'
+  pod 'TikiSdk', '~> 2.1.8'
 end
 ```
 
