@@ -32,7 +32,16 @@ export class Config {
     destinations: string[];
   }[] = [
     {
-      usecases: [Usecase.common(CommonUsecases.DISTRIBUTION)],
+      usecases: [
+        Usecase.common(CommonUsecases.ANALYTICS),
+        Usecase.common(CommonUsecases.ATTRIBUTION),
+        Usecase.common(CommonUsecases.AI_TRAINING),
+        Usecase.common(CommonUsecases.DISTRIBUTION),
+        Usecase.common(CommonUsecases.PERSONALIZATION),
+        Usecase.common(CommonUsecases.RETARGETING),
+        Usecase.common(CommonUsecases.SUPPORT),
+        Usecase.custom("evaluation"),
+      ],
       destinations: ["mytiki.com"],
     },
   ];

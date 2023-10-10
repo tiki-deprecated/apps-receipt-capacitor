@@ -21,12 +21,11 @@ The following details the types of data collected (*"Collected Data"*), the purp
 * *Purchase History* - An account’s or individual’s purchases or purchase tendencies.
 
 #### Use Cases
-* *Evaluation* - market testing to identify new uses cases and compensation opportunities.
-
 * *AI training* - train machine learning models with user data.
 * *Analytics* - extract insights and signals from user data.
 * *Attribution* - determine the actions that led to an outcome.
-* *Distribution* - distribute/relicense raw data, insights, signals, etc., to 3rd-parties.
+* *Distribution* - distribute/re-license raw data, insights, signals, etc., to 3rd-parties.
+* *Evaluation* - market test new potential uses cases and compensation opportunities.
 * *Personalization* - tailor messaging, offers, features, etc., to an individual.
 * *Retargeting* - advertise to and reach users, often on other platforms.
 * *Support* - add user data into customer support processes.
