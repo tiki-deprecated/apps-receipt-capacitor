@@ -43,7 +43,12 @@ Next, if you don't already have a `publishingId` from TIKI, **create a free acco
 Microblink is closed source, and subsequently it's AARs are hosted by Microblink's Maven repository, not Maven Central. You need to add the maven endpoint to your `android/build.gradle` file in your project's android folder.
 
 ```groovy
-maven { url  "https://maven.microblink.com" }
+allprojects {
+  repositories {
+    // other repositories
+    maven { url  "https://maven.microblink.com" }
+  }
+}
 ```
 
 Depending on your project's configuration you may also need to add the following `packagingOptions` to your `android/app/build.gradle` file.
