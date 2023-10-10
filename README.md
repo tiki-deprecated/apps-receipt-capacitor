@@ -108,6 +108,12 @@ import Tiki from "@mytiki/receipt-capacitor";
 
 createApp(App)
     .use(Tiki, {
+      company: {
+        name: "Company Inc.",
+        jurisdiction: "Tennessee, USA",
+        privacy: "https://your-co.com/privacy",
+        terms: "https://your-co.com/terms",
+      },
       key: {
         publishingId: "YOUR TIKI PUBLISHING ID",
         android: "YOUR MICROBLINK ANDROID LICENSE KEY",
@@ -128,6 +134,12 @@ import App from "./app.vue";
 import Tiki from "@mytiki/receipt-capacitor-vue2";
 
 Vue.use(Tiki, {
+  company: {
+    name: "Company Inc.",
+    jurisdiction: "Tennessee, USA",
+    privacy: "https://your-co.com/privacy",
+    terms: "https://your-co.com/terms",
+  },
   key: {
     publishingId: "YOUR TIKI PUBLISHING ID",
     android: "YOUR MICROBLINK ANDROID LICENSE KEY",

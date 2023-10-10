@@ -44,10 +44,10 @@ Any changes in compensation require a new agreement. This will have the effect o
 
 We, the Company, agree to compensate you, the User, for granting us a license to use your Shared Information in exchange for **$1 USD per month**, available for withdrawal at the end of each month period, contingent upon the following criteria:
 
-1. A Gmail account you own, connected to the app, for the duration of the period. Gmail connectivity status is available in-app.
-2. A Retailer account you own, connected to the app, for the duration of the period. See app for the complete list of supported Retailer accounts and connectivity status.
-3. Opening the app once each calendar week, to synchronize your connected accounts, for the duration of the period. Synchronization status and information is available in-app.
-4. 5 new receipts for items purchased from supported merchants within the period. Receipts are counted across all connected Retailer and Gmail accounts. Receipt status is available in-app.
+* A Gmail account you own, connected to the app, for the duration of the period. Gmail connectivity status is available in-app. 
+* A Retailer account you own, connected to the app, for the duration of the period. See app for the complete list of supported Retailer accounts and connectivity status. 
+* Opening the app once each calendar week, to synchronize your connected accounts, for the duration of the period. Synchronization status and information is available in-app. 
+* 5 new receipts for items purchased from supported merchants within the period. Receipts are counted across all connected Retailer and Gmail accounts. Receipt status is available in-app.
 
 Cash withdrawal may be subject to minimum balance thresholds, participation durations, and other application restrictions.
 

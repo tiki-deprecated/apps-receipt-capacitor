@@ -29,6 +29,12 @@ import type { Company } from "./company";
  *
  * createApp(App)
  *  .use(Tiki, {
+ *    company: {
+ *      name: "Company Inc.",
+ *      jurisdiction: "Tennessee, USA",
+ *      privacy: "https://your-co.com/privacy",
+ *      terms: "https://your-co.com/terms",
+ *    },
  *    key: {
  *      publishingId: "YOUR TIKI PUBLISHING ID",
  *      android: "YOUR MICROBLINK ANDROID LICENSE KEY",
@@ -69,6 +75,12 @@ import type { Company } from "./company";
  * import LearnMore from "@/assets/md/learn-more.md?raw";
  *
  * Vue.use(Tiki, {
+ *    company: {
+ *      name: "Company Inc.",
+ *      jurisdiction: "Tennessee, USA",
+ *      privacy: "https://your-co.com/privacy",
+ *      terms: "https://your-co.com/terms",
+ *    },
  *    key: {
  *      publishingId: "YOUR TIKI PUBLISHING ID",
  *      android: "YOUR MICROBLINK ANDROID LICENSE KEY",
