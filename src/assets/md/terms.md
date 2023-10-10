@@ -1,6 +1,6 @@
 # User Data License Agreement
 
-This is an agreement between **you, the *"User"*** and **[company name], the *"Company"***, the licensor. The agreement, the User Data License Agreement (*"UDLA"*), sets out both parties rights and obligations in respect to the licensing and use of the data referred to within.
+This is an agreement between **you, the *"User"*** and **{{{COMPANY}}}, the *"Company"***, the licensor. The agreement, the User Data License Agreement (*"UDLA"*), sets out both parties rights and obligations in respect to the licensing and use of the data referred to within.
 
 The terms of the UDLA are relevant for and apply only to those Users and licensors who have elected to participate in the data licensing program detailed within this agreement. The terms and conditions of this agreement are to be read as a whole, and each clause is deemed essential to the agreement.
 
@@ -21,10 +21,15 @@ The following details the types of data collected (*"Collected Data"*), the purp
 * *Purchase History* - An account’s or individual’s purchases or purchase tendencies.
 
 #### Use Cases
-* *Attribution* - determine the actions that led to an outcome.
+* *Evaluation* - market testing to identify new uses cases and compensation opportunities.
+
 * *AI training* - train machine learning models with user data.
 * *Analytics* - extract insights and signals from user data.
+* *Attribution* - determine the actions that led to an outcome.
 * *Distribution* - distribute/relicense raw data, insights, signals, etc., to 3rd-parties.
+* *Personalization* - tailor messaging, offers, features, etc., to an individual.
+* *Retargeting* - advertise to and reach users, often on other platforms.
+* *Support* - add user data into customer support processes.
 
 #### Destinations
 * *Tiki inc. (mytiki.com)* - the Company's zero-party data processor.
@@ -37,11 +42,14 @@ Any changes in compensation require a new agreement. This will have the effect o
 
 ### A. Program
 
-We, the Company, agree to compensate you, the User, for granting us a license to use your Shared Information in exchange for reward points, redeemable for cash back within the application at an exchange rate of **1 USD per 1,000 points**. 
+We, the Company, agree to compensate you, the User, for granting us a license to use your Shared Information in exchange for **$1 USD per month**, available for withdrawal at the end of each month period, contingent upon the following criteria:
 
-The amount of reward points earned for Shared Information is subject to the specific offers and terms displayed within the application. For example, 100 points per account linked for 90 days and 10 points for a receipt scanned.
+1. A Gmail account you own, connected to the app, for the duration of the period. Gmail connectivity status is available in-app.
+2. A Retailer account you own, connected to the app, for the duration of the period. See app for the complete list of supported Retailer accounts and connectivity status.
+3. Opening the app once each calendar week, to synchronize your connected accounts, for the duration of the period. Synchronization status and information is available in-app.
+4. 5 new receipts for items purchased from supported merchants within the period. Receipts are counted across all connected Retailer and Gmail accounts. Receipt status is available in-app.
 
-Redemption of points for cash back payouts may be subject to minimum balance thresholds, participation durations, and other application restrictions.
+Cash withdrawal may be subject to minimum balance thresholds, participation durations, and other application restrictions.
 
 ### B. Termination
 
@@ -53,7 +61,7 @@ This offer is contingent upon you the User, providing reasonable access to the S
 
 ## 3. Privacy and Confidentiality
 
-When you, the User, agree to the data licensing program, you agree to the collection of Shared Information by the Company, which may include zero, first, and third-party data covered under our [Terms of Service](Link to Terms of Service) and [Privacy Policy](Link to Privacy Policy).
+When you, the User, agree to the data licensing program, you agree to the collection of Shared Information by the Company, which may include zero, first, and third-party data covered under our [Terms of Service]({{{TOS}}}) and [Privacy Policy]({{{POLICY}}}).
 
 This agreement does not replace our Terms of Service or Privacy Policy and any rights or representations unless otherwise explicitly stated extend to this agreement, including but not limited to GDPR, CCPA, and PIPEDA considerations.
 
@@ -71,13 +79,13 @@ The Company may decide to terminate the agreement at any time, for any reason, b
 
 ### A. User Opt Out
 
-You, the User, may choose to opt out of this program at any time, by selecting the opt-out button within the application. The choice to do so will have no impact on any other services the Company provide you and the Company will not hold it against you in any way.
+You, the User, may choose to opt out of this program at any time, by disconnecting any accounts you've connected within the application. The choice to do so will have no impact on any other services the Company provide you and the Company will not hold it against you in any way.
 
 Upon receiving your opt-out notice, the Company will stop all future collection of Shared Information as described in Section 1.A as soon as possible. The Company may continue to use Shared Information licensed prior to the opt-out.
 
 ## 6. Governing Law
 
-The governing law of this agreement **[insert jurisdiction or address]**,  where the company is located or headquartered.
+The governing law of this agreement **{{{JURISDICTION}}}**,  where the company is located or headquartered.
 
 ## 7. Data Ownership
 
