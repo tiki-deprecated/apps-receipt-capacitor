@@ -9,7 +9,7 @@ import { InternalHandlers } from "@/service/tiki-service/internal-handlers";
 import { Capture } from "@/service/capture";
 import { Store } from "@/service/store";
 import { Publish } from "@/service/publish";
-import type { InjectionKey } from "vue/types/v3-generated";
+import type { InjectionKey } from "vue";
 import * as Keys from "@/utils/inject-key";
 
 /**
