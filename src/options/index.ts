@@ -13,6 +13,7 @@
 import type { Key } from "./key";
 import type { Offer } from "./offer";
 import type { Theme } from "./theme";
+import type { Company } from "./company";
 
 /**
  * The top-level configuration object for this library. Define during app registration.
@@ -102,6 +103,11 @@ import type { Theme } from "./theme";
  */
 export interface Options {
   /**
+   * Your company's information. Required for data licensing agreements.
+   */
+  company: Company;
+
+  /**
    * The license keys required to use this Library. Sign up at [mytiki.com](https://mytiki.com).
    */
   key: Key;
@@ -142,3 +148,4 @@ export interface Options {
 export * from "./key";
 export * from "./theme";
 export * from "./offer";
+export * from "./company";

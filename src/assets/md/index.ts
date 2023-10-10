@@ -4,6 +4,6 @@
  */
 
 import LearnMore from "@/assets/md/learn-more.md?raw";
-import Terms from "@/assets/md/terms.md?raw";
+import Agreement from "@/assets/md/agreement.md?raw";
 
-export { LearnMore, Terms };
+export { LearnMore, Agreement };
