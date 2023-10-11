@@ -1,6 +1,6 @@
 # User Data License Agreement
 
-This is an agreement between **you, the *"User"*** and **{{{COMPANY}}}, the *"Company"***, the licensor. The agreement, the User Data License Agreement (*"UDLA"*), sets out both parties rights and obligations in respect to the licensing and use of the data referred to within.
+This is an agreement between **you, the *"User",*** and **{{{COMPANY}}}, the *"Company"***, the licensor. The agreement, the User Data License Agreement (*"UDLA"*), sets out both parties rights and obligations in respect to the licensing and use of the data referred to within.
 
 The terms of the UDLA are relevant for and apply only to those Users and licensors who have elected to participate in the data licensing program detailed within this agreement. The terms and conditions of this agreement are to be read as a whole, and each clause is deemed essential to the agreement.
 
@@ -78,7 +78,7 @@ The Company may decide to terminate the agreement at any time, for any reason, b
 
 ### A. User Opt Out
 
-You, the User, may choose to opt out of this program at any time, by disconnecting any accounts you've connected within the application. The choice to do so will have no impact on any other services the Company provide you and the Company will not hold it against you in any way.
+You, the User, may choose to opt out of this program at any time, by disconnecting any accounts you've connected within the application. The choice to do so will have no impact on any other services the Company provide you, and the Company will not hold it against you in any way.
 
 Upon receiving your opt-out notice, the Company will stop all future collection of Shared Information as described in Section 1.A as soon as possible. The Company may continue to use Shared Information licensed prior to the opt-out.
 
