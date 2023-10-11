@@ -12,7 +12,7 @@ import {
   ButtonTextState,
   BulletState,
 } from "@/components";
-import { inject, ref, onMounted } from "vue";
+import { inject, ref, watchEffect } from "vue";
 import { InjectKey } from "@/utils";
 import type { Store, Publish } from "@/service";
 import type { Config } from "@/config";
@@ -29,13 +29,11 @@ const syncState = (): BulletState =>
     ? store.sync.status()
     : BulletState.P0;
 
-const receiptState = ref<BulletState>(store.receipt.status())
+const receiptState = ref(store.receipt.getStatus.bulletState);
+watchEffect(() => {
+  receiptState.value = store.receipt.getStatus.bulletState;
+});
 
-onMounted(()=>{
-  window.addEventListener('receipt-added', (event) => {
-    receiptState.value = store.receipt.status()
-  });
-}) 
 
 const balance = ref<number>(0);
 publish.balance().then((amount) => (balance.value = amount));
@@ -47,7 +45,7 @@ const withdraw = () => {
     publish
       .createReceipt(res)
       .catch((error) =>
-        console.log(`Failed to create withdrawal receipt: ${error}`),
+        console.log(`Failed to create withdrawal receipt: ${error}`)
       );
   }
 };

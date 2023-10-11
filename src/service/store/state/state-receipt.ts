@@ -6,17 +6,26 @@
 import type { Repository } from "@/service/store/repository";
 import { getWeek } from "@/utils/week";
 import { BulletState } from "@/components/bullet/bullet-state";
+import { reactive, readonly } from "vue";
+
 
 export class StateReceipt {
   private readonly repository: Repository;
   private readonly key: string = "receipt";
   private state: Map<string, Date> = new Map<string, Date>();
+  private _status = reactive({
+    bulletState: BulletState.P0,
+  });
 
   constructor(repository: Repository) {
     this.repository = repository;
   }
 
   get = (): Map<string, Date> => this.state;
+
+  get getStatus() {
+    return readonly(this._status);
+  }
 
   async load(): Promise<void> {
     const saved: string | undefined = await this.repository.read(this.key);
@@ -29,7 +38,7 @@ export class StateReceipt {
 
   async add(receiptId: string, date: Date = new Date()): Promise<void> {
     this.state.set(receiptId, date);
-    window.dispatchEvent(new CustomEvent('receipt-added'));
+    this.status()
     return this.repository.write(this.key, this.toString());
   }
 
@@ -69,17 +78,18 @@ export class StateReceipt {
     });
     switch (count) {
       case 0:
-        return BulletState.P0;
+        return this._status.bulletState = BulletState.P0;
       case 1:
-        return BulletState.P20;
+        return this._status.bulletState = BulletState.P20;
       case 2:
-        return BulletState.P40;
+        return this._status.bulletState = BulletState.P40;
       case 3:
-        return BulletState.P60;
+        return this._status.bulletState = BulletState.P60;
       case 4:
-        return BulletState.P80;
+        return this._status.bulletState = BulletState.P80;
       default:
-        return BulletState.P100;
+        return this._status.bulletState = BulletState.P100;
     }
   }
-}
+  }
+
