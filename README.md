@@ -168,24 +168,6 @@ _This registers the Vue Component as `TikiReceipt` and provides the service `Tik
 @import "@mytiki/receipt-capacitor-vue2/dist/receipt-capacitor.css";
 ```
 
-#### Android
-For IMAP email account linking, the authorization UI uses the material bottom sheet. This requires your theme parent to extend Theme.MaterialComponents.*
-
-```xml
-<resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-</resources>
-
-```
-
 ### Initialization
 To initialize just inject the `TikiService` and pass in your systems unique identifier for the user. If you use emails (you shouldn't 😝), we recommend hashing it first.
 
