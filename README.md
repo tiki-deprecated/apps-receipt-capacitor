@@ -178,7 +178,7 @@ To initialize just inject the `TikiService` and pass in your systems unique iden
 ```vue
 <script setup lang="ts">
   import { inject } from "vue";
-  import { type TikiService } from "@mytiki/tiki-receipt-capacitor";
+  import { type TikiService } from "@mytiki/receipt-capacitor";
   
   const tiki: TikiService | undefined = inject("Tiki");
   tiki?.initialize(id).then(() => console.log("Tiki Initialized"));
@@ -190,7 +190,7 @@ To initialize just inject the `TikiService` and pass in your systems unique iden
 ```vue
 <script setup lang="ts">
   import { inject } from "vue";
-  import { type TikiService } from "@mytiki/tiki-receipt-capacitor-vue2";
+  import { type TikiService } from "@mytiki/receipt-capacitor-vue2";
   
   const tiki: TikiService | undefined = inject("Tiki");
   tiki?.initialize(id).then(() => console.log("Tiki Initialized"));
