@@ -12,7 +12,7 @@ import {
   ButtonTextState,
   BulletState,
 } from "@/components";
-import { inject, ref } from "vue";
+import { inject, ref, onMounted } from "vue";
 import { InjectKey } from "@/utils";
 import type { Store, Publish } from "@/service";
 import type { Config } from "@/config";
@@ -29,7 +29,14 @@ const syncState = (): BulletState =>
     ? store.sync.status()
     : BulletState.P0;
 
-const receiptState = (): BulletState => store.receipt.status();
+const receiptState = ref<BulletState>(store.receipt.status())
+
+onMounted(()=>{
+  window.addEventListener('receipt-added', (event) => {
+    receiptState.value = store.receipt.status()
+  });
+}) 
+
 const balance = ref<number>(0);
 publish.balance().then((amount) => (balance.value = amount));
 
@@ -90,7 +97,7 @@ const withdraw = () => {
           },
           {
             text: 'Share 5 New Receipts',
-            state: receiptState(),
+            state: receiptState,
           },
         ]"
         class="bullets"

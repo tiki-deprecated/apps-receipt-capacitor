@@ -29,6 +29,7 @@ export class StateReceipt {
 
   async add(receiptId: string, date: Date = new Date()): Promise<void> {
     this.state.set(receiptId, date);
+    window.dispatchEvent(new CustomEvent('receipt-added'));
     return this.repository.write(this.key, this.toString());
   }
 
