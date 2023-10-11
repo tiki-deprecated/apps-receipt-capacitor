@@ -13,6 +13,7 @@
 import type { Key } from "./key";
 import type { Offer } from "./offer";
 import type { Theme } from "./theme";
+import type { Company } from "./company";
 
 /**
  * The top-level configuration object for this library. Define during app registration.
@@ -28,6 +29,12 @@ import type { Theme } from "./theme";
  *
  * createApp(App)
  *  .use(Tiki, {
+ *    company: {
+ *      name: "Company Inc.",
+ *      jurisdiction: "Tennessee, USA",
+ *      privacy: "https://your-co.com/privacy",
+ *      terms: "https://your-co.com/terms",
+ *    },
  *    key: {
  *      publishingId: "YOUR TIKI PUBLISHING ID",
  *      android: "YOUR MICROBLINK ANDROID LICENSE KEY",
@@ -68,6 +75,12 @@ import type { Theme } from "./theme";
  * import LearnMore from "@/assets/md/learn-more.md?raw";
  *
  * Vue.use(Tiki, {
+ *    company: {
+ *      name: "Company Inc.",
+ *      jurisdiction: "Tennessee, USA",
+ *      privacy: "https://your-co.com/privacy",
+ *      terms: "https://your-co.com/terms",
+ *    },
  *    key: {
  *      publishingId: "YOUR TIKI PUBLISHING ID",
  *      android: "YOUR MICROBLINK ANDROID LICENSE KEY",
@@ -101,6 +114,11 @@ import type { Theme } from "./theme";
  * ```
  */
 export interface Options {
+  /**
+   * Your company's information. Required for data licensing agreements.
+   */
+  company: Company;
+
   /**
    * The license keys required to use this Library. Sign up at [mytiki.com](https://mytiki.com).
    */
@@ -142,3 +160,4 @@ export interface Options {
 export * from "./key";
 export * from "./theme";
 export * from "./offer";
+export * from "./company";

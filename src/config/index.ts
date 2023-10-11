@@ -3,10 +3,11 @@
  * MIT license. See LICENSE file in root directory.
  */
 
-import { LearnMore, Terms } from "@/assets/md";
+import { LearnMore } from "@/assets/md";
 import { Theme } from "./theme";
 import { Key } from "./key";
 import { Offer } from "./offer";
+import { Company } from "./company";
 import type { Options } from "@/options";
 import {
   CommonTags,
@@ -18,10 +19,10 @@ import {
 export class Config {
   readonly theme: Theme;
   readonly key: Key;
-  readonly terms: string = Terms;
+  readonly company: Company;
   readonly learn: string = LearnMore;
   readonly callback: (total: number) => number | undefined;
-  readonly offer;
+  readonly offer: Offer;
   readonly tags: Tag[] = [
     Tag.common(CommonTags.USER_ID),
     Tag.common(CommonTags.PURCHASE_HISTORY),
@@ -31,7 +32,16 @@ export class Config {
     destinations: string[];
   }[] = [
     {
-      usecases: [Usecase.common(CommonUsecases.DISTRIBUTION)],
+      usecases: [
+        Usecase.common(CommonUsecases.ANALYTICS),
+        Usecase.common(CommonUsecases.ATTRIBUTION),
+        Usecase.common(CommonUsecases.AI_TRAINING),
+        Usecase.common(CommonUsecases.DISTRIBUTION),
+        Usecase.common(CommonUsecases.PERSONALIZATION),
+        Usecase.common(CommonUsecases.RETARGETING),
+        Usecase.common(CommonUsecases.SUPPORT),
+        Usecase.custom("evaluation"),
+      ],
       destinations: ["mytiki.com"],
     },
   ];
@@ -42,6 +52,7 @@ export class Config {
     this.theme = new Theme(options.theme);
     this.callback = options.callback;
     this.offer = new Offer(options.offer);
+    this.company = new Company(options.company);
     if (options?.learn != null) this.learn = options.learn;
   }
 }
