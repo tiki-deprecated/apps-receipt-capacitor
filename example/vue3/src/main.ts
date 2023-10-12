@@ -19,6 +19,5 @@ createApp(App)
       product:
         "wSNX3mu+YGc/2I1DDd0NmrYHS6zS1BQt2geMUH7DDowER43JGeJRUErOHVwU2tz6xHDXia8BuvXQI3j37I0uYw==",
     },
-    callback: (total: number): number | undefined => total,
   })
   .mount("#app");
