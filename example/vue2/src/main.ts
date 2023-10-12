@@ -23,7 +23,7 @@ Vue.use(Tiki, {
     product:
       "wSNX3mu+YGc/2I1DDd0NmrYHS6zS1BQt2geMUH7DDowER43JGeJRUErOHVwU2tz6xHDXia8BuvXQI3j37I0uYw==",
   },
-  callback: (_total: number): number | undefined => undefined,
+  callback: (total: number): number | undefined => total,
 });
 
 new Vue({ render: (h) => h(App) }).$mount("#app");

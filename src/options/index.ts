@@ -144,7 +144,7 @@ export interface Options {
    * @param total - The user's current cash balance.
    * @returns The amount of cash withdrawn or undefined if nothing withdrawn.
    */
-  callback: (total: number) => number | undefined;
+  callback?: (total: number) => number | undefined;
 
   /**
    * The learn more page content in [Markdown](https://www.markdownguide.org) format.
