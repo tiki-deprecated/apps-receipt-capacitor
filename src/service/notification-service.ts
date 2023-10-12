@@ -14,14 +14,14 @@ export class NotificationService {
      * @param title - the title of the notification 
      * @param body - the body of the notification
      */
-    sendNotification = async (title: string, body: string) => {
+    sendNotification = async (title: string, body: string, schedule: Date = new Date(Date.now())) => {
         await LocalNotifications.schedule({
             notifications: [
                 {
                   title: title,
                   body: body,
-                  id: 1,
-                  schedule: { at: new Date(Date.now() + 1000 * 5) },
+                  id: Math.random(),
+                  schedule: { at: schedule},
                   sound: undefined,
                   attachments: undefined,
                   actionTypeId: '',
