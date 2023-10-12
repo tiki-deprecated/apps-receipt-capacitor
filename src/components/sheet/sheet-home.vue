@@ -29,9 +29,9 @@ const syncState = (): BulletState =>
     ? store.sync.status()
     : BulletState.P0;
 
-const receiptState = ref(store.receipt.getStatus.bulletState);
+const receiptState = ref(store.receipt.status.bulletState);
 watchEffect(() => {
-  receiptState.value = store.receipt.getStatus.bulletState;
+  receiptState.value = store.receipt.status.bulletState;
 });
 
 

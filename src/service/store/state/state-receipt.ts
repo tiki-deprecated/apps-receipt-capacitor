@@ -23,7 +23,7 @@ export class StateReceipt {
 
   get = (): Map<string, Date> => this.state;
 
-  get getStatus() {
+  get status() {
     return readonly(this._status);
   }
 
@@ -38,7 +38,7 @@ export class StateReceipt {
 
   async add(receiptId: string, date: Date = new Date()): Promise<void> {
     this.state.set(receiptId, date);
-    this.status()
+    this.setStatus()
     return this.repository.write(this.key, this.toString());
   }
 
@@ -58,6 +58,7 @@ export class StateReceipt {
 
   async reset(): Promise<void> {
     this.state = new Map<string, Date>();
+    this.setStatus()
     return this.repository.write(this.key, this.toString());
   }
 
@@ -71,24 +72,30 @@ export class StateReceipt {
       ),
     );
 
-  status(week: number = getWeek()): BulletState {
+  setStatus(week: number = getWeek()) {
     const count = this.count({
       startWeek: week - 4,
       endWeek: week + 1,
     });
     switch (count) {
       case 0:
-        return this._status.bulletState = BulletState.P0;
+         this._status.bulletState = BulletState.P0;
+         break
       case 1:
-        return this._status.bulletState = BulletState.P20;
+         this._status.bulletState = BulletState.P20;
+         break
       case 2:
-        return this._status.bulletState = BulletState.P40;
+         this._status.bulletState = BulletState.P40;
+         break
       case 3:
-        return this._status.bulletState = BulletState.P60;
+         this._status.bulletState = BulletState.P60;
+         break
       case 4:
-        return this._status.bulletState = BulletState.P80;
+         this._status.bulletState = BulletState.P80;
+         break
       default:
-        return this._status.bulletState = BulletState.P100;
+         this._status.bulletState = BulletState.P100;
+         break
     }
   }
   }
