@@ -9,14 +9,16 @@ import {
   HeaderBack,
   ButtonText,
   ButtonTextState,
+BulletState,
 } from "@/components";
 import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
 import { computed, inject, ref } from "vue";
-import { type Capture } from "@/service";
+import { type Capture, type Store } from "@/service";
 import { InjectKey } from "@/utils";
 
 const emit = defineEmits(["close", "back"]);
 const capture: Capture = inject(InjectKey.capture)!;
+const store: Store = inject(InjectKey.store)!;
 
 const form = ref<Account>({ username: "", password: "", type: GMAIL });
 const error = ref<string>();
@@ -36,8 +38,11 @@ const submit = async () => {
   error.value = "";
   try {
     await capture.login(form.value);
+    await store.gmail.set(BulletState.SYNC)
     form.value = { username: "", password: "", type: GMAIL };
-    capture.scan().catch((error) => console.error(error.toString()));
+    capture.scan().catch((error) => console.error(error.toString())).finally(async ()=>
+      await store.gmail.set(BulletState.P100)
+    );
     emit("back");
   } catch (err: any) {
     error.value = err.toString();
