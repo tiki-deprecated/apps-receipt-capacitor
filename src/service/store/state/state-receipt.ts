@@ -34,7 +34,7 @@ export class StateReceipt {
 
   count(
     filter:
-      | { startWeek: number; endWeek: number; startDate?: Date }
+      | { startWeek: number; endWeek: number;}
       | undefined = undefined,
   ): number {
     let count = 0;
@@ -44,8 +44,7 @@ export class StateReceipt {
         const week = getWeek(date);
         if (
           week >= filter.startWeek &&
-          week < filter.endWeek &&
-          date.getDate() >= filter.startDate!.getDate()
+          week < filter.endWeek
         )
           count += 1;
       });
@@ -68,11 +67,10 @@ export class StateReceipt {
       ),
     );
 
-  status(week: number = getWeek(), startDate: Date): BulletState {
+  status(week: number = getWeek()): BulletState {
     const count = this.count({
       startWeek: week - 4,
       endWeek: week + 1,
-      startDate: startDate,
     });
     switch (count) {
       case 0:

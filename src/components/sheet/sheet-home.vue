@@ -29,9 +29,7 @@ const syncState = (): BulletState =>
     ? store.sync.status()
     : BulletState.P0;
 
-const dates = store.sync.get().values()
-const firstSync = dates.next().value
-const receiptState = (): BulletState => store.receipt.status(undefined, firstSync);
+const receiptState = (): BulletState => store.receipt.status();
 const balance = ref<number>(0);
 publish.balance().then((amount) => (balance.value = amount));
 
