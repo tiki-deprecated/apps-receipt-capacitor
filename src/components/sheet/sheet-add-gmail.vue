@@ -45,7 +45,7 @@ const submit = async () => {
     );
     emit("back");
   } catch (err: any) {
-    await store.gmail.set(BulletState.NULL)
+    await store.gmail.set(BulletState.ERROR)
     error.value = err.toString();
   }
   isLoading.value = false;
