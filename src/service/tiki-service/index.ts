@@ -11,6 +11,7 @@ import { Store } from "@/service/store";
 import { Publish } from "@/service/publish";
 import type { InjectionKey } from "vue";
 import { InjectKey } from "@/utils";
+import { BulletState } from "@/components";
 
 /**
  * The main entry point for interacting with service-level (non-UI) functionality.
@@ -47,7 +48,7 @@ export class TikiService {
     this.internalHandlers = new InternalHandlers(
       this.store,
       this.capture,
-      this.publish,
+      this.publish
     );
   }
 
@@ -70,13 +71,29 @@ export class TikiService {
     await this.capture.initialize(
       this.config.key.product,
       this.config.key.ios,
-      this.config.key.android,
+      this.config.key.android
     );
     this._isInitialized = true;
-    this.capture.load().then((accounts) => {
-      this.store.gmail.update(accounts);
-      this.store.retailer.update(accounts);
-      this.capture.scan();
+    this.capture.load().then(async (accounts) => {
+      if (accounts.length > 0) {
+        const hasGmail = accounts.find(
+          (account) => account.type.id === "GMAIL"
+        );
+        const hasRetailer = accounts.find(
+          (account) => account.type.type === "RETAILER"
+        );
+        if (hasGmail !== undefined)
+          await this.store.gmail.set(BulletState.SYNC);
+        if (hasRetailer !== undefined)
+          await this.store.retailer.set(BulletState.SYNC);
+      }
+      this.capture
+        .scan()
+        .catch((error) => console.error(error.toString()))
+        .finally(async () => {
+          this.store.retailer.update(accounts);
+          this.store.gmail.update(accounts);
+        });
     });
     await this.store.sync.add();
     await this.internalHandlers.checkPayout();
@@ -100,8 +117,8 @@ export class TikiService {
   inject(
     provide: (
       key: InjectionKey<unknown> | string | number,
-      value: unknown,
-    ) => void,
+      value: unknown
+    ) => void
   ): void {
     provide(InjectKey.config, this.config);
     provide(InjectKey.capture, this.capture);
