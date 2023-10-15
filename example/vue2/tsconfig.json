@@ -1,11 +1,23 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": [
+    "env.d.ts",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ],
+  "exclude": ["src/**/__tests__/*"],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "target": "ESNext",
+    "module": "ESNext",
+    "outDir": "./dist",
+    "emitDeclarationOnly": true,
+    "declarationDir": "./dist/types",
+    "paths": {
+      "@/*": ["./src/*"]
     }
-  ]
+  }
 }
