@@ -5,7 +5,8 @@
 
 /**
  * This module registers with a [Vue app](https://vuejs.org) the {@link TikiReceipt} component
- * and a singleton instance of the {@link TikiService}. Define a {@link TikiOptions.Options} object to specify licensing keys, styling, and content overrides.
+ * and a singleton instance of the {@link TikiService}. Define a {@link TikiOptions.Options}
+ * object to specify licensing keys, styling, and content overrides.
  *
  * This library is available for both Vue 2 (2.7.14) and Vue 3 (>=3.0.0).
  * - For Vue 3 use the package: `@mytiki/receipt-capacitor`.
@@ -31,8 +32,7 @@
  *      android: "YOUR MICROBLINK ANDROID LICENSE KEY",
  *      ios: "YOUR MICROBLINK IOS LICENSE KEY",
  *      product: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
- *    },
- *    callback: (_total: number): number | undefined => undefined,
+ *    }
  *  })
  *  .mount("#app");
  * ```
@@ -56,8 +56,7 @@
  *      android: "YOUR MICROBLINK ANDROID LICENSE KEY",
  *      ios: "YOUR MICROBLINK IOS LICENSE KEY",
  *      product: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
- *    },
- *    callback: (_total: number): number | undefined => undefined,
+ *    }
  *  })
  *
  * new Vue({ render: (h) => h(App) }).$mount("#app");
