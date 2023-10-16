@@ -24,6 +24,8 @@ PODS:
   - Capacitor (5.4.2):
     - CapacitorCordova
   - CapacitorCordova (5.4.2)
+  - CapacitorLocalNotifications (5.0.6):
+    - Capacitor
   - CapacitorPreferences (5.0.6):
     - Capacitor
   - GoogleAPIClientForREST/Core (1.7.0):
@@ -57,20 +59,24 @@ PODS:
     - BlinkEReceipt
     - BlinkReceipt
     - Capacitor
-  - MytikiTikiSdkCapacitor (0.3.4):
+  - MytikiTikiSdkCapacitor (0.3.5):
     - Capacitor
-    - TikiSdk
-  - TikiSdk (2.1.8)
+    - TikiSdkDebug (= 2.1.10)
+    - TikiSdkRelease (= 2.1.10)
+  - TikiSdkDebug (2.1.10)
+  - TikiSdkRelease (2.1.10)
 
 DEPENDENCIES:
   - BlinkEReceipt (~> 2.31)
   - BlinkReceipt (~> 1.39)
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorLocalNotifications (from `../../node_modules/@capacitor/local-notifications`)"
   - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
   - "MytikiCaptureReceiptCapacitor (from `../../node_modules/@mytiki/capture-receipt-capacitor`)"
   - "MytikiTikiSdkCapacitor (from `../../node_modules/@mytiki/tiki-sdk-capacitor`)"
-  - TikiSdk (~> 2.1.8)
+  - TikiSdkDebug (= 2.1.10)
+  - TikiSdkRelease (= 2.1.10)
 
 SPEC REPOS:
   https://github.com/BlinkReceipt/PodSpecRepo.git:
@@ -88,13 +94,16 @@ SPEC REPOS:
     - MSAL
     - MSGraphClientModels
     - MSGraphClientSDK
-    - TikiSdk
+    - TikiSdkDebug
+    - TikiSdkRelease
 
 EXTERNAL SOURCES:
   Capacitor:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
+  CapacitorLocalNotifications:
+    :path: "../../node_modules/@capacitor/local-notifications"
   CapacitorPreferences:
     :path: "../../node_modules/@capacitor/preferences"
   MytikiCaptureReceiptCapacitor:
@@ -111,6 +120,7 @@ SPEC CHECKSUMS:
   BRMSGraphMSALAuthProvider: 62676b8660c31a81e457e3bee0c7145d10601efd
   Capacitor: 8a9db42d105f55843cd8ed2a3cb54e2b78e7f102
   CapacitorCordova: cfcc06b698481da655415985eeb2b8da363f8451
+  CapacitorLocalNotifications: c2d8b14794064fd4814b1d6c4ddbac8029afa295
   CapacitorPreferences: f03954bcb0ff09c792909e46bff88e3183c16b10
   GoogleAPIClientForREST: 2d4140915e2ec6d1bcb39c9df4a534c75706c595
   GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
@@ -120,9 +130,10 @@ SPEC CHECKSUMS:
   MSGraphClientModels: ffef6d0a1cdaa774e1689e38da35301cb74fc72a
   MSGraphClientSDK: ffc07a58a838e0702c7bf2a856367035d4a335d7
   MytikiCaptureReceiptCapacitor: 66191a513ac58e6b553e1979d24816cea1c96960
-  MytikiTikiSdkCapacitor: 75b8f2efabb495b57f8aaf6935fa9df483fb6ffe
-  TikiSdk: e86997e6268f8d1f765d4e43f61ce241b1124d0c
+  MytikiTikiSdkCapacitor: 463ef5489d441aef6a6effc97f2daf0f305579a1
+  TikiSdkDebug: a84070ecc0a826c2cdde3e926c8d70021df52f5a
+  TikiSdkRelease: 075117d8873b89db71950dec9b8bb9da69cd34a6
 
-PODFILE CHECKSUM: 4adb8145cd5fe051c144b19e8f8f2fe399efeb5f
+PODFILE CHECKSUM: d31d91c3f41e6c0eab69680e0de2ce07dd150353
 
 COCOAPODS: 1.12.1

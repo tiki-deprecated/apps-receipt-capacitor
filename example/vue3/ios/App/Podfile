@@ -21,10 +21,11 @@ end
 
 target 'App' do
   capacitor_pods
-    
+
   pod 'BlinkReceipt', '~> 1.39'
   pod 'BlinkEReceipt', '~> 2.31'
-  pod 'TikiSdk', '~> 2.1.8'
+  pod 'TikiSdkRelease', '2.1.10', :configurations => 'Release'
+  pod 'TikiSdkDebug', '2.1.10', :configurations => 'Debug'
 end
 
 post_install do |installer|

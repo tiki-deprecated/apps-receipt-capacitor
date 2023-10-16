@@ -1,20 +1,96 @@
 PODS:
+  - AccountLinking (2.6.5)
+  - AppAuth (1.6.2):
+    - AppAuth/Core (= 1.6.2)
+    - AppAuth/ExternalUserAgent (= 1.6.2)
+  - AppAuth/Core (1.6.2)
+  - AppAuth/ExternalUserAgent (1.6.2):
+    - AppAuth/Core
+  - BlinkEReceipt (2.31.0):
+    - AccountLinking (~> 2.6.5)
+    - AppAuth (~> 1.3)
+    - BlinkReceipt (~> 1.39.0)
+    - BRMailCore (~> 0.1)
+    - BRMSGraphMSALAuthProvider (~> 1.0.0)
+    - GoogleAPIClientForREST/Gmail (~> 1.3)
+    - GoogleSignIn (~> 6.2.0)
+    - GTMAppAuth (~> 1.0)
+    - MSGraphClientModels (~> 1.3)
+  - BlinkReceipt (1.39.0)
+  - BRMailCore (0.1.0)
+  - BRMSGraphMSALAuthProvider (1.0.0):
+    - MSAL (~> 1.0)
+    - MSGraphClientSDK (~> 1.0.0)
   - Capacitor (5.4.2):
     - CapacitorCordova
   - CapacitorCordova (5.4.2)
   - CapacitorPreferences (5.0.6):
     - Capacitor
-  - MytikiCaptureReceiptCapacitor (0.6.2):
+  - GoogleAPIClientForREST/Core (1.7.0):
+    - GTMSessionFetcher (< 2.0, >= 1.6.1)
+  - GoogleAPIClientForREST/Gmail (1.7.0):
+    - GoogleAPIClientForREST/Core
+    - GTMSessionFetcher (< 2.0, >= 1.6.1)
+  - GoogleSignIn (6.2.4):
+    - AppAuth (~> 1.5)
+    - GTMAppAuth (~> 1.3)
+    - GTMSessionFetcher/Core (< 3.0, >= 1.1)
+  - GTMAppAuth (1.3.1):
+    - AppAuth/Core (~> 1.6)
+    - GTMSessionFetcher/Core (< 3.0, >= 1.5)
+  - GTMSessionFetcher (1.7.2):
+    - GTMSessionFetcher/Full (= 1.7.2)
+  - GTMSessionFetcher/Core (1.7.2)
+  - GTMSessionFetcher/Full (1.7.2):
+    - GTMSessionFetcher/Core (= 1.7.2)
+  - MSAL (1.2.5):
+    - MSAL/app-lib (= 1.2.5)
+  - MSAL/app-lib (1.2.5)
+  - MSGraphClientModels (1.3.0)
+  - MSGraphClientSDK (1.0.0):
+    - MSGraphClientSDK/Authentication (= 1.0.0)
+    - MSGraphClientSDK/Common (= 1.0.0)
+  - MSGraphClientSDK/Authentication (1.0.0)
+  - MSGraphClientSDK/Common (1.0.0):
+    - MSGraphClientSDK/Authentication
+  - MytikiCaptureReceiptCapacitor (0.7.0):
+    - BlinkEReceipt
+    - BlinkReceipt
     - Capacitor
   - MytikiTikiSdkCapacitor (0.3.1):
     - Capacitor
+  - TikiSdkDebug (2.1.10)
+  - TikiSdkRelease (2.1.10)
 
 DEPENDENCIES:
+  - BlinkEReceipt (~> 2.31)
+  - BlinkReceipt (~> 1.39)
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
   - "MytikiCaptureReceiptCapacitor (from `../../node_modules/@mytiki/capture-receipt-capacitor`)"
   - "MytikiTikiSdkCapacitor (from `../../node_modules/@mytiki/tiki-sdk-capacitor`)"
+  - TikiSdkDebug (= 2.1.10)
+  - TikiSdkRelease (= 2.1.10)
+
+SPEC REPOS:
+  https://github.com/BlinkReceipt/PodSpecRepo.git:
+    - AccountLinking
+    - BlinkEReceipt
+    - BlinkReceipt
+    - BRMailCore
+    - BRMSGraphMSALAuthProvider
+  trunk:
+    - AppAuth
+    - GoogleAPIClientForREST
+    - GoogleSignIn
+    - GTMAppAuth
+    - GTMSessionFetcher
+    - MSAL
+    - MSGraphClientModels
+    - MSGraphClientSDK
+    - TikiSdkDebug
+    - TikiSdkRelease
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -29,12 +105,27 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@mytiki/tiki-sdk-capacitor"
 
 SPEC CHECKSUMS:
+  AccountLinking: b1055f8e09d35b54d22c1b807bd692a8224ee9ca
+  AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
+  BlinkEReceipt: c3e5d1e0486796df84a3b54008e0ae134461f434
+  BlinkReceipt: 1e4e8d306ea7b64e26c64851b151ec1306e4f50c
+  BRMailCore: 07a819fe3342388551361b95f003a5afc0642281
+  BRMSGraphMSALAuthProvider: 62676b8660c31a81e457e3bee0c7145d10601efd
   Capacitor: 8a9db42d105f55843cd8ed2a3cb54e2b78e7f102
   CapacitorCordova: cfcc06b698481da655415985eeb2b8da363f8451
   CapacitorPreferences: f03954bcb0ff09c792909e46bff88e3183c16b10
-  MytikiCaptureReceiptCapacitor: aa1e9da282a17da9a47243037fafc640713fafac
+  GoogleAPIClientForREST: 2d4140915e2ec6d1bcb39c9df4a534c75706c595
+  GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
+  GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
+  GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
+  MSAL: 5149daaa19228c2c27d81987634da15b50981cef
+  MSGraphClientModels: ffef6d0a1cdaa774e1689e38da35301cb74fc72a
+  MSGraphClientSDK: ffc07a58a838e0702c7bf2a856367035d4a335d7
+  MytikiCaptureReceiptCapacitor: a9c1d0d8417e5f16442e826bf1bd0bc63a1a44f2
   MytikiTikiSdkCapacitor: 7fb71c6099dd3bba5c75ee7ec1dd30bd90c78c9c
+  TikiSdkDebug: a84070ecc0a826c2cdde3e926c8d70021df52f5a
+  TikiSdkRelease: 075117d8873b89db71950dec9b8bb9da69cd34a6
 
-PODFILE CHECKSUM: f1577cba99d1d91b705cb25d5cc74e6dbaef78e1
+PODFILE CHECKSUM: 58ae27a48aa783d4c54d3ec8716fc962a98f6e5a
 
 COCOAPODS: 1.12.1

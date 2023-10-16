@@ -14,6 +14,7 @@ install! 'cocoapods', :disable_input_output_paths => true
 def capacitor_pods
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
+  pod 'CapacitorLocalNotifications', :path => '../../node_modules/@capacitor/local-notifications'
   pod 'CapacitorPreferences', :path => '../../node_modules/@capacitor/preferences'
   pod 'MytikiCaptureReceiptCapacitor', :path => '../../node_modules/@mytiki/capture-receipt-capacitor'
   pod 'MytikiTikiSdkCapacitor', :path => '../../node_modules/@mytiki/tiki-sdk-capacitor'
@@ -21,10 +22,11 @@ end
 
 target 'App' do
   capacitor_pods
-    
+
   pod 'BlinkReceipt', '~> 1.39'
   pod 'BlinkEReceipt', '~> 2.31'
-  pod 'TikiSdk', '~> 2.1.8'
+  pod 'TikiSdkRelease', '2.1.10', :configurations => 'Release'
+  pod 'TikiSdkDebug', '2.1.10', :configurations => 'Debug'
 end
 
 post_install do |installer|
