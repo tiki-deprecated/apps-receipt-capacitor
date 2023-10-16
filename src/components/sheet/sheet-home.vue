@@ -12,7 +12,7 @@ import {
   ButtonTextState,
   BulletState,
 } from "@/components";
-import { inject, ref } from "vue";
+import { inject, ref, watchEffect } from "vue";
 import { InjectKey } from "@/utils";
 import type { Store, Publish } from "@/service";
 import type { Config } from "@/config";
@@ -29,7 +29,12 @@ const syncState = (): BulletState =>
     ? store.sync.status()
     : BulletState.P0;
 
-const receiptState = (): BulletState => store.receipt.status();
+const receiptState = ref(store.receipt.status.bulletState);
+watchEffect(() => {
+  receiptState.value = store.receipt.status.bulletState;
+});
+
+
 const balance = ref<number>(0);
 publish.balance().then((amount) => (balance.value = amount));
 
@@ -40,7 +45,7 @@ const withdraw = () => {
     publish
       .createReceipt(res)
       .catch((error) =>
-        console.log(`Failed to create withdrawal receipt: ${error}`),
+        console.log(`Failed to create withdrawal receipt: ${error}`)
       );
   }
 };
@@ -90,7 +95,7 @@ const withdraw = () => {
           },
           {
             text: 'Share 5 New Receipts',
-            state: receiptState(),
+            state: receiptState,
           },
         ]"
         class="bullets"

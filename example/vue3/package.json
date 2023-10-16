@@ -20,6 +20,7 @@
     "@mytiki/tiki-sdk-capacitor": "^0.3.4",
     "@mytiki/receipt-capacitor": "file:../../",
     "@capacitor/preferences": "^5.0.6",
+    "@capacitor/local-notifications": "^5.0.6",
     "uuid": "^9.0.0",
     "vue": "^3.3.4"
   },

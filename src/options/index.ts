@@ -135,8 +135,9 @@ export interface Options {
   theme?: Theme;
 
   /**
-   * A function to execute when a user presses the cash-out button. The application,
-   * not the library, is responsible for issuing the user the payout.
+   * An optional function to execute when a user presses the cash-out button. Use
+   * this to create a partial withdrawal, check if a user's account meets minimum
+   * withdrawal requirements, etc.
    *
    * For the UI to correctly reflect the users balance, the callback should return
    * the total amount withdrawn.
@@ -144,7 +145,7 @@ export interface Options {
    * @param total - The user's current cash balance.
    * @returns The amount of cash withdrawn or undefined if nothing withdrawn.
    */
-  callback: (total: number) => number | undefined;
+  callback?: (total: number) => number | undefined;
 
   /**
    * The learn more page content in [Markdown](https://www.markdownguide.org) format.
