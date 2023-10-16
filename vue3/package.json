@@ -39,7 +39,7 @@
     "@capacitor/local-notifications": "^5.0.6",
     "@mytiki/capture-receipt-capacitor": "^0.7.1",
     "@mytiki/tiki-sdk-capacitor": "^0.3.4",
-    "vue": "^3.3.4",
+    "vue": "^3.3.5",
     "showdown": "^2.1.0"
   },
   "devDependencies": {
@@ -77,7 +77,7 @@
     "@capacitor/ios": "^5.4.0",
     "@capacitor/preferences": "^5.0.0",
     "@mytiki/capture-receipt-capacitor": "^0.7.1",
-    "@mytiki/tiki-sdk-capacitor": "^0.3.4",
+    "@mytiki/tiki-sdk-capacitor": "^0.3.5",
     "vue": "^3.0.0"
   }
 }

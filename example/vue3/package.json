@@ -17,7 +17,7 @@
     "@capacitor/core": "^5.4.1",
     "@capacitor/ios": "^5.4.1",
     "@mytiki/capture-receipt-capacitor": "^0.7.1",
-    "@mytiki/tiki-sdk-capacitor": "^0.3.4",
+    "@mytiki/tiki-sdk-capacitor": "^0.3.5",
     "@mytiki/receipt-capacitor": "file:../../",
     "@capacitor/preferences": "^5.0.6",
     "@capacitor/local-notifications": "^5.0.6",
