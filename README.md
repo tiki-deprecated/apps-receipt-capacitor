@@ -119,8 +119,7 @@ createApp(App)
         android: "YOUR MICROBLINK ANDROID LICENSE KEY",
         ios: "YOUR MICROBLINK IOS LICENSE KEY",
         product: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
-      },
-      callback: (_total: number): number | undefined => undefined,
+      }
     }) 
     .mount("#app");
 ```
@@ -145,8 +144,7 @@ Vue.use(Tiki, {
     android: "YOUR MICROBLINK ANDROID LICENSE KEY",
     ios: "YOUR MICROBLINK IOS LICENSE KEY",
     product: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
-  },
-  callback: (_total: number): number | undefined => undefined,
+  }
 });
 
 new Vue({ render: (h) => h(App) }).$mount("#app");
