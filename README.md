@@ -88,8 +88,8 @@ target <TARGET> do
 
   pod 'BlinkReceipt', '~> 1.39'
   pod 'BlinkEReceipt', '~> 2.31'
-  pod 'TikiSdkRelease', '~> 2.1.10'
-  pod 'TikiSdkDebug', '~> 2.1.10'
+  pod 'TikiSdkRelease', '2.1.10', :configurations => 'Release'
+  pod 'TikiSdkDebug', '2.1.10', :configurations => 'Debug'
 end
 ```
 
