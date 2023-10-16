@@ -67,7 +67,7 @@ export class Capture {
 
   async logout(account: Account | undefined = undefined): Promise<void> {
     if (!account) {
-      await this.plugin.logout();
+      await this.plugin.logout().catch((err: string) => console.error(err));
       this._accounts.forEach((account: Account) => this.removeAccount(account));
     } else {
       await this.plugin.logout(account);
