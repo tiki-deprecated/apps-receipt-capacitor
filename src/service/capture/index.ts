@@ -114,10 +114,7 @@ export class Capture {
       console.debug(`Invalid receipt: No blinkReceiptId.`);
       return false;
     }
-    if (
-      receipt.retailerId.id == undefined ||
-      receipt.retailerId.bannerId == undefined
-    ) {
+    if (receipt.retailerId.id == undefined) {
       console.debug(
         `Invalid receipt: Invalid retailerId: ${JSON.stringify(
           receipt.retailerId,
