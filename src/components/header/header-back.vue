@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import { IconCrossMark } from "@/assets";
+import { IconCrossMarkOutline } from "@/assets";
 import { ButtonBack, ButtonIcon } from "@/components";
 
 defineEmits(["back", "close"]);
@@ -19,7 +19,7 @@ defineProps({
 <template>
   <div class="heading">
     <button-back :text="text" @click="$emit('back')" />
-    <button-icon :icon="IconCrossMark" @click="$emit('close')" />
+    <button-icon :icon="IconCrossMarkOutline" @click="$emit('close')" />
   </div>
 </template>
 

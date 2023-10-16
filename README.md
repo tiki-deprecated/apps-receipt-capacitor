@@ -119,8 +119,7 @@ createApp(App)
         android: "YOUR MICROBLINK ANDROID LICENSE KEY",
         ios: "YOUR MICROBLINK IOS LICENSE KEY",
         product: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
-      },
-      callback: (_total: number): number | undefined => undefined,
+      }
     }) 
     .mount("#app");
 ```
@@ -145,8 +144,7 @@ Vue.use(Tiki, {
     android: "YOUR MICROBLINK ANDROID LICENSE KEY",
     ios: "YOUR MICROBLINK IOS LICENSE KEY",
     product: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
-  },
-  callback: (_total: number): number | undefined => undefined,
+  }
 });
 
 new Vue({ render: (h) => h(App) }).$mount("#app");
@@ -178,7 +176,7 @@ To initialize just inject the `TikiService` and pass in your systems unique iden
 ```vue
 <script setup lang="ts">
   import { inject } from "vue";
-  import { type TikiService } from "@mytiki/tiki-receipt-capacitor";
+  import { type TikiService } from "@mytiki/receipt-capacitor";
   
   const tiki: TikiService | undefined = inject("Tiki");
   tiki?.initialize(id).then(() => console.log("Tiki Initialized"));
@@ -190,7 +188,7 @@ To initialize just inject the `TikiService` and pass in your systems unique iden
 ```vue
 <script setup lang="ts">
   import { inject } from "vue";
-  import { type TikiService } from "@mytiki/tiki-receipt-capacitor-vue2";
+  import { type TikiService } from "@mytiki/receipt-capacitor-vue2";
   
   const tiki: TikiService | undefined = inject("Tiki");
   tiki?.initialize(id).then(() => console.log("Tiki Initialized"));
