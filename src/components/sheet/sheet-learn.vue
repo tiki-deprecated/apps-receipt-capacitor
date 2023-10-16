@@ -15,7 +15,7 @@ const props = defineProps({
   },
 });
 
-const learn = new Showdown.Converter().makeHtml(props.markdown);
+const learn = new Showdown.Converter({tables: true}).makeHtml(props.markdown);
 </script>
 
 <template>
@@ -33,7 +33,7 @@ const learn = new Showdown.Converter().makeHtml(props.markdown);
 .full-screen {
   display: flex;
   flex-flow: column;
-  height: 95vh;
+  height: 95vh; 
 }
 
 .learn-more {
@@ -52,6 +52,7 @@ const learn = new Showdown.Converter().makeHtml(props.markdown);
 .learn-more :deep(p),
 .learn-more :deep(a),
 .learn-more :deep(ul),
+.learn-more :deep(ol),
 .learn-more :deep(table) {
   font-family: var(--tiki-font-family);
   line-height: var(--tiki-line-height);

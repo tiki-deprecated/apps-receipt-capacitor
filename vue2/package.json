@@ -1,6 +1,6 @@
 {
   "name": "@mytiki/receipt-capacitor-vue2",
-  "version": "0.4.2",
+  "version": "0.5.1",
   "description": "The TIKI Receipt library adds to your Vue.js + Capacitor **mobile app** a Data Reward program for your users to share their receipts in-exchange for **cash from Tiki inc**.",
   "author": "Tiki inc.",
   "license": "MIT",
@@ -36,8 +36,9 @@
   ],
   "dependencies": {
     "@capacitor/preferences": "^5.0.6",
-    "@mytiki/capture-receipt-capacitor": "^0.7.0",
-    "@mytiki/tiki-sdk-capacitor": "^0.3.3",
+    "@capacitor/local-notifications": "^5.0.6",
+    "@mytiki/capture-receipt-capacitor": "^0.7.1",
+    "@mytiki/tiki-sdk-capacitor": "^0.3.4",
     "vue": "2.7.14",
     "showdown": "^2.1.0"
   },
@@ -71,12 +72,13 @@
     "unplugin-vue-markdown": "^0.24.3"
   },
   "peerDependencies": {
-    "@capacitor/android": "^5.4.1",
-    "@capacitor/core": "^5.4.1",
-    "@capacitor/ios": "^5.4.1",
-    "@capacitor/preferences": "^5.0.6",
-    "@mytiki/capture-receipt-capacitor": "^0.7.0",
-    "@mytiki/tiki-sdk-capacitor": "^0.3.3",
-    "vue": "^3.3.0"
+    "@capacitor/android": "^5.4.0",
+    "@capacitor/core": "^5.4.0",
+    "@capacitor/ios": "^5.4.0",
+    "@capacitor/preferences": "^5.0.0",
+    "@capacitor/local-notifications": "^5.0.0",
+    "@mytiki/capture-receipt-capacitor": "^0.7.1",
+    "@mytiki/tiki-sdk-capacitor": "^0.3.4",
+    "vue": "^3.0.0"
   }
 }

@@ -15,7 +15,7 @@ const config: Config = inject(InjectKey.config)!;
 
 <template>
   <sheet-terms
-    :markdown="config.terms"
+    :markdown="config.company.agreement"
     @back="navigate.pop()"
     @accept="navigate.to(NavDef.Home)"
     @close="navigate.clear()"

@@ -53,14 +53,14 @@ PODS:
   - MSGraphClientSDK/Authentication (1.0.0)
   - MSGraphClientSDK/Common (1.0.0):
     - MSGraphClientSDK/Authentication
-  - MytikiCaptureReceiptCapacitor (0.7.0):
+  - MytikiCaptureReceiptCapacitor (0.7.1):
     - BlinkEReceipt
     - BlinkReceipt
     - Capacitor
-  - MytikiTikiSdkCapacitor (0.3.3):
+  - MytikiTikiSdkCapacitor (0.3.4):
     - Capacitor
     - TikiSdk
-  - TikiSdk (2.1.1)
+  - TikiSdk (2.1.8)
 
 DEPENDENCIES:
   - BlinkEReceipt (~> 2.31)
@@ -70,7 +70,7 @@ DEPENDENCIES:
   - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
   - "MytikiCaptureReceiptCapacitor (from `../../node_modules/@mytiki/capture-receipt-capacitor`)"
   - "MytikiTikiSdkCapacitor (from `../../node_modules/@mytiki/tiki-sdk-capacitor`)"
-  - TikiSdk (~> 2.1.1)
+  - TikiSdk (~> 2.1.8)
 
 SPEC REPOS:
   https://github.com/BlinkReceipt/PodSpecRepo.git:
@@ -79,8 +79,6 @@ SPEC REPOS:
     - BlinkReceipt
     - BRMailCore
     - BRMSGraphMSALAuthProvider
-  https://github.com/tiki/PodspecRepo.git:
-    - TikiSdk
   trunk:
     - AppAuth
     - GoogleAPIClientForREST
@@ -90,6 +88,7 @@ SPEC REPOS:
     - MSAL
     - MSGraphClientModels
     - MSGraphClientSDK
+    - TikiSdk
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -120,10 +119,10 @@ SPEC CHECKSUMS:
   MSAL: 5149daaa19228c2c27d81987634da15b50981cef
   MSGraphClientModels: ffef6d0a1cdaa774e1689e38da35301cb74fc72a
   MSGraphClientSDK: ffc07a58a838e0702c7bf2a856367035d4a335d7
-  MytikiCaptureReceiptCapacitor: a9c1d0d8417e5f16442e826bf1bd0bc63a1a44f2
-  MytikiTikiSdkCapacitor: b15b0d62f44b4aa79615d957fac2ec6e1130d4d2
-  TikiSdk: 0b3c67d6780316766c3bee9a89102c27f3b400aa
+  MytikiCaptureReceiptCapacitor: 66191a513ac58e6b553e1979d24816cea1c96960
+  MytikiTikiSdkCapacitor: 75b8f2efabb495b57f8aaf6935fa9df483fb6ffe
+  TikiSdk: e86997e6268f8d1f765d4e43f61ce241b1124d0c
 
-PODFILE CHECKSUM: 099bdebcb302ad1c1a6479c44fb44dd444f30c2d
+PODFILE CHECKSUM: 4adb8145cd5fe051c144b19e8f8f2fe399efeb5f
 
 COCOAPODS: 1.12.1
