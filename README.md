@@ -88,7 +88,8 @@ target <TARGET> do
 
   pod 'BlinkReceipt', '~> 1.39'
   pod 'BlinkEReceipt', '~> 2.31'
-  pod 'TikiSdk', '~> 2.1.8'
+  pod 'TikiSdkRelease', '~> 2.1.10'
+  pod 'TikiSdkDebug', '~> 2.1.10'
 end
 ```
 
@@ -275,7 +276,7 @@ _Note, if you press start before the initialization is complete, a warning will 
 ## Open Issues
 You can find active issues here in GitHub under [Issues](https://github.com/tiki/tiki-receipt-capacitor/issues). If you run into a bug or have a question, just create a new Issue or reach out to a team member on 👾 [Discord](https://discord.gg/tiki).
 
-### Next Release: [0.4.2](https://github.com/tiki/apps/issues/11)
+### Next Release: [0.5.3](https://github.com/tiki/apps/issues/14)
 
 # Contributing
 
