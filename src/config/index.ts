@@ -21,7 +21,7 @@ export class Config {
   readonly key: Key;
   readonly company: Company;
   readonly learn: string = LearnMore;
-  readonly callback: (total: number) => number | undefined;
+  readonly callback = (total: number): number | undefined => total;
   readonly offer: Offer;
   readonly tags: Tag[] = [
     Tag.common(CommonTags.USER_ID),
@@ -50,7 +50,7 @@ export class Config {
   constructor(options: Options) {
     this.key = new Key(options.key);
     this.theme = new Theme(options.theme);
-    this.callback = options.callback;
+    this.callback = options.callback ?? this.callback;
     this.offer = new Offer(options.offer);
     this.company = new Company(options.company);
     if (options?.learn != null) this.learn = options.learn;
