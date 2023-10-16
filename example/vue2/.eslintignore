@@ -2,3 +2,4 @@ build
 dist
 vite.config.ts
 .eslintrc
+capacitor.config.ts
