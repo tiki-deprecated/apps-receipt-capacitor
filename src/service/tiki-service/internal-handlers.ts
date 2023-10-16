@@ -54,9 +54,15 @@ export class InternalHandlers {
     if (!receipt.blinkReceiptId) {
       console.warn(`Receipt missing ID. Skipping: ${JSON.stringify(receipt)}`);
     } else {
-      this.store.receipt.add(receipt.blinkReceiptId).catch((error): void => {
-        console.error(`Failed to update receipt state. Error: ${error}`);
-      });
+      const date =
+        receipt.receiptDateTime != undefined && receipt.receiptDateTime > 0
+          ? new Date(receipt.receiptDateTime * 1000)
+          : new Date();
+      this.store.receipt
+        .add(receipt.blinkReceiptId, date)
+        .catch((error): void => {
+          console.error(`Failed to update receipt state. Error: ${error}`);
+        });
       this.publish.publish(receipt).catch((error) => console.error(error));
     }
   }

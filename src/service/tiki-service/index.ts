@@ -9,8 +9,9 @@ import { InternalHandlers } from "@/service/tiki-service/internal-handlers";
 import { Capture } from "@/service/capture";
 import { Store } from "@/service/store";
 import { Publish } from "@/service/publish";
-import type { InjectionKey } from "vue/types/v3-generated";
-import * as Keys from "@/utils/inject-key";
+import type { InjectionKey } from "vue";
+import { InjectKey } from "@/utils";
+import { BulletState } from "@/components";
 
 /**
  * The main entry point for interacting with service-level (non-UI) functionality.
@@ -73,10 +74,26 @@ export class TikiService {
       this.config.key.android,
     );
     this._isInitialized = true;
-    this.capture.load().then((accounts) => {
-      this.store.gmail.update(accounts);
-      this.store.retailer.update(accounts);
-      this.capture.scan();
+    this.capture.load().then(async (accounts) => {
+      if (accounts.length > 0) {
+        const hasGmail = accounts.find(
+          (account) => account.type.id === "GMAIL",
+        );
+        const hasRetailer = accounts.find(
+          (account) => account.type.type === "RETAILER",
+        );
+        if (hasGmail !== undefined)
+          await this.store.gmail.set(BulletState.SYNC);
+        if (hasRetailer !== undefined)
+          await this.store.retailer.set(BulletState.SYNC);
+      }
+      this.capture
+        .scan()
+        .catch((error) => console.error(error.toString()))
+        .finally(async () => {
+          this.store.retailer.update(accounts);
+          this.store.gmail.update(accounts);
+        });
     });
     await this.store.sync.add();
     await this.internalHandlers.checkPayout();
@@ -103,9 +120,9 @@ export class TikiService {
       value: unknown,
     ) => void,
   ): void {
-    provide(Keys.config, this.config);
-    provide(Keys.capture, this.capture);
-    provide(Keys.publish, this.publish);
-    provide(Keys.store, this.store);
+    provide(InjectKey.config, this.config);
+    provide(InjectKey.capture, this.capture);
+    provide(InjectKey.publish, this.publish);
+    provide(InjectKey.store, this.store);
   }
 }

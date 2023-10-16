@@ -9,23 +9,34 @@ import {
   HeaderBack,
   ButtonText,
   ButtonTextState,
+BulletState,
 } from "@/components";
 import {
   type Account,
   type AccountType,
   accountTypes,
   GMAIL,
+  AOL,
+  YAHOO,
+  OUTLOOK
 } from "@mytiki/capture-receipt-capacitor";
-import { ref, inject, computed } from "vue";
-import { type Capture } from "@/service";
+import { ref, inject, computed, onMounted } from "vue";
+import { type Capture, type Store } from "@/service";
 import { InjectKey } from "@/utils";
+
 
 const emit = defineEmits(["close", "back"]);
 const capture: Capture = inject(InjectKey.capture)!;
+const store: Store = inject(InjectKey.store)!;
 
 const filtered = accountTypes.index;
-capture.accounts.forEach((account) => filtered.delete(account.type.id));
 filtered.delete(GMAIL.id);
+filtered.delete(AOL.id);
+filtered.delete(YAHOO.id);
+filtered.delete(OUTLOOK.id);
+onMounted(() =>
+  capture.accounts.forEach((account) => filtered.delete(account.type.id))
+);
 
 const form = ref<Account>({
   username: "",
@@ -49,7 +60,10 @@ const submit = async () => {
   error.value = "";
   try {
     await capture.login(form.value);
-    capture.scan().catch((error) => console.error(error.toString()));
+    await store.retailer.set(BulletState.SYNC)
+    capture.scan().catch((error) => console.error(error.toString())).finally(async ()=>{
+      await store.retailer.set(BulletState.P100)
+    });
     error.value = "";
     form.value = {
       username: "",
@@ -58,6 +72,7 @@ const submit = async () => {
     };
     emit("back");
   } catch (err: any) {
+    await store.retailer.set(BulletState.ERROR)
     error.value = err.toString();
   }
   isLoading.value = false;

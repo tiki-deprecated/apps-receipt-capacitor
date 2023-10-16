@@ -9,6 +9,12 @@ import App from "./app.vue";
 import Tiki from "@mytiki/receipt-capacitor-vue2";
 
 Vue.use(Tiki, {
+  company: {
+    name: "Tiki inc.",
+    jurisdiction: "Tennessee, USA",
+    privacy: "https://mytiki.com/page/privacy",
+    terms: "https://mytiki.com/page/terms",
+  },
   key: {
     publishingId: "be19730a-00d5-45f5-b18e-2e19eb25f311",
     android:
@@ -17,7 +23,6 @@ Vue.use(Tiki, {
     product:
       "wSNX3mu+YGc/2I1DDd0NmrYHS6zS1BQt2geMUH7DDowER43JGeJRUErOHVwU2tz6xHDXia8BuvXQI3j37I0uYw==",
   },
-  callback: (_total: number): number | undefined => undefined,
 });
 
 new Vue({ render: (h) => h(App) }).$mount("#app");

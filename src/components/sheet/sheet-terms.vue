@@ -76,6 +76,7 @@ const accept = async () => {
 .terms :deep(p),
 .terms :deep(a),
 .terms :deep(ul),
+.terms :deep(ol),
 .terms :deep(table) {
   font-family: var(--tiki-font-family);
   line-height: var(--tiki-line-height);

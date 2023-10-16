@@ -81,7 +81,7 @@ export class Publish {
     await this.plugin.createLicense(
       titleRecord.id,
       this.config.uses,
-      this.config.terms,
+      this.config.company.terms,
       undefined,
       this.config.offer.description,
     );

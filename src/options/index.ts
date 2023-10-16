@@ -13,6 +13,7 @@
 import type { Key } from "./key";
 import type { Offer } from "./offer";
 import type { Theme } from "./theme";
+import type { Company } from "./company";
 
 /**
  * The top-level configuration object for this library. Define during app registration.
@@ -28,6 +29,12 @@ import type { Theme } from "./theme";
  *
  * createApp(App)
  *  .use(Tiki, {
+ *    company: {
+ *      name: "Company Inc.",
+ *      jurisdiction: "Tennessee, USA",
+ *      privacy: "https://your-co.com/privacy",
+ *      terms: "https://your-co.com/terms",
+ *    },
  *    key: {
  *      publishingId: "YOUR TIKI PUBLISHING ID",
  *      android: "YOUR MICROBLINK ANDROID LICENSE KEY",
@@ -68,6 +75,12 @@ import type { Theme } from "./theme";
  * import LearnMore from "@/assets/md/learn-more.md?raw";
  *
  * Vue.use(Tiki, {
+ *    company: {
+ *      name: "Company Inc.",
+ *      jurisdiction: "Tennessee, USA",
+ *      privacy: "https://your-co.com/privacy",
+ *      terms: "https://your-co.com/terms",
+ *    },
  *    key: {
  *      publishingId: "YOUR TIKI PUBLISHING ID",
  *      android: "YOUR MICROBLINK ANDROID LICENSE KEY",
@@ -102,6 +115,11 @@ import type { Theme } from "./theme";
  */
 export interface Options {
   /**
+   * Your company's information. Required for data licensing agreements.
+   */
+  company: Company;
+
+  /**
    * The license keys required to use this Library. Sign up at [mytiki.com](https://mytiki.com).
    */
   key: Key;
@@ -117,8 +135,9 @@ export interface Options {
   theme?: Theme;
 
   /**
-   * A function to execute when a user presses the cash-out button. The application,
-   * not the library, is responsible for issuing the user the payout.
+   * An optional function to execute when a user presses the cash-out button. Use
+   * this to create a partial withdrawal, check if a user's account meets minimum
+   * withdrawal requirements, etc.
    *
    * For the UI to correctly reflect the users balance, the callback should return
    * the total amount withdrawn.
@@ -126,7 +145,7 @@ export interface Options {
    * @param total - The user's current cash balance.
    * @returns The amount of cash withdrawn or undefined if nothing withdrawn.
    */
-  callback: (total: number) => number | undefined;
+  callback?: (total: number) => number | undefined;
 
   /**
    * The learn more page content in [Markdown](https://www.markdownguide.org) format.
@@ -142,3 +161,4 @@ export interface Options {
 export * from "./key";
 export * from "./theme";
 export * from "./offer";
+export * from "./company";
