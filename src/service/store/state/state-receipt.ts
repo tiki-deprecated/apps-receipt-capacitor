@@ -22,7 +22,7 @@ export class StateReceipt {
 
   get = (): Map<string, Date> => this.state;
 
-  get status() {
+  get status(): { readonly bulletState: BulletState } {
     return readonly(this._status);
   }
 
