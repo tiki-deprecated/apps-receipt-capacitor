@@ -119,8 +119,7 @@ createApp(App)
         android: "YOUR MICROBLINK ANDROID LICENSE KEY",
         ios: "YOUR MICROBLINK IOS LICENSE KEY",
         product: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
-      },
-      callback: (_total: number): number | undefined => undefined,
+      }
     }) 
     .mount("#app");
 ```
@@ -145,8 +144,7 @@ Vue.use(Tiki, {
     android: "YOUR MICROBLINK ANDROID LICENSE KEY",
     ios: "YOUR MICROBLINK IOS LICENSE KEY",
     product: "YOUR MICROBLINK PRODUCT INTELLIGENCE KEY",
-  },
-  callback: (_total: number): number | undefined => undefined,
+  }
 });
 
 new Vue({ render: (h) => h(App) }).$mount("#app");
@@ -168,24 +166,6 @@ _This registers the Vue Component as `TikiReceipt` and provides the service `Tik
 @import "@mytiki/receipt-capacitor-vue2/dist/receipt-capacitor.css";
 ```
 
-#### Android
-For IMAP email account linking, the authorization UI uses the material bottom sheet. This requires your theme parent to extend Theme.MaterialComponents.*
-
-```xml
-<resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-</resources>
-
-```
-
 ### Initialization
 To initialize just inject the `TikiService` and pass in your systems unique identifier for the user. If you use emails (you shouldn't 😝), we recommend hashing it first.
 
@@ -196,7 +176,7 @@ To initialize just inject the `TikiService` and pass in your systems unique iden
 ```vue
 <script setup lang="ts">
   import { inject } from "vue";
-  import { type TikiService } from "@mytiki/tiki-receipt-capacitor";
+  import { type TikiService } from "@mytiki/receipt-capacitor";
   
   const tiki: TikiService | undefined = inject("Tiki");
   tiki?.initialize(id).then(() => console.log("Tiki Initialized"));
@@ -208,7 +188,7 @@ To initialize just inject the `TikiService` and pass in your systems unique iden
 ```vue
 <script setup lang="ts">
   import { inject } from "vue";
-  import { type TikiService } from "@mytiki/tiki-receipt-capacitor-vue2";
+  import { type TikiService } from "@mytiki/receipt-capacitor-vue2";
   
   const tiki: TikiService | undefined = inject("Tiki");
   tiki?.initialize(id).then(() => console.log("Tiki Initialized"));
