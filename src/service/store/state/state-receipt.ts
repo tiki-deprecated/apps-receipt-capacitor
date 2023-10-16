@@ -6,17 +6,25 @@
 import type { Repository } from "@/service/store/repository";
 import { getWeek } from "@/utils/week";
 import { BulletState } from "@/components/bullet/bullet-state";
+import { reactive, readonly } from "vue";
 
 export class StateReceipt {
   private readonly repository: Repository;
   private readonly key: string = "receipt";
   private state: Map<string, Date> = new Map<string, Date>();
+  private _status = reactive({
+    bulletState: BulletState.P0,
+  });
 
   constructor(repository: Repository) {
     this.repository = repository;
   }
 
   get = (): Map<string, Date> => this.state;
+
+  get status(): { readonly bulletState: BulletState } {
+    return readonly(this._status);
+  }
 
   async load(): Promise<void> {
     const saved: string | undefined = await this.repository.read(this.key);
@@ -29,6 +37,7 @@ export class StateReceipt {
 
   async add(receiptId: string, date: Date = new Date()): Promise<void> {
     this.state.set(receiptId, date);
+    this.setStatus();
     return this.repository.write(this.key, this.toString());
   }
 
@@ -48,6 +57,7 @@ export class StateReceipt {
 
   async reset(): Promise<void> {
     this.state = new Map<string, Date>();
+    this.setStatus();
     return this.repository.write(this.key, this.toString());
   }
 
@@ -61,24 +71,30 @@ export class StateReceipt {
       ),
     );
 
-  status(week: number = getWeek()): BulletState {
+  setStatus(week: number = getWeek()): void {
     const count = this.count({
       startWeek: week - 4,
       endWeek: week + 1,
     });
     switch (count) {
       case 0:
-        return BulletState.P0;
+        this._status.bulletState = BulletState.P0;
+        break;
       case 1:
-        return BulletState.P20;
+        this._status.bulletState = BulletState.P20;
+        break;
       case 2:
-        return BulletState.P40;
+        this._status.bulletState = BulletState.P40;
+        break;
       case 3:
-        return BulletState.P60;
+        this._status.bulletState = BulletState.P60;
+        break;
       case 4:
-        return BulletState.P80;
+        this._status.bulletState = BulletState.P80;
+        break;
       default:
-        return BulletState.P100;
+        this._status.bulletState = BulletState.P100;
+        break;
     }
   }
 }
