@@ -28,13 +28,15 @@ const handleTouch = (element: any) =>{
 </script>
 
 <template>
-  <div class="overlay" @click.stop.prevent="isShow = false" @touchend="handleTouch">
-    <Transition appear name="slide" @leave="$emit('dismiss')">
-      <div v-if="isShow" class="bottom-sheet" @click.stop>
-        <slot />
-      </div>
-    </Transition>
-  </div>
+  <Transition name="fade" appear>
+    <div class="overlay" @click.stop.prevent="isShow = false" @touchend="handleTouch">
+      <Transition appear name="slide-fade" @leave="$emit('dismiss')">
+        <div v-if="isShow" class="bottom-sheet" @click.stop>
+          <slot />
+        </div>
+      </Transition>
+    </div>
+  </Transition>
 </template>
 
 <style scoped>
@@ -63,16 +65,21 @@ const handleTouch = (element: any) =>{
   max-height: 95vh;
 }
 
-.slide-enter-active {
-  transition: all 0.5s ease-out;
+.slide-fade-enter-active {
+  transition: all 0.4s ease;
 }
-
-.slide-leave-active {
+.slide-fade-leave-active {
   transition: all 0.3s ease-out;
 }
-
-.slide-enter-from,
-.slide-leave-to {
+.slide-fade-enter, .slide-fade-leave-to
+{
   transform: translate(-50%, 100%);
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.4s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
