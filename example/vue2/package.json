@@ -20,7 +20,7 @@
     "@capacitor/preferences": "^5.0.6",
     "@mytiki/capture-receipt-capacitor": "^0.7.0",
     "@mytiki/receipt-capacitor-vue2": "file:../../",
-    "@mytiki/tiki-sdk-capacitor": "^0.3.5",
+    "@mytiki/tiki-sdk-capacitor": "^0.3.6",
     "uuid": "^9.0.0",
     "vite": "^4.4.10",
     "vue": "^2.7.14"
