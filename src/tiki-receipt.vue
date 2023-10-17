@@ -52,20 +52,8 @@ watch(
 </script>
 
 <template>
-  <Transition appear name="slide-fade">
     <nav-view :show="present" @update:show="update" />
-  </Transition>
 </template>
 
 <style scoped>
-.slide-fade-enter-active {
-  transition: all 0.4s ease;
-}
-.slide-fade-leave-active {
-  transition: all 0.3s ease-out;
-}
-.slide-fade-enter, .slide-fade-leave-to
-{
-  transform: translate(-50%, 100%);
-}
 </style>
