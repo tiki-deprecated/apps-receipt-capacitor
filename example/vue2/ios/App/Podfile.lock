@@ -59,12 +59,12 @@ PODS:
     - BlinkEReceipt
     - BlinkReceipt
     - Capacitor
-  - MytikiTikiSdkCapacitor (0.3.5):
+  - MytikiTikiSdkCapacitor (0.3.6):
     - Capacitor
-    - TikiSdkDebug (= 2.1.10)
-    - TikiSdkRelease (= 2.1.10)
-  - TikiSdkDebug (2.1.10)
-  - TikiSdkRelease (2.1.10)
+    - TikiSdkDebug (= 3.0.0)
+    - TikiSdkRelease (= 3.0.0)
+  - TikiSdkDebug (3.0.0)
+  - TikiSdkRelease (3.0.0)
 
 DEPENDENCIES:
   - BlinkEReceipt (~> 2.31)
@@ -75,8 +75,8 @@ DEPENDENCIES:
   - "CapacitorPreferences (from `../../node_modules/@capacitor/preferences`)"
   - "MytikiCaptureReceiptCapacitor (from `../../node_modules/@mytiki/capture-receipt-capacitor`)"
   - "MytikiTikiSdkCapacitor (from `../../node_modules/@mytiki/tiki-sdk-capacitor`)"
-  - TikiSdkDebug (= 2.1.10)
-  - TikiSdkRelease (= 2.1.10)
+  - TikiSdkDebug (= 3.0.0)
+  - TikiSdkRelease (= 3.0.0)
 
 SPEC REPOS:
   https://github.com/BlinkReceipt/PodSpecRepo.git:
@@ -130,10 +130,10 @@ SPEC CHECKSUMS:
   MSGraphClientModels: ffef6d0a1cdaa774e1689e38da35301cb74fc72a
   MSGraphClientSDK: ffc07a58a838e0702c7bf2a856367035d4a335d7
   MytikiCaptureReceiptCapacitor: 66191a513ac58e6b553e1979d24816cea1c96960
-  MytikiTikiSdkCapacitor: 463ef5489d441aef6a6effc97f2daf0f305579a1
-  TikiSdkDebug: a84070ecc0a826c2cdde3e926c8d70021df52f5a
-  TikiSdkRelease: 075117d8873b89db71950dec9b8bb9da69cd34a6
+  MytikiTikiSdkCapacitor: 258f609e4acb6d92f8f510dd84b95f517a760dc9
+  TikiSdkDebug: 85a41ce306804d45014345fb12ed4f34b83defe0
+  TikiSdkRelease: 5979b718bf1776d1d9e66fbd503aed531f9e4d0d
 
-PODFILE CHECKSUM: d31d91c3f41e6c0eab69680e0de2ce07dd150353
+PODFILE CHECKSUM: 2695f0285861bb027b36eacb75ee77e7eab90f73
 
 COCOAPODS: 1.12.1

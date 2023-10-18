@@ -22,7 +22,8 @@ vue3-example-android: vue3-example
 	cd example/vue3 && npx cap run android
 
 vue3-example-ios: vue3-example
-	cd example/vue3/ios/App pod install --repo-update
+	cd example/vue3/ios/App && pod deintegrate
+	cd example/vue3/ios/App && pod install --repo-update
 	cd example/vue3 && npx cap run ios
 
 vue2: clean
@@ -41,7 +42,8 @@ vue2-example-android: vue2-example
 	cd example/vue2 && npx cap run android
 
 vue2-example-ios: vue2-example
-	cd example/vue2/ios/App pod install --repo-update
+	cd example/vue2/ios/App && pod deintegrate
+	cd example/vue2/ios/App && pod install --repo-update
 	cd example/vue2 && npx cap run ios
 
 clean:
