@@ -4,5 +4,5 @@
  */
 
 import ProgramImage from "@/assets/images/program.png";
-
-export { ProgramImage };
+import OfferImage from "@/assets/images/offerCard.png"
+export { ProgramImage, OfferImage };

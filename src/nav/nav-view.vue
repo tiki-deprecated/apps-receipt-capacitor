@@ -30,9 +30,10 @@ watch(
   () => props.show,
   async (show) => {
     if (show) {
-      const license: LicenseRecord | undefined = await publish.getLicense();
-      if (!license) navigate.to(NavDef.Offer);
-      else navigate.to(NavDef.Home);
+      // const license: LicenseRecord | undefined = await publish.getLicense();
+      // if (!license) navigate.to(NavDef.Offer);
+      // else navigate.to(NavDef.Home);
+      navigate.to(NavDef.CloOffer)
     } else navigate.clear();
   },
 );
