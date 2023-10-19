@@ -33,7 +33,7 @@ const learn = new Showdown.Converter({tables: true}).makeHtml(props.markdown);
 .full-screen {
   display: flex;
   flex-flow: column;
-  height: 95vh; 
+  height: 90vh;
 }
 
 .learn-more {
