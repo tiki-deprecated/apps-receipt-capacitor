@@ -24,7 +24,7 @@ watch(
 </script>
 
 <template>
-  <div class="container">
+  <div class="account-container">
     <div class="account">
       <div class="img">
         <div v-if="isError" class="overlay" />
@@ -46,7 +46,7 @@ watch(
 </template>
 
 <style scoped>
-.container {
+.account-container {
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -14,13 +14,13 @@ defineEmits(["click"]);
 </script>
 
 <template>
-  <button class="container" @click="$emit('click')">
+  <button class="btn-container" @click="$emit('click')">
     <component :is="icon" class="icon" />
   </button>
 </template>
 
 <style scoped>
-.container {
+.btn-container {
   height: 2em;
   width: 2em;
   position: relative;
