@@ -10,7 +10,6 @@ import {
   HeaderTitle,
   CloCardOffer
 } from "../../../components";
-import {OfferImage} from "../../../assets/images"
 import { defineEmits } from "vue";
 
 defineEmits(["close", "accept"]);
