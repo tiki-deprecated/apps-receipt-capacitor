@@ -26,6 +26,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  cloPresent: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 const navigate = new Navigate();
@@ -34,6 +38,7 @@ const tiki: TikiService = inject(Keys.tiki)!;
 tiki.inject(provide);
 const update = (show: boolean) => emit("update:present", show);
 const show = ref<boolean>(false);
+const showClo = ref<boolean>(false);
 
 watch(
   () => props.present,
@@ -49,10 +54,14 @@ watch(
     show.value = present;
   },
 );
+
+watch(()=> props.cloPresent, (cloPresent)=>{
+  showClo.value = cloPresent
+})
 </script>
 
 <template>
-    <nav-view :show="present" @update:show="update" />
+    <nav-view :show="present" @update:show="update" :showClo="cloPresent"/>
 </template>
 
 <style scoped>

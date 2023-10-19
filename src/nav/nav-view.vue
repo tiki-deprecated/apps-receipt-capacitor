@@ -22,6 +22,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  showClo: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 config.theme.apply(document);
@@ -30,18 +34,20 @@ watch(
   () => props.show,
   async (show) => {
     if (show) {
-      // const license: LicenseRecord | undefined = await publish.getLicense();
-      // if (!license) navigate.to(NavDef.Offer);
-      // else navigate.to(NavDef.Home);
-      navigate.to(NavDef.CloOffer)
+      const license: LicenseRecord | undefined = await publish.getLicense();
+      if (!license) navigate.to(NavDef.Offer);
+      else navigate.to(NavDef.Home);
     } else navigate.clear();
   },
 );
+watch(()=> props.showClo, (showClo)=>{
+  if(showClo) navigate.to(NavDef.CloOffer)
+})
 </script>
 
 <template>
   <sheet-bottom
-    v-if="show"
+    v-if="show || showClo"
     :show="navigate.ref.value !== NavDef.None"
     @dismiss="$emit('update:show', false)"
   >
