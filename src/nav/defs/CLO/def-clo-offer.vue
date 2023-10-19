@@ -7,5 +7,7 @@ const navigate: Navigate = inject(InjectKey.navigate)!;
 </script>
 
 <template>
-    <clo-sheet-offer @close="navigate.clear()" @accept=""/>
+    <clo-sheet-offer @close="navigate.clear()"     
+    @accept="navigate.to(NavDef.Terms)"
+    />
 </template>

@@ -25,10 +25,6 @@ const props = defineProps({
   present: {
     type: Boolean,
     default: false,
-  },
-  cloPresent: {
-    type: Boolean,
-    default: false,
   }
 });
 
@@ -55,13 +51,10 @@ watch(
   },
 );
 
-watch(()=> props.cloPresent, (cloPresent)=>{
-  showClo.value = cloPresent
-})
 </script>
 
 <template>
-    <nav-view :show="present" @update:show="update" :showClo="cloPresent"/>
+    <nav-view :show="present" @update:show="update"/>
 </template>
 
 <style scoped>

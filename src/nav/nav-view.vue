@@ -21,10 +21,6 @@ const props = defineProps({
   show: {
     type: Boolean,
     default: false,
-  },
-  showClo: {
-    type: Boolean,
-    default: false,
   }
 });
 
@@ -35,19 +31,16 @@ watch(
   async (show) => {
     if (show) {
       const license: LicenseRecord | undefined = await publish.getLicense();
-      if (!license) navigate.to(NavDef.Offer);
+      if (!license) navigate.to(NavDef.CloOffer);
       else navigate.to(NavDef.Home);
     } else navigate.clear();
   },
 );
-watch(()=> props.showClo, (showClo)=>{
-  if(showClo) navigate.to(NavDef.CloOffer)
-})
 </script>
 
 <template>
   <sheet-bottom
-    v-if="show || showClo"
+    v-if="show"
     :show="navigate.ref.value !== NavDef.None"
     @dismiss="$emit('update:show', false)"
   >

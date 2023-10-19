@@ -31,7 +31,6 @@ loadUser().then((user) => {
     .then(() => console.log("Initialization complete."));
 });
 const present = ref<boolean>(false);
-const cloPresent = ref<boolean>(false);
 
 const cycle = async () => {
   await tiki!.logout().then(async () => {
@@ -60,12 +59,11 @@ const update = (val: boolean) => (present.value = val);
       <h3>Just click &ldquo;start&rdquo; to well...</h3>
     </div>
     <button class="start" @click="present = !present">start</button>
-    <button class="start" @click="cloPresent = !cloPresent">Start Clo</button>
     <div class="cycle">
       <p><b>ID: </b>{{ id }}</p>
       <button class="newUser" @click="cycle">new user</button>
     </div>
-    <tiki-receipt :present="present" @update:present="update" :cloPresent="cloPresent"/>
+    <tiki-receipt :present="present" @update:present="update"/>
   </main>
 </template>
 
