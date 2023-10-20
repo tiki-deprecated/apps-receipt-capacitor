@@ -111,6 +111,25 @@ export class TikiService {
     this.publish.logout();
   }
 
+  checkLogin(loginType: 'GMAIL' | 'RETAILER') {
+    const startDate = this.store.sync.getStartDate()
+    if(startDate !== undefined) return 
+    if(loginType === 'GMAIL'){
+      const retailerState = this.store.retailer.get()
+      if(retailerState.value === BulletState.P100){
+         this.store.sync.setStartDate()
+         this.store.sync.setDisconnectDate(undefined)
+      } else return
+    }
+    if(loginType === 'RETAILER'){
+      const gmailState = this.store.gmail.get()
+      if(gmailState.value === BulletState.P100){
+        this.store.sync.setStartDate()
+        this.store.sync.setDisconnectDate(undefined)
+      } else return
+    }
+  }
+
   /**
    * @ignore
    */

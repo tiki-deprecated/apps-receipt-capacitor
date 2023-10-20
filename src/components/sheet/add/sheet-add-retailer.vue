@@ -21,13 +21,14 @@ import {
   OUTLOOK
 } from "@mytiki/capture-receipt-capacitor";
 import { ref, inject, computed, onMounted } from "vue";
-import { type Capture, type Store } from "@/service";
+import { type Capture, type Store, type TikiService } from "@/service";
 import { InjectKey } from "@/utils";
 
 
 const emit = defineEmits(["close", "back"]);
 const capture: Capture = inject(InjectKey.capture)!;
 const store: Store = inject(InjectKey.store)!;
+const tiki: TikiService | undefined = inject("Tiki");
 
 const filtered = accountTypes.index;
 filtered.delete(GMAIL.id);
@@ -60,6 +61,7 @@ const submit = async () => {
   error.value = "";
   try {
     await capture.login(form.value);
+    tiki?.checkLogin("RETAILER")
     await store.retailer.set(BulletState.SYNC)
     capture.scan().catch((error) => console.error(error.toString())).finally(async ()=>{
       await store.retailer.set(BulletState.P100)
