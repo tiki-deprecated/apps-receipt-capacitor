@@ -1,3 +1,3 @@
 import CloCardOffer from "./clo-card-offer.vue"
-
-export {CloCardOffer}
+import CloCardHome from "./clo-card-home.vue"
+export {CloCardOffer, CloCardHome}
