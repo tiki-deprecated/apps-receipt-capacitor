@@ -130,6 +130,12 @@ export class TikiService {
     }
   }
 
+  checkLogout() {
+    const startDate = this.store.sync.getStartDate()
+    if(startDate === undefined) return 
+    this.store.sync.setDisconnectDate(new Date())
+  }
+
   /**
    * @ignore
    */

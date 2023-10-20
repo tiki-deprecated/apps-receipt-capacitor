@@ -6,7 +6,7 @@
 import { HeaderBack, ButtonText, ButtonTextState } from "@/components";
 import { inject, ref, type PropType } from "vue";
 import type { Account } from "@mytiki/capture-receipt-capacitor";
-import type { Capture } from "@/service";
+import type { Capture, TikiService } from "@/service";
 import { InjectKey } from "@/utils";
 
 const emit = defineEmits(["remove", "close", "back"]);
@@ -18,10 +18,12 @@ const props = defineProps({
 });
 
 if (props.account === undefined) emit("back");
+const tiki: TikiService | undefined = inject("Tiki");
 const capture: Capture = inject(InjectKey.capture)!;
 const isLoading = ref<boolean>(false);
 const remove = async () => {
   isLoading.value = true;
+  tiki?.checkLogout()
   await capture.logout(props.account);
   isLoading.value = false;
   emit("back");
