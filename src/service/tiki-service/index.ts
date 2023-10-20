@@ -75,7 +75,7 @@ export class TikiService {
     );
     this._isInitialized = true;
     this.capture.load().then(async (accounts) => {
-      if (accounts.length > 0) {
+
         const hasGmail = accounts.find(
           (account) => account.type.id === "GMAIL",
         );
@@ -86,7 +86,7 @@ export class TikiService {
           await this.store.gmail.set(BulletState.SYNC);
         if (hasRetailer !== undefined)
           await this.store.retailer.set(BulletState.SYNC);
-      }
+
       this.capture
         .scan()
         .catch((error) => console.error(error.toString()))
@@ -94,8 +94,9 @@ export class TikiService {
           this.store.retailer.update(accounts);
           this.store.gmail.update(accounts);
         });
+
+        this.checkInitialize(hasGmail !== undefined, hasRetailer !== undefined)
     });
-    await this.store.sync.add();
     await this.internalHandlers.checkPayout();
   }
 
@@ -134,6 +135,22 @@ export class TikiService {
     const startDate = this.store.sync.getStartDate()
     if(startDate === undefined) return 
     this.store.sync.setDisconnectDate(new Date())
+  }
+
+  async checkInitialize(hasGmail: boolean, hasRetailer: boolean){
+    const disconnectDate = this.store.sync.getDisconnectDate()
+    const startDate = this.store.sync.getStartDate()
+    if(disconnectDate === undefined && startDate !== undefined)
+      return await this.store.sync.add();
+    else {
+      if(hasGmail && hasRetailer) 
+        return this.store.sync.setDisconnectDate(undefined)
+      else {
+        if (disconnectDate?.getTime()! >= (1000 * 60 * 60 * 24 * 7)) {
+          return await this.store.reset()
+        } else return
+      }
+    }
   }
 
   /**
