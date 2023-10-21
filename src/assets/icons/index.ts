@@ -30,8 +30,12 @@ import IconCrossMarkOutline from "@/assets/icons/crossmark-outline.svg?component
 import IconMinus from "@/assets/icons/minus.svg?component";
 import IconQuestion from "@/assets/icons/question.svg?component";
 import IconSync from "@/assets/icons/sync.svg?component";
+import IconAdd from "@/assets/icons/add.svg?component"
+import IconAlert from "@/assets/icons/alert.svg?component"
 
 export {
+  IconAdd,
+  IconAlert,
   IconMinus,
   IconCircle,
   IconCrossMark,
