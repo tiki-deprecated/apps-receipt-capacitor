@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import {
-  ButtonText,
   HeaderTitle,
-  CloCardHome
+  CloCardHome,
 } from "../../../components";
 </script>
 
@@ -14,7 +13,7 @@ import {
         @close="$emit('close')"    
         /> 
         <clo-card-home />
-        
+
     </div>
 </template>
 
