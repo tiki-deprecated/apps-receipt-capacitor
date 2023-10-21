@@ -22,7 +22,6 @@
         <div class="tiki-home-progress-bar">
             <progress value="75" min="0" max="100" style="visibility:hidden;height:0;width:0;">75%</progress>
         </div>
-
     </div>
 </template>
 

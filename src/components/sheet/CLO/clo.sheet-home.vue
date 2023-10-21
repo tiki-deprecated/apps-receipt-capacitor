@@ -2,6 +2,7 @@
 import {
   HeaderTitle,
   CloCardHome,
+  CloCarousel
 } from "../../../components";
 </script>
 
@@ -13,7 +14,7 @@ import {
         @close="$emit('close')"    
         /> 
         <clo-card-home />
-
+        <clo-carousel />
     </div>
 </template>
 
