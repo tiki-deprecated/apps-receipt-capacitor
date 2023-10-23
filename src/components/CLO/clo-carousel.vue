@@ -26,7 +26,7 @@ const accounts = accountTypes.index.values()
 <style scoped>
 .tiki-carousel-title{
     font-family: var(--tiki-font-family);
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1.2em;
     margin: 0.6em
 }
