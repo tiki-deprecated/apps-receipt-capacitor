@@ -8,5 +8,7 @@ const navigate: Navigate = inject(InjectKey.navigate)!;
 
 <template>
     <clo-sheet-details 
+    @back="navigate.pop()"
+    @close="navigate.clear()"
     />
 </template>

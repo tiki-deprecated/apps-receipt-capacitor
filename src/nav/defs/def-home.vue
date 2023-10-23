@@ -12,5 +12,8 @@ const navigate: Navigate = inject(InjectKey.navigate)!;
 </script>
 
 <template>
-  <clo-sheet-home @company="navigate.to(NavDef.CloDetails)"/>
+  <clo-sheet-home 
+  @company="navigate.to(NavDef.CloDetails)"
+  @close="navigate.clear()"
+  />
 </template>
