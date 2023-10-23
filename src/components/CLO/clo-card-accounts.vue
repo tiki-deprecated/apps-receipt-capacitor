@@ -42,7 +42,7 @@ const accounts = [gmail, walmart, amazon, dg]
     border: 1px solid var(--tiki-secondary-text-color);
     align-items: center;
     font-weight: 500;
-    margin-top: 2em;
+    margin-bottom: 1.2em;
     padding: 1.8em 0;
     display: flex;
     flex-wrap: wrap
