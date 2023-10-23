@@ -4,6 +4,7 @@ import {
   CloCardHome,
   CloCarousel
 } from "../../../components";
+
 </script>
 
 <template>
@@ -14,7 +15,7 @@ import {
         @close="$emit('close')"    
         /> 
         <clo-card-home />
-        <clo-carousel />
+        <clo-carousel @company="$emit('company')" />
     </div>
 </template>
 

@@ -6,6 +6,7 @@ import {IconAdd, IconAlert} from "@/assets/icons"
  } from "@mytiki/capture-receipt-capacitor";
 
 const accounts = accountTypes.index.values()
+
 </script>
 
 <template>
@@ -13,8 +14,9 @@ const accounts = accountTypes.index.values()
         <h6 class="tiki-carousel-title">Increase Earning</h6>
         <carousel :paginationEnabled="false" class="tiki-carousel"> 
              <slide v-for="account of accounts" :key="account.id" class="tiki-carousel-slide">
-                <div class="image-container">
-                    <img :src="account.icon" alt="company icon" class="tiki-carousel-img">
+                <div class="image-container"  @click="$emit('company', account.id)">
+                    <img :src="account.icon" alt="company icon" class="tiki-carousel-img" 
+                    >
                     <icon-add class="svg-icon"/>
                 </div>
                 <figcaption class="tiki-carousel-caption">Add <br>{{ account.name }}</figcaption>
