@@ -1,6 +1,6 @@
 import { StateAccount } from "../../src/service/store/state/state-account"
 import { Account, accountTypes } from "@mytiki/capture-receipt-capacitor";
-import { ServiceStore } from "../../src/service/store"
+import { Store } from "../../src/service/store"
 
 export default function connectGmail (storeGmail: StateAccount): string {
     const account: Account = {

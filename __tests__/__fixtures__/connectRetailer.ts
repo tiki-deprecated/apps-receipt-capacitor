@@ -1,6 +1,5 @@
 import { StateAccount } from "../../src/service/store/state/state-account"
 import { Account, accountTypes } from "@mytiki/capture-receipt-capacitor";
-import { ServiceStore } from "../../src/service/store"
 
 export default function connectRetailer (retailerStore: StateAccount): string {
     const account: Account = {
