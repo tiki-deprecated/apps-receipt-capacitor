@@ -18,22 +18,6 @@ const accounts = [gmail, walmart, amazon, dg]
             <img :src="account.icon" alt=""  class="tiki-card-img">
             <icon-alert class="svg-icon"/>
         </div>
-        <!-- <div class="image-container">
-            <img :src="gmail?.icon" alt="" class="tiki-card-img">
-            <icon-alert class="svg-icon"/>
-        </div>
-        <div class="image-container">
-            <img :src="walmart?.icon" alt="" class="tiki-card-img">
-            <icon-alert class="svg-icon"/>
-        </div>
-        <div class="image-container">
-            <img :src="amazon?.icon" alt="" class="tiki-card-img">
-            <icon-alert class="svg-icon"/>
-        </div>
-        <div class="image-container">
-            <img :src="dg?.icon" alt="" class="tiki-card-img">
-            <icon-alert class="svg-icon"/>
-        </div> -->
     </div>
 </template>
 
