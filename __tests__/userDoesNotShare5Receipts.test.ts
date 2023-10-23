@@ -1,5 +1,5 @@
 import { StateAccount } from "../src/service/store/state/state-account";
-import { ServiceStore } from "../src/service/store";
+import { Store } from "../src/service/store";
 import connectGmail from "./__fixtures__/connectGmail";
 import connectRetailer from "./__fixtures__/connectRetailer";
 import fourWeeks from "./__fixtures__/fourWeeks";
@@ -7,7 +7,7 @@ import mockCheckPayout from "./__mocks__/mockCheckPayout";
 
 describe("User does not share 5 receipts", () => {
   test("Test Suite", () => {
-    const store = new ServiceStore();
+    const store = new Store();
 
     const gmail = store.gmail as StateAccount;
     expect(connectGmail(gmail)).toBe("P100");

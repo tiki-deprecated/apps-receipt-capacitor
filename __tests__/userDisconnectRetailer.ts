@@ -1,6 +1,6 @@
 
 import { StateAccount } from "../src/service/store/state/state-account"
-import { ServiceStore } from "../src/service/store"
+import { Store } from "../src/service/store"
 import connectRetailer from "./__fixtures__/connectRetailer"
 import connectGmail from "./__fixtures__/connectGmail";
 import fiveReceipts from "./__fixtures__/fiveReceipts";
@@ -9,7 +9,7 @@ import mockCheckPayout from "./__mocks__/mockCheckPayout";
 
 describe('User disconnect Gmail', ()=>{
    test("test suite", async ()=>{
-    const store = new ServiceStore()
+    const store = new Store()
     const retailer = store.retailer as StateAccount
     expect(connectRetailer(retailer)).toBe('P100')
 
