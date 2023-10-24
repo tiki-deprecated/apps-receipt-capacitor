@@ -82,6 +82,7 @@ import {
   align-items: center;
   font-weight: 500;
   margin-bottom: 1.2em;
+  margin-top: 1em;
   padding: 1.8em 0 0 0;
   display: flex;
   flex-direction: column;
