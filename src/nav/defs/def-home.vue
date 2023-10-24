@@ -13,7 +13,7 @@ const navigate: Navigate = inject(InjectKey.navigate)!;
 
 <template>
   <clo-sheet-home 
-  @company="navigate.to(NavDef.CloDetails)"
+  @details="navigate.to(NavDef.CloDetails)"
   @close="navigate.clear()"
   />
 </template>

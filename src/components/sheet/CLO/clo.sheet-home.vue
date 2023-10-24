@@ -14,8 +14,8 @@ import {
         subtitle="Share data. Earn rewards."
         @close="$emit('close')"    
         /> 
-        <clo-card-home />
-        <clo-carousel @company="$emit('company')" />
+        <clo-card-home @details="$emit('details')"/>
+        <clo-carousel />
     </div>
 </template>
 

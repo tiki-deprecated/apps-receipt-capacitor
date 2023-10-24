@@ -15,7 +15,7 @@
                     $34.30
                 </span>
             </p>
-            <button class="tiki-accent-text-button">
+            <button class="tiki-accent-text-button" @click="$emit('details')">
                 Show More
             </button>
         </div>
