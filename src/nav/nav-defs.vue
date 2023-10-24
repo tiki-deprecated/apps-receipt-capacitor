@@ -19,24 +19,23 @@ import {
   CloSheetDetails,
   CloSheetCompany
 } from "./defs";
-import { inject, type Ref, ref } from "vue";
+import { inject, ref } from "vue";
+import type { Ref } from "vue";
 import { InjectKey } from "@/utils";
 import { AccountType } from "@mytiki/capture-receipt-capacitor";
 const state: Ref<NavDef> = inject(InjectKey.navigate)!.ref;
 
-const company = ref<AccountType>()
+const company = ref<AccountType>();
 const companyNavigation = (event: AccountType) => {
   company.value = event
-}
+};
 </script>
 
 <template>
   <div class="body">
     <add-google v-if="state === NavDef.AddGoogle" />
     <add-retailer v-if="state === NavDef.AddRetailer" />
-    <home v-if="state === NavDef.Home" 
-    @company="companyNavigation"
-    />
+    <home v-if="state === NavDef.Home" @company="companyNavigation"/>
     <learn v-if="state === NavDef.Learn" />
     <list-google v-if="state === NavDef.ListGoogle" />
     <list-retailer v-if="state === NavDef.ListRetailer" />
@@ -45,9 +44,7 @@ const companyNavigation = (event: AccountType) => {
     <warn-account v-if="state === NavDef.WarnAccount" />
     <clo-sheet-offer v-if="state === NavDef.CloOffer"/>
     <clo-sheet-details v-if="state === NavDef.CloDetails"/>
-    <clo-sheet-company v-if="state === NavDef.CloCompany"
-    :company="company!"
-    />
+    <clo-sheet-company v-if="state === NavDef.CloCompany" :company="company" />
   </div>
 </template>
 

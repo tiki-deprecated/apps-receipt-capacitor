@@ -4,6 +4,7 @@ import CloCarousel from "./clo-carousel.vue"
 import CloCardDetails from "./clo-card-details.vue"
 import CloCardAccounts from "./clo-card-accounts.vue"
 import CloProgramDetails from "./clo-program-details.vue"
+import CloCardCompany from "./clo-card-company.vue"
 
 export {
     CloCardOffer, 
@@ -11,5 +12,6 @@ export {
     CloCarousel, 
     CloCardDetails, 
     CloCardAccounts, 
-    CloProgramDetails
+    CloProgramDetails,
+    CloCardCompany,
 }
