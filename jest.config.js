@@ -1,5 +1,8 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
+const { createViteJestPreset } = require('vite-jest/preset');
+
 module.exports = {
+  ...createViteJestPreset(),
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   moduleNameMapper: {
