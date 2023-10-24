@@ -42,40 +42,44 @@ watch(
   async (newValue) => {
     username.value!.value = newValue?.username ?? "";
     password.value!.value = newValue?.password ?? "";
-  },
+  }
 );
 
 const errorMessage = ref(props.error);
+
 watch(
   () => props.error,
-  (newValue) => (errorMessage.value = newValue),
+  (newValue) => (errorMessage.value = newValue)
 );
 </script>
 
 <template>
-  <form>
-    <label id="username">Username</label>
-    <input
-      id="username"
-      ref="username"
-      type="text"
-      autocomplete="false"
-      required
-      @input="update"
-    />
-    <label id="password">Password</label>
-    <input
-      id="password"
-      ref="password"
-      type="password"
-      autocomplete="false"
-      required
-      @input="update"
-    />
-    <div class="error">
-      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
-    </div>
-  </form>
+  <div>
+    <h2>Add Account</h2>
+    <form>
+      <label id="username">Email</label>
+      <input
+        id="username"
+        ref="username"
+        type="text"
+        autocomplete="false"
+        required
+        @input="update"
+      />
+      <label id="password">Password</label>
+      <input
+        id="password"
+        ref="password"
+        type="password"
+        autocomplete="false"
+        required
+        @input="update"
+      />
+      <div class="error" >
+        <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
+      </div>
+    </form>
+  </div>
 </template>
 
 <style scoped>
@@ -92,7 +96,7 @@ input {
   color: var(--tiki-primary-text-color);
   padding: 0.6em 0.8em;
   background-color: var(--tiki-primary-background-color);
-  border: none;
+  border: 1px solid var(--tiki-primary-text-color);
   border-radius: 0.5em;
   box-sizing: border-box;
   margin-bottom: 1.2em;

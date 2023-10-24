@@ -17,7 +17,7 @@ import {
     <p class="tiki-details-subtitle">Estimate calculated based on your spending
     history and available offers from eligible retailers.</p>
     <h1>Accounts</h1>
-    <clo-card-accounts />
+    <clo-card-accounts @company=""/>
     <h1>Program Details</h1>
     <clo-program-details/>
     </div>

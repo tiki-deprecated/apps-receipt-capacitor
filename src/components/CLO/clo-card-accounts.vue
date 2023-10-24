@@ -14,7 +14,7 @@ const accounts = [gmail, walmart, amazon, dg]
 
 <template>
     <div class="tiki-card-accounts">
-        <div class="image-container" v-for="account of accounts">
+        <div class="image-container" v-for="account of accounts" @click="$emit('company', account)">
             <img :src="account.icon" alt=""  class="tiki-card-img">
             <icon-alert class="svg-icon"/>
         </div>

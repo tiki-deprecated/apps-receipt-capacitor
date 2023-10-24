@@ -33,41 +33,43 @@ const click = () => {
 </script>
 
 <template>
-  <button
-    class="textButton"
-    :class="{
-      standard:
-        state === ButtonTextState.STANDARD ||
-        state === ButtonTextState.STANDARD_LOADING ||
-        state === ButtonTextState.STANDARD_DISABLED,
-      boring:
-        state === ButtonTextState.BORING ||
-        state === ButtonTextState.BORING_LOADING ||
-        state === ButtonTextState.BORING_DISABLED,
-      alert:
-        state === ButtonTextState.ALERT ||
-        state === ButtonTextState.ALERT_LOADING ||
-        state === ButtonTextState.ALERT_DISABLED,
-      disable:
-        state === ButtonTextState.STANDARD_DISABLED ||
-        state === ButtonTextState.BORING_DISABLED ||
-        state === ButtonTextState.ALERT_DISABLED ||
-        state === ButtonTextState.STANDARD_LOADING ||
-        state === ButtonTextState.ALERT_LOADING ||
-        state === ButtonTextState.BORING_LOADING,
-    }"
-    @click.stop.prevent="click"
-  >
-    <span
-      v-if="
-        state === ButtonTextState.STANDARD_LOADING ||
-        state === ButtonTextState.BORING_LOADING ||
-        state === ButtonTextState.ALERT_LOADING
-      "
-      id="loading"
-    />
-    <span v-else>{{ text }}</span>
-  </button>
+  <div>
+    <button
+      class="textButton"
+      :class="{
+        standard:
+          state === ButtonTextState.STANDARD ||
+          state === ButtonTextState.STANDARD_LOADING ||
+          state === ButtonTextState.STANDARD_DISABLED,
+        boring:
+          state === ButtonTextState.BORING ||
+          state === ButtonTextState.BORING_LOADING ||
+          state === ButtonTextState.BORING_DISABLED,
+        alert:
+          state === ButtonTextState.ALERT ||
+          state === ButtonTextState.ALERT_LOADING ||
+          state === ButtonTextState.ALERT_DISABLED,
+        disable:
+          state === ButtonTextState.STANDARD_DISABLED ||
+          state === ButtonTextState.BORING_DISABLED ||
+          state === ButtonTextState.ALERT_DISABLED ||
+          state === ButtonTextState.STANDARD_LOADING ||
+          state === ButtonTextState.ALERT_LOADING ||
+          state === ButtonTextState.BORING_LOADING,
+      }"
+      @click.stop.prevent="click"
+    >
+      <span
+        v-if="
+          state === ButtonTextState.STANDARD_LOADING ||
+          state === ButtonTextState.BORING_LOADING ||
+          state === ButtonTextState.ALERT_LOADING
+        "
+        id="loading"
+      />
+      <span v-else>{{ text }}</span>
+    </button>
+  </div>
 </template>
 
 <style scoped>
