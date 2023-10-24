@@ -47,7 +47,7 @@
 
 .tiki-card-offer-description {
   font-family: var(--tiki-font-family);
-  font-size: var(--tiki-font-size);
+  font-size: var(--tiki-font-size-sm);
   line-height: var(--tiki-line-height-sm);
   color: var(--tiki-secondary-text-color);
   font-weight: 500;
