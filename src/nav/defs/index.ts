@@ -12,6 +12,7 @@ import ListRetailer from "@/nav/defs/def-list-retailer.vue";
 import Offer from "@/nav/defs/def-offer.vue";
 import Terms from "@/nav/defs/def-terms.vue";
 import WarnAccount from "@/nav/defs/def-warn-account.vue";
+import CloSheetOffer from "@/nav/defs/CLO/def-clo-offer.vue";
 
 export {
   AddGoogle,
@@ -23,6 +24,7 @@ export {
   Offer,
   Terms,
   WarnAccount,
+  CloSheetOffer
 };
 
 export enum NavDef {
@@ -36,4 +38,5 @@ export enum NavDef {
   AddRetailer,
   AddGoogle,
   WarnAccount,
+  CloOffer
 }

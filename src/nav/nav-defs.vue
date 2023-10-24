@@ -15,6 +15,7 @@ import {
   Terms,
   WarnAccount,
   NavDef,
+  CloSheetOffer
 } from "./defs";
 import { inject, type Ref } from "vue";
 import { InjectKey } from "@/utils";
@@ -32,6 +33,7 @@ const state: Ref<NavDef> = inject(InjectKey.navigate)!.ref;
     <offer v-if="state === NavDef.Offer" />
     <terms v-if="state === NavDef.Terms" />
     <warn-account v-if="state === NavDef.WarnAccount" />
+    <clo-sheet-offer v-if="state === NavDef.CloOffer"/>
   </div>
 </template>
 

@@ -4,5 +4,4 @@
  */
 
 import ProgramImage from "@/assets/images/program.png";
-
 export { ProgramImage };

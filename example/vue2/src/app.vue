@@ -63,7 +63,7 @@ const update = (val: boolean) => (present.value = val);
       <p><b>ID: </b>{{ id }}</p>
       <button class="newUser" @click="cycle">new user</button>
     </div>
-    <tiki-receipt :present="present" @update:present="update" />
+    <tiki-receipt :present="present" @update:present="update"/>
   </main>
 </template>
 
