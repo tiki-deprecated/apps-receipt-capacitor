@@ -1,14 +1,31 @@
 <script setup lang="ts">
 import {IconAdd, IconAlert} from "@/assets/icons"
+import { defineEmits } from 'vue';
  import {
    accountTypes,
  } from "@mytiki/capture-receipt-capacitor";
 
 const accounts = accountTypes.index.values()
+
+const emits = defineEmits(['closeGrid', 'company'])
+
+let yDown: number | null = null;
+
+function handleTouchStart(event: TouchEvent) {
+  const firstTouch = event.touches[0];
+  yDown = firstTouch.clientY;
+}
+
+const handleTouchEnd = (event: TouchEvent) =>{
+    const finalTouch = event.changedTouches[0]
+    let finalY = finalTouch.clientY;
+    const scrollPosition = document.getElementById('grid-accounts')?.scrollTop
+    if(yDown! < finalY && scrollPosition === 0) emits('closeGrid') 
+}
 </script>
 
 <template>
-    <div class="tiki-grid-accounts">
+    <div class="tiki-grid-accounts" id="grid-accounts" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
         <h6 class="tiki-grid-title">Increase Earning</h6>
         <div @click="$emit('company', account)" v-for="account of accounts">
             <div class="image-container">

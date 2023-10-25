@@ -28,7 +28,7 @@ const showAccountGrid = ref<boolean>(false)
           <clo-card-home @details="$emit('details')"/>
           <clo-carousel @company="companyNavigation" @swipeUp="showAccountGrid = true"/>
         </div>
-        <clo-account-grid v-else/>
+        <clo-account-grid @closeGrid="showAccountGrid = false" v-else/>
     </div>
 </template>
 
