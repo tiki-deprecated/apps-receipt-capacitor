@@ -41,6 +41,7 @@
     "@mytiki/tiki-sdk-capacitor": "^0.3.6",
     "vue": "2.7.14",
     "vue-template-compiler": "2.7.14",
+    "vue-carousel": "ˆ0.18.0",
     "showdown": "^2.1.0"
   },
   "devDependencies": {
