@@ -30,8 +30,32 @@ import IconCrossMarkOutline from "@/assets/icons/crossmark-outline.svg?component
 import IconMinus from "@/assets/icons/minus.svg?component";
 import IconQuestion from "@/assets/icons/question.svg?component";
 import IconSync from "@/assets/icons/sync.svg?component";
+import IconAdd from "@/assets/icons/add.svg?component"
+import IconAlert from "@/assets/icons/alert.svg?component"
+import IconAccount from "@/assets/icons/account.svg?component"
+import IconBag from "@/assets/icons/bag.svg?component"
+import IconForbidden from "@/assets/icons/forbidden.svg?component"
+import IconGraphic from "@/assets/icons/graphic.svg?component"
+import IconGrayAlert from "@/assets/icons/gray-alert.svg?component"
+import IconHand from "@/assets/icons/hand.svg?component"
+import IconInfo from "@/assets/icons/info.svg?component"
+import IconMoney from "@/assets/icons/money.svg?component"
+import IconPurchase from "@/assets/icons/purchase.svg?component"
+import IconReceipt from "@/assets/icons/receipts.svg?component"
 
 export {
+  IconAdd,
+  IconAccount,
+  IconBag,
+  IconForbidden,
+  IconGraphic,
+  IconGrayAlert,
+  IconHand,
+  IconInfo,
+  IconMoney,
+  IconPurchase,
+  IconReceipt,
+  IconAlert,
   IconMinus,
   IconCircle,
   IconCrossMark,

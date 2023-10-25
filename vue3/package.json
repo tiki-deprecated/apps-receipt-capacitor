@@ -35,12 +35,13 @@
     "receipt"
   ],
   "dependencies": {
-    "@capacitor/preferences": "^5.0.6",
     "@capacitor/local-notifications": "^5.0.6",
+    "@capacitor/preferences": "^5.0.0",
     "@mytiki/capture-receipt-capacitor": "^0.7.1",
-    "@mytiki/tiki-sdk-capacitor": "^0.3.4",
-    "vue": "^3.3.4",
-    "showdown": "^2.1.0"
+    "@mytiki/tiki-sdk-capacitor": "^0.3.6",
+    "showdown": "^2.1.0",
+    "vue": "^3.0.0",
+    "vue-carousel": "^0.18.0"
   },
   "devDependencies": {
     "@babel/types": "^7.22.5",
@@ -65,11 +66,12 @@
     "ts-node": "^10.9.1",
     "typedoc": "^0.25.0",
     "typescript": "^5.1.6",
+    "unplugin-vue-markdown": "^0.24.3",
     "vite": "^4.4.9",
+    "vue-carousel": "^0.18.0",
     "vite-plugin-dts": "^3.5.2",
     "vite-svg-loader": "^4.0.0",
-    "vue-tsc": "^1.8.8",
-    "unplugin-vue-markdown": "^0.24.3"
+    "vue-tsc": "^1.8.8"
   },
   "peerDependencies": {
     "@capacitor/android": "^5.4.0",
