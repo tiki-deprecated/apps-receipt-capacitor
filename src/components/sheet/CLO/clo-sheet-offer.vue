@@ -20,7 +20,7 @@ defineEmits(["close", "accept"]);
     <div>
         <header-title 
         title="Cashback Connections"
-        subtitle="Share data. Earn rewards."
+        subtitle="Share data. Earn cash."
         @close="$emit('close')"    
         /> 
         <clo-card-offer />

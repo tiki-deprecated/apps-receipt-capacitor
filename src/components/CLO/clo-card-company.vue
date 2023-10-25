@@ -17,7 +17,7 @@ defineProps({
 <template>
     <div class="tiki-company-card">
         <img :src="company.icon" alt="">
-        <h2>{{ company.name }}</h2>
+        <h1>{{ company.name }}</h1>
         <p>{{ subtitle }}</p>
     </div>
 </template>
@@ -40,15 +40,18 @@ defineProps({
 
 .tiki-company-card img {
     border-radius: 1em;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 8%);
 }
 
-.tiki-company-card h2 {
+.tiki-company-card h1 {
     margin: 1em 0 0 0;
 }
 
 .tiki-company-card p {
     color: var(--tiki-secondary-text-color);
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: 0.8em;
+    text-align: center;
+    padding: 0 1.2em;
 }
 </style>

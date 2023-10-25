@@ -23,7 +23,6 @@
 .tiki-offer-card {
     width: 100%;
     padding: 1.25em;
-    background-color: var(--tiki-primary-background-color);
     box-sizing: border-box;
     border-radius: 0.625em;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 5%);
@@ -35,11 +34,11 @@
     font-weight: 500;
     margin-top: 3em;
     margin-bottom: 2.3em;
-    padding: 2.55em 0;
+    padding: 2.3em 0;
 }
 
 .tiki-accent-text {
-    font-size: 2em;
+    font-size: 2.5em;
     color: var(--tiki-success-color);
     font-weight: bold;
     margin: 0.5em 0 0.5em 0
@@ -51,6 +50,6 @@
   line-height: var(--tiki-line-height-sm);
   color: var(--tiki-secondary-text-color);
   font-weight: 500;
-  margin: 2em 0.5em 2em 1.5em;
+  margin: 2em 0.5em 2.5em 1.5em;
 }
 </style>

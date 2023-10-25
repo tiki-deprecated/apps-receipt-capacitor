@@ -42,10 +42,10 @@ defineProps({
 .title {
   font-family: var(--tiki-font-family);
   color: var(--tiki-primary-text-color);
-  font-weight: bold;
+  font-weight: 600;
   font-size: calc(var(--tiki-font-size) * 1.50);
   text-transform: uppercase;
-  margin: 0;
+  margin: 0.15em 0 0 0;
 }
 
 .subtitle {

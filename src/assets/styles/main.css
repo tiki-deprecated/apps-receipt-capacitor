@@ -8,7 +8,7 @@
 :root {
   --tiki-font-family: "Space Grotesk", sans-serif;
   --tiki-primary-text-color: rgb(0 0 0);
-  --tiki-secondary-text-color: rgb(90 90 90);
+  --tiki-secondary-text-color: rgba(0, 0, 0, 0.6);
   --tiki-primary-background-color: rgb(255 255 255);
   --tiki-secondary-background-color: rgb(246 246 246);
   --tiki-error-color: rgb(199, 48, 0);

@@ -36,21 +36,23 @@
     border: 1px solid var(--tiki-secondary-text-color);
     display: flex;
     align-items: center;
-    font-size: 1.2em;
-    font-weight: 500;
+    font-size: 1.1em;
+    font-weight: 600;
     margin-top: 3em;
     margin-bottom: 2.3em;
     padding: 1.5em 0;
     justify-content: space-around;
+    color: var(--tiki-secondary-text-color);
 }
 span{
     display: block;
-    font-weight: 600;
+    font-weight: 500;
     margin-top: 0.2em;
     font-size: 1.125em;
 }
 .tiki-span-accent{
     color: var(--tiki-success-color);
+    font-weight: 600;
 }
 
 .tiki-accent-text-button{
@@ -58,7 +60,7 @@ span{
     background: transparent;
     color: var(--tiki-success-color);
     font-size: 1.125em;
-    font-weight: 600;
+    font-weight: 500;
     margin-left: -0.4em
 }
 
