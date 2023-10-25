@@ -4,7 +4,7 @@
   -->
 
 <script setup lang="ts">
-import { IconCrossMark } from "@/assets";
+import { IconCrossMarkOutline } from "@/assets";
 import { ButtonIcon } from "@/components";
 
 defineEmits(["close"]);
@@ -27,7 +27,7 @@ defineProps({
       <p class="title">{{ title }}</p>
       <p class="subtitle">{{ subtitle }}</p>
     </div>
-    <button-icon :icon="IconCrossMark" @click="$emit('close')" />
+    <button-icon :icon="IconCrossMarkOutline" @click="$emit('close')" />
   </div>
 </template>
 
@@ -43,7 +43,7 @@ defineProps({
   font-family: var(--tiki-font-family);
   color: var(--tiki-primary-text-color);
   font-weight: bold;
-  font-size: calc(var(--tiki-font-size) * 1.75);
+  font-size: calc(var(--tiki-font-size) * 1.50);
   text-transform: uppercase;
   margin: 0;
 }
