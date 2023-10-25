@@ -46,12 +46,13 @@
 }
 span{
     display: block;
-    font-weight: 600;
+    font-weight: 500;
     margin-top: 0.2em;
     font-size: 1.125em;
 }
 .tiki-span-accent{
     color: var(--tiki-success-color);
+    font-weight: 600;
 }
 
 .tiki-accent-text-button{
