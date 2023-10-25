@@ -8,15 +8,6 @@ import { HeaderBack } from "@/components";
 import { ref } from "vue";
 
 defineEmits(["back", "close"]);
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-let show_retailers = ref(false);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-let show_us = ref(false);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-let show_pos = ref(false);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-let show_instacart = ref(false);
 </script>
 
 <template>
