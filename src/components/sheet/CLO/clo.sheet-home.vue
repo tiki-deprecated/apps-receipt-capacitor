@@ -1,10 +1,17 @@
 <script setup lang="ts">
+import { AccountType } from "@mytiki/capture-receipt-capacitor";
+import { defineEmits } from "vue";
 import {
   HeaderTitle,
   CloCardHome,
   CloCarousel
 } from "../../../components";
 
+const emits = defineEmits(['close', 'details', 'company'])
+
+const companyNavigation = (company: AccountType) =>{
+  emits('company', company)
+}
 </script>
 
 <template>
@@ -15,7 +22,7 @@ import {
         @close="$emit('close')"    
         /> 
         <clo-card-home @details="$emit('details')"/>
-        <clo-carousel />
+        <clo-carousel @company="companyNavigation"/>
     </div>
 </template>
 

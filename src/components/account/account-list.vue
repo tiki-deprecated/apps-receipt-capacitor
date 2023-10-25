@@ -4,6 +4,7 @@
   -->
 
 <script setup lang="ts">
+import { computed } from "vue";
 import AccountStatus from "./account-status.vue";
 import type { Account } from "@mytiki/capture-receipt-capacitor";
 
@@ -18,6 +19,7 @@ defineProps({
 
 <template>
   <div class="list">
+    <h2 v-if="accounts.length >= 1">{{ accounts.length > 1 ? 'Accounts' : 'Account'}}</h2>
     <account-status
       v-for="(account, index) in accounts"
       :key="index"
@@ -30,12 +32,15 @@ defineProps({
 
 <style scoped>
 .list {
-  overflow: scroll;
   font-size: var(--tiki-font-size);
 }
 
 .status {
   margin: 1em 0;
   padding: 0.5em;
+}
+
+h2 {
+  margin: 1em 0;
 }
 </style>

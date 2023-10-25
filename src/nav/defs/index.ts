@@ -14,6 +14,7 @@ import Terms from "@/nav/defs/def-terms.vue";
 import WarnAccount from "@/nav/defs/def-warn-account.vue";
 import CloSheetOffer from "@/nav/defs/CLO/def-clo-offer.vue";
 import CloSheetDetails from "@/nav/defs/CLO/def-clo-details.vue";
+import CloSheetCompany from "@/nav/defs/CLO/def-clo-company.vue"
 
 export {
   AddGoogle,
@@ -26,7 +27,8 @@ export {
   Terms,
   WarnAccount,
   CloSheetOffer,
-  CloSheetDetails
+  CloSheetDetails,
+  CloSheetCompany
 };
 
 export enum NavDef {
@@ -41,5 +43,6 @@ export enum NavDef {
   AddGoogle,
   WarnAccount,
   CloOffer,
-  CloDetails
+  CloDetails,
+  CloCompany
 }
