@@ -43,9 +43,10 @@ const handleTouchEnd = (event: TouchEvent) =>{
 <style scoped>
 .tiki-carousel-title{
     font-family: var(--tiki-font-family);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.2em;
-    margin: 0.6em
+    margin: 0.6em;
+    color: var(--tiki-secondary-text-color)
 }
 .image-container {
   position: relative;
@@ -67,7 +68,7 @@ const handleTouchEnd = (event: TouchEvent) =>{
 .tiki-carousel-caption{
     font-family: var(--tiki-font-family);
     color: var(--tiki-secondary-text-color);
-    font-weight: 600;
+    font-weight: 500;
     font-size: 0.75em;
     line-height: normal;
 }

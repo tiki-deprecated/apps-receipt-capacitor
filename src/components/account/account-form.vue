@@ -55,7 +55,7 @@ watch(
 
 <template>
   <div>
-    <h2>Add Account</h2>
+    <h1>Add Account</h1>
     <form>
       <label id="username">Email</label>
       <input
@@ -125,6 +125,10 @@ label {
   line-height: var(--tiki-line-height);
   font-weight: bold;
   color: var(--tiki-secondary-text-color);
-  margin-bottom: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+h1 {
+  margin: 1em 0;
 }
 </style>

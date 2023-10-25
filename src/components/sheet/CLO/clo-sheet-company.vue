@@ -64,7 +64,7 @@ const updateAccount = (account: Account) => (form.value = account);
 <template>
     <div class="tiki-scroll">
         <header-back @close="$emit('close')" @back="$emit('back')" :text="company.name"/>
-        <clo-card-company :company="company" subtitle="3% cashback on all purchases"/>   
+        <clo-card-company :company="company" subtitle="When you connect your Gmail account, we auto-identify receipts and process available cashback rewards"/>   
         <account-list :accounts="filtered"/>
         <account-form 
         :accountType="company" 

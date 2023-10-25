@@ -91,13 +91,13 @@ watch(
 }
 
 .account .text .type {
-  font-size: var(--tiki-font-size-xl);
+  font-size: 1.3em;
   line-height: var(--tiki-line-height);
   font-weight: bold;
 }
 
 .account .text .username {
-  font-size: var(--tiki-font-size-lg);
+  font-size: var(--tiki-font-size-xl);
   line-height: var(--tiki-line-height);
   font-weight: 500;
 }

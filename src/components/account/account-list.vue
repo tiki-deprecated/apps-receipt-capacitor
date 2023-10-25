@@ -19,7 +19,7 @@ defineProps({
 
 <template>
   <div class="list">
-    <h2 v-if="accounts.length >= 1">{{ accounts.length > 1 ? 'Accounts' : 'Account'}}</h2>
+    <h1 v-if="accounts.length >= 1">{{ accounts.length > 1 ? 'Accounts' : 'Account'}}</h1>
     <account-status
       v-for="(account, index) in accounts"
       :key="index"
