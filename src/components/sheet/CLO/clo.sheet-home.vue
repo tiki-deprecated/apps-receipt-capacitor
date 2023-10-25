@@ -4,7 +4,8 @@ import { defineEmits } from "vue";
 import {
   HeaderTitle,
   CloCardHome,
-  CloCarousel
+  CloCarousel, 
+  CloAccountGrid
 } from "../../../components";
 
 const emits = defineEmits(['close', 'details', 'company'])
@@ -16,13 +17,14 @@ const companyNavigation = (company: AccountType) =>{
 
 <template>
     <div>
-        <header-title 
+        <!-- <header-title 
         title="Cashback Connections"
         subtitle="Share data. Earn rewards."
         @close="$emit('close')"    
         /> 
         <clo-card-home @details="$emit('details')"/>
-        <clo-carousel @company="companyNavigation"/>
+        <clo-carousel @company="companyNavigation"/> -->
+        <clo-account-grid />
     </div>
 </template>
 

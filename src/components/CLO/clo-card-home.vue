@@ -28,7 +28,6 @@
 <style scoped>
 .tiki-card-home{
     width: 100%;
-    padding: 1.25em;
     background-color: var(--tiki-primary-background-color);
     box-sizing: border-box;
     border-radius: 0.625em;

@@ -24,7 +24,6 @@ defineProps({
 
 <style scoped>
 .tiki-company-card {
-    padding: 1.25em;
     background-color: var(--tiki-primary-background-color);
     box-sizing: border-box;
     border-radius: 0.625em;

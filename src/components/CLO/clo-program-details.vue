@@ -73,7 +73,6 @@ import {
 .tiki-program-details {
   text-align: center;
   color: var(--tiki-secondary-text-color);
-  padding: 1.25em;
   background-color: var(--tiki-primary-background-color);
   box-sizing: border-box;
   border-radius: 0.625em;
