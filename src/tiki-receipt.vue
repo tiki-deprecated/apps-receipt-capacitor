@@ -34,7 +34,6 @@ const tiki: TikiService = inject(Keys.tiki)!;
 tiki.inject(provide);
 const update = (show: boolean) => emit("update:present", show);
 const show = ref<boolean>(false);
-const showClo = ref<boolean>(false);
 
 watch(
   () => props.present,

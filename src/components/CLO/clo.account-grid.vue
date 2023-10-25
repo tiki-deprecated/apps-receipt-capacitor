@@ -9,10 +9,6 @@ const accounts = accountTypes.index.values()
 
 <template>
     <div class="tiki-grid-accounts">
-        <!-- <div class="image-container" v-for="account of accounts" @click="$emit('company', account)">
-            <img :src="account.icon" alt=""  class="tiki-card-img">
-            <icon-alert class="svg-icon"/>
-        </div> -->
         <h6 class="tiki-grid-title">Increase Earning</h6>
         <div @click="$emit('company', account)" v-for="account of accounts">
             <div class="image-container">

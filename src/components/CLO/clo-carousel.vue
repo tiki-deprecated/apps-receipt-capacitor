@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Carousel, Slide } from 'vue-carousel';
+import { defineEmits } from 'vue';
 import {IconAdd, IconAlert} from "@/assets/icons"
  import {
    accountTypes,
@@ -7,10 +8,24 @@ import {IconAdd, IconAlert} from "@/assets/icons"
 
 const accounts = accountTypes.index.values()
 
+const emits = defineEmits(['swipeUp', 'company'])
+                                                
+let yDown: number | null = null;
+
+function handleTouchStart(event: TouchEvent) {
+  const firstTouch = event.touches[0];
+  yDown = firstTouch.clientY;
+}
+
+const handleTouchEnd = (event: TouchEvent) =>{
+    const finalTouch = event.changedTouches[0]
+    let finalY = finalTouch.clientY;
+    if(yDown! > finalY + 100) emits('swipeUp')
+}
 </script>
 
 <template>
-    <div>
+    <div @touchstart="handleTouchStart" @touchend="handleTouchEnd">
         <h6 class="tiki-carousel-title">Increase Earning</h6>
         <carousel :paginationEnabled="false" class="tiki-carousel"> 
              <slide v-for="account of accounts" :key="account.id" class="tiki-carousel-slide">
