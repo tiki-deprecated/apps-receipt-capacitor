@@ -5,6 +5,7 @@ import connectRetailer from "./__fixtures__/connectRetailer";
 import fiveReceipts from "./__fixtures__/fiveReceipts";
 import fourWeeks from "./__fixtures__/fourWeeks";
 import mockCheckPayout from "./__mocks__/mockCheckPayout";
+import { test, expect } from 'vitest'
 
 test("User disconnect Gmail", async () => {
   const store = new Store();
