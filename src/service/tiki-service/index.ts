@@ -75,18 +75,14 @@ export class TikiService {
     );
     this._isInitialized = true;
     this.capture.load().then(async (accounts) => {
-      if (accounts.length > 0) {
-        const hasGmail = accounts.find(
-          (account) => account.type.id === "GMAIL",
-        );
-        const hasRetailer = accounts.find(
-          (account) => account.type.type === "RETAILER",
-        );
-        if (hasGmail !== undefined)
-          await this.store.gmail.set(BulletState.SYNC);
-        if (hasRetailer !== undefined)
-          await this.store.retailer.set(BulletState.SYNC);
-      }
+      const hasGmail = accounts.find((account) => account.type.id === "GMAIL");
+      const hasRetailer = accounts.find(
+        (account) => account.type.type === "RETAILER",
+      );
+      if (hasGmail !== undefined) await this.store.gmail.set(BulletState.SYNC);
+      if (hasRetailer !== undefined)
+        await this.store.retailer.set(BulletState.SYNC);
+
       this.capture
         .scan()
         .catch((error) => console.error(error.toString()))
@@ -94,8 +90,9 @@ export class TikiService {
           this.store.retailer.update(accounts);
           this.store.gmail.update(accounts);
         });
+
+      this.checkInitialize(hasGmail !== undefined, hasRetailer !== undefined);
     });
-    await this.store.sync.add();
     await this.internalHandlers.checkPayout();
   }
 
@@ -109,6 +106,41 @@ export class TikiService {
     await this.store.clear();
     this._isInitialized = false;
     this.publish.logout();
+  }
+
+  checkLogin(loginType: "GMAIL" | "RETAILER") {
+    const startDate = this.store.sync.getStartDate();
+    const retailerState = this.store.retailer.get();
+    const gmailState = this.store.gmail.get();
+    if (startDate !== undefined) return;
+    if (loginType === "GMAIL" && retailerState.value !== BulletState.P100)
+      return;
+    if (loginType === "RETAILER" && gmailState.value !== BulletState.P100)
+      return;
+    this.store.sync.setStartDate();
+    this.store.sync.setDisconnectDate(undefined);
+  }
+
+  checkLogout() {
+    const startDate = this.store.sync.getStartDate();
+    if (startDate === undefined) return;
+    this.store.sync.setDisconnectDate(new Date());
+  }
+
+  async checkInitialize(hasGmail: boolean, hasRetailer: boolean) {
+    const disconnectDate = this.store.sync.getDisconnectDate();
+    const startDate = this.store.sync.getStartDate();
+    if (disconnectDate === undefined && startDate !== undefined)
+      return await this.store.sync.add();
+    else {
+      if (hasGmail && hasRetailer)
+        return this.store.sync.setDisconnectDate(undefined);
+      else {
+        if (disconnectDate?.getTime()! >= 1000 * 60 * 60 * 24 * 7) {
+          return await this.store.reset();
+        } else return;
+      }
+    }
   }
 
   /**

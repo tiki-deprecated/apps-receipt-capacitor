@@ -13,12 +13,13 @@ BulletState,
 } from "@/components";
 import { type Account, GMAIL } from "@mytiki/capture-receipt-capacitor";
 import { computed, inject, ref } from "vue";
-import { type Capture, type Store } from "@/service";
+import { type TikiService, type Capture, type Store } from "@/service";
 import { InjectKey } from "@/utils";
 
 const emit = defineEmits(["close", "back"]);
 const capture: Capture = inject(InjectKey.capture)!;
 const store: Store = inject(InjectKey.store)!;
+const tiki: TikiService | undefined = inject("Tiki");
 
 const form = ref<Account>({ username: "", password: "", type: GMAIL });
 const error = ref<string>();
@@ -38,6 +39,7 @@ const submit = async () => {
   error.value = "";
   try {
     await capture.login(form.value);
+    tiki?.checkLogin("GMAIL")
     await store.gmail.set(BulletState.SYNC)
     form.value = { username: "", password: "", type: GMAIL };
     capture.scan().catch((error) => console.error(error.toString())).finally(async ()=>

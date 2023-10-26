@@ -1,12 +1,12 @@
 
 import { StateAccount } from "../src/service/store/state/state-account"
 import { Store } from "../src/service/store"
-
 import connectRetailer from "./__fixtures__/connectRetailer"
 import connectGmail from "./__fixtures__/connectGmail";
 import fiveReceipts from "./__fixtures__/fiveReceipts";
 import fourWeeks from "./__fixtures__/fourWeeks";
 import mockCheckPayout from "./__mocks__/mockCheckPayout";
+import { test, expect } from 'vitest'
 
 test("User disconnect Gmail", async () => {
   const store = new Store()

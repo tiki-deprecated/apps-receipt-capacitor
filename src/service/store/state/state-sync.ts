@@ -11,6 +11,8 @@ export class StateSync {
   private readonly repository: Repository;
   private readonly key: string = "sync";
   private state: Set<Date> = new Set<Date>();
+  private startDate?: Date = undefined
+  private disconnectDate?: Date = undefined
 
   constructor(repository: Repository) {
     this.repository = repository;
@@ -18,9 +20,21 @@ export class StateSync {
 
   get = (): Set<Date> => this.state;
 
+  getStartDate = (): Date | undefined => this.startDate
+
+  getDisconnectDate = (): Date | undefined => this.disconnectDate
+
   async add(date: Date = new Date()): Promise<void> {
     this.state.add(date);
     return this.repository.write(this.key, this.toString());
+  }
+
+  setStartDate(){
+    this.startDate = new Date()
+  }
+
+  setDisconnectDate(date: Date | undefined){
+    this.disconnectDate = date
   }
 
   async load(): Promise<void> {
