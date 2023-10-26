@@ -39,8 +39,8 @@
     "@capacitor/preferences": "^5.0.0",
     "@mytiki/capture-receipt-capacitor": "^0.7.1",
     "@mytiki/tiki-sdk-capacitor": "^0.3.6",
-    "showdown": "^2.1.0",
-    "vue": "^3.0.0"
+    "vue": "2.7.15",
+    "showdown": "^2.1.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.23.2",

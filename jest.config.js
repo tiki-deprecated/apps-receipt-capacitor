@@ -14,6 +14,13 @@ module.exports = {
     crypto: {
       getRandomValues: (arr) => require("crypto").randomBytes(arr.length),
     },
-  },
-  modulePathIgnorePatterns: ["<rootDir>/__tests__/__mocks__/*", "<rootDir>/__tests__/__fixtures__/*"]
+    setupFiles: ["<rootDir>/__tests__/__mocks__/localStorageMock.js"],
+    verbose: true,
+    globals: {
+      crypto: {
+        getRandomValues: (arr) => require("crypto").randomBytes(arr.length),
+      },
+    },
+    modulePathIgnorePatterns: ["<rootDir>/__tests__/__mocks__/*", "<rootDir>/__tests__/__fixtures__/*"]
+  }
 }
