@@ -47,8 +47,8 @@ describe('Reward payment tests', () => {
     expect((store.retailer as StateAccount).get().value).toBe(BulletState.P100)
     plus1week()
     expect(store.sync.status()).toBe(BulletState.P0)
-    // expect(store.receipt.status).toBe(BulletState.P0) // not working. See 
   })
+  
 });
 
 const plus1week = () => {
