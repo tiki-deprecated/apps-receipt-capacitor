@@ -125,7 +125,7 @@ createApp(App)
     .mount("#app");
 ```
 
-#### With Vue 2.7.14
+#### With Vue 2.7.15
 
 ```ts
 import Vue from "vue";
@@ -161,7 +161,7 @@ _This registers the Vue Component as `TikiReceipt` and provides the service `Tik
 @import "@mytiki/receipt-capacitor/dist/receipt-capacitor.css";
 ```
 
-#### With Vue 2.7.14
+#### With Vue 2.7.15
 
 ```css
 @import "@mytiki/receipt-capacitor-vue2/dist/receipt-capacitor.css";
@@ -184,7 +184,7 @@ To initialize just inject the `TikiService` and pass in your systems unique iden
 </script>
 ```
 
-#### With Vue 2.7.14
+#### With Vue 2.7.15
 
 ```vue
 <script setup lang="ts">
@@ -218,7 +218,7 @@ Add the `TikiReceipt` component to your template and a boolean Ref (e.g. present
 </template>
 ```
 
-#### With Vue 2.7.14
+#### With Vue 2.7.15
 
 ```vue
 <script setup lang="ts">
@@ -249,7 +249,7 @@ const tiki: TikiService | undefined = inject("Tiki");
 await tiki?.logout();
 ```
 
-#### With Vue 2.7.14
+#### With Vue 2.7.15
 
 ```ts
 import { inject, ref } from "vue";
