@@ -14,6 +14,8 @@ import type { Key } from "./key";
 import type { Offer } from "./offer";
 import type { Theme } from "./theme";
 import type { Company } from "./company";
+import type { Receipt } from "@mytiki/capture-receipt-capacitor";
+
 
 /**
  * The top-level configuration object for this library. Define during app registration.
@@ -145,7 +147,9 @@ export interface Options {
    * @param total - The user's current cash balance.
    * @returns The amount of cash withdrawn or undefined if nothing withdrawn.
    */
-  callback?: (total: number) => number | undefined;
+  onWithdrawl?: (total: number) => number | undefined;
+
+  onReceipt?: (receipt: Receipt) => Receipt | undefined;
 
   /**
    * The learn more page content in [Markdown](https://www.markdownguide.org) format.

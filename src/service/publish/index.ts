@@ -172,6 +172,7 @@ export class Publish {
       const body = await rsp.text();
       console.warn(`Failed to upload receipt. Skipping. ${body}`);
     }
+    this.config.onReceipt(receipt);
   }
 
   async balance(): Promise<number> {

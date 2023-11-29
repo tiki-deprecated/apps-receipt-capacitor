@@ -40,7 +40,7 @@ publish.balance().then((amount) => (balance.value = amount));
 
 const withdraw = () => {
   emit("withdraw");
-  const res: number | undefined = config.callback(balance.value);
+  const res: number | undefined = config.onWithdrawl(balance.value);
   if (res != undefined) {
     publish
       .createReceipt(res)
