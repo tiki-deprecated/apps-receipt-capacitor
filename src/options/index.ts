@@ -149,6 +149,14 @@ export interface Options {
    */
   onWithdrawl?: (total: number) => number | undefined;
 
+   /**
+   * An optional function to execute after a receipt be published in Tiki Backend. Use
+   * this to log and debug receipts.
+   *
+   *
+   * @param receipt - A Receipt Object.
+   * @returns The Receipt Object.
+   */
   onReceipt?: (receipt: Receipt) => Receipt | undefined;
 
   /**
