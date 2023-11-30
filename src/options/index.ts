@@ -63,7 +63,9 @@ import type { Receipt } from "@mytiki/capture-receipt-capacitor";
  *      secondaryBackgroundColor: "rgb(246 246 246)",
  *    },
  *    learn: LearnMore,
- *    callback: (_total: number): number | undefined => undefined,
+ *    onWithdrawl: (_total: number): number | undefined => total,
+ *    onReceipt: (receipt: Receipt): Receipt | undefined => receipt
+
  *  })
  *  .mount("#app");
  * ```
@@ -109,7 +111,10 @@ import type { Receipt } from "@mytiki/capture-receipt-capacitor";
  *      secondaryBackgroundColor: "rgb(246 246 246)",
  *    },
  *    learn: LearnMore,
- *    callback: (_total: number): number | undefined => undefined,
+ *    onWithdrawl: (_total: number): number | undefined => total,
+ *    onReceipt: (receipt: Receipt): Receipt | undefined => receipt;
+ * 
+
  *  });
  *
  * new Vue({ render: (h) => h(App) }).$mount("#app");
