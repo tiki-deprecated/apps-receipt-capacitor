@@ -64,7 +64,7 @@ import type { Receipt } from "@mytiki/capture-receipt-capacitor";
  *    },
  *    learn: LearnMore,
  *    onWithdrawl: (_total: number): number | undefined => total,
- *    onReceipt: (receipt: Receipt) => void;
+ *    onReceipt: (receipt: Receipt) => console.log(receipt),
 
  *  })
  *  .mount("#app");
@@ -112,7 +112,7 @@ import type { Receipt } from "@mytiki/capture-receipt-capacitor";
  *    },
  *    learn: LearnMore,
  *    onWithdrawl: (_total: number): number | undefined => total,
- *    onReceipt: (receipt: Receipt) => void;
+ *    onReceipt: (receipt: Receipt) => console.log(receipt);
  * 
 
  *  });
@@ -160,8 +160,9 @@ export interface Options {
    *
    *
    * @param receipt - A Receipt Object.
+   * @returns The receipt object.
    */
-  onReceipt?: (receipt: Receipt) => void;
+  onReceipt?: (receipt: Receipt) => Receipt | undefined;
 
   /**
    * The learn more page content in [Markdown](https://www.markdownguide.org) format.

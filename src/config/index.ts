@@ -24,7 +24,7 @@ export class Config {
   readonly company: Company;
   readonly learn: string = LearnMore;
   readonly onWithdrawl = (total: number): number | undefined => total;
-  readonly onReceipt: ((receipt: Receipt) => void) | undefined = undefined;
+  readonly onReceipt = (receipt: Receipt): Receipt | undefined => receipt;
   readonly offer: Offer;
   readonly tags: Tag[] = [
     Tag.common(CommonTags.USER_ID),
