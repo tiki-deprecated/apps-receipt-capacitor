@@ -64,7 +64,7 @@ import type { Receipt } from "@mytiki/capture-receipt-capacitor";
  *    },
  *    learn: LearnMore,
  *    onWithdrawl: (_total: number): number | undefined => total,
- *    onReceipt: (receipt: Receipt) => void
+ *    onReceipt: (receipt: Receipt) => void;
 
  *  })
  *  .mount("#app");
