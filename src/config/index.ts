@@ -24,7 +24,7 @@ export class Config {
   readonly company: Company;
   readonly learn: string = LearnMore;
   readonly onWithdrawl = (total: number): number | undefined => total;
-  readonly onReceipt = (receipt: Receipt): Receipt | undefined => receipt;
+  readonly onReceipt?: (receipt: Receipt) => void;
   readonly offer: Offer;
   readonly tags: Tag[] = [
     Tag.common(CommonTags.USER_ID),
@@ -54,10 +54,10 @@ export class Config {
     this.key = new Key(options.key);
     this.theme = new Theme(options.theme);
     this.onWithdrawl = options.onWithdrawl ?? this.onWithdrawl;
+    this.onReceipt = options.onReceipt ?? this.onReceipt;
     this.offer = new Offer(options.offer);
     this.company = new Company(options.company);
     if (options?.learn != null) this.learn = options.learn;
-    if (options?.onReceipt != null) this.onReceipt = options.onReceipt;
   }
 }
 

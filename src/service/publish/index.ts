@@ -173,7 +173,7 @@ export class Publish {
       console.warn(`Failed to upload receipt. Skipping. ${body}`);
       return
     }
-    this.config.onReceipt(receipt);
+    if(this.config.onReceipt) this.config.onReceipt(receipt);
   }
 
   async balance(): Promise<number> {
