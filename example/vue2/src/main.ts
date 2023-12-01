@@ -7,6 +7,7 @@ import "./assets/main.css";
 import Vue from "vue";
 import App from "./app.vue";
 import Tiki from "@mytiki/receipt-capacitor-vue2";
+import type { Receipt } from "@mytiki/capture-receipt-capacitor"
 
 Vue.use(Tiki, {
   company: {
@@ -23,6 +24,10 @@ Vue.use(Tiki, {
     product:
       "wSNX3mu+YGc/2I1DDd0NmrYHS6zS1BQt2geMUH7DDowER43JGeJRUErOHVwU2tz6xHDXia8BuvXQI3j37I0uYw==",
   },
+  onReceipt: (receipt: Receipt) => {
+    console.log("funfou")
+    console.log(receipt)
+  }
 });
 
 new Vue({ render: (h) => h(App) }).$mount("#app");

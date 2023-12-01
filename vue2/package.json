@@ -40,7 +40,8 @@
     "@capacitor/preferences": "^5.0.0",
     "@mytiki/capture-receipt-capacitor": "^0.7.1",
     "@mytiki/tiki-sdk-capacitor": "^0.3.6",
-    "vue": "2.7.15",
+    "vue": "2.7.14",
+    "vue-template-compiler": "2.7.14",
     "showdown": "^2.1.0"
   },
   "devDependencies": {

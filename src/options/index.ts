@@ -14,6 +14,8 @@ import type { Key } from "./key";
 import type { Offer } from "./offer";
 import type { Theme } from "./theme";
 import type { Company } from "./company";
+import type { Receipt } from "@mytiki/capture-receipt-capacitor";
+
 
 /**
  * The top-level configuration object for this library. Define during app registration.
@@ -61,7 +63,8 @@ import type { Company } from "./company";
  *      secondaryBackgroundColor: "rgb(246 246 246)",
  *    },
  *    learn: LearnMore,
- *    callback: (_total: number): number | undefined => undefined,
+ *    onWithdrawl: (_total: number): number | undefined => total,
+ *    onReceipt: (receipt: Receipt) => console.log(receipt),
  *  })
  *  .mount("#app");
  * ```
@@ -107,7 +110,10 @@ import type { Company } from "./company";
  *      secondaryBackgroundColor: "rgb(246 246 246)",
  *    },
  *    learn: LearnMore,
- *    callback: (_total: number): number | undefined => undefined,
+ *    onWithdrawl: (_total: number): number | undefined => total,
+ *    onReceipt: (receipt: Receipt) => console.log(receipt);
+ * 
+
  *  });
  *
  * new Vue({ render: (h) => h(App) }).$mount("#app");
@@ -145,7 +151,17 @@ export interface Options {
    * @param total - The user's current cash balance.
    * @returns The amount of cash withdrawn or undefined if nothing withdrawn.
    */
-  callback?: (total: number) => number | undefined;
+  onWithdrawl?: (total: number) => number | undefined;
+
+   /**
+   * An optional function to execute after a receipt be published in Tiki Backend. Use
+   * this to log and debug receipts.
+   *
+   *
+   * @param receipt - A Receipt Object.
+   * @returns The receipt object.
+   */
+  onReceipt?: (receipt: Receipt) => void;
 
   /**
    * The learn more page content in [Markdown](https://www.markdownguide.org) format.

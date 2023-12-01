@@ -15,13 +15,16 @@ import {
   Tag,
   Usecase,
 } from "@mytiki/tiki-sdk-capacitor";
+import type { Receipt } from "@mytiki/capture-receipt-capacitor";
+
 
 export class Config {
   readonly theme: Theme;
   readonly key: Key;
   readonly company: Company;
   readonly learn: string = LearnMore;
-  readonly callback = (total: number): number | undefined => total;
+  readonly onWithdrawl = (total: number): number | undefined => total;
+  readonly onReceipt?: (receipt: Receipt) => void;
   readonly offer: Offer;
   readonly tags: Tag[] = [
     Tag.common(CommonTags.USER_ID),
@@ -50,7 +53,8 @@ export class Config {
   constructor(options: Options) {
     this.key = new Key(options.key);
     this.theme = new Theme(options.theme);
-    this.callback = options.callback ?? this.callback;
+    this.onWithdrawl = options.onWithdrawl ?? this.onWithdrawl;
+    this.onReceipt = options.onReceipt ?? this.onReceipt;
     this.offer = new Offer(options.offer);
     this.company = new Company(options.company);
     if (options?.learn != null) this.learn = options.learn;
