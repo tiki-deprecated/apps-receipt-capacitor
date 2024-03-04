@@ -73,7 +73,7 @@
     "vite": "^4.4.9",
     "vite-plugin-dts": "^3.5.2",
     "vite-svg-loader": "^5.1.0",
-    "vue-tsc": "^1.8.8"
+    "vue-tsc": "^2.0.4"
   },
   "peerDependencies": {
     "@capacitor/android": "^5.4.0",
