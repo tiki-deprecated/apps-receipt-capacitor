@@ -1,4 +1,13 @@
+# Discontinuation Notice: Transition to TIKI Publish Client Library
+
+Please note that the [TIKI App Receipt Capacitor SDK](https://github.com/tiki/apps-receipt-capacitor) has been discontinued as part of our ongoing development process. As of April 2024, we will no longer be maintaining or updating this SDK. It no longer can connect to our new APIs, and should not be used.
+
+We have replaced this SDK with our new client library, [TIKI Publish Client Library](https://github.com/tiki/publish-client-capacitor), which offers improved functionality, better support, and enhanced features. We encourage you to transition to the new client library for continued support and compatibility with future updates.
+
+---
+
 # TIKI Receipt (Capacitor + Vue.js)
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <a href="https://receipt-capacitor.mytiki.com" alt="Reference Docs"><img src="https://img.shields.io/static/v1?logo=readme&label=&message=reference%20docs&color=018EF5&logoColor=white&style=flat-square"></a>
 [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
